@@ -4,7 +4,7 @@
     <img
       class="heading__bann"
       src="@/assets/bann.png"
-      alt=""
+      alt="Bannière du site"
       :style="setSize"
     />
     <!--Member of the Month-->
@@ -16,8 +16,7 @@ export default {
   name: "AppHeading",
   data() {
     return {
-      windowHeight: "",
-      windowWidth: ""
+      windowHeight: ""
     };
   },
   mounted() {
@@ -27,15 +26,13 @@ export default {
   computed: {
     setSize() {
       return {
-        maxHeight: this.windowHeight + "px",
-        maxWidth: this.windowWidth + "px"
+        maxHeight: this.windowHeight + "px"
       };
     }
   },
   methods: {
     checkSize() {
       this.windowHeight = window.innerHeight / 1.5;
-      this.windowWidth = window.innerWidth;
     }
   }
 };
