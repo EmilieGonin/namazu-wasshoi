@@ -52,6 +52,7 @@ export default {
   padding-top: 43px;
   &__bann {
     width: 100%;
+    min-height: 350px;
     object-fit: cover;
     border-bottom: 5px solid $namazu;
   }
