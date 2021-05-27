@@ -19,3 +19,8 @@
     font-size: $size + px;
   }
 }
+@mixin page-title {
+  font-family: "Bebas Neue", cursive;
+  font-weight: normal;
+  font-size: 37px;
+}

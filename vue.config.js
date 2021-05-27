@@ -13,7 +13,8 @@ module.exports = {
             new GoogleFontsPlugin({
                 fonts: [
                     { family: "Roboto", variants: [ "400", "700" ] },
-                    { family: "Pattaya" }
+                    { family: "Pattaya" },
+                    { family: "Bebas Neue" }
                 ]
             })
         ]
