@@ -18,6 +18,9 @@
     <!--User Menu-->
     <div class="nav__user-menu">
       <!--Avatar-->
+      <router-link :to="'/'">
+        <UserAvatar />
+      </router-link>
       <!--Links-->
       <router-link class="nav__menu-icon" :to="'/'">
         <font-awesome-icon icon="cog" fixed-width />
@@ -30,8 +33,13 @@
 </template>
 
 <script>
+import UserAvatar from "@/components/UserAvatar.vue";
+
 export default {
-  name: "AppNav"
+  name: "AppNav",
+  components: {
+    UserAvatar
+  }
 };
 </script>
 
