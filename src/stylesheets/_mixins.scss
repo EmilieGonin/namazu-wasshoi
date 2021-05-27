@@ -5,22 +5,34 @@
   left: 0;
   bottom: 0;
 }
-@mixin flex($justify: center, $align: center, $gap: 0) {
+@mixin flex($justify: center, $align: center, $gap: 0, $direction: 0) {
   display: flex;
   justify-content: $justify;
   align-items: $align;
   @if ($gap != 0) {
     gap: $gap + px;
   }
+  @if ($direction != 0) {
+    flex-direction: $direction;
+  }
 }
-@mixin cl-name($size: 0) {
+@mixin cl-name {
   font-family: "Pattaya", sans-serif;
-  @if ($size != 0) {
-    font-size: $size + px;
+  font-size: 27px;
+  @media (max-width: 375px) {
+    font-size: 17px;
   }
 }
 @mixin page-title {
   font-family: "Bebas Neue", cursive;
   font-weight: normal;
   font-size: 37px;
+  @media (max-width: 559px) {
+    font-size: 25px;
+  }
+}
+@mixin mobile-hide {
+  @media (max-width: 559px) {
+    display: none;
+  }
 }
