@@ -1,3 +1,5 @@
+@use "sass:math";
+
 //Colors
 $mog: #ff99d2;
 $chocobo: #ffff6b;
@@ -9,3 +11,15 @@ $gold: #f3d17b;
 $lightblack: #776f74;
 $grey: #e0dfe4;
 $black-veil: rgba(0, 0, 0, 0.2);
+
+$teams: (
+  "mog": $mog,
+  "chocobo": $chocobo,
+  "pampa": $pampa,
+  "carbuncle": $carbuncle
+);
+
+//Loading spinner
+$load-dur: 700ms;
+$load-num: 4;
+$load-delay: math.div($load-dur, $load-num);
