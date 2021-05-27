@@ -5,8 +5,10 @@ import store from './store'
 import "@/stylesheets/global.scss"
 
 import { library } from '@fortawesome/fontawesome-svg-core'
+import { faBars, faSignOutAlt, faCog } from '@fortawesome/free-solid-svg-icons'
+import { faHomeLgAlt } from '@fortawesome/pro-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add()
+library.add(faBars, faSignOutAlt, faCog, faHomeLgAlt)
 
 createApp(App).use(store).use(router).component("font-awesome-icon", FontAwesomeIcon).mount('#app')

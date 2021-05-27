@@ -1,0 +1,21 @@
+@mixin absolute-center {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+@mixin flex($justify: center, $align: center, $gap: 0) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  @if ($gap != 0) {
+    gap: $gap + px;
+  }
+}
+@mixin cl-name($size: 0) {
+  font-family: "Pattaya", sans-serif;
+  @if ($size != 0) {
+    font-size: $size + px;
+  }
+}
