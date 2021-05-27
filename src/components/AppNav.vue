@@ -46,7 +46,7 @@ export default {
 <style lang="scss" scoped>
 .nav {
   @include flex($justify: space-between);
-  z-index: 999;
+  z-index: 998;
   position: fixed;
   width: 100%;
   background: $namazu;
