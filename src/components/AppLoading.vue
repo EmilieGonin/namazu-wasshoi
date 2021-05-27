@@ -27,8 +27,8 @@ export default {
   background: fade-out(white, 0.5);
   &__ball {
     margin: 1px;
-    width: 27px;
-    height: 27px;
+    width: 20px;
+    height: 20px;
     border: 2px solid $grey;
     border-radius: 50%;
     box-shadow: -1px -1px 5px $lightblack inset;
