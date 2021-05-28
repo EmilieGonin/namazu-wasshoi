@@ -4,3 +4,6 @@
 @function dark($color, $amount: 15%) {
   @return darken($color, $amount);
 }
+@function veil($color, $amount: 0.2) {
+  @return fade-out($color, $amount);
+}
