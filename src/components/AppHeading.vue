@@ -51,6 +51,7 @@ export default {
   position: relative;
   padding-top: 43px;
   &__bann {
+    display: block;
     width: 100%;
     min-height: 350px;
     object-fit: cover;
