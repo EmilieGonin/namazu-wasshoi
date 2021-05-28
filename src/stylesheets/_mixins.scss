@@ -19,9 +19,6 @@
 @mixin cl-name {
   font-family: "Pattaya", sans-serif;
   font-size: 27px;
-  @media (max-width: 375px) {
-    font-size: 17px;
-  }
 }
 @mixin page-title {
   font-family: "Bebas Neue", cursive;

@@ -108,6 +108,9 @@ export default {
   }
   &__cl-name {
     @include cl-name;
+    @media (max-width: 375px) {
+      font-size: 17px;
+    }
   }
   &__cl-tag {
     @include mobile-hide;
