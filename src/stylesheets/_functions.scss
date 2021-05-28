@@ -1,0 +1,6 @@
+@function pastel($color) {
+  @return change-color($color, $saturation: 100%, $lightness: 80%);
+}
+@function dark($color, $amount: 15%) {
+  @return darken($color, $amount);
+}

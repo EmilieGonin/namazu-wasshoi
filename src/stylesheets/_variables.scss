@@ -1,16 +1,22 @@
 @use "sass:math";
 
 //Colors
-$mog: #ff99d2;
-$chocobo: #ffff6b;
-$pampa: #d2ff99;
-$carbuncle: #99d2ff;
-$namazu: #b32927;
-$dark-namazu: darken($namazu, 15%);
-$gold: #f3d17b;
+$namazu: #e62e39;
+$gold: #e6b12e;
 $lightblack: #776f74;
 $grey: #e0dfe4;
 $black-veil: rgba(0, 0, 0, 0.2);
+
+$colors: (
+  "primary": $namazu,
+  "secondary": $gold,
+  "tertiary": $grey
+);
+
+$mog: #e62e95;
+$chocobo: #fff233;
+$pampa: #95e62e;
+$carbuncle: #2e95e6;
 
 $teams: (
   "mog": $mog,
@@ -18,6 +24,12 @@ $teams: (
   "pampa": $pampa,
   "carbuncle": $carbuncle
 );
+
+//Font sizes
+$font-regular: 16px;
+$font-small: 14px;
+$font-large: 20px;
+$font-xxl: 27px;
 
 //Loading spinner
 $load-dur: 700ms;
