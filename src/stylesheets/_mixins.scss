@@ -36,3 +36,8 @@
     display: none;
   }
 }
+@mixin responsive($width: 559, $condition: max) {
+  @media (#{$condition}-width: $width + px) {
+    @content;
+  }
+}
