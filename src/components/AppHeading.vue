@@ -55,7 +55,7 @@ export default {
     width: 100%;
     min-height: 350px;
     object-fit: cover;
-    border-bottom: 5px solid $namazu;
+    // border-bottom: 5px solid $namazu;
   }
   &__title-container {
     @include flex($gap: 5);
