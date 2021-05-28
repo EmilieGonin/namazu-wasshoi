@@ -31,7 +31,7 @@ export default {
     height: 20px;
     border: 2px solid $grey;
     border-radius: 50%;
-    box-shadow: -1px -1px 5px $lightblack inset;
+    box-shadow: -1px -1px 5px $light-black inset;
 
     @each $team, $color in $teams {
       $i: index(($teams), ($team $color));

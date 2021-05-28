@@ -3,9 +3,14 @@
 //Colors
 $namazu: #e62e39;
 $gold: #e6b12e;
-$lightblack: #776f74;
 $grey: #e0dfe4;
 $black-veil: rgba(0, 0, 0, 0.2);
+
+$main-black: lighten(black, 15%);
+$minor-black: lighten(black, 10%);
+$light-black: #776f74;
+$minor-white: darken(white, 5%);
+$grey: #e0dfe4;
 
 $colors: (
   "primary": $namazu,
