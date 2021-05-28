@@ -62,7 +62,6 @@ export default {
     position: absolute;
     bottom: 5px;
     padding: 5px 10px 5px 2px;
-    border-top-right-radius: 10px;
     background: $namazu;
     color: $grey;
   }
