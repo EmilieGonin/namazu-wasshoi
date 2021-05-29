@@ -60,6 +60,7 @@ export default {
   &__title-container {
     @include flex($gap: 5);
     position: absolute;
+    z-index: 2;
     bottom: 10px;
     padding: 5px 10px 5px 2px;
     background: $namazu;
