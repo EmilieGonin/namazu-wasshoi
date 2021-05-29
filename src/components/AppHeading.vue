@@ -9,7 +9,12 @@
     />
     <!--Page Title-->
     <div class="heading__title-container">
-      <font-awesome-icon class="heading__icon" :icon="icon" fixed-width />
+      <font-awesome-icon
+        class="heading__icon"
+        :icon="icon"
+        v-if="icon"
+        fixed-width
+      />
       <h1 class="heading__title"><slot></slot></h1>
     </div>
     <!--Member of the Month-->
