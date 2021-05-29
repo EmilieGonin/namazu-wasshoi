@@ -37,6 +37,6 @@ $font-large: 20px;
 $font-xxl: 27px;
 
 //Loading spinner
-$load-dur: 700ms;
+$load-dur: 400ms;
 $load-num: 4;
 $load-delay: math.div($load-dur, $load-num);

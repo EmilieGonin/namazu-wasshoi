@@ -37,7 +37,7 @@ export default {
       $i: index(($teams), ($team $color));
       &--#{$team} {
         background: $color;
-        animation: $load-dur blink ease-in-out infinite alternate;
+        animation: $load-dur blink ease-in-out infinite alternate both;
         animation-delay: $load-delay * $i;
       }
     }
