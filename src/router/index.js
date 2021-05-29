@@ -73,7 +73,7 @@ const routes = [
     }
   },
   {
-    path: "/galleries",
+    path: "/galleries/:id?",
     name: "Galleries",
     component: () => import('../views/Galleries.vue'),
     meta: {
@@ -103,7 +103,7 @@ const routes = [
     }
   },
   {
-    path: "/teams",
+    path: "/teams/:team?",
     name: "Teams",
     component: () => import('../views/Teams.vue'),
     meta: {
