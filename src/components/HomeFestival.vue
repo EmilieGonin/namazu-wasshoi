@@ -40,19 +40,12 @@ export default {
   @include responsive(700) {
     padding: 10% 0 0 0;
   }
-  z-index: -1;
-  position: absolute;
-  transform: translateY(-25%);
+  position: relative;
   width: 100%;
-  padding: 15% 0 1% 0;
+  padding: 2% 0;
   background: white;
   &__line {
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    transform: translateY(66%);
+    @include absolute-center;
     width: 100%;
     max-height: 20%;
     background: $namazu;
@@ -96,7 +89,6 @@ export default {
     text-align: center;
     left: unset;
     right: 12%;
-    transform: translateY(45%);
     width: 25%;
     max-width: 475px;
     padding: 20px;
