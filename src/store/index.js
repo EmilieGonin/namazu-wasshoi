@@ -20,16 +20,10 @@ export default createStore({
     SET_PAGE(state, [ title, icon ]) {
       state.title = title;
       state.icon = icon;
-      setTimeout(() => {
-        state.loading = false;
-      }, 500)
     }
   },
   actions: {
     setPage({ commit }, [ title, icon ]) {
-      commit("LOADING");
-      console.log(title);
-      console.log(icon);
       commit("SET_PAGE", [ title, icon ]);
     }
   },
