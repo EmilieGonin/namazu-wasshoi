@@ -1,5 +1,4 @@
 <template>
-  <AppHeading :icon="'home-lg-alt'">Bienvenue, petit namazu !</AppHeading>
   <div class="home">
     <!--Stats-->
     <div class="home__stats">
@@ -67,14 +66,12 @@
 </template>
 
 <script>
-import AppHeading from "@/components/AppHeading.vue";
 import HomeCard from "@/components/HomeCard.vue";
 import HomeFestival from "@/components/HomeFestival.vue";
 
 export default {
   name: "Home",
   components: {
-    AppHeading,
     HomeCard,
     HomeFestival
   }
