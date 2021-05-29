@@ -13,7 +13,7 @@
       <transition name="fade">
         <div class="nav__submenu" v-show="toggle">
           <router-link class="nav__submenu-link" :to="'/'">
-            <font-awesome-icon icon="bars" fixed-width /> Lien
+            <font-awesome-icon icon="home-lg-alt" fixed-width /> Accueil
           </router-link>
           <router-link class="nav__submenu-link" :to="'/'">
             <font-awesome-icon icon="bars" fixed-width /> Lien
@@ -95,7 +95,8 @@ export default {
     }
   }
   &__submenu-link {
-    @include flex($gap: 10);
+    @include flex($gap: 10, $justify: flex-start);
+    width: 100%;
     color: $grey;
     text-decoration: none;
     padding: 5px 20px;
