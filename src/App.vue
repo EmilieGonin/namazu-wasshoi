@@ -2,7 +2,7 @@
   <AppLoading :loading="loading" />
   <AppNav />
   <AppHeading :title="title" :icon="icon">{{ title }}</AppHeading>
-  <router-view v-if="!loading" />
+  <router-view />
 </template>
 
 <script>

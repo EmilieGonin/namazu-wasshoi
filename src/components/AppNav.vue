@@ -16,47 +16,47 @@
           <router-link class="nav__submenu-link" :to="'/'">
             <font-awesome-icon icon="home-lg-alt" fixed-width /> Accueil
           </router-link>
-          <router-link class="nav__submenu-link" :to="'/'">
+          <router-link class="nav__submenu-link" :to="'/members'">
             <font-awesome-icon icon="users" fixed-width /> Membres et rosters
           </router-link>
-          <router-link class="nav__submenu-link" :to="'/'">
+          <router-link class="nav__submenu-link" :to="'/galleries'">
             <font-awesome-icon icon="images" fixed-width /> Galeries de
             screenshots
           </router-link>
           <!--only if not logged in-->
-          <router-link class="nav__submenu-link" :to="'/'">
+          <router-link class="nav__submenu-link" :to="'/apply'">
             <font-awesome-icon icon="user-check" fixed-width /> Postuler
           </router-link>
           <!--Separation-->
           <div class="nav__separation"></div>
           <!--Activities Links-->
-          <router-link class="nav__submenu-link" :to="'/'">
+          <router-link class="nav__submenu-link" :to="'/planning'">
             <font-awesome-icon icon="calendar-week" fixed-width /> Planning
           </router-link>
-          <router-link class="nav__submenu-link" :to="'/'">
+          <router-link class="nav__submenu-link" :to="'/festival-gyokoso'">
             <font-awesome-icon icon="camera" fixed-width /> Festival Gyôkoso
           </router-link>
-          <router-link class="nav__submenu-link" :to="'/'">
+          <router-link class="nav__submenu-link" :to="'/teams'">
             <font-awesome-icon icon="stars" fixed-width /> Equipes d'évent
           </router-link>
           <!--Separation-->
           <div class="nav__separation"></div>
           <!--Account Pages-->
           <!--if logged  in-->
-          <router-link class="nav__submenu-link" :to="'/'">
+          <router-link class="nav__submenu-link" :to="'/user'">
             <font-awesome-icon icon="user" fixed-width /> Profil utilisateur
           </router-link>
-          <router-link class="nav__submenu-link" :to="'/'">
+          <router-link class="nav__submenu-link" :to="'/account'">
             <font-awesome-icon icon="cog" fixed-width /> Paramètres du compte
           </router-link>
           <router-link class="nav__submenu-link" :to="'/'">
             <font-awesome-icon icon="sign-out-alt" fixed-width /> Se déconnecter
           </router-link>
           <!--else-->
-          <router-link class="nav__submenu-link" :to="'/'">
+          <router-link class="nav__submenu-link" :to="'/login'">
             <font-awesome-icon icon="sign-in-alt" fixed-width /> Se connecter
           </router-link>
-          <router-link class="nav__submenu-link" :to="'/'">
+          <router-link class="nav__submenu-link" :to="'/signup'">
             <font-awesome-icon icon="user-plus" fixed-width /> S'inscrire
           </router-link>
         </div>

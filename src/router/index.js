@@ -31,6 +31,86 @@ const routes = [
       heading: "Créer un compte",
       icon: "user-plus"
     }
+  },
+  {
+    path: "/user/:id",
+    name: "Profile",
+    component: () => import('../views/Profile.vue'),
+    meta: {
+      title: "Profil utilisateur - Namazu Wasshoi",
+      heading: "Profil utilisateur - ",
+      icon: "user"
+    }
+  },
+  {
+    path: "/account",
+    name: "Account",
+    component: () => import('../views/Account.vue'),
+    meta: {
+      title: "Paramètres du compte - Namazu Wasshoi",
+      heading: "Paramètres du compte",
+      icon: "cog"
+    }
+  },
+  {
+    path: "/apply",
+    name: "Apply",
+    component: () => import('../views/Apply.vue'),
+    meta: {
+      title: "Postuler - Namazu Wasshoi",
+      heading: "Postuler",
+      icon: "user-check"
+    }
+  },
+  {
+    path: "/members",
+    name: "Members",
+    component: () => import('../views/Members.vue'),
+    meta: {
+      title: "Membres et rosters - Namazu Wasshoi",
+      heading: "Membres et rosters",
+      icon: "users"
+    }
+  },
+  {
+    path: "/galleries",
+    name: "Galleries",
+    component: () => import('../views/Galleries.vue'),
+    meta: {
+      title: "Galeries de screenshots - Namazu Wasshoi",
+      heading: "Galeries de screenshots",
+      icon: "images"
+    }
+  },
+  {
+    path: "/planning",
+    name: "Planning",
+    component: () => import('../views/Planning.vue'),
+    meta: {
+      title: "Planning - Namazu Wasshoi",
+      heading: "Planning",
+      icon: "calendar-week"
+    }
+  },
+  {
+    path: "/festival-gyokoso",
+    name: "FestivalGyokoso",
+    component: () => import('../views/FestivalGyokoso.vue'),
+    meta: {
+      title: "Festival Gkyôkoso - Namazu Wasshoi",
+      heading: "Festival Gkyôkoso",
+      icon: "camera"
+    }
+  },
+  {
+    path: "/teams",
+    name: "Teams",
+    component: () => import('../views/Teams.vue'),
+    meta: {
+      title: "Equipes d'évent - Namazu Wasshoi",
+      heading: "Equipes d'évent",
+      icon: "stars"
+    }
   }
 ]
 
