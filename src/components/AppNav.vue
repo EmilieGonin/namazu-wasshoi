@@ -12,14 +12,52 @@
       <!--Submenu-->
       <transition name="fade">
         <div class="nav__submenu" v-show="toggle">
+          <!--Public Links-->
           <router-link class="nav__submenu-link" :to="'/'">
             <font-awesome-icon icon="home-lg-alt" fixed-width /> Accueil
           </router-link>
           <router-link class="nav__submenu-link" :to="'/'">
-            <font-awesome-icon icon="bars" fixed-width /> Lien
+            <font-awesome-icon icon="users" fixed-width /> Membres et rosters
           </router-link>
           <router-link class="nav__submenu-link" :to="'/'">
-            <font-awesome-icon icon="bars" fixed-width /> Lien
+            <font-awesome-icon icon="images" fixed-width /> Galeries de
+            screenshots
+          </router-link>
+          <!--only if not logged in-->
+          <router-link class="nav__submenu-link" :to="'/'">
+            <font-awesome-icon icon="user-check" fixed-width /> Postuler
+          </router-link>
+          <!--Separation-->
+          <div class="nav__separation"></div>
+          <!--Activities Links-->
+          <router-link class="nav__submenu-link" :to="'/'">
+            <font-awesome-icon icon="calendar-week" fixed-width /> Planning
+          </router-link>
+          <router-link class="nav__submenu-link" :to="'/'">
+            <font-awesome-icon icon="camera" fixed-width /> Festival Gyôkoso
+          </router-link>
+          <router-link class="nav__submenu-link" :to="'/'">
+            <font-awesome-icon icon="stars" fixed-width /> Equipes d'évent
+          </router-link>
+          <!--Separation-->
+          <div class="nav__separation"></div>
+          <!--Account Pages-->
+          <!--if logged  in-->
+          <router-link class="nav__submenu-link" :to="'/'">
+            <font-awesome-icon icon="user" fixed-width /> Profil utilisateur
+          </router-link>
+          <router-link class="nav__submenu-link" :to="'/'">
+            <font-awesome-icon icon="cog" fixed-width /> Paramètres du compte
+          </router-link>
+          <router-link class="nav__submenu-link" :to="'/'">
+            <font-awesome-icon icon="sign-out-alt" fixed-width /> Se déconnecter
+          </router-link>
+          <!--else-->
+          <router-link class="nav__submenu-link" :to="'/'">
+            <font-awesome-icon icon="sign-in-alt" fixed-width /> Se connecter
+          </router-link>
+          <router-link class="nav__submenu-link" :to="'/'">
+            <font-awesome-icon icon="user-plus" fixed-width /> S'inscrire
           </router-link>
         </div>
       </transition>
@@ -74,13 +112,6 @@ export default {
   &__site-menu {
     @include flex($gap: 5);
   }
-  &__submenu {
-    @include flex($direction: column);
-    position: absolute;
-    top: 46px;
-    left: 0;
-    background: $namazu;
-  }
   &__user-menu {
     @include flex($gap: 5);
   }
@@ -94,6 +125,13 @@ export default {
       background: fade-in($black-veil, 0.1);
     }
   }
+  &__submenu {
+    @include flex($direction: column);
+    position: absolute;
+    top: 46px;
+    left: 0;
+    background: $namazu;
+  }
   &__submenu-link {
     @include flex($gap: 10, $justify: flex-start);
     width: 100%;
@@ -103,6 +141,12 @@ export default {
     &:hover {
       background: fade-in($black-veil, 0.1);
     }
+  }
+  &__separation {
+    width: 90%;
+    height: 1px;
+    margin: 5px 0;
+    background: $grey;
   }
   &__cl-title {
     @include flex($gap: 5);
