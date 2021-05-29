@@ -43,7 +43,11 @@
           sadique du mage bleu.
         </template>
       </HomeCard>
-      <HomeCard :icon="'users'" class="carbuncle">
+      <HomeCard
+        :icon="'users'"
+        :link="'https://discord.gg/gpV2CzN'"
+        class="carbuncle"
+      >
         <template #title>Communauté active</template>
         <template #infos>
           Même en dehors du jeu, nos membres se regroupent sur notre serveur

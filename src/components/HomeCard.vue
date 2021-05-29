@@ -9,7 +9,7 @@
     <div class="card__infos">
       <slot name="infos"></slot>
     </div>
-    <div class="card__link">
+    <div class="card__link" @click="redirect()">
       <div :class="'card__button--' + $attrs.class">
         <slot name="button">Obtenir plus d'informations</slot>
       </div>
@@ -27,7 +27,15 @@
 export default {
   name: "HomeCard",
   props: {
-    icon: String
+    icon: String,
+    link: String
+  },
+  methods: {
+    redirect() {
+      if (this.link) {
+        window.open(this.link);
+      }
+    }
   }
 };
 </script>
