@@ -69,12 +69,8 @@ export default {
   &__banner {
     display: block;
     width: 100%;
-    // height: 700px;
     max-height: 70%;
     min-height: 300px;
-    // border: 10px solid white;
-    // border-bottom: 50px solid white;
-    // box-shadow: 0 0 3px $main-black;
     object-fit: cover;
   }
   &__legend {
@@ -106,7 +102,7 @@ export default {
     padding: 20px;
     height: 30%;
     background: white;
-    border: 10px solid dark($namazu);
+    border: 5px solid dark($namazu);
     box-shadow: 1px 1px 2px $main-black;
   }
   &__name {
