@@ -10,10 +10,8 @@
 <script>
 export default {
   name: "AppLoading",
-  data() {
-    return {
-      loading: false
-    };
+  props: {
+    loading: Boolean
   }
 };
 </script>

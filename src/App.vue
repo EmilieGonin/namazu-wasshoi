@@ -1,27 +1,24 @@
 <template>
-  <AppLoading />
+  <AppLoading :loading="loading" />
   <AppNav />
   <AppHeading :title="title" :icon="icon">{{ title }}</AppHeading>
-  <router-view />
+  <router-view v-if="!loading" />
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import AppLoading from "@/components/AppLoading.vue";
 import AppHeading from "@/components/AppHeading.vue";
 import AppNav from "@/components/AppNav.vue";
 
 export default {
-  data() {
-    return {
-      //Temp before creating store
-      title: "Bienvenue, petit namazu !",
-      icon: "home-lg-alt"
-    };
-  },
   components: {
     AppLoading,
     AppHeading,
     AppNav
+  },
+  computed: {
+    ...mapGetters(["loading", "title", "icon"])
   }
 };
 </script>
