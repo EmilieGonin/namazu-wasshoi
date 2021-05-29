@@ -9,7 +9,7 @@
     </div>
     <!--Activities-->
     <div class="home__activities">
-      <HomeCard :icon="'bars'" class="mog">
+      <HomeCard :icon="'calendar-week'" class="mog">
         <template #title>Sorties et évents</template>
         <template #infos>
           Notre planning vous propose chaque semaine différents types de
@@ -21,7 +21,7 @@
         </template>
         <template #button>Accéder au planning</template>
       </HomeCard>
-      <HomeCard :icon="'bars'" class="chocobo">
+      <HomeCard :icon="'stars'" class="chocobo">
         <template #title>Système de points</template>
         <template #infos>
           Lorsque vous rejoignez la CL, vous devez rejoindre l'une de nos quatre
@@ -32,7 +32,7 @@
           votre équipe.
         </template>
       </HomeCard>
-      <HomeCard :icon="'bars'" class="pampa">
+      <HomeCard :icon="'dungeon'" class="pampa">
         <template #title>Contenu sadique</template>
         <template #infos>
           Notre compagnie libre étant à la fois ouverte au contenu dit « casual
@@ -43,7 +43,7 @@
           sadique du mage bleu.
         </template>
       </HomeCard>
-      <HomeCard :icon="'bars'" class="carbuncle">
+      <HomeCard :icon="'users'" class="carbuncle">
         <template #title>Communauté active</template>
         <template #infos>
           Même en dehors du jeu, nos membres se regroupent sur notre serveur
