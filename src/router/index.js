@@ -97,8 +97,8 @@ const routes = [
     name: "FestivalGyokoso",
     component: () => import('../views/FestivalGyokoso.vue'),
     meta: {
-      title: "Festival Gkyôkoso - Namazu Wasshoi",
-      heading: "Festival Gkyôkoso",
+      title: "Festival Gyôkoso - Namazu Wasshoi",
+      heading: "Festival Gyôkoso",
       icon: "camera"
     }
   },
