@@ -22,7 +22,7 @@ export default createStore({
       state.icon = icon;
       setTimeout(() => {
         state.loading = false;
-      }, 1000)
+      }, 500)
     }
   },
   actions: {
