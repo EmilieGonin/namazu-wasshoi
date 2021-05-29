@@ -16,9 +16,9 @@
     flex-direction: $direction;
   }
 }
-@mixin cl-name {
+@mixin cl-name($size: 27) {
   font-family: "Pattaya", sans-serif;
-  font-size: 27px;
+  font-size: $size + px;
 }
 @mixin page-title {
   font-family: "Bebas Neue", cursive;
