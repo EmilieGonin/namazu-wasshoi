@@ -15,13 +15,12 @@ export default {
 <style lang="scss" scoped>
 .fullscreen {
   @include absolute-center;
+  @include flex;
   backdrop-filter: blur(5px);
   &__container {
-    @include absolute-center;
     width: 35%;
     min-width: 320px;
-    height: 50%;
-    min-height: 420px;
+    padding: 50px 20px;
     background: $minor-white;
     box-shadow: 0 0 5px $main-black;
   }
