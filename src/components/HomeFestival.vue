@@ -7,19 +7,24 @@
         « Theme » par Gagnant • Participation gagnante de la précédente édition
       </div>
     </div>
-    <div class="festival__theme">
+    <div class="festival__theme-container">
       <div class="festival__infos festival__infos--heading">
-        Participez à la xème édition du
+        {{ heading }}
       </div>
-      <div class="festival__name">
-        Festival Gyôkoso
+      <div class="festival__theme">
+        <div class="festival__name">
+          Festival Gyôkoso
+        </div>
+        <span class="festival__infos">
+          « Incarner un boss de défi extrême »
+        </span>
+        <AppButton class="festival__button" :iconR="'arrow-right'">
+          {{ action }}
+        </AppButton>
       </div>
-      <span class="festival__infos">
-        « Incarner un boss de défi extrême »
-      </span>
-      <AppButton class="festival__button" :iconR="'arrow-right'"
-        >Participer</AppButton
-      >
+      <div class="festival__infos festival__infos--heading">
+        Date limite : {{ date }}
+      </div>
     </div>
   </div>
 </template>
@@ -29,6 +34,14 @@ import AppButton from "@/components/AppButton.vue";
 
 export default {
   name: "HomeFestival",
+  data() {
+    return {
+      //temp
+      heading: "Les votes sont ouverts !",
+      date: "30/05 - 20:00",
+      action: "Voter"
+    };
+  },
   components: {
     AppButton
   }
@@ -51,6 +64,10 @@ export default {
     background: $namazu;
   }
   &__banner-container {
+    @include responsive(820) {
+      width: 90%;
+      margin: auto;
+    }
     @include responsive(700) {
       width: 100%;
       margin: 0;
@@ -80,19 +97,22 @@ export default {
     color: $minor-white;
     font-size: $font-small;
   }
-  &__theme {
-    @include responsive(700) {
+  &__theme-container {
+    @include responsive(820) {
       display: none;
     }
     @include absolute-center;
-    @include flex($direction: column);
-    text-align: center;
+    @include flex($direction: column, $align: stretch);
     left: unset;
     right: 12%;
     width: 25%;
     max-width: 475px;
-    padding: 20px;
-    height: 30%;
+    height: 50%;
+    text-align: center;
+  }
+  &__theme {
+    @include flex($direction: column);
+    padding: 40px 20px;
     background: white;
     border: 5px solid dark($namazu);
     box-shadow: 1px 1px 2px $main-black;
@@ -111,10 +131,15 @@ export default {
     @include responsive(1195) {
       font-size: $font-small;
     }
+    @include responsive(950) {
+      font-size: $font-small - 2;
+    }
     &--heading {
-      @include responsive(1020) {
-        display: none;
-      }
+      width: 90%;
+      margin: 0 auto;
+      padding: 5px;
+      background: dark($namazu);
+      color: $minor-white;
     }
   }
   &__button {
