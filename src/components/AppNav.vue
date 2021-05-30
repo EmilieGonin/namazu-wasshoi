@@ -96,6 +96,11 @@ export default {
       id: "1"
     };
   },
+  watch: {
+    $route() {
+      this.toggle = false;
+    }
+  },
   components: {
     UserAvatar
   }
