@@ -74,12 +74,20 @@
         <UserAvatar />
       </router-link>
       <!--Links-->
+      <!--if logged in-->
       <router-link class="nav__menu-icon" :to="'/account'">
         <font-awesome-icon icon="cog" fixed-width />
       </router-link>
       <router-link class="nav__menu-icon" :to="'/'">
         <font-awesome-icon icon="sign-out-alt" fixed-width />
       </router-link>
+      <!--else-
+      <router-link class="nav__menu-icon" :to="'/login'">
+        <font-awesome-icon icon="sign-in-alt" fixed-width />
+      </router-link>
+      <router-link class="nav__menu-icon" :to="'/signup'">
+        <font-awesome-icon icon="user-plus" fixed-width />
+      </router-link>-->
     </div>
   </div>
 </template>
