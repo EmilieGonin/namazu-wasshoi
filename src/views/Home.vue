@@ -3,8 +3,8 @@
     <!--Stats-->
     <div class="home__stats">
       <span class="home__cl-name">Namazu Wasshoi</span> est une compagnie libre
-      de <strong>{{ ActiveMemberCount || "x" }}</strong> petits namazu, en
-      activité depuis <strong>février 2020</strong>.
+      de <strong>{{ ActiveMemberCount }}</strong> petits namazu, en activité
+      depuis <strong>février 2020</strong>.
     </div>
     <!--Activities-->
     <div class="home__activities">
@@ -71,6 +71,12 @@ import HomeFestival from "@/components/HomeFestival.vue";
 
 export default {
   name: "Home",
+  data() {
+    return {
+      //temp
+      ActiveMemberCount: "34"
+    };
+  },
   components: {
     HomeCard,
     HomeFestival
