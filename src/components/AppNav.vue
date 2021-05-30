@@ -43,7 +43,7 @@
           <div class="nav__separation"></div>
           <!--Account Pages-->
           <!--if logged  in-->
-          <router-link class="nav__submenu-link" :to="'/user'">
+          <router-link class="nav__submenu-link" :to="'/user/' + 1">
             <font-awesome-icon icon="user" fixed-width /> Profil utilisateur
           </router-link>
           <router-link class="nav__submenu-link" :to="'/account'">
@@ -70,11 +70,11 @@
     <!--User Menu-->
     <div class="nav__user-menu">
       <!--Avatar-->
-      <router-link :to="'/'">
+      <router-link :to="'/user/' + id">
         <UserAvatar />
       </router-link>
       <!--Links-->
-      <router-link class="nav__menu-icon" :to="'/'">
+      <router-link class="nav__menu-icon" :to="'/account'">
         <font-awesome-icon icon="cog" fixed-width />
       </router-link>
       <router-link class="nav__menu-icon" :to="'/'">
@@ -91,7 +91,9 @@ export default {
   name: "AppNav",
   data() {
     return {
-      toggle: false
+      toggle: false,
+      //temp
+      id: "1"
     };
   },
   components: {
