@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="button">
+  <button class="button">
     <slot>Envoyer</slot>
     <font-awesome-icon
       class="button__icon button__icon--l"
@@ -13,7 +13,7 @@
       fixed-width
       v-if="iconR"
     />
-  </div>
+  </button>
 </template>
 
 <script>
@@ -38,6 +38,7 @@ export default {
   background: $namazu;
   border: 2px solid $namazu;
   color: $minor-white;
+  font-size: $font-regular;
   &:hover {
     background: white;
     border: 2px solid $namazu;
