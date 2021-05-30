@@ -10,8 +10,8 @@ import {
   faUser, faUsers, faUserCheck, faUserPlus, faSignOutAlt, faSignInAlt, faCog,
   //Activities
   faCalendarWeek, faDungeon, faCamera, faImages,
-  //Menu
-  faBars, faArrowRight } from '@fortawesome/free-solid-svg-icons'
+  //Misc
+  faBars, faArrowRight, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faHomeLgAlt, faStars } from '@fortawesome/pro-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -20,8 +20,8 @@ library.add(
   faUser, faUsers, faUserCheck, faUserPlus, faSignOutAlt, faSignInAlt, faCog,
   //Activities
   faCalendarWeek, faDungeon, faCamera, faImages,
-  //Menu
-  faBars, faArrowRight,
+  //Misc
+  faBars, faArrowRight, faPlus,
   //Pro
   faHomeLgAlt, faStars
 )

@@ -15,3 +15,20 @@ html,
 button {
   font-family: "Roboto", sans-serif;
 }
+.form {
+  @include flex($direction: column, $gap: 25);
+  &__field {
+    @include flex($direction: column, $gap: 5);
+    width: 60%;
+  }
+
+  //Form elements
+  input {
+    padding: 5px;
+    width: 100%;
+  }
+  label {
+    display: block;
+    text-align: center;
+  }
+}
