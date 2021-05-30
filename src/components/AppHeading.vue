@@ -43,9 +43,18 @@ export default {
       };
     }
   },
+  watch: {
+    $route() {
+      this.checkSize();
+    }
+  },
   methods: {
     checkSize() {
-      this.windowHeight = window.innerHeight / 1.5;
+      if (this.$route.name == "Home") {
+        this.windowHeight = window.innerHeight / 1.5;
+      } else {
+        this.windowHeight = window.innerHeight / 3;
+      }
     }
   }
 };
@@ -58,8 +67,9 @@ export default {
   &__bann {
     display: block;
     width: 100%;
-    min-height: 350px;
+    min-height: 250px;
     object-fit: cover;
+    transition: all 500ms;
     // border-bottom: 5px solid $namazu;
   }
   &__title-container {
