@@ -23,6 +23,7 @@ export default {
     height: 50%;
     min-height: 420px;
     background: $minor-white;
+    box-shadow: 0 0 5px $main-black;
   }
 }
 </style>
