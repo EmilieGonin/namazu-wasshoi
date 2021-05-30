@@ -33,7 +33,8 @@ export default {
   cursor: pointer;
   width: 100%;
   max-width: 200px;
-  padding: 3% 5%;
+  // padding: 3% 5%;
+  padding: 12px;
   background: $namazu;
   border: 2px solid $namazu;
   color: $minor-white;
