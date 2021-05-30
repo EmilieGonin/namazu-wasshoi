@@ -50,9 +50,10 @@ export default {
   },
   methods: {
     checkSize() {
-      if (this.$route.name == "Home") {
+      const name = this.$route.name;
+      if (name == "Home") {
         this.windowHeight = window.innerHeight / 1.5;
-      } else if (this.$route.name == ("Login" || "Signup")) {
+      } else if (name == "Login" || name == "Signup") {
         this.windowHeight = window.innerHeight - 43;
       } else {
         this.windowHeight = window.innerHeight / 3;
