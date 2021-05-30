@@ -154,7 +154,7 @@ export default {
     @include flex($gap: 5);
   }
   &__cl-name {
-    @include cl-name;
+    @include cursive;
     @media (max-width: 375px) {
       font-size: 17px;
     }

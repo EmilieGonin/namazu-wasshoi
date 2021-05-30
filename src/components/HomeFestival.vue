@@ -124,7 +124,7 @@ export default {
     @include responsive(950) {
       font-size: $font-large - 2;
     }
-    @include cl-name(37);
+    @include cursive(37);
     color: $namazu;
   }
   &__infos {

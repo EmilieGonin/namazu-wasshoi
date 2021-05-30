@@ -102,7 +102,7 @@ export default {
     color: $minor-white;
   }
   &__cl-name {
-    @include cl-name(60);
+    @include cursive(60);
     @include responsive(465) {
       font-size: 40px;
     }
