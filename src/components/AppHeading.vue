@@ -39,7 +39,7 @@ export default {
   computed: {
     setSize() {
       return {
-        maxHeight: this.windowHeight + "px"
+        height: this.windowHeight + "px"
       };
     }
   },
@@ -52,6 +52,8 @@ export default {
     checkSize() {
       if (this.$route.name == "Home") {
         this.windowHeight = window.innerHeight / 1.5;
+      } else if (this.$route.name == ("Login" || "Signup")) {
+        this.windowHeight = window.innerHeight - 43;
       } else {
         this.windowHeight = window.innerHeight / 3;
       }
@@ -67,7 +69,7 @@ export default {
   &__bann {
     display: block;
     width: 100%;
-    min-height: 250px;
+    // min-height: 250px;
     object-fit: cover;
     transition: all 500ms;
     // border-bottom: 5px solid $namazu;
