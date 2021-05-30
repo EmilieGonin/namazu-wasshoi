@@ -9,58 +9,6 @@
       <router-link class="nav__menu-icon" :to="'/'">
         <font-awesome-icon icon="home-lg-alt" fixed-width />
       </router-link>
-      <!--Submenu-->
-      <transition name="fade">
-        <div class="nav__submenu" v-show="toggle">
-          <!--Public Links-->
-          <router-link class="nav__submenu-link" :to="'/'">
-            <font-awesome-icon icon="home-lg-alt" fixed-width /> Accueil
-          </router-link>
-          <router-link class="nav__submenu-link" :to="'/members'">
-            <font-awesome-icon icon="users" fixed-width /> Membres et rosters
-          </router-link>
-          <router-link class="nav__submenu-link" :to="'/galleries'">
-            <font-awesome-icon icon="images" fixed-width /> Galeries de
-            screenshots
-          </router-link>
-          <!--only if not logged in-->
-          <router-link class="nav__submenu-link" :to="'/apply'">
-            <font-awesome-icon icon="user-check" fixed-width /> Postuler
-          </router-link>
-          <!--Separation-->
-          <div class="nav__separation"></div>
-          <!--Activities Links-->
-          <router-link class="nav__submenu-link" :to="'/planning'">
-            <font-awesome-icon icon="calendar-week" fixed-width /> Planning
-          </router-link>
-          <router-link class="nav__submenu-link" :to="'/festival-gyokoso'">
-            <font-awesome-icon icon="camera" fixed-width /> Festival Gyôkoso
-          </router-link>
-          <router-link class="nav__submenu-link" :to="'/teams'">
-            <font-awesome-icon icon="stars" fixed-width /> Equipes d'évent
-          </router-link>
-          <!--Separation-->
-          <div class="nav__separation"></div>
-          <!--Account Pages-->
-          <!--if logged  in-->
-          <router-link class="nav__submenu-link" :to="'/user/' + 1">
-            <font-awesome-icon icon="user" fixed-width /> Profil utilisateur
-          </router-link>
-          <router-link class="nav__submenu-link" :to="'/account'">
-            <font-awesome-icon icon="cog" fixed-width /> Paramètres du compte
-          </router-link>
-          <router-link class="nav__submenu-link" :to="'/'">
-            <font-awesome-icon icon="sign-out-alt" fixed-width /> Se déconnecter
-          </router-link>
-          <!--else-->
-          <router-link class="nav__submenu-link" :to="'/login'">
-            <font-awesome-icon icon="sign-in-alt" fixed-width /> Se connecter
-          </router-link>
-          <router-link class="nav__submenu-link" :to="'/signup'">
-            <font-awesome-icon icon="user-plus" fixed-width /> S'inscrire
-          </router-link>
-        </div>
-      </transition>
       <!--CL Title-->
       <div class="nav__cl-title">
         <span class="nav__cl-name">Namazu Wasshoi</span>
@@ -90,6 +38,58 @@
       </router-link>-->
     </div>
   </div>
+  <!--Submenu-->
+  <transition name="fade">
+    <div class="nav__submenu" v-show="toggle">
+      <!--Public Links-->
+      <router-link class="nav__submenu-link" :to="'/'">
+        <font-awesome-icon icon="home-lg-alt" fixed-width /> Accueil
+      </router-link>
+      <router-link class="nav__submenu-link" :to="'/members'">
+        <font-awesome-icon icon="users" fixed-width /> Membres et rosters
+      </router-link>
+      <router-link class="nav__submenu-link" :to="'/galleries'">
+        <font-awesome-icon icon="images" fixed-width /> Galeries de screenshots
+      </router-link>
+      <!--only if not logged in-->
+      <router-link class="nav__submenu-link" :to="'/apply'">
+        <font-awesome-icon icon="user-check" fixed-width /> Postuler
+      </router-link>
+      <!--Separation-->
+      <div class="nav__separation"></div>
+      <!--Activities Links-->
+      <router-link class="nav__submenu-link" :to="'/planning'">
+        <font-awesome-icon icon="calendar-week" fixed-width /> Planning
+      </router-link>
+      <router-link class="nav__submenu-link" :to="'/festival-gyokoso'">
+        <font-awesome-icon icon="camera" fixed-width /> Festival Gyôkoso
+      </router-link>
+      <router-link class="nav__submenu-link" :to="'/teams'">
+        <font-awesome-icon icon="stars" fixed-width /> Equipes d'évent
+      </router-link>
+      <!--Separation-->
+      <div class="nav__separation"></div>
+      <!--Account Pages-->
+      <!--if logged  in-->
+      <router-link class="nav__submenu-link" :to="'/user/' + 1">
+        <font-awesome-icon icon="user" fixed-width /> Profil utilisateur
+      </router-link>
+      <router-link class="nav__submenu-link" :to="'/account'">
+        <font-awesome-icon icon="cog" fixed-width /> Paramètres du compte
+      </router-link>
+      <router-link class="nav__submenu-link" :to="'/'">
+        <font-awesome-icon icon="sign-out-alt" fixed-width /> Se déconnecter
+      </router-link>
+      <!--else-->
+      <router-link class="nav__submenu-link" :to="'/login'">
+        <font-awesome-icon icon="sign-in-alt" fixed-width /> Se connecter
+      </router-link>
+      <router-link class="nav__submenu-link" :to="'/signup'">
+        <font-awesome-icon icon="user-plus" fixed-width /> S'inscrire
+      </router-link>
+    </div>
+  </transition>
+  <div class="nav__popup" v-show="toggle" @click="close"></div>
 </template>
 
 <script>
@@ -111,6 +111,13 @@ export default {
   },
   components: {
     UserAvatar
+  },
+  methods: {
+    close() {
+      if (this.toggle) {
+        this.toggle = false;
+      }
+    }
   }
 };
 </script>
@@ -140,8 +147,13 @@ export default {
       background: fade-in($black-veil, 0.1);
     }
   }
+  &__popup {
+    @include absolute-center;
+    z-index: 997;
+  }
   &__submenu {
     @include flex($direction: column);
+    z-index: 998;
     position: absolute;
     top: 46px;
     left: 0;
