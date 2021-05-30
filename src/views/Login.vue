@@ -1,10 +1,15 @@
 <template lang="html">
-  <div class="login"></div>
+  <AppFullscreen></AppFullscreen>
 </template>
 
 <script>
+import AppFullscreen from "@/components/AppFullscreen.vue";
+
 export default {
-  name: "Login"
+  name: "Login",
+  components: {
+    AppFullscreen
+  }
 };
 </script>
 
