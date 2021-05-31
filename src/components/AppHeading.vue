@@ -8,7 +8,7 @@
       :style="setSize"
     />
     <!--Page Title-->
-    <div class="heading__title-container">
+    <div class="heading__title-container" v-if="!fullscreen">
       <font-awesome-icon
         class="heading__icon"
         :icon="icon"
@@ -26,7 +26,8 @@ export default {
   name: "AppHeading",
   data() {
     return {
-      windowHeight: ""
+      windowHeight: "",
+      fullscreen: false
     };
   },
   props: {
@@ -53,10 +54,13 @@ export default {
       const name = this.$route.name;
       if (name == "Home") {
         this.windowHeight = window.innerHeight / 1.5;
+        this.fullscreen = false;
       } else if (name == "Login" || name == "Signup") {
         this.windowHeight = window.innerHeight - 43;
+        this.fullscreen = true;
       } else {
         this.windowHeight = window.innerHeight / 3;
+        this.fullscreen = false;
       }
     }
   }
@@ -70,10 +74,8 @@ export default {
   &__bann {
     display: block;
     width: 100%;
-    // min-height: 250px;
     object-fit: cover;
     transition: all 500ms;
-    // border-bottom: 5px solid $namazu;
   }
   &__title-container {
     @include flex($gap: 5);
