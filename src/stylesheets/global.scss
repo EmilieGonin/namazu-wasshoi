@@ -12,7 +12,8 @@ body {
   margin: 0;
 }
 html,
-button {
+button,
+input {
   font-family: "Roboto", sans-serif;
 }
 .form {
@@ -62,7 +63,8 @@ button {
   //Form elements
   input {
     width: 100%;
-    padding: 5px;
+    min-height: 34px;
+    padding: 0 5px;
     border: none;
     outline: none;
     border: 2px solid $grey;
