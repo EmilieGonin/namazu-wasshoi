@@ -23,19 +23,19 @@
       </router-link>
       <!--Links-->
       <!--if logged in-->
-      <router-link class="nav__menu-icon" :to="'/account'">
+      <router-link class="nav__menu-icon" :to="'/account'" v-if="loggedIn">
         <font-awesome-icon icon="cog" fixed-width />
       </router-link>
-      <router-link class="nav__menu-icon" :to="'/'">
+      <router-link class="nav__menu-icon" :to="'/'" v-if="loggedIn">
         <font-awesome-icon icon="sign-out-alt" fixed-width />
       </router-link>
-      <!--else-
-      <router-link class="nav__menu-icon" :to="'/login'">
+      <!--else-->
+      <router-link class="nav__menu-icon" :to="'/login'" v-if="!loggedIn">
         <font-awesome-icon icon="sign-in-alt" fixed-width />
       </router-link>
-      <router-link class="nav__menu-icon" :to="'/signup'">
+      <router-link class="nav__menu-icon" :to="'/signup'" v-if="!loggedIn">
         <font-awesome-icon icon="user-plus" fixed-width />
-      </router-link>-->
+      </router-link>
     </div>
   </div>
   <!--Submenu-->
@@ -52,7 +52,7 @@
         <font-awesome-icon icon="images" fixed-width /> Galeries de screenshots
       </router-link>
       <!--only if not logged in-->
-      <router-link class="nav__submenu-link" :to="'/apply'">
+      <router-link class="nav__submenu-link" :to="'/apply'" v-if="!loggedIn">
         <font-awesome-icon icon="user-check" fixed-width /> Postuler
       </router-link>
       <!--Separation-->
@@ -71,20 +71,20 @@
       <div class="nav__separation"></div>
       <!--Account Pages-->
       <!--if logged  in-->
-      <router-link class="nav__submenu-link" :to="'/user/' + 1">
+      <router-link class="nav__submenu-link" :to="'/user/' + 1" v-if="loggedIn">
         <font-awesome-icon icon="user" fixed-width /> Profil utilisateur
       </router-link>
-      <router-link class="nav__submenu-link" :to="'/account'">
+      <router-link class="nav__submenu-link" :to="'/account'" v-if="loggedIn">
         <font-awesome-icon icon="cog" fixed-width /> Paramètres du compte
       </router-link>
-      <router-link class="nav__submenu-link" :to="'/'">
+      <router-link class="nav__submenu-link" :to="'/'" v-if="loggedIn">
         <font-awesome-icon icon="sign-out-alt" fixed-width /> Se déconnecter
       </router-link>
       <!--else-->
-      <router-link class="nav__submenu-link" :to="'/login'">
+      <router-link class="nav__submenu-link" :to="'/login'" v-if="!loggedIn">
         <font-awesome-icon icon="sign-in-alt" fixed-width /> Se connecter
       </router-link>
-      <router-link class="nav__submenu-link" :to="'/signup'">
+      <router-link class="nav__submenu-link" :to="'/signup'" v-if="!loggedIn">
         <font-awesome-icon icon="user-plus" fixed-width /> S'inscrire
       </router-link>
     </div>
@@ -101,7 +101,8 @@ export default {
     return {
       toggle: false,
       //temp
-      id: "1"
+      id: "1",
+      loggedIn: false
     };
   },
   watch: {
