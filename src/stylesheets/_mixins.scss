@@ -22,12 +22,15 @@
   font-size: $size + px;
 }
 @mixin page-title {
-  font-family: "Bebas Neue", cursive;
-  font-weight: normal;
-  font-size: 37px;
+  @include title;
   @media (max-width: 559px) {
     font-size: 25px;
   }
+}
+@mixin title {
+  font-family: "Bebas Neue", cursive;
+  font-weight: normal;
+  font-size: 37px;
 }
 @mixin mobile-hide {
   @media (max-width: 559px) {
