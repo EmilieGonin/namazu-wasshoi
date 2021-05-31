@@ -5,8 +5,8 @@
         <div class="form__title">
           Bienvenue parmi nous !
         </div>
-        Vous avez déjà créé votre compte ?
-        <router-link to="/login">Connectez-vous !</router-link>
+        Vous ne faites pas partie de la compagnie ?
+        <router-link to="/apply">Postulez dès maintenant !</router-link>
       </div>
       <FormInput
         :value="email"
@@ -21,6 +21,27 @@
         :label="'Mot de passe'"
         :name="'password'"
         :type="'password'"
+        :required="true"
+        @handle-change="handleChange($event)"
+      ></FormInput>
+      <FormInput
+        :value="firstName"
+        :label="'Prénom du personnage'"
+        :name="'firstName'"
+        :required="true"
+        @handle-change="handleChange($event)"
+      ></FormInput>
+      <FormInput
+        :value="lastName"
+        :label="'Nom du personnage'"
+        :name="'lastName'"
+        :required="true"
+        @handle-change="handleChange($event)"
+      ></FormInput>
+      <FormInput
+        :value="discord"
+        :label="'Pseudo Discord'"
+        :name="'discord'"
         :required="true"
         @handle-change="handleChange($event)"
       ></FormInput>
@@ -39,7 +60,10 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      firstName: "",
+      lastName: "",
+      discord: ""
     };
   },
   components: {
