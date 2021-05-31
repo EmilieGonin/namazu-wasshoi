@@ -155,7 +155,7 @@ export default {
   &__submenu {
     @include flex($direction: column);
     z-index: 998;
-    position: absolute;
+    position: fixed;
     top: 46px;
     left: 0;
     background: $namazu;
