@@ -15,6 +15,8 @@ export default {
 <style lang="scss" scoped>
 .fullscreen {
   @include absolute-center;
+  position: fixed;
+  top: 43px;
   @include flex;
   backdrop-filter: blur(5px);
   &__container {
