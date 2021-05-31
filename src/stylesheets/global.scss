@@ -13,7 +13,8 @@ body {
 }
 html,
 button,
-input {
+input,
+textarea {
   font-family: "Roboto", sans-serif;
 }
 .form {
@@ -61,19 +62,24 @@ input {
   }
 
   //Form elements
-  input {
-    width: 100%;
-    min-height: 34px;
-    padding: 0 5px;
-    border: none;
+  input,
+  textarea {
+    padding: 5px;
     outline: none;
     border: 2px solid $grey;
     border-top: 2px solid $namazu;
     background: veil($minor-white);
     &:focus {
-      background: white;
-      border: 2px solid dark($namazu);
+      //
     }
+  }
+  input {
+    width: 100%;
+    min-height: 34px;
+    padding: 0 5px;
+  }
+  textarea {
+    resize: none;
   }
   label {
     display: block;
