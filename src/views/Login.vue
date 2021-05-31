@@ -8,14 +8,20 @@
         Vous n'avez pas encore de compte ?
         <router-link to="/signup">Inscrivez-vous !</router-link>
       </div>
-      <div class="form__field">
-        <label for="email">Adresse email</label>
-        <input type="email" id="email" v-model="email" />
-      </div>
-      <div class="form__field">
-        <label for="password">Mot de passe</label>
-        <input type="password" id="password" v-model="password" />
-      </div>
+      <FormInput
+        :value="email"
+        :label="'Adresse email'"
+        :name="'email'"
+        :type="'email'"
+        @handle-change="handleChange($event)"
+      ></FormInput>
+      <FormInput
+        :value="password"
+        :label="'Mot de passe'"
+        :name="'password'"
+        :type="'password'"
+        @handle-change="handleChange($event)"
+      ></FormInput>
       <AppButton :iconR="'sign-in-alt'">Se connecter</AppButton>
     </form>
   </AppFullscreen>
@@ -24,6 +30,7 @@
 <script>
 import AppFullscreen from "@/components/AppFullscreen.vue";
 import AppButton from "@/components/AppButton.vue";
+import FormInput from "@/components/FormInput.vue";
 
 export default {
   name: "Login",
@@ -35,9 +42,13 @@ export default {
   },
   components: {
     AppFullscreen,
-    AppButton
+    AppButton,
+    FormInput
   },
   methods: {
+    handleChange([value, name]) {
+      this[name] = value;
+    },
     submit() {
       //
     }
