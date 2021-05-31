@@ -8,43 +8,43 @@
         Vous ne faites pas partie de la compagnie ?
         <router-link to="/apply">Postulez dès maintenant !</router-link>
       </div>
-      <FormInput
+      <FormElement
         :value="email"
         :label="'Adresse email'"
         :name="'email'"
         :type="'email'"
         :required="true"
         @handle-change="handleChange($event)"
-      ></FormInput>
-      <FormInput
+      ></FormElement>
+      <FormElement
         :value="password"
         :label="'Mot de passe'"
         :name="'password'"
         :type="'password'"
         :required="true"
         @handle-change="handleChange($event)"
-      ></FormInput>
-      <FormInput
+      ></FormElement>
+      <FormElement
         :value="firstName"
         :label="'Prénom du personnage'"
         :name="'firstName'"
         :required="true"
         @handle-change="handleChange($event)"
-      ></FormInput>
-      <FormInput
+      ></FormElement>
+      <FormElement
         :value="lastName"
         :label="'Nom du personnage'"
         :name="'lastName'"
         :required="true"
         @handle-change="handleChange($event)"
-      ></FormInput>
-      <FormInput
+      ></FormElement>
+      <FormElement
         :value="discord"
         :label="'Pseudo Discord'"
         :name="'discord'"
         :required="true"
         @handle-change="handleChange($event)"
-      ></FormInput>
+      ></FormElement>
       <AppButton :iconR="'plus'">Créer un compte</AppButton>
     </form>
   </AppFullscreen>
@@ -53,7 +53,7 @@
 <script>
 import AppFullscreen from "@/components/AppFullscreen.vue";
 import AppButton from "@/components/AppButton.vue";
-import FormInput from "@/components/FormInput.vue";
+import FormElement from "@/components/FormElement.vue";
 
 export default {
   name: "Signup",
@@ -69,7 +69,7 @@ export default {
   components: {
     AppFullscreen,
     AppButton,
-    FormInput
+    FormElement
   },
   methods: {
     handleChange([value, name]) {

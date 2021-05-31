@@ -8,22 +8,22 @@
         Vous n'avez pas encore de compte ?
         <router-link to="/signup">Inscrivez-vous !</router-link>
       </div>
-      <FormInput
+      <FormElement
         :value="email"
         :label="'Adresse email'"
         :name="'email'"
         :type="'email'"
         :required="true"
         @handle-change="handleChange($event)"
-      ></FormInput>
-      <FormInput
+      ></FormElement>
+      <FormElement
         :value="password"
         :label="'Mot de passe'"
         :name="'password'"
         :type="'password'"
         :required="true"
         @handle-change="handleChange($event)"
-      ></FormInput>
+      ></FormElement>
       <AppButton :iconR="'sign-in-alt'">Se connecter</AppButton>
     </form>
   </AppFullscreen>
@@ -32,7 +32,7 @@
 <script>
 import AppFullscreen from "@/components/AppFullscreen.vue";
 import AppButton from "@/components/AppButton.vue";
-import FormInput from "@/components/FormInput.vue";
+import FormElement from "@/components/FormElement.vue";
 
 export default {
   name: "Login",
@@ -45,7 +45,7 @@ export default {
   components: {
     AppFullscreen,
     AppButton,
-    FormInput
+    FormElement
   },
   methods: {
     handleChange([value, name]) {
