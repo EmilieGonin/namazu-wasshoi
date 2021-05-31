@@ -11,7 +11,8 @@ import {
   //Activities
   faCalendarWeek, faDungeon, faCamera, faImages,
   //Misc
-  faBars, faArrowRight, faPlus } from '@fortawesome/free-solid-svg-icons'
+  faBars, faArrowRight, faPlus, faCheckCircle, faTimesCircle
+} from '@fortawesome/free-solid-svg-icons'
 import { faHomeLgAlt, faStars } from '@fortawesome/pro-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -21,7 +22,7 @@ library.add(
   //Activities
   faCalendarWeek, faDungeon, faCamera, faImages,
   //Misc
-  faBars, faArrowRight, faPlus,
+  faBars, faArrowRight, faPlus, faCheckCircle, faTimesCircle,
   //Pro
   faHomeLgAlt, faStars
 )

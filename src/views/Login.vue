@@ -13,6 +13,7 @@
         :label="'Adresse email'"
         :name="'email'"
         :type="'email'"
+        :required="true"
         @handle-change="handleChange($event)"
       ></FormInput>
       <FormInput
@@ -20,6 +21,7 @@
         :label="'Mot de passe'"
         :name="'password'"
         :type="'password'"
+        :required="true"
         @handle-change="handleChange($event)"
       ></FormInput>
       <AppButton :iconR="'sign-in-alt'">Se connecter</AppButton>

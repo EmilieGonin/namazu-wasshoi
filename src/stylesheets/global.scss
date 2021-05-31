@@ -29,18 +29,44 @@ button {
     line-height: 30px;
     color: $namazu;
   }
+  &__icon {
+    position: absolute;
+    right: 5px;
+    color: veil($namazu);
+    &--valid {
+      color: $valid;
+    }
+  }
   &__field {
-    @include flex($direction: column, $gap: 5);
-    width: 60%;
+    @include flex($direction: column);
+    width: 80%;
+    max-width: 320px;
+  }
+  &__input-container {
+    @include flex;
+    position: relative;
+    width: 100%;
   }
 
   //Form elements
   input {
-    padding: 5px;
     width: 100%;
+    padding: 5px;
+    border: none;
+    outline: none;
+    border-top: 2px solid $namazu;
+    border-bottom: 2px solid $grey;
+    &:focus {
+      border-bottom: 2px solid dark($grey);
+    }
   }
   label {
     display: block;
+    padding: 5px;
+    width: 70%;
     text-align: center;
+    background: $namazu;
+    color: $minor-white;
+    font-size: $font-small;
   }
 }
