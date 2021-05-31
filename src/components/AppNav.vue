@@ -46,10 +46,10 @@
         <font-awesome-icon icon="home-lg-alt" fixed-width /> Accueil
       </router-link>
       <router-link class="nav__submenu-link" :to="'/members'">
-        <font-awesome-icon icon="users" fixed-width /> Membres et rosters
+        <font-awesome-icon icon="users" fixed-width /> Membres
       </router-link>
       <router-link class="nav__submenu-link" :to="'/galleries'">
-        <font-awesome-icon icon="images" fixed-width /> Galeries de screenshots
+        <font-awesome-icon icon="images" fixed-width /> Galeries
       </router-link>
       <!--only if not logged in-->
       <router-link class="nav__submenu-link" :to="'/apply'" v-if="!loggedIn">

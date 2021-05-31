@@ -67,8 +67,8 @@ const routes = [
     name: "Members",
     component: () => import('../views/Members.vue'),
     meta: {
-      title: "Membres et rosters - Namazu Wasshoi",
-      heading: "Membres et rosters",
+      title: "Membres - Namazu Wasshoi",
+      heading: "Membres",
       icon: "users"
     }
   },
@@ -77,8 +77,8 @@ const routes = [
     name: "Galleries",
     component: () => import('../views/Galleries.vue'),
     meta: {
-      title: "Galeries de screenshots - Namazu Wasshoi",
-      heading: "Galeries de screenshots",
+      title: "Galeries - Namazu Wasshoi",
+      heading: "Galeries",
       icon: "images"
     }
   },
