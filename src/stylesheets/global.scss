@@ -18,6 +18,11 @@ button {
 .form {
   @include flex($direction: column, $gap: 25);
   width: 100%;
+  &__pannel {
+    @include flex($gap: 50);
+    flex-wrap: wrap;
+    width: 100%;
+  }
   &__heading {
     text-align: center;
     margin-bottom: 10px;
@@ -41,11 +46,17 @@ button {
     @include flex($direction: column);
     width: 80%;
     max-width: 320px;
+    &--large {
+      max-width: 600px;
+    }
   }
   &__input-container {
     @include flex;
     position: relative;
     width: 100%;
+  }
+  &__separator {
+    height: 10px;
   }
 
   //Form elements
