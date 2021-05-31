@@ -1,6 +1,13 @@
 <template lang="html">
   <AppFullscreen>
     <form class="form" @submit.prevent="submit" method="post">
+      <div class="form__heading">
+        <div class="form__title">
+          Bon retour parmi nous !
+        </div>
+        Vous n'avez pas encore de compte ?
+        <router-link to="/signup">Inscrivez-vous !</router-link>
+      </div>
       <div class="form__field">
         <label for="email">Adresse email</label>
         <input type="email" id="email" v-model="email" />
