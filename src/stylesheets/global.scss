@@ -54,10 +54,12 @@ button {
     padding: 5px;
     border: none;
     outline: none;
+    border: 2px solid $grey;
     border-top: 2px solid $namazu;
-    border-bottom: 2px solid $grey;
+    background: veil($minor-white);
     &:focus {
-      border-bottom: 2px solid dark($grey);
+      background: white;
+      border: 2px solid dark($namazu);
     }
   }
   label {

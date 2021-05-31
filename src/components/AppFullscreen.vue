@@ -23,7 +23,7 @@ export default {
     width: 35%;
     min-width: 320px;
     padding: 50px 20px;
-    background: $minor-white;
+    background: white;
     box-shadow: 0 0 5px $main-black;
     border-radius: 5px;
   }
