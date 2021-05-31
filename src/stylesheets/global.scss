@@ -49,7 +49,7 @@ textarea {
     width: 80%;
     max-width: 320px;
     &--large {
-      max-width: 600px;
+      max-width: 665px;
     }
   }
   &__empty-field {
@@ -72,6 +72,7 @@ textarea {
   //Form elements
   input,
   textarea {
+    width: 100%;
     padding: 5px;
     outline: none;
     border: 2px solid $grey;
@@ -82,7 +83,6 @@ textarea {
     }
   }
   input {
-    width: 100%;
     min-height: 34px;
     padding: 0 5px;
   }
