@@ -17,6 +17,7 @@ button {
 }
 .form {
   @include flex($direction: column, $gap: 25);
+  width: 100%;
   &__heading {
     text-align: center;
     margin-bottom: 10px;
@@ -27,7 +28,6 @@ button {
     font-weight: normal;
     font-size: 35px;
     line-height: 30px;
-    color: $namazu;
   }
   &__icon {
     position: absolute;
