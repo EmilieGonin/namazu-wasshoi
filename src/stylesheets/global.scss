@@ -52,6 +52,14 @@ textarea {
       max-width: 600px;
     }
   }
+  &__empty-field {
+    @include responsive(664) {
+      display: none;
+    }
+    width: 80%;
+    height: 1px;
+    max-width: 320px;
+  }
   &__input-container {
     @include flex;
     position: relative;
