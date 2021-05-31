@@ -1,6 +1,15 @@
 <template lang="html">
-  <div class="form__field" :class="{ 'form__field--large': large }">
-    <label :for="name">{{ label }}</label>
+  <!--Label Only-->
+  <label class="form__label form__label--only" :for="name" v-if="labelOnly">
+    {{ label }}
+  </label>
+  <!--Field-->
+  <div class="form__field" :class="{ 'form__field--large': large }" v-else>
+    <!--Label-->
+    <label class="form__label" :for="name">
+      {{ label }}
+    </label>
+    <!--Input-->
     <div class="form__input-container">
       <input
         :value="value"
@@ -14,6 +23,7 @@
             setIcon($event)
         "
       />
+      <!--Textarea-->
       <textarea
         :value="value"
         :id="name"
@@ -22,6 +32,7 @@
         :required="required"
         v-if="element == 'text'"
       ></textarea>
+      <!--Input Icon-->
       <font-awesome-icon
         class="form__icon"
         :class="{ 'form__icon--valid': valid }"
@@ -42,10 +53,15 @@ export default {
       valid: false
     };
   },
+  emits: ["handleChange"],
   props: {
     element: {
       type: String,
       default: "input"
+    },
+    labelOnly: {
+      type: Boolean,
+      default: false
     },
     value: String,
     name: String,

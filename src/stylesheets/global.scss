@@ -68,6 +68,37 @@ textarea {
   &__separator {
     height: 10px;
   }
+  &__label {
+    display: block;
+    padding: 5px;
+    width: 70%;
+    text-align: center;
+    background: $namazu;
+    color: $minor-white;
+    font-size: $font-small;
+    &--only {
+      max-width: 465px;
+    }
+  }
+  &__checkbox {
+    @include flex;
+    width: 100%;
+    margin-top: -25px;
+    & .form__field {
+      width: auto;
+      padding: 5px 1px;
+    }
+  }
+  &__checkbox-label {
+    cursor: pointer;
+    display: block;
+    width: 35px;
+    height: 35px;
+    opacity: 0.5;
+    &:hover {
+      opacity: 1;
+    }
+  }
 
   //Form elements
   input,
@@ -86,16 +117,13 @@ textarea {
     min-height: 34px;
     padding: 0 5px;
   }
+  input[type="checkbox"] {
+    display: none;
+    &:checked + label img {
+      opacity: 1;
+    }
+  }
   textarea {
     resize: none;
-  }
-  label {
-    display: block;
-    padding: 5px;
-    width: 70%;
-    text-align: center;
-    background: $namazu;
-    color: $minor-white;
-    font-size: $font-small;
   }
 }
