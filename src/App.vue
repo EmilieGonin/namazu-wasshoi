@@ -18,7 +18,7 @@ export default {
     AppNav
   },
   computed: {
-    ...mapGetters(["loading", "title", "icon"])
+    ...mapGetters(["loading", "loggedIn", "title", "icon"])
   }
 };
 </script>
