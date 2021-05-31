@@ -1,17 +1,21 @@
 import { createStore } from 'vuex'
 
+const user = JSON.parse(localStorage.getItem("user"));
+
 export default createStore({
   state() {
     return {
       loading: false,
       title: "",
-      icon: ""
+      icon: "",
+      user: user
     }
   },
   getters: {
     loading(state) { return state.loading },
     title(state) { return state.title },
-    icon(state) { return state.icon }
+    icon(state) { return state.icon },
+    loggedIn(state) { return !!state.user }
   },
   mutations: {
     LOADING(state) {
