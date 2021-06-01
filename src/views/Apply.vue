@@ -61,12 +61,13 @@
         <!--Availability-->
         <FormElement
           v-model="availability"
-          :label="'Quand es-tu dispo après 21h ?'"
+          :label="'Quelles sont tes disponibilités pour jouer ?'"
           :name="'availability'"
           :type="'availability'"
+          :element="'text'"
+          :large="true"
           :required="true"
         ></FormElement>
-        <div class="form__empty-field"></div>
         <!--About-->
         <FormElement
           :element="'text'"
