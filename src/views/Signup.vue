@@ -9,41 +9,36 @@
         <router-link to="/apply">Postulez dès maintenant !</router-link>
       </div>
       <FormElement
-        :value="email"
+        v-model="email"
         :label="'Adresse email'"
         :name="'email'"
         :type="'email'"
         :required="true"
-        @handle-change="handleChange($event)"
       ></FormElement>
       <FormElement
-        :value="password"
+        v-model="password"
         :label="'Mot de passe'"
         :name="'password'"
         :type="'password'"
         :required="true"
-        @handle-change="handleChange($event)"
       ></FormElement>
       <FormElement
-        :value="firstName"
+        v-model="firstName"
         :label="'Prénom du personnage'"
         :name="'firstName'"
         :required="true"
-        @handle-change="handleChange($event)"
       ></FormElement>
       <FormElement
-        :value="lastName"
+        v-model="lastName"
         :label="'Nom du personnage'"
         :name="'lastName'"
         :required="true"
-        @handle-change="handleChange($event)"
       ></FormElement>
       <FormElement
-        :value="discord"
+        v-model="discord"
         :label="'Pseudo Discord'"
         :name="'discord'"
         :required="true"
-        @handle-change="handleChange($event)"
       ></FormElement>
       <AppButton :iconR="'plus'">Créer un compte</AppButton>
     </form>
@@ -72,9 +67,6 @@ export default {
     FormElement
   },
   methods: {
-    handleChange([value, name]) {
-      this[name] = value;
-    },
     submit() {
       //
     }

@@ -9,20 +9,18 @@
         <router-link to="/signup">Inscrivez-vous !</router-link>
       </div>
       <FormElement
-        :value="email"
+        v-model="email"
         :label="'Adresse email'"
         :name="'email'"
         :type="'email'"
         :required="true"
-        @handle-change="handleChange($event)"
       ></FormElement>
       <FormElement
-        :value="password"
+        v-model="password"
         :label="'Mot de passe'"
         :name="'password'"
         :type="'password'"
         :required="true"
-        @handle-change="handleChange($event)"
       ></FormElement>
       <AppButton :iconR="'sign-in-alt'">Se connecter</AppButton>
     </form>
@@ -48,9 +46,6 @@ export default {
     FormElement
   },
   methods: {
-    handleChange([value, name]) {
-      this[name] = value;
-    },
     submit() {
       //
     }
