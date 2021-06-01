@@ -58,6 +58,9 @@ export default {
       } else if (name == "Login" || name == "Signup") {
         this.windowHeight = window.innerHeight - 43;
         this.fullscreen = true;
+      } else if (name == "FestivalGyokoso") {
+        this.windowHeight = 0;
+        this.fullscreen = false;
       } else {
         this.windowHeight = window.innerHeight / 3;
         this.fullscreen = false;
