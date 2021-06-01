@@ -80,14 +80,11 @@ textarea {
       max-width: 465px;
     }
   }
-  &__checkbox {
+  &__checkbox-container {
     @include flex;
+    flex-wrap: wrap;
     width: 100%;
-    margin-top: -25px;
-    & .form__field {
-      width: auto;
-      padding: 5px 1px;
-    }
+    padding: 5px;
   }
   &__checkbox-label {
     cursor: pointer;

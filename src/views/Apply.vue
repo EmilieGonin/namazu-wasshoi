@@ -11,8 +11,10 @@
       d'attente !
     </div>
   </div>
+  <!--Apply Form-->
   <div class="apply__form">
     <form class="form" @submit.prevent="submit" method="post">
+      <!--À propos de toi-->
       <div class="form__heading">
         <div class="form__title">
           À propos de toi
@@ -20,11 +22,13 @@
         Nous souhaiterions en savoir plus sur toi !
       </div>
       <div class="form__pannel">
+        <!--Name-->
         <FormElement
           v-model="name"
           :label="'Comment t\'appelles-tu ?'"
           :name="'name'"
         ></FormElement>
+        <!--Birthday-->
         <FormElement
           v-model="birthday"
           :label="'Quelle est ta date de naissance ?'"
@@ -32,12 +36,14 @@
           :type="'date'"
           :required="true"
         ></FormElement>
+        <!--Discord-->
         <FormElement
           v-model="discord"
           :label="'Quel est ton identifiant Discord ?'"
           :name="'discord'"
           :required="true"
         ></FormElement>
+        <!--Mic-->
         <FormElement
           v-model="mic"
           :label="'Possèdes-tu un micro ?'"
@@ -45,6 +51,7 @@
           :type="'mic'"
           :required="true"
         ></FormElement>
+        <!--Availability-->
         <FormElement
           v-model="availability"
           :label="'Quand es-tu dispo après 21h ?'"
@@ -53,6 +60,7 @@
           :required="true"
         ></FormElement>
         <div class="form__empty-field"></div>
+        <!--About-->
         <FormElement
           :element="'text'"
           v-model="about"
@@ -64,6 +72,7 @@
         ></FormElement>
       </div>
       <div class="form__separator"></div>
+      <!--À propos du personnage-->
       <div class="form__heading">
         <div class="form__title">
           À propos de ton personnage
@@ -71,32 +80,30 @@
         C'est au tour de ton personnage d'avoir la vedette !
       </div>
       <div class="form__pannel">
+        <!--First Name-->
         <FormElement
           v-model="firstName"
           :label="'Prénom du personnage'"
           :name="'firstName'"
           :required="true"
         ></FormElement>
+        <!--Last Name-->
         <FormElement
           v-model="lastName"
           :label="'Nom du personnage'"
           :name="'lastName'"
           :required="true"
         ></FormElement>
+        <!--Jobs Max Lvl-->
         <FormElement
-          :labelOnly="true"
+          :inputs="jobs"
           :label="'Quelles sont tes classes au niveau maximum ?'"
           :name="'maxlvl'"
+          :type="'checkbox'"
           :large="true"
+          @check="handleCheck"
         ></FormElement>
-        <FormCheckbox
-          v-for="job in jobs"
-          v-model="maxlvl"
-          :key="job.name"
-          :name="job.name"
-          :label="job.icon"
-        ></FormCheckbox>
-        {{ maxlvl }}
+        <!--Main Class-->
         <FormElement
           v-model="mainClass"
           :label="'Quelle est ta classe principale ?'"
@@ -110,7 +117,6 @@
 
 <script>
 import FormElement from "@/components/FormElement.vue";
-import FormCheckbox from "@/components/FormCheckbox.vue";
 
 export default {
   name: "Apply",
@@ -126,17 +132,43 @@ export default {
       lastName: "",
       maxlvl: [],
       jobs: [
-        { name: "gnb", icon: "emote", checked: false },
-        { name: "pld", icon: "emote", checked: false }
+        { name: "Paladin", label: "apply/pld" },
+        { name: "Guerrier", label: "apply/war" },
+        { name: "Chevalier noir", label: "apply/drk" },
+        { name: "Pistosabreur", label: "apply/gnb" },
+        { name: "Mage blanc", label: "apply/whm" },
+        { name: "Erudit", label: "apply/sch" },
+        { name: "Astromancien", label: "apply/ast" },
+        { name: "Moine", label: "apply/mnk" },
+        { name: "Chevalier dragon", label: "apply/drg" },
+        { name: "Ninja", label: "apply/nin" },
+        { name: "Samouraï", label: "apply/sam" },
+        { name: "Barde", label: "apply/brd" },
+        { name: "Machiniste", label: "apply/mch" },
+        { name: "Danseur", label: "apply/dnc" },
+        { name: "Mage noir", label: "apply/blm" },
+        { name: "Invocateur", label: "apply/smn" },
+        { name: "Mage rouge", label: "apply/rdm" }
       ],
       mainClass: ""
     };
   },
   components: {
-    FormElement,
-    FormCheckbox
+    FormElement
   },
   methods: {
+    handleCheck(e) {
+      const name = e.name;
+      if (e.checked) {
+        this[name].push(e.value);
+      } else {
+        const index = this[name].indexOf(e.value);
+        if (index > -1) {
+          this[name].splice(index, 1);
+        }
+      }
+      console.log(this[name]);
+    },
     submit() {
       //
     }

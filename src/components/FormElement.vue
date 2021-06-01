@@ -1,9 +1,37 @@
 <template lang="html">
-  <!--Label Only-->
-  <label class="form__label form__label--only" :for="name" v-if="labelOnly">
-    {{ label }}
-  </label>
-  <!--Field-->
+  <!--Checkbox Field-->
+  <div
+    class="form__field"
+    :class="{ 'form__field--large': large }"
+    v-if="type == 'checkbox'"
+  >
+    <!--Field Label-->
+    <label class="form__label form__label--only" :for="name">
+      {{ label }}
+    </label>
+    <!--Checkbox Inputs-->
+    <div class="form__checkbox-container">
+      <span v-for="input in inputs" :key="input.name">
+        <input
+          type="checkbox"
+          v-model="checked"
+          :value="input.name"
+          :id="input.name"
+          :name="name"
+          @change="$emit('check', $event.target)"
+        />
+        <label :for="input.name">
+          <img
+            class="form__checkbox-label"
+            :src="require('../assets/' + input.label + '.png')"
+            :alt="input.name"
+            :title="input.name"
+          />
+        </label>
+      </span>
+    </div>
+  </div>
+  <!--Other Fields-->
   <div class="form__field" :class="{ 'form__field--large': large }" v-else>
     <!--Label-->
     <label class="form__label" :for="name">
@@ -49,10 +77,11 @@ export default {
   data() {
     return {
       icon: "",
-      valid: false
+      valid: false,
+      checked: []
     };
   },
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "check"],
   props: {
     //Element datas
     modelValue: [String, Array],
@@ -62,6 +91,7 @@ export default {
       type: Boolean,
       default: null
     },
+    inputs: Array,
     //Element tag
     element: {
       type: String,
@@ -95,5 +125,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped></style>
