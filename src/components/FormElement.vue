@@ -45,7 +45,6 @@
         :type="type"
         :required="required"
         v-if="element == 'input'"
-        @focus="setIcon($event)"
         @input="
           $emit('update:modelValue', $event.target.value), setIcon($event)
         "
