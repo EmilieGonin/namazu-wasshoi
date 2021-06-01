@@ -12,10 +12,12 @@
     <!--Checkbox Inputs-->
     <div
       class="form__checkbox-container"
-      :class="{ 'form__checkbox-container--box': !bigLabel }"
+      :class="{
+        'form__checkbox-container--box': !bigLabel
+      }"
       v-if="type == 'checkbox'"
     >
-      <span v-for="input in inputs" :key="input.name">
+      <span v-for="(input, index) in inputs" :key="input.name">
         <input
           type="checkbox"
           v-model="checked"
@@ -27,7 +29,10 @@
         <label :for="input.name">
           <img
             class="form__checkbox-label"
-            :class="{ 'form__checkbox-label--big': bigLabel }"
+            :class="{
+              'form__checkbox-label--big': bigLabel,
+              ['form__checkbox-label--' + (index + 1)]: teamsLabel
+            }"
             :src="require('../assets/' + input.label + '.png')"
             :alt="input.name"
             :title="input.name"
@@ -41,7 +46,7 @@
       :class="{ 'form__checkbox-container--box': !bigLabel }"
       v-if="type == 'radio'"
     >
-      <span v-for="input in inputs" :key="input.name">
+      <span v-for="(input, index) in inputs" :key="input.name">
         <input
           type="radio"
           :value="input.name"
@@ -52,7 +57,10 @@
         <label :for="input.name">
           <img
             class="form__checkbox-label"
-            :class="{ 'form__checkbox-label--big': bigLabel }"
+            :class="{
+              'form__checkbox-label--big': bigLabel,
+              ['form__checkbox-label--' + (index + 1)]: teamsLabel
+            }"
             :src="require('../assets/' + input.label + '.png')"
             :alt="input.name"
             :title="input.name"
@@ -141,6 +149,10 @@ export default {
       default: false
     },
     bigLabel: {
+      type: Boolean,
+      default: false
+    },
+    teamsLabel: {
       type: Boolean,
       default: false
     }

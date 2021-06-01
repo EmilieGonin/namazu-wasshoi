@@ -105,6 +105,15 @@ textarea {
     &:hover {
       opacity: 1;
     }
+
+    @each $team, $color in $teams {
+      $i: index(($teams), ($team $color));
+      &--#{$i} {
+        border: 5px solid $color;
+        margin: 5px;
+        box-shadow: 0 0 3px $main-black;
+      }
+    }
   }
 
   //Form elements
