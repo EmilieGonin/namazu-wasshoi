@@ -22,11 +22,13 @@ export default {
   props: {
     iconL: String,
     iconR: String,
-    marginTop: Number
+    marginTop: Number,
+    margin: String
   },
   computed: {
     style() {
       return {
+        margin: this.margin,
         marginTop: this.marginTop + "px"
       };
     }
@@ -41,7 +43,6 @@ export default {
   cursor: pointer;
   width: 100%;
   max-width: 200px;
-  // padding: 3% 5%;
   padding: 12px;
   background: $namazu;
   border: 2px solid $namazu;
