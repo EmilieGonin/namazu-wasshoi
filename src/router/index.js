@@ -116,10 +116,15 @@ const routes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
+  scrollBehavior() {
+    // always scroll to top
+    return { top: 0 }
+  },
 })
 
 router.beforeEach((to, from, next) => {
+  //Set Page Infos
   store.dispatch("setPage", [to.meta.heading, to.meta.icon]);
   next();
 })
