@@ -203,6 +203,9 @@
         :teamsLabel="true"
         @check="handleCheck"
       ></FormElement>
+      <AppButton :iconR="'arrow-right'">
+        Postuler
+      </AppButton>
     </form>
   </div>
 </template>
