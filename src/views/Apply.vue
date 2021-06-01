@@ -9,10 +9,17 @@
       Le recrutement est actuellement fermé. Toutefois, nous continuons
       d'étudier les nouvelles candidatures et tu seras ajouté sur la liste
       d'attente !
+      <AppButton
+        :iconR="'arrow-right'"
+        :marginTop="10"
+        @click="scroll('apply')"
+      >
+        Postuler
+      </AppButton>
     </div>
   </div>
   <!--Apply Form-->
-  <div class="apply__form">
+  <div class="apply__form" ref="apply">
     <form class="form" @submit.prevent="submit" method="post">
       <!--À propos de toi-->
       <div class="form__heading">
@@ -117,6 +124,7 @@
 
 <script>
 import FormElement from "@/components/FormElement.vue";
+import AppButton from "@/components/AppButton.vue";
 
 export default {
   name: "Apply",
@@ -154,9 +162,15 @@ export default {
     };
   },
   components: {
-    FormElement
+    FormElement,
+    AppButton
   },
   methods: {
+    scroll(ref) {
+      const to = this.$refs[ref];
+      const top = to.offsetTop;
+      window.scrollTo(0, top + 100);
+    },
     handleCheck(e) {
       const name = e.name;
       if (e.checked) {
