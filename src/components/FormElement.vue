@@ -3,14 +3,18 @@
   <div
     class="form__field"
     :class="{ 'form__field--large': large }"
-    v-if="type == 'checkbox'"
+    v-if="type == 'checkbox' || type == 'radio'"
   >
     <!--Field Label-->
-    <label class="form__label form__label--only" :for="name">
+    <label class="form__label form__label--only" :for="name" v-if="label">
       {{ label }}
     </label>
     <!--Checkbox Inputs-->
-    <div class="form__checkbox-container">
+    <div
+      class="form__checkbox-container"
+      :class="{ 'form__checkbox-container--box': !bigLabel }"
+      v-if="type == 'checkbox'"
+    >
       <span v-for="input in inputs" :key="input.name">
         <input
           type="checkbox"
@@ -23,6 +27,32 @@
         <label :for="input.name">
           <img
             class="form__checkbox-label"
+            :class="{ 'form__checkbox-label--big': bigLabel }"
+            :src="require('../assets/' + input.label + '.png')"
+            :alt="input.name"
+            :title="input.name"
+          />
+        </label>
+      </span>
+    </div>
+    <!--Radio Inputs-->
+    <div
+      class="form__checkbox-container"
+      :class="{ 'form__checkbox-container--box': !bigLabel }"
+      v-if="type == 'radio'"
+    >
+      <span v-for="input in inputs" :key="input.name">
+        <input
+          type="radio"
+          :value="input.name"
+          :id="input.name"
+          :name="name"
+          @change="$emit('update:modelValue', $event.target.value)"
+        />
+        <label :for="input.name">
+          <img
+            class="form__checkbox-label"
+            :class="{ 'form__checkbox-label--big': bigLabel }"
             :src="require('../assets/' + input.label + '.png')"
             :alt="input.name"
             :title="input.name"
@@ -107,6 +137,10 @@ export default {
       default: false
     },
     large: {
+      type: Boolean,
+      default: false
+    },
+    bigLabel: {
       type: Boolean,
       default: false
     }

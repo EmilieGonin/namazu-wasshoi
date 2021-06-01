@@ -118,6 +118,91 @@
           :required="true"
         ></FormElement>
       </div>
+      <div class="form__separator"></div>
+      <!--Ton rapport au jeu-->
+      <div class="form__heading">
+        <div class="form__title">
+          Ton rapport au jeu
+        </div>
+        Que fais-tu pendant tes sessions de jeu ?
+      </div>
+      <!--Playtime-->
+      <FormElement
+        v-model="playtime"
+        :label="'Depuis quand joues-tu à Final Fantasy XIV ?'"
+        :name="'playtime'"
+        :required="true"
+        :large="true"
+        :element="'text'"
+      ></FormElement>
+      <!--Game Activities-->
+      <FormElement
+        v-model="gameActivities"
+        :label="'Quelles sont tes activités préférées dans le jeu ?'"
+        :name="'gameActivities'"
+        :required="true"
+        :large="true"
+        :element="'text'"
+      ></FormElement>
+      <!--CL Wishes-->
+      <FormElement
+        v-model="cl"
+        :label="
+          'Quel genre de compagnie libre recherches-tu et pourquoi nous choisir ?'
+        "
+        :name="'cl'"
+        :required="true"
+        :large="true"
+        :element="'text'"
+      ></FormElement>
+      <!--Current CL-->
+      <FormElement
+        v-model="currentCl"
+        :label="
+          'Fais-tu actuellement partie d\'une compagnie ? Si oui, pourquoi la quitter ?'
+        "
+        :name="'currentCl'"
+        :required="true"
+        :large="true"
+        :element="'text'"
+      ></FormElement>
+      <div class="form__separator"></div>
+      <!--Ton expérience à haut niveau-->
+      <div class="form__heading">
+        <div class="form__title">
+          Ton expérience à haut niveau
+        </div>
+        Nous aimerions en savoir plus sur le contenu que tu as fait !
+      </div>
+      <!--Exp-->
+      <FormElement
+        v-model="exp"
+        :label="
+          'Quelle est ton expérience de jeu HL ? Souhaites-tu rejoindre un roster ?'
+        "
+        :name="'exp'"
+        :required="true"
+        :large="true"
+        :element="'text'"
+      ></FormElement>
+      <div class="form__separator"></div>
+      <!--Choisis ton équipe-->
+      <div class="form__heading">
+        <div class="form__title">
+          Choisis ton équipe
+        </div>
+        C'est le moment de faire un choix crucial !
+      </div>
+      <FormElement
+        v-model="team"
+        :inputs="teams"
+        :name="'team'"
+        :type="'radio'"
+        :large="true"
+        :bigLabel="true"
+        :teamsLabel="true"
+        @check="handleCheck"
+      ></FormElement>
     </form>
   </div>
 </template>
@@ -158,7 +243,19 @@ export default {
         { name: "Invocateur", label: "job-icons/smn" },
         { name: "Mage rouge", label: "job-icons/rdm" }
       ],
-      mainClass: ""
+      mainClass: "",
+      playtime: "",
+      gameActivities: "",
+      cl: "",
+      currentCl: "",
+      exp: "",
+      team: "",
+      teams: [
+        { name: "Mog", label: "teams/mog" },
+        { name: "Chocobo", label: "teams/chocobo" },
+        { name: "Pampa", label: "teams/pampa" },
+        { name: "Carbuncle", label: "teams/carbuncle" }
+      ]
     };
   },
   components: {
