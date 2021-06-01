@@ -1,29 +1,41 @@
 <template lang="html">
   <!--Checkbox Input & Label-->
   <input
+    type="checkbox"
     :value="value"
-    :id="name"
-    :type="type"
+    :id="value"
+    :name="name"
     :required="required"
-    v-if="type == 'checkbox'"
-    @focus="setIcon"
-    @input="
-      $emit('checkbox', [$event.target.checked, $event.target.id]),
-        setIcon($event)
-    "
+    @input="$emit('handleCheck', $event.target)"
   />
-  <label :for="name" v-if="type == 'checkbox'">
+  <label :for="value">
     <img
       class="form__checkbox-label"
       :src="require('../assets/' + label + '.png')"
       alt=""
-      v-if="type == 'checkbox'"
     />
   </label>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "FormCheckbox",
+  emits: ["handleCheck"],
+  props: {
+    modelValue: Array,
+    value: String,
+    name: String,
+    label: String,
+    required: {
+      type: Boolean,
+      default: null
+    }
+  },
+  required: {
+    type: Boolean,
+    default: null
+  }
+};
 </script>
 
 <style lang="css" scoped></style>

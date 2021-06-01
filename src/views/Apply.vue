@@ -91,13 +91,24 @@
           :required="true"
           @handle-change="handleChange($event)"
         ></FormElement>
-        <!--<FormElement
+        <FormElement
           :labelOnly="true"
           :label="'Quelles sont tes classes au niveau maximum ?'"
           :name="'maxlvl'"
           :large="true"
         ></FormElement>
         <div class="form__checkbox">
+          <FormCheckbox
+            v-for="job in jobs"
+            v-model="maxlvl"
+            :key="job.name"
+            :value="job.name"
+            :label="job.icon"
+            :name="'maxlvl'"
+            @handle-check="handleCheck($event)"
+          ></FormCheckbox>
+        </div>
+        <!--<div class="form__checkbox">
           <FormElement
             :value="maxlvl"
             :label="job.icon"
@@ -123,6 +134,7 @@
 
 <script>
 import FormElement from "@/components/FormElement.vue";
+import FormCheckbox from "@/components/FormCheckbox.vue";
 
 export default {
   name: "Apply",
@@ -138,18 +150,22 @@ export default {
       lastName: "",
       maxlvl: [],
       jobs: [
-        { name: "gnb", icon: "emote" },
-        { name: "pld", icon: "emote" }
+        { name: "gnb", icon: "emote", checked: false },
+        { name: "pld", icon: "emote", checked: false }
       ],
       mainClass: ""
     };
   },
   components: {
-    FormElement
+    FormElement,
+    FormCheckbox
   },
   methods: {
     handleChange([value, name]) {
       this[name] = value;
+    },
+    handleCheck(e) {
+      console.log(e);
     },
     submit() {
       //
