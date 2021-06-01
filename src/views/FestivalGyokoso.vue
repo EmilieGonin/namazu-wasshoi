@@ -127,6 +127,7 @@ export default {
   }
   &__theme {
     @include responsive(940) {
+      width: 100%;
       overflow: visible;
       height: auto;
     }
