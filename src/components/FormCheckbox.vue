@@ -1,5 +1,12 @@
 <template lang="html">
   <!--Checkbox Input & Label-->
+  <label :for="name">
+    <img
+      class="form__checkbox-label"
+      :src="require('../assets/' + label + '.png')"
+      alt=""
+    />
+  </label>
   <input
     type="checkbox"
     :value="modelValue"
@@ -10,7 +17,7 @@
 <script>
 export default {
   name: "FormCheckbox",
-  props: ["modelValue"],
+  props: ["modelValue", "name", "label"],
   emits: ["update:modelValue"]
 };
 </script>

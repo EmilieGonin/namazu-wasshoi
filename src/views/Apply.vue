@@ -91,9 +91,12 @@
         ></FormElement>
         <FormCheckbox
           v-for="job in jobs"
-          :key="job.name"
           v-model="maxlvl"
+          :key="job.name"
+          :name="job.name"
+          :label="job.icon"
         ></FormCheckbox>
+        {{ maxlvl }}
         <FormElement
           v-model="mainClass"
           :label="'Quelle est ta classe principale ?'"
