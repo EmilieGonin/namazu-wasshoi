@@ -21,52 +21,46 @@
       </div>
       <div class="form__pannel">
         <FormElement
-          :value="name"
+          v-model="name"
           :label="'Comment t\'appelles-tu ?'"
           :name="'name'"
-          @handle-change="handleChange($event)"
         ></FormElement>
         <FormElement
-          :value="birthday"
+          v-model="birthday"
           :label="'Quelle est ta date de naissance ?'"
           :name="'birthday'"
           :type="'date'"
           :required="true"
-          @handle-change="handleChange($event)"
         ></FormElement>
         <FormElement
-          :value="discord"
+          v-model="discord"
           :label="'Quel est ton identifiant Discord ?'"
           :name="'discord'"
           :required="true"
-          @handle-change="handleChange($event)"
         ></FormElement>
         <FormElement
-          :value="mic"
+          v-model="mic"
           :label="'Possèdes-tu un micro ?'"
           :name="'mic'"
           :type="'mic'"
           :required="true"
-          @handle-change="handleChange($event)"
         ></FormElement>
         <FormElement
-          :value="availability"
+          v-model="availability"
           :label="'Quand es-tu dispo après 21h ?'"
           :name="'availability'"
           :type="'availability'"
           :required="true"
-          @handle-change="handleChange($event)"
         ></FormElement>
         <div class="form__empty-field"></div>
         <FormElement
           :element="'text'"
-          :value="about"
+          v-model="about"
           :label="'Dis-nous en plus sur toi !'"
           :name="'about'"
           :type="'about'"
           :required="true"
           :large="true"
-          @handle-change="handleChange($event)"
         ></FormElement>
       </div>
       <div class="form__separator"></div>
@@ -78,18 +72,16 @@
       </div>
       <div class="form__pannel">
         <FormElement
-          :value="firstName"
+          v-model="firstName"
           :label="'Prénom du personnage'"
           :name="'firstName'"
           :required="true"
-          @handle-change="handleChange($event)"
         ></FormElement>
         <FormElement
-          :value="lastName"
+          v-model="lastName"
           :label="'Nom du personnage'"
           :name="'lastName'"
           :required="true"
-          @handle-change="handleChange($event)"
         ></FormElement>
         <FormElement
           :labelOnly="true"
@@ -97,35 +89,16 @@
           :name="'maxlvl'"
           :large="true"
         ></FormElement>
-        <div class="form__checkbox">
-          <FormCheckbox
-            v-for="job in jobs"
-            v-model="maxlvl"
-            :key="job.name"
-            :value="job.name"
-            :label="job.icon"
-            :name="'maxlvl'"
-            @handle-check="handleCheck($event)"
-          ></FormCheckbox>
-        </div>
-        <!--<div class="form__checkbox">
-          <FormElement
-            :value="maxlvl"
-            :label="job.icon"
-            :name="job.name"
-            :type="'checkbox'"
-            :required="true"
-            :key="job.index"
-            v-for="job in jobs"
-            @checkbox="checkbox($event)"
-          ></FormElement>
-        </div>-->
+        <FormCheckbox
+          v-for="job in jobs"
+          :key="job.name"
+          v-model="maxlvl"
+        ></FormCheckbox>
         <FormElement
-          :value="mainClass"
+          v-model="mainClass"
           :label="'Quelle est ta classe principale ?'"
           :name="'mainClass'"
           :required="true"
-          @handle-change="handleChange($event)"
         ></FormElement>
       </div>
     </form>
@@ -161,12 +134,6 @@ export default {
     FormCheckbox
   },
   methods: {
-    handleChange([value, name]) {
-      this[name] = value;
-    },
-    handleCheck(e) {
-      console.log(e);
-    },
     submit() {
       //
     }

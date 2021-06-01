@@ -12,24 +12,23 @@
     <!--Input-->
     <div class="form__input-container">
       <input
-        :value="value"
+        :value="modelValue"
         :id="name"
         :type="type"
         :required="required"
         v-if="element == 'input'"
-        @focus="setIcon"
+        @focus="setIcon($event)"
         @input="
-          $emit('handleChange', [$event.target.value, $event.target.id]),
-            setIcon($event)
+          $emit('update:modelValue', $event.target.value), setIcon($event)
         "
       />
       <!--Textarea-->
       <textarea
-        :value="value"
+        :value="modelValue"
         :id="name"
+        :required="required"
         rows="8"
         cols="80"
-        :required="required"
         v-if="element == 'text'"
       ></textarea>
       <!--Input Icon-->
@@ -53,26 +52,30 @@ export default {
       valid: false
     };
   },
-  emits: ["handleChange"],
+  emits: ["update:modelValue"],
   props: {
+    //Element datas
+    modelValue: [String, Array],
+    name: String,
+    label: String,
+    required: {
+      type: Boolean,
+      default: null
+    },
+    //Element tag
     element: {
       type: String,
       default: "input"
     },
-    labelOnly: {
-      type: Boolean,
-      default: false
-    },
-    value: String,
-    name: String,
-    label: String,
+    //Element type
     type: {
       type: String,
       default: "text"
     },
-    required: {
+    //Element design
+    labelOnly: {
       type: Boolean,
-      default: null
+      default: false
     },
     large: {
       type: Boolean,
