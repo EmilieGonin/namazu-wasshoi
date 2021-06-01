@@ -10,64 +10,51 @@
       </div>
     </div>
     <div class="festival__theme">
-      <div class="festival__heading festival__heading--main">
-        Participez à la xème édition du Festival Gyôkoso
+      <div class="festival__heading">
+        xème édition du Festival Gyôkoso
       </div>
-      <div class="festival__rules">
-        <div class="festival__heading">
-          Informations
-        </div>
-        <span>
-          Le Festival Gyôkoso est un concours mensuel de glamour et screenshots
-          au terme duquel sont élus deux Namazu dorés ! Participer et remporter
-          le festival vous feront tout deux gagner des points pour votre équipe.
-        </span>
-        <div class="festival__heading">
-          Règles de participations
-        </div>
-        <p>
-          - Les candidatures doivent d'être envoyées en privé à la @🔴GM👑.
-        </p>
-        <p>
-          - Vous êtes libre d'interpréter le thème comme vous le sentez, et vous
-          devrez expliquer votre interprétation du thème en une ou deux phrases,
-          donc choisissez bien vos mots !
-        </p>
-        <p>
-          - Vous pouvez accompagner votre participation d'une piste musicale
-          afin de renforcer votre interprétation.
-        </p>
-        <p>
-          - Vous êtes autorisés à utiliser Photoshop, mais uniquement pour
-          corriger la luminosité et les couleurs ou flouter/renforcer votre
-          image.
-        </p>
-        <p>
-          - Les gagnants de l'édition précédente peuvent participer pour tenter
-          de conserver leur titre.
-        </p>
-        <p>
-          - Vous pouvez demander à une ou plusieurs personnes de poser avec
-          vous, même si ces personnes participent de leur côté.
-        </p>
-        <p>
-          - Les shaders sont autorisés ! Vous pouvez demander de l'aide pour
-          installer GShade sur votre ordinateur auprès de la @🔴GM👑, des
-          @🔴Officiers👑 ou même des autres membres !
-        </p>
-        <p>- Les mods sont interdits !</p>
+      <div class="festival__infos">
+        Les votes sont ouverts ! Date limite : 30/05 - 20:00
       </div>
+      <div class="festival__menu">
+        <AppButton
+          v-for="view in views"
+          :key="view"
+          :class="[
+            'button--alt',
+            {
+              'button--alt--inactive': currentView != view
+            }
+          ]"
+          @click="currentView = view"
+        >
+          {{ view }}
+        </AppButton>
+      </div>
+      <component :is="currentViewComponent"></component>
+      <AppButton>Participer</AppButton>
     </div>
   </div>
 </template>
 
 <script>
+import FestivalInfos from "@/components/FestivalInfos.vue";
+import FestivalSubmissions from "@/components/FestivalSubmissions.vue";
+import AppButton from "@/components/AppButton.vue";
+
 export default {
   name: "FestivalGyokoso",
   data() {
     return {
-      windowHeight: ""
+      windowHeight: "",
+      views: ["Informations", "Participations"],
+      currentView: "Informations"
     };
+  },
+  components: {
+    FestivalInfos,
+    FestivalSubmissions,
+    AppButton
   },
   mounted() {
     this.checkSize();
@@ -78,6 +65,15 @@ export default {
       return {
         height: this.windowHeight
       };
+    },
+    currentViewComponent() {
+      if (this.currentView == "Informations") {
+        return "FestivalInfos";
+      } else if (this.currentView == "Participations") {
+        return "FestivalSubmissions";
+      } else {
+        return "";
+      }
     }
   },
   methods: {
@@ -140,6 +136,10 @@ export default {
     background: white;
     overflow: auto;
   }
+  &__menu {
+    @include flex($gap: 10);
+    margin-bottom: 20px;
+  }
   &__title {
     @include flex;
     @include cursive(50);
@@ -151,10 +151,10 @@ export default {
   }
   &__heading {
     @include title(30);
-    &--main {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+    text-align: center;
+  }
+  &__infos {
+    text-align: center;
   }
 }
 </style>

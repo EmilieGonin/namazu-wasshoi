@@ -53,6 +53,22 @@ export default {
     border: 2px solid $namazu;
     color: $namazu;
   }
+  &--alt {
+    background: none;
+    border: none;
+    border-bottom: 2px solid $namazu;
+    color: $namazu;
+    &:hover {
+      background: none;
+      border: none;
+      border-bottom: 2px solid $namazu;
+      color: $namazu;
+    }
+  }
+  &--alt--inactive {
+    border-bottom: 2px solid $grey;
+    color: $namazu;
+  }
   &__icon {
     position: absolute;
     font-size: $font-small;
