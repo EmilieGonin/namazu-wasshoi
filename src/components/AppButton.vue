@@ -1,5 +1,5 @@
 <template lang="html">
-  <button class="button">
+  <button class="button" :style="style">
     <slot>Envoyer</slot>
     <font-awesome-icon
       class="button__icon button__icon--l"
@@ -21,7 +21,15 @@ export default {
   name: "AppButton",
   props: {
     iconL: String,
-    iconR: String
+    iconR: String,
+    marginTop: Number
+  },
+  computed: {
+    style() {
+      return {
+        marginTop: this.marginTop + "px"
+      };
+    }
   }
 };
 </script>
