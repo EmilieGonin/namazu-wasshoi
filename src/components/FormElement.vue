@@ -295,8 +295,5 @@ export default {
       opacity: 1;
     }
   }
-  textarea {
-    resize: none;
-  }
 }
 </style>
