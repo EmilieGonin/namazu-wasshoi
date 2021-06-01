@@ -169,7 +169,7 @@ export default {
     scroll(ref) {
       const to = this.$refs[ref];
       const top = to.offsetTop;
-      window.scrollTo(0, top + 100);
+      window.scrollTo(0, top);
     },
     handleCheck(e) {
       const name = e.name;
@@ -196,6 +196,9 @@ export default {
   width: 100%;
   position: relative;
   &__line {
+    @include responsive(930) {
+      transform: translateY(30px);
+    }
     @include absolute-center;
     transform: translateY(60px);
     z-index: -1;
@@ -204,7 +207,17 @@ export default {
     background: $namazu;
   }
   &__infos-container {
+    @include responsive(930) {
+      width: 70%;
+      top: 30px;
+      right: 0;
+    }
+    @include responsive(410) {
+      width: 90%;
+      font-size: $font-small;
+    }
     position: relative;
+    top: -20px;
     right: 50px;
     z-index: 2;
     width: 40%;
@@ -215,6 +228,9 @@ export default {
     @include title;
   }
   &__bann {
+    @include responsive(930) {
+      display: none;
+    }
     display: block;
     position: relative;
     top: 60px;
@@ -223,6 +239,9 @@ export default {
     object-fit: cover;
   }
   &__form {
+    @include responsive(930) {
+      transform: translateY(60px);
+    }
     @include flex($justify: space-evenly);
     transform: translateY(120px);
     background: white;
