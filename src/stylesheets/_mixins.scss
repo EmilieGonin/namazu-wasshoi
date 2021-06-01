@@ -27,10 +27,10 @@
     font-size: 25px;
   }
 }
-@mixin title {
+@mixin title($size: 37) {
   font-family: "Bebas Neue", cursive;
   font-weight: normal;
-  font-size: 37px;
+  font-size: $size + px;
 }
 @mixin mobile-hide {
   @media (max-width: 559px) {

@@ -1,14 +1,17 @@
 <template lang="html">
   <div class="festival" :style="setSize">
     <div class="festival__banner-container">
+      <div class="festival__title">
+        Festival Gyôkoso
+      </div>
       <img class="festival__banner" src="@/assets/festival.png" alt="" />
       <div class="festival__legend">
         « Theme » par Gagnant • Participation gagnante de la précédente édition
       </div>
     </div>
     <div class="festival__theme">
-      <div class="festival__title">
-        Participez à la xème édition du
+      <div class="festival__heading festival__heading--main">
+        Participez à la xème édition du Festival Gyôkoso
       </div>
       <div class="festival__rules">
         <div class="festival__heading">
@@ -96,7 +99,7 @@ export default {
   }
   @include flex;
   &__banner-container {
-    @include flex;
+    @include flex($direction: column);
     position: relative;
     width: 100%;
     height: 100%;
@@ -107,22 +110,18 @@ export default {
     height: 100%;
     min-height: 400px;
     object-fit: cover;
+    border-top: 3px solid white;
+    box-shadow: 0 0 2px $main-black;
   }
   &__legend {
-    @include responsive(940) {
-      bottom: 0;
-    }
     @include responsive(700) {
       font-size: $font-small - 2;
     }
     @include flex;
-    position: absolute;
-    bottom: 1%;
     width: 100%;
     padding: 10px 27px;
     background: $namazu;
     color: $minor-white;
-    font-size: $font-small;
   }
   &__line {
     @include absolute-center;
@@ -140,6 +139,22 @@ export default {
     padding: 50px;
     background: white;
     overflow: auto;
+  }
+  &__title {
+    @include flex;
+    @include cursive(50);
+    width: 100%;
+    background: white;
+    color: $namazu;
+    padding: 5px;
+    text-shadow: 1px 1px 1px dark($namazu);
+  }
+  &__heading {
+    @include title(30);
+    &--main {
+      text-align: center;
+      margin-bottom: 20px;
+    }
   }
 }
 </style>
