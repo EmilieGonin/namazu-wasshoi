@@ -1,5 +1,5 @@
 <template lang="html">
-  <button class="button" :style="style">
+  <button class="button" :style="style" @click="go">
     <slot>Envoyer</slot>
     <font-awesome-icon
       class="button__icon button__icon--l"
@@ -23,7 +23,8 @@ export default {
     iconL: String,
     iconR: String,
     marginTop: Number,
-    margin: String
+    margin: String,
+    link: String
   },
   computed: {
     style() {
@@ -31,6 +32,13 @@ export default {
         margin: this.margin,
         marginTop: this.marginTop + "px"
       };
+    }
+  },
+  methods: {
+    go() {
+      if (this.link) {
+        this.$router.push(this.link);
+      }
     }
   }
 };

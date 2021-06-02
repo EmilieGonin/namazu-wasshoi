@@ -18,7 +18,11 @@
         <span class="festival__infos">
           « Incarner un boss de défi extrême »
         </span>
-        <AppButton class="festival__button" :iconR="'arrow-right'">
+        <AppButton
+          class="festival__button"
+          :iconR="'arrow-right'"
+          :link="'/festival-gyokoso'"
+        >
           {{ action }}
         </AppButton>
       </div>
