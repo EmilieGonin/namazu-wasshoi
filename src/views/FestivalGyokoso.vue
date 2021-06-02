@@ -137,6 +137,7 @@ export default {
     width: 50%;
     height: 100%;
     padding: 50px;
+    padding-bottom: 20px;
     background: white;
     overflow: hidden scroll;
   }
