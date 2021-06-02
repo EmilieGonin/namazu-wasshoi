@@ -24,6 +24,7 @@
           :value="input.name"
           :id="input.name"
           :name="name"
+          :class="{ 'form__checkbox-input': input.label }"
           @change="$emit('check', $event.target)"
         />
         <label :for="input.name">
@@ -52,6 +53,7 @@
           :value="input.name"
           :id="input.name"
           :name="name"
+          :class="{ 'form__checkbox-input': input.label }"
           @change="$emit('update:modelValue', $event.target.value)"
         />
         <label :for="input.name">
@@ -64,7 +66,9 @@
             :src="require('../assets/' + input.label + '.png')"
             :alt="input.name"
             :title="input.name"
+            v-if="input.label"
           />
+          <span v-else>{{ input.name }}</span>
         </label>
       </span>
     </div>
@@ -270,6 +274,12 @@ export default {
       }
     }
   }
+  &__checkbox-input {
+    display: none;
+    &:checked + label img {
+      opacity: 1;
+    }
+  }
 
   //Form elements
   input,
@@ -290,10 +300,9 @@ export default {
   }
   input[type="checkbox"],
   input[type="radio"] {
-    display: none;
-    &:checked + label img {
-      opacity: 1;
-    }
+    margin: 0 5px 0 15px;
+    min-height: auto;
+    width: auto;
   }
 }
 </style>

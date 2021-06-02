@@ -53,9 +53,10 @@
         <!--Mic-->
         <FormElement
           v-model="mic"
+          :inputs="yesno"
           :label="'Possèdes-tu un micro ?'"
           :name="'mic'"
-          :type="'mic'"
+          :type="'radio'"
           :required="true"
         ></FormElement>
         <!--Availability-->
@@ -63,7 +64,6 @@
           v-model="availability"
           :label="'Quelles sont tes disponibilités pour jouer ?'"
           :name="'availability'"
-          :type="'availability'"
           :element="'text'"
           :large="true"
           :required="true"
@@ -74,7 +74,6 @@
           v-model="about"
           :label="'Dis-nous en plus sur toi !'"
           :name="'about'"
-          :type="'about'"
           :required="true"
           :large="true"
         ></FormElement>
@@ -219,6 +218,7 @@ export default {
   name: "Apply",
   data() {
     return {
+      yesno: [{ name: "Oui" }, { name: "Non" }],
       name: "",
       birthday: "",
       discord: "",
