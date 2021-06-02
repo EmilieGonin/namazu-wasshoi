@@ -24,6 +24,14 @@ a {
   text-decoration: none;
 }
 
+//Text Global Style
+strong {
+  text-decoration: underline 2px $namazu;
+}
+.gold {
+  text-decoration: underline 2px $gold;
+}
+
 //Vue Transitions
 .slide {
   &-enter-active,

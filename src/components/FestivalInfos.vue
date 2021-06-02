@@ -5,8 +5,9 @@
     </div>
     <span>
       <p>
-        Le Festival Gyôkoso est un concours mensuel de glamour et screenshots au
-        terme duquel sont élus deux Namazu dorés ! Participer et remporter le
+        Le <strong>Festival Gyôkoso</strong> est un concours mensuel de glamour
+        et screenshots au terme duquel sont élus deux
+        <strong class="gold">Namazu dorés</strong> ! Participer et remporter le
         festival vous feront tout deux gagner des points pour votre équipe.
       </p>
     </span>

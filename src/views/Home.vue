@@ -3,8 +3,7 @@
     <!--Stats-->
     <div class="home__stats">
       <span class="home__cl-name">Namazu Wasshoi</span> est une compagnie libre
-      de <strong>{{ ActiveMemberCount }}</strong> petits namazu, en activité
-      depuis <strong>février 2020</strong>.
+      de {{ ActiveMemberCount }} petits namazu, en activité depuis février 2020.
     </div>
     <!--Activities-->
     <div class="home__activities">
