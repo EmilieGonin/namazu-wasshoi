@@ -75,10 +75,6 @@
   </div>
   <!--Other Fields-->
   <div class="form__field" :class="{ 'form__field--large': large }" v-else>
-    <!--Label-->
-    <label class="form__label" :for="name">
-      {{ label }}
-    </label>
     <!--Input-->
     <div class="form__input-container">
       <input
@@ -100,6 +96,10 @@
         cols="80"
         v-if="element == 'text'"
       ></textarea>
+      <!--Label-->
+      <label class="form__label" :for="name">
+        {{ label }}
+      </label>
       <!--Input Icon-->
       <font-awesome-icon
         class="form__icon"
@@ -198,6 +198,7 @@ export default {
   &__icon {
     position: absolute;
     right: 5px;
+    bottom: 9px;
     color: veil($namazu);
     &--valid {
       color: $valid;
@@ -220,7 +221,7 @@ export default {
     max-width: 320px;
   }
   &__input-container {
-    @include flex;
+    @include flex($direction: column-reverse);
     position: relative;
     width: 100%;
   }
@@ -285,7 +286,8 @@ export default {
   input,
   textarea {
     width: 100%;
-    padding: 5px;
+    padding: 0 5px;
+    padding-right: 25px;
     outline: none;
     border: 2px solid $grey;
     border-top: 2px solid $namazu;
@@ -294,15 +296,26 @@ export default {
       //
     }
   }
+  textarea {
+    padding: 5px;
+  }
   input {
     min-height: 34px;
-    padding: 0 5px;
   }
   input[type="checkbox"],
   input[type="radio"] {
     margin: 0 5px 0 15px;
     min-height: auto;
     width: auto;
+  }
+  input:required + label::after,
+  textarea:required + label::after {
+    content: " *";
+    position: absolute;
+    top: 27px;
+    right: -10px;
+    // right: 0;
+    color: $namazu;
   }
 }
 </style>
