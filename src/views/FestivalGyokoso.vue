@@ -14,7 +14,9 @@
         xème édition du Festival Gyôkoso
       </div>
       <div class="festival__infos">
-        Les votes sont ouverts ! Date limite : 30/05 - 20:00
+        Les inscriptions sont ouvertes !
+        <AppButton>Participer</AppButton>
+        <span class="festival__deadline">Date limite : 25/06 - 20:00</span>
       </div>
       <div class="festival__menu">
         <AppButton
@@ -31,8 +33,9 @@
           {{ view }}
         </AppButton>
       </div>
-      <component :is="currentViewComponent"></component>
-      <AppButton>Participer</AppButton>
+      <transition name="slide-down" mode="out-in">
+        <component :is="currentViewComponent"></component>
+      </transition>
     </div>
   </div>
 </template>
@@ -135,7 +138,7 @@ export default {
     height: 100%;
     padding: 50px;
     background: white;
-    overflow: auto;
+    overflow: hidden scroll;
   }
   &__menu {
     @include flex($gap: 10);
@@ -155,7 +158,11 @@ export default {
     text-align: center;
   }
   &__infos {
-    text-align: center;
+    @include flex($direction: column, $gap: 10);
+  }
+  &__deadline {
+    font-size: $font-small;
+    margin-top: -5px;
   }
 }
 </style>

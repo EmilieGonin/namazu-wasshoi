@@ -23,3 +23,32 @@ textarea {
 a {
   text-decoration: none;
 }
+
+//Vue Transitions
+.slide {
+  &-enter-active,
+  &-leave-active {
+    transition: opacity 700ms, transform 500ms ease-out;
+    transform: translateX(0);
+    opacity: 1;
+  }
+  &-enter-from,
+  &-leave-to {
+    transform: translateX(45%);
+    opacity: 0;
+  }
+}
+.slide-down {
+  &-enter-active,
+  &-leave-active {
+    transition: all 500ms;
+    transform: translateY(0);
+    opacity: 1;
+  }
+  &-enter-from,
+  &-leave-to {
+    transform: translateY(10%);
+    transform-origin: top;
+    opacity: 0;
+  }
+}
