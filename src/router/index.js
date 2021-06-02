@@ -125,8 +125,18 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   //Set Page Infos
+  console.log("is loading");
+  store.dispatch("loading", true);
   store.dispatch("setPage", [to.meta.heading, to.meta.icon]);
   next();
+})
+router.afterEach(() => {
+  router.isReady()
+  .then(() => {
+    console.log("is ready");
+    store.dispatch("loading", false);
+  })
+  .catch((e) => console.error(e));
 })
 
 export default router

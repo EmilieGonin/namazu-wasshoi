@@ -1,6 +1,8 @@
 import { createStore } from 'vuex'
 
 const user = JSON.parse(localStorage.getItem("user"));
+// localStorage.clear();
+// console.log(user);
 
 export default createStore({
   state() {
@@ -21,6 +23,9 @@ export default createStore({
     LOADING(state) {
       state.loading = true;
     },
+    SUCCESS(state) {
+      state.loading = false;
+    },
     SET_PAGE(state, [ title, icon ]) {
       state.title = title;
       state.icon = icon;
@@ -29,6 +34,13 @@ export default createStore({
   actions: {
     setPage({ commit }, [ title, icon ]) {
       commit("SET_PAGE", [ title, icon ]);
+    },
+    loading({commit}, isLoading) {
+      if (isLoading) {
+        commit("LOADING");
+      } else {
+        commit("SUCCESS");
+      }
     }
   },
   modules: {
