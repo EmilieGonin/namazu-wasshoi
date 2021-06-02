@@ -72,10 +72,20 @@ export default {
       border-bottom: 2px solid $namazu;
       color: $namazu;
     }
-  }
-  &--alt--inactive {
-    border-bottom: 2px solid $grey;
-    color: $namazu;
+    &--inactive {
+      border-bottom: 2px solid $grey;
+      color: $namazu;
+    }
+    &--disabled {
+      color: dark($grey);
+      &:hover {
+        cursor: default;
+        background: none;
+        border: none;
+        border-bottom: 2px solid $grey;
+        color: dark($grey);
+      }
+    }
   }
   &__icon {
     position: absolute;

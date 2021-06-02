@@ -26,9 +26,14 @@
             'button--alt',
             {
               'button--alt--inactive': currentView != view
-            }
+            },
+            { 'button--alt--disabled': view == 'Participations' && !voting }
           ]"
-          @click="currentView = view"
+          @click="
+            if (voting) {
+              currentView = view;
+            }
+          "
         >
           {{ view }}
         </AppButton>
@@ -51,7 +56,9 @@ export default {
     return {
       windowHeight: "",
       views: ["Informations", "Participations"],
-      currentView: "Informations"
+      currentView: "Informations",
+      //temp
+      voting: false
     };
   },
   components: {
