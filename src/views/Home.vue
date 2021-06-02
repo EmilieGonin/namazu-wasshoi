@@ -119,9 +119,6 @@ export default {
       padding: 0;
     }
     @include flex($align: stretch, $gap: 20);
-    // background: $minor-white;
-    // background: $main-black;
-    // transform: translateY(-200px);
     padding: 50px 0;
     flex-wrap: wrap;
     text-align: center;
