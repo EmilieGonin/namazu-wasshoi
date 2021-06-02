@@ -5,6 +5,7 @@
       class="heading__bann"
       src="@/assets/bann.png"
       alt="Bannière du site"
+      v-if="display"
       :style="setSize"
     />
     <!--Page Title-->
@@ -27,7 +28,8 @@ export default {
   data() {
     return {
       windowHeight: "",
-      fullscreen: false
+      fullscreen: false,
+      display: true
     };
   },
   props: {
@@ -53,15 +55,17 @@ export default {
     checkSize() {
       const name = this.$route.name;
       if (name == "Home") {
+        this.display = true;
         this.windowHeight = window.innerHeight / 1.5;
         this.fullscreen = false;
       } else if (name == "Login" || name == "Signup") {
+        this.display = true;
         this.windowHeight = window.innerHeight - 43;
         this.fullscreen = true;
       } else if (name == "FestivalGyokoso") {
-        this.windowHeight = 0;
-        this.fullscreen = false;
+        this.display = false;
       } else {
+        this.display = true;
         this.windowHeight = window.innerHeight / 3;
         this.fullscreen = false;
       }
