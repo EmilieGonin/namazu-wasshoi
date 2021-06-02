@@ -28,12 +28,18 @@ export default {
   name: "HomeCard",
   props: {
     icon: String,
-    link: String
+    link: String,
+    internal: {
+      type: Boolean,
+      default: true
+    }
   },
   methods: {
     redirect() {
-      if (this.link) {
+      if (!this.internal) {
         window.open(this.link);
+      } else {
+        this.$router.push(this.link);
       }
     }
   }

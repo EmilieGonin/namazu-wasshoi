@@ -7,7 +7,7 @@
     </div>
     <!--Activities-->
     <div class="home__activities">
-      <HomeCard :icon="'calendar-week'" class="mog">
+      <HomeCard :icon="'calendar-week'" :link="'/planning'" class="mog">
         <template #title>Sorties et évents</template>
         <template #infos>
           Notre planning vous propose chaque semaine différents types de
@@ -19,7 +19,7 @@
         </template>
         <template #button>Accéder au planning</template>
       </HomeCard>
-      <HomeCard :icon="'stars'" class="chocobo">
+      <HomeCard :icon="'stars'" :link="'/teams'" class="chocobo">
         <template #title>Système de points</template>
         <template #infos>
           Lorsque vous rejoignez la CL, vous devez rejoindre l'une de nos quatre
@@ -30,7 +30,7 @@
           votre équipe.
         </template>
       </HomeCard>
-      <HomeCard :icon="'dungeon'" class="pampa">
+      <HomeCard :icon="'dungeon'" :link="'/'" class="pampa">
         <template #title>Contenu sadique</template>
         <template #infos>
           Notre compagnie libre étant à la fois ouverte au contenu dit « casual
@@ -44,6 +44,7 @@
       <HomeCard
         :icon="'users'"
         :link="'https://discord.gg/gpV2CzN'"
+        :internal="false"
         class="carbuncle"
       >
         <template #title>Communauté active</template>
