@@ -34,10 +34,7 @@ export default {
     return {
       //temp
       dayBirthdays: "",
-      monthBirthdays: [
-        { member: "Test", day: "01" },
-        { member: "Test", day: "10" }
-      ]
+      monthBirthdays: ""
     };
   }
 };
