@@ -1,5 +1,5 @@
 <template>
-  <AppLoading :loading="loading" />
+  <AppLoading :loading="status == 'pending'" />
   <AppNav />
   <AppHeading :title="title" :icon="icon">{{ title }}</AppHeading>
   <router-view />
@@ -18,7 +18,7 @@ export default {
     AppNav
   },
   computed: {
-    ...mapGetters(["loading", "loggedIn", "title", "icon"])
+    ...mapGetters(["status", "loggedIn", "title", "icon"])
   }
 };
 </script>
