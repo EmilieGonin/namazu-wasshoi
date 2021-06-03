@@ -1,38 +1,43 @@
 <template lang="html">
   <div class="members" v-if="status && status != 'loading'">
-    <!--Current Selected Member Name-->
-    <div
-      class="members__name"
-      :class="{
-        'members__name--empty': !currentMember,
-        'members__name--staff': staffMember(currentMember)
-      }"
-    >
-      {{ currentMember || "Sélectionnez un membre" }}
-    </div>
-    <!--Members Icons Container-->
-    <div class="members__container">
+    <!--Birthdays-->
+    <UsersBirthdays></UsersBirthdays>
+    <!--Members-->
+    <div class="members__members-pannel">
+      <!--Current Selected Member Name-->
       <div
-        class="members__avatar-container"
-        v-for="member in fcMembers"
-        :key="member.ID"
+        class="members__name"
+        :class="{
+          'members__name--empty': !currentMember,
+          'members__name--staff': staffMember(currentMember)
+        }"
       >
-        <!--Member Avatar-->
-        <img
-          class="members__avatar"
-          :src="member.Avatar"
-          alt="Avatar"
-          :title="member.Name"
-          @mouseover="setCurrentMember"
-          @mouseleave="reset"
-        />
-        <!--Member Rank Icon-->
-        <img
-          class="members__staff-icon"
-          :src="member.RankIcon"
-          alt=""
-          v-if="staffMember(member.Name)"
-        />
+        {{ currentMember || "Sélectionnez un membre" }}
+      </div>
+      <!--Members Icons Container-->
+      <div class="members__container">
+        <div
+          class="members__avatar-container"
+          v-for="member in fcMembers"
+          :key="member.ID"
+        >
+          <!--Member Avatar-->
+          <img
+            class="members__avatar"
+            :src="member.Avatar"
+            alt="Avatar"
+            :title="member.Name"
+            @mouseover="setCurrentMember"
+            @mouseleave="reset"
+          />
+          <!--Member Rank Icon-->
+          <img
+            class="members__staff-icon"
+            :src="member.RankIcon"
+            alt=""
+            v-if="staffMember(member.Name)"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -40,6 +45,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import UsersBirthdays from "@/components/UsersBirthdays.vue";
 
 export default {
   name: "Members",
@@ -47,6 +53,9 @@ export default {
     return {
       currentMember: ""
     };
+  },
+  components: {
+    UsersBirthdays
   },
   computed: {
     ...mapGetters(["status", "fcMembers", "staffMembers"])
@@ -74,13 +83,14 @@ export default {
 
 <style lang="scss" scoped>
 .members {
-  @include responsive(900) {
+  @include flex($align: stretch);
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  &__members-pannel {
+    @include flex($direction: column);
     margin: 20px auto;
   }
-  @include flex($direction: column);
-  width: 100%;
-  max-width: 800px;
-  margin: 10px auto;
   &__name {
     @include responsive(900) {
       display: none;
