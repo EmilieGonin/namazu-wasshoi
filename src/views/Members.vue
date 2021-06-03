@@ -68,6 +68,9 @@ export default {
     flex-wrap: wrap;
   }
   &__avatar {
+    @include responsive(900) {
+      width: 70px;
+    }
     cursor: pointer;
     width: 80px;
     opacity: 0.5;
