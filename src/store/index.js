@@ -53,12 +53,12 @@ export default createStore({
     setFreeCompany({ commit, dispatch }) {
       return new Promise((resolve, reject) => {
         commit("UPDATE_STATUS", "pending");
-        const data = checkCache("fc");
-        if (!data) {
+        const fc = checkCache("fc");
+        if (!fc) {
           xivapi.get("/freecompany/" + id + "?data=FCM")
           .then((response) => {
             commit("SET_FREE_COMPANY", cache("fc", response.data));
-            dispatch("setStaffMembers", response.data)
+            dispatch("setStaffMembers", response.data.FreeCompanyMembers)
             .then(() => {
               commit("UPDATE_STATUS", "success");
               resolve();
@@ -70,8 +70,8 @@ export default createStore({
             reject();
           });
         } else {
-          commit("SET_FREE_COMPANY", data);
-          dispatch("setStaffMembers", data)
+          commit("SET_FREE_COMPANY", fc);
+          dispatch("setStaffMembers", fc.data.FreeCompanyMembers)
           .then(() => {
             commit("UPDATE_STATUS", "success");
             resolve();
@@ -80,15 +80,17 @@ export default createStore({
       })
     },
     setStaffMembers({ commit }, fc) {
-      const members = fc.data.FreeCompanyMembers;
-      const staffRoles = ["Maître", "Bras droit", "Officier"];
-      const staff = [];
-      for (const member of members) {
-        if (staffRoles.includes(member.Rank)) {
-          staff.push(member.Name);
+      return new Promise((resolve) => {
+        const staffRoles = ["Maître", "Bras droit", "Officier"];
+        const staff = [];
+        for (const member of fc) {
+          if (staffRoles.includes(member.Rank)) {
+            staff.push(member.Name);
+          }
         }
-      }
-      commit("SET_STAFF_MEMBERS", staff);
+        commit("SET_STAFF_MEMBERS", staff);
+        resolve();
+      });
     }
   },
   modules: {
