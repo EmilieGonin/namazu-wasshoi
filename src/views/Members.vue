@@ -3,9 +3,12 @@
     <!--Current Selected Member Name-->
     <div
       class="members__name"
-      :class="{ 'members__name--staff': staffMember(currentMember) }"
+      :class="{
+        'members__name--empty': !currentMember,
+        'members__name--staff': staffMember(currentMember)
+      }"
     >
-      {{ currentMember }}
+      {{ currentMember || "Sélectionnez un membre" }}
     </div>
     <!--Members Icons Container-->
     <div class="members__container">
@@ -85,6 +88,9 @@ export default {
     @include cursive(50);
     margin-bottom: 10px;
     height: 69px;
+    &--empty {
+      color: dark($grey);
+    }
     &--staff {
       color: $namazu;
     }
