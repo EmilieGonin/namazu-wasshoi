@@ -14,6 +14,14 @@ body {
   width: 100vw;
   // margin-right: calc(-1 * (100vw - 100%));
 }
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.content {
+  flex: 1;
+}
 html,
 button,
 input,

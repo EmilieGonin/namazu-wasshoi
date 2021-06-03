@@ -2,7 +2,8 @@
   <AppLoading :loading="status == 'pending'" />
   <AppNav />
   <AppHeading :title="title" :icon="icon">{{ title }}</AppHeading>
-  <router-view />
+  <router-view class="content" />
+  <AppFooter />
 </template>
 
 <script>
@@ -10,12 +11,14 @@ import { mapGetters } from "vuex";
 import AppLoading from "@/components/AppLoading.vue";
 import AppHeading from "@/components/AppHeading.vue";
 import AppNav from "@/components/AppNav.vue";
+import AppFooter from "@/components/AppFooter.vue";
 
 export default {
   components: {
     AppLoading,
     AppHeading,
-    AppNav
+    AppNav,
+    AppFooter
   },
   computed: {
     ...mapGetters(["status", "loggedIn", "title", "icon"])
