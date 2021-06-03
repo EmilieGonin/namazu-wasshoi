@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="members" v-if="status && status != 'loading'">
+  <div class="members" v-if="status && status != 'pending'">
     <!--Birthdays-->
     <UsersBirthdays></UsersBirthdays>
     <!--Members-->
@@ -41,6 +41,7 @@
       </div>
     </div>
   </div>
+  <div v-else></div>
 </template>
 
 <script>
