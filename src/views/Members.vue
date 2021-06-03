@@ -1,10 +1,17 @@
 <template lang="html">
   <div class="members" v-if="status && status != 'loading'">
-    <div class="members__name">
+    <div
+      class="members__name"
+      :class="{ 'members__name--staff': staffMember(currentMember) }"
+    >
       {{ currentMember }}
     </div>
     <div class="members__container">
-      <div v-for="member in fcMembers" :key="member.ID">
+      <div
+        class="members__avatar-container"
+        v-for="member in fcMembers"
+        :key="member.ID"
+      >
         <img
           class="members__avatar"
           :src="member.Avatar"
@@ -12,6 +19,12 @@
           :title="member.Name"
           @mouseover="setCurrentMember"
           @mouseleave="reset"
+        />
+        <img
+          class="members__staff-icon"
+          :src="member.RankIcon"
+          alt=""
+          v-if="staffMember(member.Name)"
         />
       </div>
     </div>
@@ -29,7 +42,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["status", "fcMembers"])
+    ...mapGetters(["status", "fcMembers", "staffMembers"])
   },
   mounted() {
     this.$store.dispatch("setFreeCompany");
@@ -40,6 +53,13 @@ export default {
     },
     reset() {
       this.currentMember = "";
+    },
+    staffMember(member) {
+      if (this.staffMembers.includes(member)) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 };
@@ -61,11 +81,17 @@ export default {
     @include cursive(50);
     margin-bottom: 10px;
     height: 69px;
+    &--staff {
+      color: $namazu;
+    }
   }
   &__container {
     @include flex($gap: 5);
     position: relative;
     flex-wrap: wrap;
+  }
+  &__avatar-container {
+    position: relative;
   }
   &__avatar {
     @include responsive(900) {
@@ -81,6 +107,11 @@ export default {
       border: 3px solid $namazu;
       opacity: 1;
     }
+  }
+  &__staff-icon {
+    position: absolute;
+    bottom: 0;
+    right: -5px;
   }
 }
 </style>

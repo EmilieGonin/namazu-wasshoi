@@ -13,7 +13,8 @@ export default createStore({
       title: "",
       icon: "",
       user: user,
-      fc: ""
+      fc: "",
+      staffMembers: ""
     }
   },
   getters: {
@@ -27,6 +28,7 @@ export default createStore({
     fcMembers(state) { if (state.fc) {
       return state.fc.data.FreeCompanyMembers;
     }},
+    staffMembers(state) { return state.staffMembers },
     loggedIn(state) { return !!state.user }
   },
   mutations: {
@@ -39,13 +41,16 @@ export default createStore({
     },
     SET_FREE_COMPANY(state, data) {
       state.fc = data;
+    },
+    SET_STAFF_MEMBERS(state, data) {
+      state.staffMembers = data;
     }
   },
   actions: {
     setPage({ commit }, [ title, icon ]) {
       commit("SET_PAGE", [ title, icon ]);
     },
-    setFreeCompany({commit}) {
+    setFreeCompany({ commit, dispatch }) {
       return new Promise((resolve, reject) => {
         commit("UPDATE_STATUS", "pending");
         const data = checkCache("fc");
@@ -53,8 +58,11 @@ export default createStore({
           xivapi.get("/freecompany/" + id + "?data=FCM")
           .then((response) => {
             commit("SET_FREE_COMPANY", cache("fc", response.data));
-            commit("UPDATE_STATUS", "success");
-            resolve();
+            dispatch("setStaffMembers", response.data)
+            .then(() => {
+              commit("UPDATE_STATUS", "success");
+              resolve();
+            })
           })
           .catch((e) => {
             console.error(e);
@@ -63,10 +71,24 @@ export default createStore({
           });
         } else {
           commit("SET_FREE_COMPANY", data);
-          commit("UPDATE_STATUS", "success");
-          resolve();
+          dispatch("setStaffMembers", data)
+          .then(() => {
+            commit("UPDATE_STATUS", "success");
+            resolve();
+          })
         }
       })
+    },
+    setStaffMembers({ commit }, fc) {
+      const members = fc.data.FreeCompanyMembers;
+      const staffRoles = ["Maître", "Bras droit", "Officier"];
+      const staff = [];
+      for (const member of members) {
+        if (staffRoles.includes(member.Rank)) {
+          staff.push(member.Name);
+        }
+      }
+      commit("SET_STAFF_MEMBERS", staff);
     }
   },
   modules: {
