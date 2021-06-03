@@ -53,7 +53,7 @@ export default {
   margin: auto;
   &__name {
     @include cursive(50);
-    margin: 20px 0;
+    margin: 10px 0;
     height: 69px;
   }
   &__container {
