@@ -47,27 +47,36 @@ export default {
 
 <style lang="scss" scoped>
 .members {
+  @include responsive(900) {
+    margin: 20px auto;
+  }
   @include flex($direction: column);
   width: 100%;
   max-width: 800px;
-  margin: auto;
+  margin: 10px auto;
   &__name {
+    @include responsive(900) {
+      display: none;
+    }
     @include cursive(50);
-    margin: 10px 0;
+    margin-bottom: 10px;
     height: 69px;
   }
   &__container {
     @include flex($gap: 5);
+    position: relative;
     flex-wrap: wrap;
   }
   &__avatar {
     cursor: pointer;
-    width: 70px;
+    width: 80px;
+    opacity: 0.5;
     border-radius: 25%;
     border: 3px solid $grey;
     box-shadow: 0 0 2px $main-black;
     &:hover {
       border: 3px solid $namazu;
+      opacity: 1;
     }
   }
 }
