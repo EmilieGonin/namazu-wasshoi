@@ -1,17 +1,20 @@
 <template lang="html">
   <div class="members" v-if="status && status != 'loading'">
+    <!--Current Selected Member Name-->
     <div
       class="members__name"
       :class="{ 'members__name--staff': staffMember(currentMember) }"
     >
       {{ currentMember }}
     </div>
+    <!--Members Icons Container-->
     <div class="members__container">
       <div
         class="members__avatar-container"
         v-for="member in fcMembers"
         :key="member.ID"
       >
+        <!--Member Avatar-->
         <img
           class="members__avatar"
           :src="member.Avatar"
@@ -20,6 +23,7 @@
           @mouseover="setCurrentMember"
           @mouseleave="reset"
         />
+        <!--Member Rank Icon-->
         <img
           class="members__staff-icon"
           :src="member.RankIcon"
