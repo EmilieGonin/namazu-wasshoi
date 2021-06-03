@@ -89,6 +89,7 @@ export default {
   margin: auto;
   &__members-pannel {
     @include flex($direction: column);
+    width: 100%;
     margin: 20px auto;
   }
   &__name {

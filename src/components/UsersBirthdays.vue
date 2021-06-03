@@ -42,7 +42,7 @@ export default {
 
 <style lang="scss" scoped>
 .birthdays {
-  width: 100%;
+  width: 35%;
   background: $namazu;
   padding: 15px 0;
   &__title {
