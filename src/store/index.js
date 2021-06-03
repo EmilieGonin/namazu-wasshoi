@@ -1,6 +1,8 @@
 import { createStore } from 'vuex'
+import { xivapi } from './axios'
 
 const user = JSON.parse(localStorage.getItem("user"));
+const id = process.env.VUE_APP_FC_ID;
 // localStorage.clear();
 // console.log(user);
 
@@ -10,13 +12,16 @@ export default createStore({
       loading: false,
       title: "",
       icon: "",
-      user: user
+      user: user,
+      fc: ""
     }
   },
   getters: {
     loading(state) { return state.loading },
     title(state) { return state.title },
     icon(state) { return state.icon },
+    user(state) { return state.user },
+    fc(state) { return state.fc },
     loggedIn(state) { return !!state.user }
   },
   mutations: {
@@ -29,6 +34,10 @@ export default createStore({
     SET_PAGE(state, [ title, icon ]) {
       state.title = title;
       state.icon = icon;
+    },
+    SET_FREE_COMPANY(state, data) {
+      state.fc = data;
+      state.loading = false;
     }
   },
   actions: {
@@ -41,6 +50,15 @@ export default createStore({
       } else {
         commit("SUCCESS");
       }
+    },
+    setFreeCompany({commit}) {
+      commit("LOADING");
+      xivapi.get("/freecompany/" + id)
+      .then((response) => {
+        console.log(response.data);
+        commit("SET_FREE_COMPANY", response.data);
+      })
+      .catch((e) => console.error(e));
     }
   },
   modules: {
