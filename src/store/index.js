@@ -22,6 +22,7 @@ export default createStore({
     icon(state) { return state.icon },
     user(state) { return state.user },
     fc(state) { return state.fc },
+    fcMembers(state) { return state.fc.FreeCompanyMembers },
     loggedIn(state) { return !!state.user }
   },
   mutations: {
@@ -53,7 +54,7 @@ export default createStore({
     },
     setFreeCompany({commit}) {
       commit("LOADING");
-      xivapi.get("/freecompany/" + id)
+      xivapi.get("/freecompany/" + id + "?data=FCM")
       .then((response) => {
         console.log(response.data);
         commit("SET_FREE_COMPANY", response.data);
