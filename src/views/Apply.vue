@@ -270,7 +270,7 @@ export default {
     scroll(ref) {
       const to = this.$refs[ref];
       const top = to.offsetTop;
-      window.scrollTo(0, top);
+      window.scrollTo(0, top - 10);
     },
     handleCheck(e) {
       const name = e.name;
@@ -344,12 +344,12 @@ export default {
       transform: translateY(60px);
     }
     @include flex($justify: space-evenly);
-    transform: translateY(120px);
-    background: white;
     width: 100%;
     max-width: 1000px;
     margin: auto;
+    margin-top: 120px;
     padding: 50px 0;
+    background: white;
   }
   &__pannel {
     width: 100%;
