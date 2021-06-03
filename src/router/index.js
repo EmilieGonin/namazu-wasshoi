@@ -125,16 +125,14 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   //Set Page Infos
-  console.log("is loading");
-  store.dispatch("loading", true);
+  // store.commit("UPDATE_STATUS", "pending");
   store.dispatch("setPage", [to.meta.heading, to.meta.icon]);
   next();
 })
 router.afterEach(() => {
   router.isReady()
   .then(() => {
-    console.log("is ready");
-    store.dispatch("loading", false);
+    // store.commit("UPDATE_STATUS", "success");
   })
   .catch((e) => console.error(e));
 })
