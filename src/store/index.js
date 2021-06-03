@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { xivapi } from './axios'
+import { xivapi, cache, checkCache } from './axios'
 
 const user = JSON.parse(localStorage.getItem("user"));
 const id = process.env.VUE_APP_FC_ID;
@@ -9,7 +9,7 @@ const id = process.env.VUE_APP_FC_ID;
 export default createStore({
   state() {
     return {
-      loading: false,
+      status: "",
       title: "",
       icon: "",
       user: user,
@@ -17,20 +17,21 @@ export default createStore({
     }
   },
   getters: {
-    loading(state) { return state.loading },
+    status(state) { return state.status },
     title(state) { return state.title },
     icon(state) { return state.icon },
     user(state) { return state.user },
-    fc(state) { return state.fc },
-    fcMembers(state) { return state.fc.FreeCompanyMembers },
+    fc(state) { if (state.fc) {
+        return state.fc.data;
+      }},
+    fcMembers(state) { if (state.fc) {
+      return state.fc.data.FreeCompanyMembers;
+    }},
     loggedIn(state) { return !!state.user }
   },
   mutations: {
-    LOADING(state) {
-      state.loading = true;
-    },
-    SUCCESS(state) {
-      state.loading = false;
+    UPDATE_STATUS(state, status) {
+      state.status = status;
     },
     SET_PAGE(state, [ title, icon ]) {
       state.title = title;
@@ -38,28 +39,34 @@ export default createStore({
     },
     SET_FREE_COMPANY(state, data) {
       state.fc = data;
-      state.loading = false;
     }
   },
   actions: {
     setPage({ commit }, [ title, icon ]) {
       commit("SET_PAGE", [ title, icon ]);
     },
-    loading({commit}, isLoading) {
-      if (isLoading) {
-        commit("LOADING");
-      } else {
-        commit("SUCCESS");
-      }
-    },
     setFreeCompany({commit}) {
-      commit("LOADING");
-      xivapi.get("/freecompany/" + id + "?data=FCM")
-      .then((response) => {
-        console.log(response.data);
-        commit("SET_FREE_COMPANY", response.data);
+      return new Promise((resolve, reject) => {
+        commit("UPDATE_STATUS", "pending");
+        const data = checkCache("fc");
+        if (!data) {
+          xivapi.get("/freecompany/" + id + "?data=FCM")
+          .then((response) => {
+            commit("SET_FREE_COMPANY", cache("fc", response.data));
+            commit("UPDATE_STATUS", "success");
+            resolve();
+          })
+          .catch((e) => {
+            console.error(e);
+            commit("UPDATE_STATUS", "error");
+            reject();
+          });
+        } else {
+          commit("SET_FREE_COMPANY", data);
+          commit("UPDATE_STATUS", "success");
+          resolve();
+        }
       })
-      .catch((e) => console.error(e));
     }
   },
   modules: {
