@@ -111,6 +111,16 @@ const routes = [
       heading: "Equipes d'évent",
       icon: "stars"
     }
+  },
+  {
+    path: "/admin",
+    name: "AdminPanel",
+    component: () => import('../views/AdminPanel.vue'),
+    meta: {
+      title: "Panel administrateur - Namazu Wasshoi",
+      heading: "Panel administrateur",
+      icon: "user-crown"
+    }
   }
 ]
 

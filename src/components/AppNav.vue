@@ -25,17 +25,17 @@
       </router-link>
       <!--Links-->
       <!--if logged in-->
-      <router-link class="nav__menu-icon" :to="'/account'" v-if="loggedIn">
+      <router-link class="nav__menu-icon" to="/account" v-if="loggedIn">
         <font-awesome-icon icon="cog" fixed-width />
       </router-link>
-      <router-link class="nav__menu-icon" :to="'/'" v-if="loggedIn">
+      <router-link class="nav__menu-icon" to="/" v-if="loggedIn">
         <font-awesome-icon icon="sign-out-alt" fixed-width />
       </router-link>
       <!--else-->
-      <router-link class="nav__menu-icon" :to="'/login'" v-if="!loggedIn">
+      <router-link class="nav__menu-icon" to="/login" v-if="!loggedIn">
         <font-awesome-icon icon="sign-in-alt" fixed-width />
       </router-link>
-      <router-link class="nav__menu-icon" :to="'/signup'" v-if="!loggedIn">
+      <router-link class="nav__menu-icon" to="/signup" v-if="!loggedIn">
         <font-awesome-icon icon="user-plus" fixed-width />
       </router-link>
     </div>
@@ -43,30 +43,36 @@
   <!--Submenu-->
   <transition name="fade">
     <div class="nav__submenu" v-show="toggle">
+      <!--Admin Panel-->
+      <router-link class="nav__submenu-link" to="/admin" v-if="isAdmin">
+        <font-awesome-icon icon="user-crown" fixed-width /> Panel administrateur
+      </router-link>
+      <!--Separation if admin-->
+      <div class="nav__separation" v-if="isAdmin"></div>
       <!--Public Links-->
-      <router-link class="nav__submenu-link" :to="'/'">
+      <router-link class="nav__submenu-link" to="/">
         <font-awesome-icon icon="home-lg-alt" fixed-width /> Accueil
       </router-link>
-      <router-link class="nav__submenu-link" :to="'/members'">
+      <router-link class="nav__submenu-link" to="/members">
         <font-awesome-icon icon="users" fixed-width /> Membres
       </router-link>
-      <router-link class="nav__submenu-link" :to="'/galleries'">
+      <router-link class="nav__submenu-link" to="/galleries">
         <font-awesome-icon icon="images" fixed-width /> Galeries
       </router-link>
       <!--only if not logged in-->
-      <router-link class="nav__submenu-link" :to="'/apply'" v-if="!loggedIn">
+      <router-link class="nav__submenu-link" to="/apply" v-if="!loggedIn">
         <font-awesome-icon icon="user-check" fixed-width /> Postuler
       </router-link>
       <!--Separation-->
       <div class="nav__separation"></div>
       <!--Activities Links-->
-      <router-link class="nav__submenu-link" :to="'/planning'">
+      <router-link class="nav__submenu-link" to="/planning">
         <font-awesome-icon icon="calendar-week" fixed-width /> Planning
       </router-link>
-      <router-link class="nav__submenu-link" :to="'/festival-gyokoso'">
+      <router-link class="nav__submenu-link" to="/festival-gyokoso">
         <font-awesome-icon icon="camera" fixed-width /> Festival Gyôkoso
       </router-link>
-      <router-link class="nav__submenu-link" :to="'/teams'">
+      <router-link class="nav__submenu-link" to="/teams">
         <font-awesome-icon icon="stars" fixed-width /> Equipes d'évent
       </router-link>
       <!--Separation-->
@@ -76,17 +82,17 @@
       <router-link class="nav__submenu-link" :to="'/user/' + 1" v-if="loggedIn">
         <font-awesome-icon icon="user" fixed-width /> Profil utilisateur
       </router-link>
-      <router-link class="nav__submenu-link" :to="'/account'" v-if="loggedIn">
+      <router-link class="nav__submenu-link" to="/account" v-if="loggedIn">
         <font-awesome-icon icon="cog" fixed-width /> Paramètres du compte
       </router-link>
       <router-link class="nav__submenu-link" :to="'/'" v-if="loggedIn">
         <font-awesome-icon icon="sign-out-alt" fixed-width /> Se déconnecter
       </router-link>
       <!--else-->
-      <router-link class="nav__submenu-link" :to="'/login'" v-if="!loggedIn">
+      <router-link class="nav__submenu-link" to="/login" v-if="!loggedIn">
         <font-awesome-icon icon="sign-in-alt" fixed-width /> Se connecter
       </router-link>
-      <router-link class="nav__submenu-link" :to="'/signup'" v-if="!loggedIn">
+      <router-link class="nav__submenu-link" to="/signup" v-if="!loggedIn">
         <font-awesome-icon icon="user-plus" fixed-width /> S'inscrire
       </router-link>
     </div>
@@ -104,7 +110,8 @@ export default {
       toggle: false,
       //temp
       id: "1",
-      loggedIn: false
+      loggedIn: true,
+      isAdmin: true
     };
   },
   watch: {
