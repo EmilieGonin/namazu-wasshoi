@@ -2,12 +2,23 @@
   <!--if logged in-->
   <!--<img class="avatar" :src="avatar" alt="" />-->
   <!--else-->
-  <img class="avatar" src="@/assets/avatar_sample.jpg" alt="" />
+  <img class="avatar" src="@/assets/avatar_sample.jpg" alt="" :style="style" />
 </template>
 
 <script>
 export default {
-  name: "UserAvatar"
+  name: "UserAvatar",
+  props: {
+    size: [String, Number]
+  },
+  computed: {
+    style() {
+      return {
+        width: this.size + "px",
+        height: this.size + "px"
+      };
+    }
+  }
 };
 </script>
 
