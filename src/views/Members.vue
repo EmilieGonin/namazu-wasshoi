@@ -49,6 +49,21 @@
           />
         </div>
       </div>
+      <!--Legend-->
+      <div class="members__legend-container">
+        <div class="members__legend">
+          <div class="members__line members__line--gold"></div>
+          <span>Namazu dorés</span>
+        </div>
+        <div class="members__legend">
+          <div class="members__line members__line--lunar"></div>
+          <span>Namazu lunaire</span>
+        </div>
+        <div class="members__legend">
+          <div class="members__line members__line--fail"></div>
+          <span>Namazu espiègle</span>
+        </div>
+      </div>
     </div>
   </div>
   <div v-else></div>
@@ -118,7 +133,7 @@ export default {
   &__members-pannel {
     @include flex($direction: column);
     width: 100%;
-    margin: 20px auto;
+    margin: 20px auto 0 auto;
   }
   &__name {
     @include responsive(900) {
@@ -148,6 +163,7 @@ export default {
     @include flex($gap: 5);
     position: relative;
     flex-wrap: wrap;
+    margin-bottom: 20px;
   }
   &__avatar-container {
     position: relative;
@@ -189,6 +205,32 @@ export default {
     position: absolute;
     bottom: 0;
     right: -5px;
+  }
+  &__legend-container {
+    @include flex($gap: 15);
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 10px;
+    background: white;
+    font-size: $font-small;
+  }
+  &__legend {
+    @include flex($gap: 5);
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  &__line {
+    width: 20px;
+    height: 3px;
+    &--gold {
+      background: pastel($gold);
+    }
+    &--lunar {
+      background: pastel($lunar);
+    }
+    &--fail {
+      background: pastel($fail);
+    }
   }
 }
 </style>
