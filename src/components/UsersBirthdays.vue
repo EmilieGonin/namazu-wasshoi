@@ -5,7 +5,7 @@
     </div>
     <div class="birthdays__list" v-if="dayBirthdays">
       <div v-for="birthday in birthdays" :key="birthday">
-        <font-awesome-icon icon="bars" fixed-width />
+        <font-awesome-icon class="birthdays__icon" icon="bars" fixed-width />
         {{ birthday.day }} : {{ birthday.member }}
       </div>
     </div>
@@ -17,7 +17,7 @@
     </div>
     <div class="birthdays__list" v-if="monthBirthdays">
       <div v-for="birthday in monthBirthdays" :key="birthday">
-        <font-awesome-icon icon="bars" fixed-width />
+        <font-awesome-icon class="birthdays__icon" icon="gift" fixed-width />
         {{ birthday.day }} : {{ birthday.member }}
       </div>
     </div>
@@ -34,7 +34,14 @@ export default {
     return {
       //temp
       dayBirthdays: "",
-      monthBirthdays: ""
+      monthBirthdays: [
+        { day: "1", name: "Test" },
+        { day: "1", name: "Test" },
+        { day: "1", name: "Test" },
+        { day: "1", name: "Test" },
+        { day: "1", name: "Test" },
+        { day: "1", name: "Test" }
+      ]
     };
   }
 };
@@ -56,6 +63,9 @@ export default {
     padding: 15px;
     margin: 20px 0;
     background: white;
+  }
+  &__icon {
+    color: dark($namazu);
   }
 }
 </style>

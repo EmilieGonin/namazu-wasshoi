@@ -9,7 +9,7 @@ import {
   //Users & Account
   faUser, faUsers, faUserCheck, faUserPlus, faSignOutAlt, faSignInAlt, faCog,
   //Activities
-  faCalendarWeek, faDungeon, faCamera, faImages,
+  faCalendarWeek, faDungeon, faCamera, faImages, faGift,
   //Misc
   faBars, faArrowRight, faPlus, faCheckCircle, faTimesCircle
 } from '@fortawesome/free-solid-svg-icons'
@@ -20,7 +20,7 @@ library.add(
   //Users & Account
   faUser, faUsers, faUserCheck, faUserPlus, faSignOutAlt, faSignInAlt, faCog,
   //Activities
-  faCalendarWeek, faDungeon, faCamera, faImages,
+  faCalendarWeek, faDungeon, faCamera, faImages, faGift,
   //Misc
   faBars, faArrowRight, faPlus, faCheckCircle, faTimesCircle,
   //Pro
