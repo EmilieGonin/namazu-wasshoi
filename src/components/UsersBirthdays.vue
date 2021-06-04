@@ -50,6 +50,7 @@ export default {
 <style lang="scss" scoped>
 .birthdays {
   width: 35%;
+  min-width: 150px;
   background: $namazu;
   padding: 15px 0;
   &__title {
