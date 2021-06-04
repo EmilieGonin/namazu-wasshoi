@@ -15,7 +15,7 @@
             'profile__name--fail': isFail
           }"
         >
-          Yuuna Tsukisagi
+          Nom du personnage
         </div>
         <div class="profile__title">
           Titre du personnage
