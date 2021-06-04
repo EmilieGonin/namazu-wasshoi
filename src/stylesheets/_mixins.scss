@@ -42,3 +42,7 @@
     @content;
   }
 }
+@mixin soft-border($color: $grey, $size: 2) {
+  border: 5px solid $color;
+  box-shadow: 0 0 ($size + px) $main-black;
+}
