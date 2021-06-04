@@ -9,7 +9,11 @@
         class="members__name"
         :class="{
           'members__name--empty': !currentMember,
-          'members__name--staff': staffMember(currentMember)
+          'members__name--staff': staffMember(currentMember),
+          'members__name--gold': currentMember && grade(currentMember, 'gold'),
+          'members__name--lunar':
+            currentMember && grade(currentMember, 'lunar'),
+          'members__name--fail': currentMember && grade(currentMember, 'fail')
         }"
       >
         {{ currentMember || "Sélectionnez un membre" }}
@@ -20,10 +24,16 @@
           class="members__avatar-container"
           v-for="member in fcMembers"
           :key="member.ID"
+          @click="redirect(member.Name)"
         >
           <!--Member Avatar-->
           <img
             class="members__avatar"
+            :class="{
+              'members__avatar--gold': grade(member.Name, 'gold'),
+              'members__avatar--lunar': grade(member.Name, 'lunar'),
+              'members__avatar--fail': grade(member.Name, 'fail')
+            }"
             :src="member.Avatar"
             alt="Avatar"
             :title="member.Name"
@@ -52,7 +62,11 @@ export default {
   name: "Members",
   data() {
     return {
-      currentMember: ""
+      currentMember: "",
+      //temp
+      gold: ["Nexara Dei-ijla", "Fallen Nightblade"],
+      lunar: "Nana Rosenbach",
+      fail: "Enael Chubby'fox"
     };
   },
   components: {
@@ -77,6 +91,19 @@ export default {
       } else {
         return false;
       }
+    },
+    grade(member, grade) {
+      console.log(member);
+      console.log(this[grade].includes(member));
+      if (this[grade].includes(member)) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    redirect(name) {
+      //Add api call to get user ID - if user doesn't have an ID, don't redirect and call error message
+      console.log(name);
     }
   }
 };
@@ -102,12 +129,19 @@ export default {
     margin-bottom: 10px;
     height: 69px;
     &--empty {
-      color: dark($grey);
       @include font-relief(dark($grey));
     }
     &--staff {
-      color: $namazu;
       @include font-relief($namazu);
+    }
+    &--gold {
+      @include font-relief($gold);
+    }
+    &--lunar {
+      @include font-relief($lunar);
+    }
+    &--fail {
+      @include font-relief($fail);
     }
   }
   &__container {
@@ -131,6 +165,24 @@ export default {
     &:hover {
       border: 3px solid $namazu;
       opacity: 1;
+    }
+    &--gold {
+      border: 3px solid pastel($gold);
+      &:hover {
+        border: 3px solid $gold;
+      }
+    }
+    &--lunar {
+      border: 3px solid pastel($lunar);
+      &:hover {
+        border: 3px solid $lunar;
+      }
+    }
+    &--fail {
+      border: 3px solid pastel($fail);
+      &:hover {
+        border: 3px solid $fail;
+      }
     }
   }
   &__staff-icon {
