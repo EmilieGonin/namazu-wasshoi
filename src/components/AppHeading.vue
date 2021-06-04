@@ -66,7 +66,7 @@ export default {
         this.display = false;
       } else {
         this.display = true;
-        this.windowHeight = window.innerHeight / 3;
+        this.windowHeight = window.innerHeight / 4;
         this.fullscreen = false;
       }
     }
