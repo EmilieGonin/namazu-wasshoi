@@ -62,7 +62,7 @@ export default {
         this.display = true;
         this.windowHeight = window.innerHeight - 43;
         this.fullscreen = true;
-      } else if (name == "FestivalGyokoso") {
+      } else if (name == "FestivalGyokoso" || name == "AdminPanel") {
         this.display = false;
       } else {
         this.display = true;

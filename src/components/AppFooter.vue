@@ -7,7 +7,12 @@ export default {
   name: "AppFooter",
   methods: {
     show() {
-      const forbiddenLinks = ["FestivalGyokoso", "Login", "Signup"];
+      const forbiddenLinks = [
+        "FestivalGyokoso",
+        "Login",
+        "Signup",
+        "AdminPanel"
+      ];
       if (forbiddenLinks.includes(this.$route.name)) {
         return false;
       } else {
