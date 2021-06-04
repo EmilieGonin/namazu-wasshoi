@@ -46,3 +46,7 @@
   border: 5px solid $color;
   box-shadow: 0 0 ($size + px) $main-black;
 }
+@mixin font-relief($color: $namazu) {
+  color: $color;
+  text-shadow: 1px 1px 1px dark($color);
+}
