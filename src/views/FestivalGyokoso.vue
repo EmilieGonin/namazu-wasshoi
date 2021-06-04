@@ -155,11 +155,10 @@ export default {
   &__title {
     @include flex;
     @include cursive(50);
+    @include font-relief($namazu);
     width: 100%;
     background: white;
-    color: $namazu;
     padding: 5px;
-    text-shadow: 1px 1px 1px dark($namazu);
   }
   &__heading {
     @include title(30);

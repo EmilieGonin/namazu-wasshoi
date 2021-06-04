@@ -98,13 +98,16 @@ export default {
       display: none;
     }
     @include cursive(50);
+    @include font-relief($main-black);
     margin-bottom: 10px;
     height: 69px;
     &--empty {
       color: dark($grey);
+      @include font-relief(dark($grey));
     }
     &--staff {
       color: $namazu;
+      @include font-relief($namazu);
     }
   }
   &__container {
