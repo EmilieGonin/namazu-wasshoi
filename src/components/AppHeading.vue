@@ -91,7 +91,7 @@ export default {
     bottom: 10px;
     padding: 5px 10px 5px 2px;
     background: $namazu;
-    color: $grey;
+    color: white;
   }
   &__icon {
     font-size: 20px;
