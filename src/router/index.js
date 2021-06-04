@@ -38,7 +38,7 @@ const routes = [
     component: () => import('../views/Profile.vue'),
     meta: {
       title: "Profil utilisateur - Namazu Wasshoi",
-      heading: "Profil utilisateur - ",
+      heading: "Profil utilisateur",
       icon: "user"
     }
   },
