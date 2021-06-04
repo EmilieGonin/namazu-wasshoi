@@ -163,6 +163,7 @@ export default {
   }
   &__popup {
     @include absolute-center;
+    position: fixed;
     z-index: 997;
   }
   &__submenu {
