@@ -42,12 +42,12 @@ export default {
       width: 100%;
     }
     position: relative;
-    width: 75%;
+    width: 70%;
   }
   &__img {
     display: block;
     width: 100%;
-    height: 500px;
+    height: 450px;
     object-fit: cover;
     box-shadow: 0 0 1px $main-black;
 
