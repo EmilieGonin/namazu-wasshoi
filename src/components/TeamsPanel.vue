@@ -38,6 +38,9 @@ export default {
   margin-top: 40px;
   border-bottom: 30px solid white;
   &__img-container {
+    @include responsive(750) {
+      width: 100%;
+    }
     position: relative;
     width: 75%;
   }
