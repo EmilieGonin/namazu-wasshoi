@@ -21,7 +21,7 @@
       <a href="/" @click="clear">Cache clear</a>
       <!--Avatar-->
       <router-link :to="'/user/' + id">
-        <UserAvatar />
+        <UserAvatar :altStyle="true"></UserAvatar>
       </router-link>
       <!--Links-->
       <!--if logged in-->

@@ -16,14 +16,29 @@
     </div>
     <div class="panel__background" :class="`panel__background--${team}`"></div>
     <div class="panel__container">
-      (Liste des membres)
+      <div class="panel__members-title">
+        Liste des membres
+      </div>
+      <div class="panel__members">
+        <UserAvatar :size="'80'" :borderRadius="'25%'"></UserAvatar>
+        <UserAvatar :size="'80'" :borderRadius="'25%'"></UserAvatar>
+        <UserAvatar :size="'80'" :borderRadius="'25%'"></UserAvatar>
+        <UserAvatar :size="'80'" :borderRadius="'25%'"></UserAvatar>
+        <UserAvatar :size="'80'" :borderRadius="'25%'"></UserAvatar>
+        <UserAvatar :size="'80'" :borderRadius="'25%'"></UserAvatar>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import UserAvatar from "@/components/UserAvatar.vue";
+
 export default {
   name: "TeamsPanel",
+  components: {
+    UserAvatar
+  },
   props: {
     team: String
   }
@@ -32,6 +47,9 @@ export default {
 
 <style lang="scss" scoped>
 .panel {
+  @include responsive(750) {
+    margin: 0;
+  }
   @include flex($direction: column);
   position: relative;
   width: 100%;
@@ -106,6 +124,18 @@ export default {
     padding-bottom: 20px;
     background: white;
     text-align: justify;
+  }
+  &__members-title {
+    @include title;
+    font-weight: bold;
+    font-size: $font-xxl;
+    color: $mog;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  &__members {
+    @include flex($gap: 10);
+    flex-wrap: wrap;
   }
 }
 </style>

@@ -27,19 +27,16 @@
           @click="redirect(member.Name)"
         >
           <!--Member Avatar-->
-          <img
+          <UserAvatar
             class="members__avatar"
-            :class="{
-              'members__avatar--gold': grade(member.Name, 'gold'),
-              'members__avatar--lunar': grade(member.Name, 'lunar'),
-              'members__avatar--fail': grade(member.Name, 'fail')
-            }"
+            :size="'75'"
+            :borderRadius="'25%'"
             :src="member.Avatar"
             alt="Avatar"
-            :title="member.Name"
+            :member="member.Name"
             @mouseover="setCurrentMember"
             @mouseleave="reset"
-          />
+          ></UserAvatar>
           <!--Member Rank Icon-->
           <img
             class="members__staff-icon"
@@ -72,6 +69,7 @@
 <script>
 import { mapGetters } from "vuex";
 import UsersBirthdays from "@/components/UsersBirthdays.vue";
+import UserAvatar from "@/components/UserAvatar.vue";
 
 export default {
   name: "Members",
@@ -85,7 +83,8 @@ export default {
     };
   },
   components: {
-    UsersBirthdays
+    UsersBirthdays,
+    UserAvatar
   },
   computed: {
     ...mapGetters(["status", "fcMembers", "staffMembers"])
@@ -107,9 +106,8 @@ export default {
         return false;
       }
     },
+    //temp
     grade(member, grade) {
-      console.log(member);
-      console.log(this[grade].includes(member));
       if (this[grade].includes(member)) {
         return true;
       } else {
@@ -170,39 +168,6 @@ export default {
   }
   &__avatar-container {
     position: relative;
-  }
-  &__avatar {
-    @include responsive(900) {
-      width: 70px;
-    }
-    cursor: pointer;
-    width: 80px;
-    opacity: 0.5;
-    border-radius: 25%;
-    border: 3px solid $grey;
-    box-shadow: 0 0 2px $main-black;
-    &:hover {
-      border: 3px solid $namazu;
-      opacity: 1;
-    }
-    &--gold {
-      border: 3px solid pastel($gold);
-      &:hover {
-        border: 3px solid $gold;
-      }
-    }
-    &--lunar {
-      border: 3px solid pastel($lunar);
-      &:hover {
-        border: 3px solid $lunar;
-      }
-    }
-    &--fail {
-      border: 3px solid pastel($fail);
-      &:hover {
-        border: 3px solid $fail;
-      }
-    }
   }
   &__staff-icon {
     position: absolute;
