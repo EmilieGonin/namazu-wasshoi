@@ -4,7 +4,11 @@
     <div class="profile__container">
       <div class="profile__screenshot-container">
         <img class="profile__screenshot" src="@/assets/sample.png" alt="" />
-        <UserAvatar class="profile__avatar" :size="'80'"></UserAvatar>
+        <UserAvatar
+          class="profile__avatar"
+          :nofade="true"
+          :size="'80'"
+        ></UserAvatar>
       </div>
       <div class="profile__user-container">
         <div
@@ -81,15 +85,11 @@ export default {
     object-fit: cover;
   }
   &__avatar {
-    @include soft-border;
     position: absolute;
     left: 0;
     right: 0;
     bottom: -30px;
     margin: auto;
-    &:hover {
-      @include soft-border;
-    }
   }
   &__user-container {
     @include flex($direction: column, $justify: flex-start);

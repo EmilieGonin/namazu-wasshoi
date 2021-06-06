@@ -8,7 +8,8 @@
       'avatar--gold': member && grade(member, 'gold'),
       'avatar--lunar': member && grade(member, 'lunar'),
       'avatar--fail': member && grade(member, 'fail'),
-      'avatar--alt': altStyle
+      'avatar--alt': altStyle,
+      'avatar--nofade': nofade
     }"
     src="@/assets/avatar_sample.jpg"
     altStyle=""
@@ -32,6 +33,10 @@ export default {
     size: [String, Number],
     borderRadius: String,
     altStyle: {
+      type: Boolean,
+      default: false
+    },
+    nofade: {
       type: Boolean,
       default: false
     },
@@ -97,6 +102,9 @@ export default {
     &:hover {
       border: 3px solid $fail;
     }
+  }
+  &--nofade {
+    opacity: 1;
   }
 }
 </style>
