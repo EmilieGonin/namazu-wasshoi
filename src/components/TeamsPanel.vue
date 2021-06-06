@@ -39,7 +39,7 @@ export default {
   border-bottom: 30px solid white;
   &__img-container {
     position: relative;
-    width: 90%;
+    width: 75%;
   }
   &__img {
     display: block;
