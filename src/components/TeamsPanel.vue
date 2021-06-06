@@ -16,7 +16,10 @@
     </div>
     <div class="panel__background" :class="`panel__background--${team}`"></div>
     <div class="panel__container">
-      <div class="panel__members-title">
+      <div
+        class="panel__members-title"
+        :class="`panel__members-title--${team}`"
+      >
         Liste des membres
       </div>
       <div class="panel__members">
@@ -128,10 +131,15 @@ export default {
   &__members-title {
     @include title;
     font-weight: bold;
-    font-size: $font-xxl;
-    color: $mog;
+    font-size: $font-xxl + 5;
     text-align: center;
     margin-bottom: 10px;
+
+    @each $team, $color in $teams {
+      &--#{$team} {
+        color: dark($color);
+      }
+    }
   }
   &__members {
     @include flex($gap: 10);
