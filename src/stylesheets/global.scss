@@ -41,9 +41,16 @@ li {
 //Text Global Style
 strong {
   text-decoration: underline 2px $namazu;
-}
-.gold {
-  text-decoration: underline 2px $gold;
+  text-decoration-skip-ink: none;
+  &.gold {
+    text-decoration: underline 2px $gold;
+  }
+
+  @each $team, $color in $teams {
+    &.#{$team} {
+      text-decoration: underline 2px $color;
+    }
+  }
 }
 
 //Vue Transitions
