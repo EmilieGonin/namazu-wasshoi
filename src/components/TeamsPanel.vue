@@ -63,7 +63,8 @@ export default {
       width: 100%;
     }
     position: relative;
-    width: 70%;
+    width: 85%;
+    max-width: 1200px;
   }
   &__img {
     display: block;
