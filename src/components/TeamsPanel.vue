@@ -125,7 +125,7 @@ export default {
     width: 100%;
     max-width: 1000px;
     padding: 50px;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
     background: white;
     text-align: justify;
   }
