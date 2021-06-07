@@ -30,6 +30,20 @@
         <UserAvatar :size="'80'" :borderRadius="'25%'"></UserAvatar>
         <UserAvatar :size="'80'" :borderRadius="'25%'"></UserAvatar>
       </div>
+      <div class="panel__screenshots">
+        <img
+          class="panel__screenshot"
+          :class="`panel__screenshot--${team}`"
+          src="@/assets/sample.png"
+          alt=""
+        />
+        <img
+          class="panel__screenshot"
+          :class="`panel__screenshot--${team}`"
+          src="@/assets/sample.png"
+          alt=""
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -50,6 +64,9 @@ export default {
 
 <style lang="scss" scoped>
 .panel {
+  @include responsive(1000) {
+    border: none;
+  }
   @include responsive(750) {
     margin: 0;
   }
@@ -122,10 +139,12 @@ export default {
     }
   }
   &__container {
+    @include responsive(1000) {
+      padding: 40px 0;
+    }
     width: 100%;
     max-width: 1000px;
-    padding: 50px;
-    padding-bottom: 40px;
+    padding: 50px 0 40px 0;
     background: white;
     text-align: justify;
   }
@@ -145,6 +164,24 @@ export default {
   &__members {
     @include flex($gap: 10);
     flex-wrap: wrap;
+  }
+  &__screenshots {
+    @include responsive(320) {
+      gap: 5px;
+    }
+    @include flex($gap: 27);
+    flex-wrap: wrap;
+    margin-top: 50px;
+  }
+  &__screenshot {
+    width: 100%;
+    max-width: 300px;
+
+    @each $team, $color in $teams {
+      &--#{$team} {
+        border: 5px solid pastel($color);
+      }
+    }
   }
 }
 </style>
