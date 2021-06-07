@@ -111,7 +111,7 @@ export default {
   &__background {
     z-index: -1;
     position: absolute;
-    bottom: 0;
+    bottom: 1px;
     width: 100%;
     height: 70%;
 
