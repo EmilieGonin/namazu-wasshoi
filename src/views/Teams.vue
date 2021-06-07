@@ -52,6 +52,9 @@ export default {
 <style lang="scss" scoped>
 .teams {
   &__infos-container {
+    @include responsive(800) {
+      margin-top: 0;
+    }
     position: relative;
     width: 100%;
     margin: 50px auto;
