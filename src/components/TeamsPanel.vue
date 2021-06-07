@@ -88,11 +88,12 @@ export default {
     width: 100%;
     height: 450px;
     object-fit: cover;
-    box-shadow: 0 0 1px $main-black;
+    // box-shadow: 0 0 1px $main-black;
 
     @each $team, $color in $teams {
       &--#{$team} {
         border: 5px solid pastel($color);
+        box-shadow: 0 0 5px dark($color);
       }
     }
   }
@@ -176,10 +177,12 @@ export default {
   &__screenshot {
     width: 100%;
     max-width: 300px;
+    border-radius: 10px;
 
     @each $team, $color in $teams {
       &--#{$team} {
         border: 5px solid pastel($color);
+        box-shadow: 0 0 3px dark($color);
       }
     }
   }
