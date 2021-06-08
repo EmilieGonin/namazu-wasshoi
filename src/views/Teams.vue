@@ -72,7 +72,7 @@ export default {
     @include absolute-center;
     z-index: -1;
     height: 20%;
-    background: $namazu;
+    background: linear-gradient(to right, $mog, $chocobo, $pampa, $carbuncle);
   }
 }
 </style>
