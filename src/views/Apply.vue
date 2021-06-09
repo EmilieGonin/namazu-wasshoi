@@ -28,7 +28,7 @@
         </div>
         Nous souhaiterions en savoir plus sur toi !
       </div>
-      <div class="form__pannel">
+      <div class="form__panel">
         <!--Name-->
         <FormElement
           v-model="name"
@@ -86,7 +86,7 @@
         </div>
         C'est au tour de ton personnage d'avoir la vedette !
       </div>
-      <div class="form__pannel">
+      <div class="form__panel">
         <!--First Name-->
         <FormElement
           v-model="firstName"
@@ -351,9 +351,9 @@ export default {
     padding: 50px 0;
     background: white;
   }
-  &__pannel {
-    width: 100%;
-    text-align: center;
+  &__panel {
+    // width: 100%;
+    // text-align: center;
   }
 }
 </style>

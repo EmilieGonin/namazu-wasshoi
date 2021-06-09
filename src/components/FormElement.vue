@@ -179,7 +179,7 @@ export default {
 .form {
   @include flex($direction: column, $gap: 25);
   width: 100%;
-  &__pannel {
+  &__panel {
     @include flex($gap: 25);
     flex-wrap: wrap;
     width: 100%;
