@@ -1,8 +1,7 @@
 import { createStore } from 'vuex'
-import { xivapi, cache, checkCache } from './axios'
+import { xivapi, cache, checkCache, fcId } from './xivapi'
 
 const user = JSON.parse(localStorage.getItem("user"));
-const id = process.env.VUE_APP_FC_ID;
 // localStorage.clear();
 // console.log(user);
 
@@ -14,6 +13,7 @@ export default createStore({
       icon: "",
       user: user,
       fc: "",
+      fcMembers: "",
       staffMembers: ""
     }
   },
@@ -22,12 +22,16 @@ export default createStore({
     title(state) { return state.title },
     icon(state) { return state.icon },
     user(state) { return state.user },
-    fc(state) { if (state.fc) {
+    fc(state) {
+      if (state.fc) {
         return state.fc.data;
-      }},
-    fcMembers(state) { if (state.fc) {
-      return state.fc.data.FreeCompanyMembers;
-    }},
+      }
+    },
+    fcMembers(state) {
+      if (state.fcMembers) {
+        return state.fcMembers.data;
+      }
+    },
     staffMembers(state) { return state.staffMembers },
     loggedIn(state) { return !!state.user }
   },
@@ -42,6 +46,9 @@ export default createStore({
     SET_FREE_COMPANY(state, data) {
       state.fc = data;
     },
+    SET_FREE_COMPANY_MEMBERS(state, data) {
+      state.fcMembers = data;
+    },
     SET_STAFF_MEMBERS(state, data) {
       state.staffMembers = data;
     }
@@ -50,19 +57,24 @@ export default createStore({
     setPage({ commit }, [ title, icon ]) {
       commit("SET_PAGE", [ title, icon ]);
     },
-    setFreeCompany({ commit, dispatch }) {
+    setFreeCompanyMembers({ commit, dispatch }) {
       return new Promise((resolve, reject) => {
         commit("UPDATE_STATUS", "pending");
-        const fc = checkCache("fc");
-        if (!fc) {
-          xivapi.get("/freecompany/" + id + "?data=FCM")
+        const fcMembers = checkCache("fcMembers");
+        if (!fcMembers) {
+          xivapi.freecompany.get(fcId, {data: "FCM"})
           .then((response) => {
-            commit("SET_FREE_COMPANY", cache("fc", response.data));
-            dispatch("setStaffMembers", response.data.FreeCompanyMembers)
+            commit("SET_FREE_COMPANY_MEMBERS", cache("fcMembers", response.FreeCompanyMembers));
+            dispatch("setStaffMembers", response.FreeCompanyMembers)
             .then(() => {
               commit("UPDATE_STATUS", "success");
               resolve();
             })
+            .catch((e) => {
+              console.error(e);
+              commit("UPDATE_STATUS", "error");
+              reject();
+            });
           })
           .catch((e) => {
             console.error(e);
@@ -70,8 +82,8 @@ export default createStore({
             reject();
           });
         } else {
-          commit("SET_FREE_COMPANY", fc);
-          dispatch("setStaffMembers", fc.data.FreeCompanyMembers)
+          commit("SET_FREE_COMPANY_MEMBERS", fcMembers);
+          dispatch("setStaffMembers", fcMembers.data)
           .then(() => {
             commit("UPDATE_STATUS", "success");
             resolve();

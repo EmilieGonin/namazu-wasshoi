@@ -90,7 +90,7 @@ export default {
     ...mapGetters(["status", "fcMembers", "staffMembers"])
   },
   mounted() {
-    this.$store.dispatch("setFreeCompany");
+    this.$store.dispatch("setFreeCompanyMembers");
   },
   methods: {
     setCurrentMember(e) {
