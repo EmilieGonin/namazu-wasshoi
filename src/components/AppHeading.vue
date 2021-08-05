@@ -36,7 +36,6 @@ export default {
     icon: String
   },
   mounted() {
-    this.checkSize();
     window.addEventListener("resize", this.checkSize);
   },
   computed: {
@@ -54,20 +53,21 @@ export default {
   methods: {
     checkSize() {
       const name = this.$route.name;
-      if (name == "Home") {
+      const fullscreenPages = ["Login", "Signup"];
+      const noBannerPages = ["FestivalGyokoso", "AdminPanel"];
+
+      if (!noBannerPages.includes(name)) {
         this.display = true;
-        this.windowHeight = window.innerHeight / 1.5;
-        this.fullscreen = false;
-      } else if (name == "Login" || name == "Signup") {
-        this.display = true;
-        this.windowHeight = window.innerHeight - 43;
-        this.fullscreen = true;
-      } else if (name == "FestivalGyokoso" || name == "AdminPanel") {
-        this.display = false;
+        if (fullscreenPages.includes(name)) {
+          this.windowHeight = window.innerHeight - 43;
+          this.fullscreen = true;
+        } else if (name == "Home") {
+          this.windowHeight = window.innerHeight / 1.5;
+        } else {
+          this.windowHeight = window.innerHeight / 4;
+        }
       } else {
-        this.display = true;
-        this.windowHeight = window.innerHeight / 4;
-        this.fullscreen = false;
+        this.display = false;
       }
     }
   }
