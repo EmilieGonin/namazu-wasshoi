@@ -261,6 +261,8 @@ export default {
     &--big {
       width: 150px;
       height: 150px;
+      border-radius: 100%;
+      transition: border-radius 200ms;
     }
     &:hover {
       opacity: 1;
@@ -279,6 +281,7 @@ export default {
     display: none;
     &:checked + label img {
       opacity: 1;
+      border-radius: 20%;
     }
   }
 
