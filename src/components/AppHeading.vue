@@ -58,6 +58,7 @@ export default {
 
       if (!noBannerPages.includes(name)) {
         this.display = true;
+        this.fullscreen = false;
         if (fullscreenPages.includes(name)) {
           this.windowHeight = window.innerHeight - 43;
           this.fullscreen = true;
