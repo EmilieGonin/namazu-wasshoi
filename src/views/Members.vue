@@ -132,7 +132,7 @@ export default {
   max-width: 1000px;
   margin: auto;
   &__members-pannel {
-    @include flex($direction: column);
+    @include flex($justify: space-between, $direction: column);
     width: 100%;
     margin: 20px auto 0 auto;
   }
