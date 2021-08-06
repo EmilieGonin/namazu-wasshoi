@@ -70,14 +70,12 @@ export default {
   cursor: pointer;
   width: 40px;
   height: 40px;
-  opacity: 0.5;
   border-radius: 50%;
   border: 3px solid $grey;
   box-shadow: 0 0 2px $main-black;
   object-fit: cover;
   &:hover {
     border: 3px solid $namazu;
-    opacity: 1;
   }
   &--alt {
     border: 2px solid $grey;
