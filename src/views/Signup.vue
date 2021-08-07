@@ -35,7 +35,7 @@
         :type="'password'"
         :required="true"
       ></FormElement>
-      <AppButton :iconR="'plus'">Créer un compte</AppButton>
+      <AppButton :iconR="'plus'" @click="submit">Créer un compte</AppButton>
     </form>
   </AppFullscreen>
 </template>
@@ -62,7 +62,27 @@ export default {
   },
   methods: {
     submit() {
-      //
+      try {
+        const user = {
+          email: this.email,
+          password: this.password,
+          character: this.character,
+          discord: this.discord
+        };
+        if (!this.email || !this.password || !this.character || !this.discord) {
+          const error = "Veuillez renseigner tous les champs du formulaire.";
+          this.$store.dispatch("error", error);
+          throw error;
+        }
+        this.$store
+          .dispatch("signup", user)
+          .then(() => this.$router.push("/"))
+          .catch(() =>
+            console.error("Une erreur s'est produite pendant l'inscription.")
+          );
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
 };

@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { api, cache, checkCache } from './axios'
+import { api, authHeader, cache, checkCache } from './axios'
 
 const user = JSON.parse(localStorage.getItem("user"));
 // localStorage.clear();
@@ -30,7 +30,7 @@ export default createStore({
     UPDATE_STATUS(state, status) {
       state.status = status;
     },
-    SET_ERRORS(state, errors) {
+    ERROR(state, errors) {
       state.errors = errors;
       setTimeout(() => {
         state.errors = "";
@@ -42,7 +42,14 @@ export default createStore({
     },
     SET_FREE_COMPANY(state, data) {
       state.fc = data;
-    }
+    },
+    AUTH_SUCCESS(state, user) {
+      localStorage.setItem("user", JSON.stringify(user));
+      authHeader(user);
+      state.user = user;
+      state.status = "success";
+      state.errors = "";
+    },
   },
   actions: {
     setPage({ commit }, [ title, icon ]) {
@@ -63,7 +70,7 @@ export default createStore({
           .catch((e) => {
             console.error(e);
             commit("UPDATE_STATUS", "error");
-            commit("SET_ERRORS", "Une erreur s'est produite pendant le chargement de la compagnie libre.");
+            commit("ERROR", "Une erreur s'est produite pendant le chargement de la compagnie libre.");
             reject();
           });
         } else {
@@ -85,11 +92,30 @@ export default createStore({
         })
         .catch(() => {
           commit("UPDATE_STATUS", "error");
-          commit("SET_ERRORS", "Le personnage ne fait pas partie de Namazu Wasshoi.");
+          commit("ERROR", "Le personnage ne fait pas partie de Namazu Wasshoi.");
           reject();
         });
       })
-    }
+    },
+    error({ commit }, error) {
+      commit("UPDATE_STATUS", "error");
+      commit("ERROR", error);
+    },
+    signup({ commit }, user) {
+      return new Promise((resolve, reject) => {
+        commit("UPDATE_STATUS", "pending");
+        api.post("user/signup", user)
+        .then((response) => {
+          commit("AUTH_SUCCESS", response.data);
+          resolve(response);
+        })
+        .catch((error) => {
+          commit("UPDATE_STATUS", "error");
+          commit("ERROR", error.response.data.error);
+          reject(error);
+        })
+      })
+    },
   },
   modules: {
   }
