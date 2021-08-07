@@ -3,7 +3,7 @@ import { api, authHeader, cache, checkCache } from './axios'
 
 const user = JSON.parse(localStorage.getItem("user"));
 // localStorage.clear();
-// console.log(user);
+console.log(user);
 
 export default createStore({
   state() {

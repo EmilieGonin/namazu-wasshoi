@@ -1,7 +1,7 @@
 <template>
   <AppLoading :loading="status == 'pending'" />
   <AppErrors />
-  <AppNav />
+  <AppNav :loggedIn="loggedIn" />
   <AppHeading :title="title" :icon="icon">{{ title }}</AppHeading>
   <router-view class="content" />
   <AppFooter />

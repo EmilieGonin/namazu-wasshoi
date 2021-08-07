@@ -110,9 +110,11 @@ export default {
       toggle: false,
       //temp
       id: "1",
-      loggedIn: false,
       isAdmin: true
     };
+  },
+  props: {
+    loggedIn: Boolean
   },
   watch: {
     $route() {
