@@ -1,5 +1,5 @@
 <template lang="html">
-  <button type="button" class="button" :style="style" @click="go">
+  <button :type="type" class="button" :style="style" @click="go">
     <slot>Envoyer</slot>
     <font-awesome-icon
       class="button__icon button__icon--l"
@@ -20,6 +20,10 @@
 export default {
   name: "AppButton",
   props: {
+    type: {
+      type: String,
+      default: "button"
+    },
     iconL: String,
     iconR: String,
     marginTop: Number,

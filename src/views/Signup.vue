@@ -35,7 +35,9 @@
         :type="'password'"
         :required="true"
       ></FormElement>
-      <AppButton :iconR="'plus'" @click="submit">Créer un compte</AppButton>
+      <AppButton :type="'submit'" :iconR="'plus'" @click="submit"
+        >Créer un compte</AppButton
+      >
     </form>
   </AppFullscreen>
 </template>

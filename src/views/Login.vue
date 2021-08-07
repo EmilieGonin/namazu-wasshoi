@@ -22,7 +22,9 @@
         :type="'password'"
         :required="true"
       ></FormElement>
-      <AppButton :iconR="'sign-in-alt'">Se connecter</AppButton>
+      <AppButton :type="'submit'" :iconR="'sign-in-alt'"
+        >Se connecter</AppButton
+      >
     </form>
   </AppFullscreen>
 </template>
