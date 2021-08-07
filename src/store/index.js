@@ -9,6 +9,7 @@ export default createStore({
   state() {
     return {
       status: "",
+      errors: "",
       title: "",
       icon: "",
       user: user,
@@ -28,6 +29,12 @@ export default createStore({
   mutations: {
     UPDATE_STATUS(state, status) {
       state.status = status;
+    },
+    SET_ERRORS(state, errors) {
+      state.errors = errors;
+      setTimeout(() => {
+        state.errors = "";
+      }, 5000);
     },
     SET_PAGE(state, [ title, icon ]) {
       state.title = title;
@@ -56,6 +63,7 @@ export default createStore({
           .catch((e) => {
             console.error(e);
             commit("UPDATE_STATUS", "error");
+            commit("SET_ERRORS", "Une erreur s'est produite pendant le chargement de la compagnie libre.");
             reject();
           });
         } else {
@@ -77,6 +85,7 @@ export default createStore({
         })
         .catch(() => {
           commit("UPDATE_STATUS", "error");
+          commit("SET_ERRORS", "Le personnage ne fait pas partie de Namazu Wasshoi.");
           reject();
         });
       })

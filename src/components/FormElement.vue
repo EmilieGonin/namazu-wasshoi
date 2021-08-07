@@ -194,8 +194,6 @@ export default {
             this.valid = true;
           })
           .catch(() => {
-            console.error("Personnage non trouvé.");
-            // e.setCustomValidity("Personnage non trouvé.");
             this.icon = "times-circle";
             this.valid = false;
           });
