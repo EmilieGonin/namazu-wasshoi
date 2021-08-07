@@ -86,7 +86,6 @@
         @input="
           $emit('update:modelValue', $event.target.value), setIcon($event)
         "
-        @invalid.capture.prevent="test"
         @keyup="name == 'character' ? searchCharacter($event.target) : ''"
       />
       <!--Textarea-->
@@ -105,9 +104,13 @@
       <!--Input Icon-->
       <font-awesome-icon
         class="form__icon"
-        :class="{ 'form__icon--valid': valid }"
+        :class="{
+          'form__icon--valid': status == 'valid',
+          'form__icon--invalid': status == 'invalid',
+          'fa-spin': icon == 'spinner-third'
+        }"
         v-if="icon"
-        :icon="icon"
+        :icon="[iconPre, icon]"
         fixed-width
       />
     </div>
@@ -120,7 +123,8 @@ export default {
   data() {
     return {
       icon: "",
-      valid: false,
+      iconPre: "fas",
+      status: "",
       checked: [],
       timer: ""
     };
@@ -171,13 +175,20 @@ export default {
   methods: {
     setIcon(e) {
       if (!this.wait && e.target.checkValidity()) {
+        this.iconPre = "fas";
         this.icon = "check-circle";
-        this.valid = true;
+        this.status = "valid";
       } else if (this.wait) {
         this.icon = "";
+        this.status = "";
+        setTimeout(() => {
+          this.iconPre = "fad";
+          this.icon = "spinner-third";
+        }, 500);
       } else {
+        this.iconPre = "fas";
         this.icon = "times-circle";
-        this.valid = false;
+        this.status = "invalid";
       }
     },
     searchCharacter(e) {
@@ -188,16 +199,19 @@ export default {
 
       this.timer = setTimeout(() => {
         this.$store
-          .dispatch("searchCharacter", character)
+          .dispatch("searchCharacterSilent", character)
           .then(() => {
+            this.iconPre = "fas";
             this.icon = "check-circle";
-            this.valid = true;
+            this.status = "valid";
           })
           .catch(() => {
+            console.error("Personnage non trouvé.");
+            this.iconPre = "fas";
             this.icon = "times-circle";
-            this.valid = false;
+            this.status = "invalid";
           });
-      }, 2000);
+      }, 1500);
     }
   }
 };
@@ -227,9 +241,12 @@ export default {
     position: absolute;
     right: 5px;
     bottom: 9px;
-    color: veil($namazu);
+    color: dark($grey);
     &--valid {
       color: $valid;
+    }
+    &--invalid {
+      color: veil($namazu);
     }
   }
   &__field {

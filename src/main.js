@@ -14,6 +14,7 @@ import {
   faBars, faArrowRight, faPlus, faCheckCircle, faTimesCircle
 } from '@fortawesome/free-solid-svg-icons'
 import { faHomeLgAlt, faStars, faUserCrown } from '@fortawesome/pro-solid-svg-icons'
+import { faSpinnerThird } from '@fortawesome/pro-duotone-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(
@@ -24,7 +25,7 @@ library.add(
   //Misc
   faBars, faArrowRight, faPlus, faCheckCircle, faTimesCircle,
   //Pro
-  faHomeLgAlt, faStars, faUserCrown
+  faHomeLgAlt, faStars, faUserCrown, faSpinnerThird
 )
 
 createApp(App).use(store).use(router).component("font-awesome-icon", FontAwesomeIcon).mount('#app')

@@ -82,7 +82,7 @@ export default createStore({
     },
     searchCharacter({ commit }, character) {
       return new Promise((resolve, reject) => {
-        // commit("UPDATE_STATUS", "pending");
+        commit("UPDATE_STATUS", "pending");
         api.post("fc/character", {
           character: character
         })
@@ -92,6 +92,20 @@ export default createStore({
         })
         .catch(() => {
           commit("UPDATE_STATUS", "error");
+          commit("ERROR", "Le personnage ne fait pas partie de Namazu Wasshoi.");
+          reject();
+        });
+      })
+    },
+    searchCharacterSilent({ commit }, character) {
+      return new Promise((resolve, reject) => {
+        api.post("fc/character", {
+          character: character
+        })
+        .then(() => {
+          resolve();
+        })
+        .catch(() => {
           commit("ERROR", "Le personnage ne fait pas partie de Namazu Wasshoi.");
           reject();
         });

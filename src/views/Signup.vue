@@ -74,12 +74,22 @@ export default {
           this.$store.dispatch("error", error);
           throw error;
         }
+        const character = this.character.split(" ").join("+");
         this.$store
-          .dispatch("signup", user)
-          .then(() => this.$router.push("/"))
-          .catch(() =>
-            console.error("Une erreur s'est produite pendant l'inscription.")
-          );
+          .dispatch("searchCharacter", character)
+          .then(() => {
+            this.$store
+              .dispatch("signup", user)
+              .then(() => this.$router.push("/"))
+              .catch(() =>
+                console.error(
+                  "Une erreur s'est produite pendant l'inscription."
+                )
+              );
+          })
+          .catch(() => {
+            console.error("Personnage non trouvé.");
+          });
       } catch (e) {
         console.error(e);
       }
