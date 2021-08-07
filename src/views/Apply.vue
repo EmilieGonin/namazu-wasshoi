@@ -6,9 +6,16 @@
       <div class="apply__heading">
         Nous rejoindre
       </div>
-      Le recrutement est actuellement fermé. Toutefois, nous continuons
-      d'étudier les nouvelles candidatures et tu seras ajouté sur la liste
-      d'attente !
+      <span v-if="recruiting">
+        Le recrutement est actuellement ouvert. Nous sommes à la recherche de
+        nouveaux Namazu de niveau 80, actifs en soirée entre 20h et minuit de
+        préférence.
+      </span>
+      <span v-else>
+        Le recrutement est actuellement fermé. Toutefois, nous continuons
+        d'étudier les nouvelles candidatures et tu seras ajouté sur la liste
+        d'attente !
+      </span>
       <AppButton
         :iconR="'arrow-right'"
         :marginTop="10"
@@ -239,6 +246,7 @@ export default {
   name: "Apply",
   data() {
     return {
+      recruiting: "",
       yesno: [{ name: "Oui" }, { name: "Non" }],
       name: "",
       birthday: "",
@@ -288,6 +296,11 @@ export default {
   components: {
     FormElement,
     AppButton
+  },
+  mounted() {
+    this.$store.dispatch("getParameter", "recruiting").then(response => {
+      this.recruiting = response;
+    });
   },
   methods: {
     scroll(ref) {
