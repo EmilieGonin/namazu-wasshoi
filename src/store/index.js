@@ -130,6 +130,21 @@ export default createStore({
         })
       })
     },
+    getParameter({ commit }, parameter) {
+      return new Promise((resolve, reject) => {
+        commit("UPDATE_STATUS", "pending");
+        api.get("parameters/" + parameter)
+        .then((response) => {
+          commit("UPDATE_STATUS", "success");
+          resolve(response.data.parameter.data);
+        })
+        .catch((error) => {
+          commit("UPDATE_STATUS", "error");
+          commit("ERROR", error.response.data.error);
+          reject(error);
+        })
+      })
+    }
   },
   modules: {
   }
