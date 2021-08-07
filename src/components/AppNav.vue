@@ -17,8 +17,6 @@
     </div>
     <!--User Menu-->
     <div class="nav__user-menu">
-      <!--Temp-->
-      <a href="/" @click="clear">Cache clear</a>
       <!--Avatar-->
       <router-link :to="'/user/' + id">
         <UserAvatar :altStyle="true"></UserAvatar>
@@ -129,10 +127,6 @@ export default {
       if (this.toggle) {
         this.toggle = false;
       }
-    },
-    //temp
-    clear() {
-      localStorage.clear();
     }
   }
 };
