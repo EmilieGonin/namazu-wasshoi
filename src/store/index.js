@@ -64,6 +64,22 @@ export default createStore({
           resolve();
         }
       })
+    },
+    searchCharacter({ commit }, character) {
+      return new Promise((resolve, reject) => {
+        // commit("UPDATE_STATUS", "pending");
+        api.post("fc/character", {
+          character: character
+        })
+        .then(() => {
+          commit("UPDATE_STATUS", "success");
+          resolve();
+        })
+        .catch(() => {
+          commit("UPDATE_STATUS", "error");
+          reject();
+        });
+      })
     }
   },
   modules: {

@@ -5,9 +5,22 @@
         <div class="form__title">
           Bienvenue parmi nous !
         </div>
-        Vous ne faites pas partie de la compagnie ?
+        L'inscription est réservée aux membres de Namazu Wasshoi.
         <router-link to="/apply">Postulez dès maintenant !</router-link>
       </div>
+      <FormElement
+        v-model="discord"
+        :label="'Pseudo Discord'"
+        :name="'discord'"
+        :required="true"
+      ></FormElement>
+      <FormElement
+        v-model="character"
+        :label="'Nom du personnage'"
+        :name="'character'"
+        :required="true"
+        :wait="true"
+      ></FormElement>
       <FormElement
         v-model="email"
         :label="'Adresse email'"
@@ -20,24 +33,6 @@
         :label="'Mot de passe'"
         :name="'password'"
         :type="'password'"
-        :required="true"
-      ></FormElement>
-      <FormElement
-        v-model="firstName"
-        :label="'Prénom du personnage'"
-        :name="'firstName'"
-        :required="true"
-      ></FormElement>
-      <FormElement
-        v-model="lastName"
-        :label="'Nom du personnage'"
-        :name="'lastName'"
-        :required="true"
-      ></FormElement>
-      <FormElement
-        v-model="discord"
-        :label="'Pseudo Discord'"
-        :name="'discord'"
         :required="true"
       ></FormElement>
       <AppButton :iconR="'plus'">Créer un compte</AppButton>
@@ -56,8 +51,7 @@ export default {
     return {
       email: "",
       password: "",
-      firstName: "",
-      lastName: "",
+      character: "",
       discord: ""
     };
   },

@@ -86,6 +86,8 @@
         @input="
           $emit('update:modelValue', $event.target.value), setIcon($event)
         "
+        @invalid.capture.prevent="test"
+        @keyup="name == 'character' ? searchCharacter($event.target) : ''"
       />
       <!--Textarea-->
       <textarea
@@ -119,10 +121,11 @@ export default {
     return {
       icon: "",
       valid: false,
-      checked: []
+      checked: [],
+      timer: ""
     };
   },
-  emits: ["update:modelValue", "check"],
+  emits: ["update:modelValue", "check", "keyup"],
   props: {
     //Element datas
     modelValue: [String, Array],
@@ -159,17 +162,44 @@ export default {
     teamsLabel: {
       type: Boolean,
       default: false
+    },
+    wait: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
     setIcon(e) {
-      if (e.target.checkValidity()) {
+      if (!this.wait && e.target.checkValidity()) {
         this.icon = "check-circle";
         this.valid = true;
+      } else if (this.wait) {
+        this.icon = "";
       } else {
         this.icon = "times-circle";
         this.valid = false;
       }
+    },
+    searchCharacter(e) {
+      const character = e.value.split(" ").join("+");
+      if (this.timer) {
+        clearTimeout(this.timer);
+      }
+
+      this.timer = setTimeout(() => {
+        this.$store
+          .dispatch("searchCharacter", character)
+          .then(() => {
+            this.icon = "check-circle";
+            this.valid = true;
+          })
+          .catch(() => {
+            console.error("Personnage non trouvé.");
+            // e.setCustomValidity("Personnage non trouvé.");
+            this.icon = "times-circle";
+            this.valid = false;
+          });
+      }, 2000);
     }
   }
 };
