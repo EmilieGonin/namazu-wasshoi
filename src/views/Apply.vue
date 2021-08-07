@@ -157,6 +157,17 @@
       ></FormElement>
       <!--Current CL-->
       <FormElement
+        v-model="clRequired"
+        :label="
+          'Quel est le ou les critères obligatoires pour que tu nous rejoignes ?'
+        "
+        :name="'clRequired'"
+        :required="true"
+        :large="true"
+        :element="'text'"
+      ></FormElement>
+      <!--Current CL-->
+      <FormElement
         v-model="currentCl"
         :label="
           'Fais-tu actuellement partie d\'une compagnie ? Si oui, pourquoi la quitter ?'
@@ -177,10 +188,19 @@
       <!--Exp-->
       <FormElement
         v-model="exp"
-        :label="
-          'Quelle est ton expérience de jeu HL ? Souhaites-tu rejoindre un roster ?'
-        "
+        :label="'Quelle est ton expérience de jeu à haut niveau ?'"
         :name="'exp'"
+        :required="true"
+        :large="true"
+        :element="'text'"
+      ></FormElement>
+      <!--Savage Required-->
+      <FormElement
+        v-model="savageRequired"
+        :label="
+          'Souhaites-tu rejoindre l\'un de nos rosters ? Si oui, obligatoirement ?'
+        "
+        :name="'savageRequired'"
         :required="true"
         :large="true"
         :element="'text'"
@@ -251,8 +271,10 @@ export default {
       playtime: "",
       gameActivities: "",
       cl: "",
+      clRequired: "",
       currentCl: "",
       exp: "",
+      savageRequired: "",
       team: "",
       teams: [
         { name: "Mog", label: "teams/mog" },
