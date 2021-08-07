@@ -116,6 +116,7 @@
           :label="'Quelle est ta classe principale ?'"
           :name="'mainClass'"
           :required="true"
+          :large="true"
         ></FormElement>
       </div>
       <div class="form__separator"></div>
