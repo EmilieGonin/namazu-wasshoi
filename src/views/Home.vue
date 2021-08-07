@@ -3,7 +3,7 @@
     <!--Stats-->
     <div class="home__stats">
       <span class="home__cl-name">Namazu Wasshoi</span> est une compagnie libre
-      de {{ ActiveMemberCount }} petits namazu, en activité depuis février 2020.
+      en activité depuis février 2020 sur le serveur Moogle.
     </div>
     <!--Activities-->
     <div class="home__activities">
@@ -71,12 +71,6 @@ import HomeFestival from "@/components/HomeFestival.vue";
 
 export default {
   name: "Home",
-  data() {
-    return {
-      //temp
-      ActiveMemberCount: "34"
-    };
-  },
   components: {
     HomeCard,
     HomeFestival
