@@ -1,5 +1,5 @@
 <template lang="html">
-  <button class="button" :style="style" @click="go">
+  <button type="button" class="button" :style="style" @click="go">
     <slot>Envoyer</slot>
     <font-awesome-icon
       class="button__icon button__icon--l"
