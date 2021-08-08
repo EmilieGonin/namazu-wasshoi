@@ -101,3 +101,17 @@ strong {
     opacity: 0;
   }
 }
+.slide-up {
+  &-enter-active,
+  &-leave-active {
+    transition: all 500ms;
+    max-height: 600px;
+    transition-timing-function: ease-out;
+    opacity: 1;
+  }
+  &-enter-from,
+  &-leave-to {
+    max-height: 0;
+    opacity: 0;
+  }
+}
