@@ -9,29 +9,29 @@
         <router-link to="/apply">Postulez dès maintenant !</router-link>
       </div>
       <FormElement
-        v-model="discord"
+        v-model="form_discord"
         :label="'Pseudo Discord'"
-        :name="'discord'"
+        :name="'form_discord'"
         :required="true"
       ></FormElement>
       <FormElement
-        v-model="character"
+        v-model="form_character_cl"
         :label="'Nom du personnage'"
-        :name="'character'"
+        :name="'form_character_cl'"
         :required="true"
         :wait="true"
       ></FormElement>
       <FormElement
-        v-model="email"
+        v-model="form_email"
         :label="'Adresse email'"
-        :name="'email'"
+        :name="'form_email'"
         :type="'email'"
         :required="true"
       ></FormElement>
       <FormElement
-        v-model="password"
+        v-model="form_password"
         :label="'Mot de passe'"
-        :name="'password'"
+        :name="'form_password'"
         :type="'password'"
         :required="true"
       ></FormElement>
@@ -49,10 +49,10 @@ export default {
   name: "Signup",
   data() {
     return {
-      email: "",
-      password: "",
-      character: "",
-      discord: ""
+      form_email: "",
+      form_password: "",
+      form_character_cl: "",
+      form_discord: ""
     };
   },
   components: {
@@ -75,9 +75,13 @@ export default {
           this.$store.dispatch("error", error);
           throw error;
         }
+
         const character = this.character.split(" ").join("+");
+        const cl = true;
+        const silent = false;
+
         this.$store
-          .dispatch("searchCharacter", character)
+          .dispatch("searchCharacter", [character, cl, silent])
           .then(() => {
             this.$store
               .dispatch("signup", user)

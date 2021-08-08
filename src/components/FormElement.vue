@@ -86,7 +86,9 @@
         @input="
           $emit('update:modelValue', $event.target.value), setIcon($event)
         "
-        @keyup="name == 'character' ? searchCharacter($event.target) : ''"
+        @keyup="
+          name.includes('character') ? searchCharacter($event.target) : ''
+        "
       />
       <!--Textarea-->
       <textarea
@@ -196,14 +198,18 @@ export default {
     },
     searchCharacter(e) {
       const character = e.value.split(" ").join("+");
+      const cl = e.id.includes("cl");
+      const silent = true;
+
       if (this.timer) {
         clearTimeout(this.timer);
       }
 
       this.timer = setTimeout(() => {
         this.$store
-          .dispatch("searchCharacterSilent", character)
-          .then(() => {
+          .dispatch("searchCharacter", [character, cl, silent])
+          .then(character => {
+            this.$emit("update:modelValue", character);
             this.iconPre = "fas";
             this.icon = "check-circle";
             this.status = "valid";

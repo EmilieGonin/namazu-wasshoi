@@ -80,33 +80,23 @@ export default createStore({
         }
       })
     },
-    searchCharacter({ commit }, character) {
+    searchCharacter({ commit }, [ character, cl, silent ]) {
       return new Promise((resolve, reject) => {
-        commit("UPDATE_STATUS", "pending");
+        if (!silent) {
+          commit("UPDATE_STATUS", "pending");
+        }
+
         api.post("fc/character", {
-          character: character
+          character: character,
+          cl: cl
         })
-        .then(() => {
+        .then((response) => {
           commit("UPDATE_STATUS", "success");
-          resolve();
+          resolve(response.data.character.Name);
         })
-        .catch(() => {
+        .catch((e) => {
           commit("UPDATE_STATUS", "error");
-          commit("ERROR", "Le personnage ne fait pas partie de Namazu Wasshoi.");
-          reject();
-        });
-      })
-    },
-    searchCharacterSilent({ commit }, character) {
-      return new Promise((resolve, reject) => {
-        api.post("fc/character", {
-          character: character
-        })
-        .then(() => {
-          resolve();
-        })
-        .catch(() => {
-          commit("ERROR", "Le personnage ne fait pas partie de Namazu Wasshoi.");
+          commit("ERROR", e.response.data.error);
           reject();
         });
       })
