@@ -52,6 +52,12 @@ strong {
     }
   }
 }
+.valid {
+  color: $valid;
+}
+.invalid {
+  color: $invalid;
+}
 
 //Vue Transitions
 .slide {
