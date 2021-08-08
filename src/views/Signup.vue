@@ -70,7 +70,8 @@ export default {
           discord: this.discord
         };
         if (!this.email || !this.password || !this.character || !this.discord) {
-          const error = "Veuillez renseigner tous les champs du formulaire.";
+          const error =
+            "Veuillez renseigner tous les champs requis du formulaire.";
           this.$store.dispatch("error", error);
           throw error;
         }
