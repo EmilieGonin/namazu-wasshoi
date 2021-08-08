@@ -240,7 +240,10 @@ export default {
       form_savageRequired: "",
       form_team: "",
       //temp
-      yesno: [{ name: "Oui" }, { name: "Non" }],
+      yesno: [
+        { name: "Oui", value: true },
+        { name: "Non", value: false }
+      ],
       teams: [
         { name: "Mog", label: "teams/mog" },
         { name: "Chocobo", label: "teams/chocobo" },
@@ -314,15 +317,30 @@ export default {
             }
           }
         }
+
+        const character = this.form_character.split(" ").join("+");
+        const cl = false;
+        const silent = false;
+
         this.$store
-          .dispatch("apply", form)
-          .then(() => {
-            //
+          .dispatch("searchCharacter", [character, cl, silent])
+          .then(character => {
+            form.character = character.Name;
+            form.characterId = character.ID;
+
+            this.$store
+              .dispatch("apply", form)
+              .then(() => {
+                //
+              })
+              .catch(() => {
+                console.error(
+                  "Une erreur est survenue pendant l'envoi du formulaire."
+                );
+              });
           })
           .catch(() => {
-            console.error(
-              "Une erreur est survenue pendant l'envoi du formulaire."
-            );
+            console.error("Personnage non trouvé.");
           });
       } catch (e) {
         console.error(e);

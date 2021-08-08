@@ -120,6 +120,21 @@ export default createStore({
         })
       })
     },
+    apply({ commit }, form) {
+      return new Promise((resolve, reject) => {
+        commit("UPDATE_STATUS", "pending");
+        api.post("applicants/new", form)
+        .then(() => {
+          commit("UPDATE_STATUS", "success");
+          resolve();
+        })
+        .catch((error) => {
+          commit("UPDATE_STATUS", "error");
+          commit("ERROR", error.response.data.error);
+          reject(error);
+        })
+      })
+    },
     getParameter({ commit }, parameter) {
       return new Promise((resolve, reject) => {
         commit("UPDATE_STATUS", "pending");
