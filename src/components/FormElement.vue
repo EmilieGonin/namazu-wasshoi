@@ -96,6 +96,9 @@
         rows="8"
         cols="80"
         v-if="element == 'text'"
+        @input="
+          $emit('update:modelValue', $event.target.value), setIcon($event)
+        "
       ></textarea>
       <!--Label-->
       <label class="form__label" :for="name">
