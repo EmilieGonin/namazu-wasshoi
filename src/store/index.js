@@ -92,7 +92,7 @@ export default createStore({
         })
         .then((response) => {
           commit("UPDATE_STATUS", "success");
-          resolve(response.data.character.Name);
+          resolve(response.data.character);
         })
         .catch((e) => {
           commit("UPDATE_STATUS", "error");

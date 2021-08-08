@@ -209,7 +209,7 @@ export default {
         this.$store
           .dispatch("searchCharacter", [character, cl, silent])
           .then(character => {
-            this.$emit("update:modelValue", character);
+            this.$emit("update:modelValue", character.Name);
             this.iconPre = "fas";
             this.icon = "check-circle";
             this.status = "valid";
