@@ -20,6 +20,7 @@ export default {
 .loading {
   @include absolute-center;
   @include flex;
+  position: fixed;
   z-index: 999;
   width: 100%;
   background: fade-out(white, 0.5);
