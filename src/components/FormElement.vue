@@ -50,7 +50,7 @@
       <span v-for="(input, index) in inputs" :key="input.name">
         <input
           type="radio"
-          :value="input.name"
+          :value="input.name == 'Oui' ? true : 'Non' ? false : input.name"
           :id="input.name"
           :name="name"
           :class="{ 'form__checkbox-input': input.label }"
