@@ -86,36 +86,21 @@
         ></FormElement>
       </div>
       <div class="form__separator"></div>
-      <!--À propos du personnage-->
+      <!--Ton rapport au jeu-->
       <div class="form__heading">
         <div class="form__title">
-          À propos de ton personnage
+          Ton rapport au jeu
         </div>
-        C'est au tour de ton personnage d'avoir la vedette !
+        Que fais-tu pendant tes sessions de jeu ?
       </div>
       <div class="form__panel">
-        <!--First Name-->
+        <!--Character-->
         <FormElement
-          v-model="form_firstName"
-          :label="'Prénom du personnage'"
-          :name="'form_firstName'"
-          :required="true"
-        ></FormElement>
-        <!--Last Name-->
-        <FormElement
-          v-model="form_lastName"
+          v-model="form_character"
           :label="'Nom du personnage'"
-          :name="'form_lastName'"
+          :name="'form_character'"
           :required="true"
-        ></FormElement>
-        <!--Jobs Max Lvl-->
-        <FormElement
-          :inputs="jobs"
-          :label="'Quelles sont tes classes au niveau maximum ?'"
-          :name="'formo_maxlvl'"
-          :type="'checkbox'"
-          :large="true"
-          @check="handleCheck"
+          :wait="true"
         ></FormElement>
         <!--Main Class-->
         <FormElement
@@ -123,16 +108,7 @@
           :label="'Quelle est ta classe principale ?'"
           :name="'form_mainClass'"
           :required="true"
-          :large="true"
         ></FormElement>
-      </div>
-      <div class="form__separator"></div>
-      <!--Ton rapport au jeu-->
-      <div class="form__heading">
-        <div class="form__title">
-          Ton rapport au jeu
-        </div>
-        Que fais-tu pendant tes sessions de jeu ?
       </div>
       <!--Playtime-->
       <FormElement
@@ -253,9 +229,7 @@ export default {
       form_mic: "",
       form_availability: "",
       form_about: "",
-      form_firstName: "",
-      form_lastName: "",
-      formo_maxlvl: [],
+      form_character: "",
       form_mainClass: "",
       form_playtime: "",
       form_gameActivities: "",
