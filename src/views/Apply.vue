@@ -38,39 +38,39 @@
       <div class="form__panel">
         <!--Name-->
         <FormElement
-          v-model="name"
+          v-model="formo_name"
           :label="'Comment t\'appelles-tu ?'"
-          :name="'name'"
+          :name="'formo_name'"
         ></FormElement>
         <!--Birthday-->
         <FormElement
-          v-model="birthday"
+          v-model="form_birthday"
           :label="'Quelle est ta date de naissance ?'"
-          :name="'birthday'"
+          :name="'form_birthday'"
           :type="'date'"
           :required="true"
         ></FormElement>
         <!--Discord-->
         <FormElement
-          v-model="discord"
+          v-model="form_discord"
           :label="'Quel est ton identifiant Discord ?'"
-          :name="'discord'"
+          :name="'form_discord'"
           :required="true"
         ></FormElement>
         <!--Mic-->
         <FormElement
-          v-model="mic"
+          v-model="form_mic"
           :inputs="yesno"
           :label="'Possèdes-tu un micro ?'"
-          :name="'mic'"
+          :name="'form_mic'"
           :type="'radio'"
           :required="true"
         ></FormElement>
         <!--Availability-->
         <FormElement
-          v-model="availability"
+          v-model="form_availability"
           :label="'Quelles sont tes disponibilités pour jouer ?'"
-          :name="'availability'"
+          :name="'form_availability'"
           :element="'text'"
           :large="true"
           :required="true"
@@ -78,9 +78,9 @@
         <!--About-->
         <FormElement
           :element="'text'"
-          v-model="about"
+          v-model="form_about"
           :label="'Dis-nous en plus sur toi !'"
-          :name="'about'"
+          :name="'form_about'"
           :required="true"
           :large="true"
         ></FormElement>
@@ -96,32 +96,32 @@
       <div class="form__panel">
         <!--First Name-->
         <FormElement
-          v-model="firstName"
+          v-model="form_firstName"
           :label="'Prénom du personnage'"
-          :name="'firstName'"
+          :name="'form_firstName'"
           :required="true"
         ></FormElement>
         <!--Last Name-->
         <FormElement
-          v-model="lastName"
+          v-model="form_lastName"
           :label="'Nom du personnage'"
-          :name="'lastName'"
+          :name="'form_lastName'"
           :required="true"
         ></FormElement>
         <!--Jobs Max Lvl-->
         <FormElement
           :inputs="jobs"
           :label="'Quelles sont tes classes au niveau maximum ?'"
-          :name="'maxlvl'"
+          :name="'formo_maxlvl'"
           :type="'checkbox'"
           :large="true"
           @check="handleCheck"
         ></FormElement>
         <!--Main Class-->
         <FormElement
-          v-model="mainClass"
+          v-model="form_mainClass"
           :label="'Quelle est ta classe principale ?'"
-          :name="'mainClass'"
+          :name="'form_mainClass'"
           :required="true"
           :large="true"
         ></FormElement>
@@ -136,51 +136,51 @@
       </div>
       <!--Playtime-->
       <FormElement
-        v-model="playtime"
+        v-model="form_playtime"
         :label="'Depuis quand joues-tu à Final Fantasy XIV ?'"
-        :name="'playtime'"
+        :name="'form_playtime'"
         :required="true"
         :large="true"
         :element="'text'"
       ></FormElement>
       <!--Game Activities-->
       <FormElement
-        v-model="gameActivities"
+        v-model="form_gameActivities"
         :label="'Quelles sont tes activités préférées dans le jeu ?'"
-        :name="'gameActivities'"
+        :name="'form_gameActivities'"
         :required="true"
         :large="true"
         :element="'text'"
       ></FormElement>
       <!--CL Wishes-->
       <FormElement
-        v-model="cl"
+        v-model="form_cl"
         :label="
           'Quel genre de compagnie libre recherches-tu et pourquoi nous choisir ?'
         "
-        :name="'cl'"
+        :name="'form_cl'"
         :required="true"
         :large="true"
         :element="'text'"
       ></FormElement>
       <!--Current CL-->
       <FormElement
-        v-model="clRequired"
+        v-model="form_clRequired"
         :label="
           'Quel est le ou les critères obligatoires pour que tu nous rejoignes ?'
         "
-        :name="'clRequired'"
+        :name="'form_clRequired'"
         :required="true"
         :large="true"
         :element="'text'"
       ></FormElement>
       <!--Current CL-->
       <FormElement
-        v-model="currentCl"
+        v-model="form_currentCl"
         :label="
           'Fais-tu actuellement partie d\'une compagnie ? Si oui, pourquoi la quitter ?'
         "
-        :name="'currentCl'"
+        :name="'form_currentCl'"
         :required="true"
         :large="true"
         :element="'text'"
@@ -195,20 +195,20 @@
       </div>
       <!--Exp-->
       <FormElement
-        v-model="exp"
+        v-model="form_exp"
         :label="'Quelle est ton expérience de jeu à haut niveau ?'"
-        :name="'exp'"
+        :name="'form_exp'"
         :required="true"
         :large="true"
         :element="'text'"
       ></FormElement>
       <!--Savage Required-->
       <FormElement
-        v-model="savageRequired"
+        v-model="form_savageRequired"
         :label="
           'Souhaites-tu rejoindre l\'un de nos rosters ? Si oui, obligatoirement ?'
         "
-        :name="'savageRequired'"
+        :name="'form_savageRequired'"
         :required="true"
         :large="true"
         :element="'text'"
@@ -222,16 +222,16 @@
         C'est le moment de faire un choix crucial !
       </div>
       <FormElement
-        v-model="team"
+        v-model="form_team"
         :inputs="teams"
-        :name="'team'"
+        :name="'form_team'"
         :type="'radio'"
         :large="true"
         :bigLabel="true"
         :teamsLabel="true"
         @check="handleCheck"
       ></FormElement>
-      <AppButton :iconR="'arrow-right'">
+      <AppButton :iconR="'arrow-right'" @click="submit">
         Postuler
       </AppButton>
     </form>
@@ -247,16 +247,32 @@ export default {
   data() {
     return {
       recruiting: "",
+      formo_name: "",
+      form_birthday: "",
+      form_discord: "",
+      form_mic: "",
+      form_availability: "",
+      form_about: "",
+      form_firstName: "",
+      form_lastName: "",
+      formo_maxlvl: [],
+      form_mainClass: "",
+      form_playtime: "",
+      form_gameActivities: "",
+      form_cl: "",
+      form_clRequired: "",
+      form_currentCl: "",
+      form_exp: "",
+      form_savageRequired: "",
+      form_team: "",
+      //temp
       yesno: [{ name: "Oui" }, { name: "Non" }],
-      name: "",
-      birthday: "",
-      discord: "",
-      mic: "",
-      availability: "",
-      about: "",
-      firstName: "",
-      lastName: "",
-      maxlvl: [],
+      teams: [
+        { name: "Mog", label: "teams/mog" },
+        { name: "Chocobo", label: "teams/chocobo" },
+        { name: "Pampa", label: "teams/pampa" },
+        { name: "Carbuncle", label: "teams/carbuncle" }
+      ],
       jobs: [
         { name: "Paladin", label: "job-icons/pld" },
         { name: "Guerrier", label: "job-icons/war" },
@@ -275,21 +291,6 @@ export default {
         { name: "Mage noir", label: "job-icons/blm" },
         { name: "Invocateur", label: "job-icons/smn" },
         { name: "Mage rouge", label: "job-icons/rdm" }
-      ],
-      mainClass: "",
-      playtime: "",
-      gameActivities: "",
-      cl: "",
-      clRequired: "",
-      currentCl: "",
-      exp: "",
-      savageRequired: "",
-      team: "",
-      teams: [
-        { name: "Mog", label: "teams/mog" },
-        { name: "Chocobo", label: "teams/chocobo" },
-        { name: "Pampa", label: "teams/pampa" },
-        { name: "Carbuncle", label: "teams/carbuncle" }
       ]
     };
   },
@@ -321,7 +322,37 @@ export default {
       console.log(this[name]);
     },
     submit() {
-      //
+      try {
+        const form = {};
+        const datas = JSON.parse(JSON.stringify(this.$data));
+
+        for (const data of Object.entries(datas)) {
+          if (data[0].startsWith("form_") || data[0].startsWith("formo_")) {
+            const name = data[0].split("_")[1];
+            const value = data[1];
+            form[name] = value;
+
+            if (!data[0].startsWith("formo_") && !value) {
+              const error =
+                "Veuillez renseigner tous les champs requis du formulaire.";
+              this.$store.dispatch("error", error);
+              throw error;
+            }
+          }
+        }
+        this.$store
+          .dispatch("apply", form)
+          .then(() => {
+            //
+          })
+          .catch(() => {
+            console.error(
+              "Une erreur est survenue pendant l'envoi du formulaire."
+            );
+          });
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
 };
