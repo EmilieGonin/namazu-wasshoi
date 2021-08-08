@@ -63,28 +63,35 @@ export default {
   methods: {
     submit() {
       try {
-        const user = {
-          email: this.email,
-          password: this.password,
-          character: this.character,
-          discord: this.discord
-        };
-        if (!this.email || !this.password || !this.character || !this.discord) {
-          const error =
-            "Veuillez renseigner tous les champs requis du formulaire.";
-          this.$store.dispatch("error", error);
-          throw error;
+        const form = {};
+        const datas = JSON.parse(JSON.stringify(this.$data));
+
+        for (const data of Object.entries(datas)) {
+          if (data[0].startsWith("form_") || data[0].startsWith("formo_")) {
+            const name = data[0].split("_")[1];
+            const value = data[1];
+            form[name] = value;
+
+            if (!data[0].startsWith("formo_") && !value) {
+              const error =
+                "Veuillez renseigner tous les champs requis du formulaire.";
+              this.$store.dispatch("error", error);
+              throw error;
+            }
+          }
         }
 
-        const character = this.character.split(" ").join("+");
+        const character = this.character_cl.split(" ").join("+");
         const cl = true;
         const silent = false;
 
         this.$store
           .dispatch("searchCharacter", [character, cl, silent])
-          .then(() => {
+          .then(character => {
+            form.character_cl = character.ID;
+
             this.$store
-              .dispatch("signup", user)
+              .dispatch("signup", form)
               .then(() => this.$router.push("/"))
               .catch(() =>
                 console.error(
