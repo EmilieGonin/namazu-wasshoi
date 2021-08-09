@@ -60,6 +60,17 @@ strong {
 }
 
 //Vue Transitions
+.fade {
+  &-enter-active,
+  &-leave-active {
+    transition: all 500ms;
+    opacity: 1;
+  }
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
+}
 .slide {
   &-enter-active,
   &-leave-active {
