@@ -68,7 +68,6 @@ export default createStore({
       authHeader(user);
       state.user = user;
       state.status = "success";
-      state.errors = "";
     },
     LOGOUT(state) {
       state.user = "";
@@ -134,6 +133,7 @@ export default createStore({
         commit("REQUEST", "pending");
         api.post("user/signup", user)
         .then((response) => {
+          commit("MESSAGE", "Inscription validée !");
           commit("AUTH_SUCCESS", response.data);
           resolve(response);
         })
@@ -149,6 +149,7 @@ export default createStore({
         // commit("REQUEST", "pending");
         api.post("user/login", user)
         .then((response) => {
+          commit("MESSAGE", "Connexion réussie !");
           commit("AUTH_SUCCESS", response.data);
           resolve(response);
         })
