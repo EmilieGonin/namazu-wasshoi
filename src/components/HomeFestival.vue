@@ -2,7 +2,7 @@
   <div class="festival">
     <div class="festival__line"></div>
     <div class="festival__banner-container">
-      <img class="festival__banner" src="@/assets/festival.png" alt="" />
+      <img class="festival__banner" src="@/assets/sample.png" alt="" />
       <div class="festival__legend">
         « Theme » par Gagnant • Participation gagnante de la précédente édition
       </div>
@@ -15,9 +15,7 @@
         <div class="festival__name">
           Festival Gyôkoso
         </div>
-        <span class="festival__infos">
-          « Incarner un boss de défi extrême »
-        </span>
+        <span class="festival__infos"> « {{ theme }} » </span>
         <AppButton
           class="festival__button"
           :iconR="'arrow-right'"
@@ -43,7 +41,8 @@ export default {
       //temp
       heading: "Les votes sont ouverts !",
       date: "30/05 - 20:00",
-      action: "Voter"
+      action: "Voter",
+      theme: "Theme"
     };
   },
   components: {

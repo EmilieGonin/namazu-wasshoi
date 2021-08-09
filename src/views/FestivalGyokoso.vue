@@ -4,7 +4,7 @@
       <div class="festival__title">
         Festival Gyôkoso
       </div>
-      <img class="festival__banner" src="@/assets/festival.png" alt="" />
+      <img class="festival__banner" src="@/assets/sample.png" alt="" />
       <div class="festival__legend">
         « Theme » par Gagnant • Participation gagnante de la précédente édition
       </div>
