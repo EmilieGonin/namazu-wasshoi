@@ -22,9 +22,7 @@
         :type="'password'"
         :required="true"
       ></FormElement>
-      <AppButton :type="'submit'" :iconR="'sign-in-alt'"
-        >Se connecter</AppButton
-      >
+      <AppButton :iconR="'sign-in-alt'" @click="submit">Se connecter</AppButton>
     </form>
   </AppFullscreen>
 </template>
@@ -49,7 +47,28 @@ export default {
   },
   methods: {
     submit() {
-      //
+      try {
+        if (!this.email || !this.password) {
+          const error =
+            "Veuillez renseigner tous les champs requis du formulaire.";
+          this.$store.dispatch("error", error);
+          throw error;
+        }
+
+        const user = {
+          email: this.email,
+          password: this.password
+        };
+
+        this.$store
+          .dispatch("login", user)
+          .then(() => this.$router.push("/"))
+          .catch(e => {
+            console.error(e);
+          });
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
 };

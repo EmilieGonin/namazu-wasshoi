@@ -93,11 +93,7 @@ export default {
             this.$store
               .dispatch("signup", form)
               .then(() => this.$router.push("/"))
-              .catch(() =>
-                console.error(
-                  "Une erreur s'est produite pendant l'inscription."
-                )
-              );
+              .catch(e => console.error(e));
           })
           .catch(() => {
             console.error("Personnage non trouvé.");

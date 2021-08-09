@@ -125,7 +125,7 @@ export default createStore({
     },
     login({ commit }, user) {
       return new Promise((resolve, reject) => {
-        commit("REQUEST");
+        // commit("REQUEST", "pending");
         api.post("user/login", user)
         .then((response) => {
           commit("AUTH_SUCCESS", response.data);
