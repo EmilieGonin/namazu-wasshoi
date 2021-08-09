@@ -81,7 +81,7 @@ export default {
           }
         }
 
-        const character = this.character_cl.split(" ").join("+");
+        const character = this.form_character_cl.split(" ").join("+");
         const cl = true;
         const silent = false;
 
