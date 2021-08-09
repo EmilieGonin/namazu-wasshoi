@@ -59,8 +59,8 @@
       <router-link class="nav__submenu-link" to="/members">
         <font-awesome-icon icon="users" fixed-width /> Membres
       </router-link>
-      <router-link class="nav__submenu-link" to="/galleries">
-        <font-awesome-icon icon="images" fixed-width /> Galeries
+      <router-link class="nav__submenu-link" to="/teams">
+        <font-awesome-icon icon="stars" fixed-width /> Equipes d'évent
       </router-link>
       <!--only if not logged in-->
       <router-link class="nav__submenu-link" to="/apply" v-if="!loggedIn">
@@ -68,18 +68,22 @@
       </router-link>
       <!--Separation-->
       <div class="nav__separation"></div>
-      <!--Activities Links-->
-      <router-link class="nav__submenu-link" to="/planning">
+      <!--Activities Links if logged in-->
+      <router-link class="nav__submenu-link" to="/planning" v-if="loggedIn">
         <font-awesome-icon icon="calendar-week" fixed-width /> Planning
       </router-link>
-      <router-link class="nav__submenu-link" to="/festival-gyokoso">
+      <router-link
+        class="nav__submenu-link"
+        to="/festival-gyokoso"
+        v-if="loggedIn"
+      >
         <font-awesome-icon icon="camera" fixed-width /> Festival Gyôkoso
       </router-link>
-      <router-link class="nav__submenu-link" to="/teams">
-        <font-awesome-icon icon="stars" fixed-width /> Equipes d'évent
+      <router-link class="nav__submenu-link" to="/galleries" v-if="loggedIn">
+        <font-awesome-icon icon="images" fixed-width /> Galeries
       </router-link>
       <!--Separation-->
-      <div class="nav__separation"></div>
+      <div class="nav__separation" v-if="loggedIn"></div>
       <!--Account Pages-->
       <!--if logged  in-->
       <router-link class="nav__submenu-link" :to="'/user/' + 1" v-if="loggedIn">
@@ -112,12 +116,12 @@ export default {
     return {
       toggle: false,
       //temp
-      id: "1",
-      isAdmin: true
+      id: "1"
     };
   },
   props: {
-    loggedIn: Boolean
+    loggedIn: Boolean,
+    isAdmin: Boolean
   },
   watch: {
     $route() {

@@ -3,7 +3,7 @@ import { api, authHeader, cache, checkCache } from './axios'
 
 const user = JSON.parse(localStorage.getItem("user"));
 // localStorage.clear();
-// console.log(user);
+console.log(user);
 
 export default createStore({
   state() {
@@ -21,6 +21,14 @@ export default createStore({
     title(state) { return state.title },
     icon(state) { return state.icon },
     user(state) { return state.user },
+    userId(state) { return state.user.user.id },
+    isAdmin(state) {
+      if (state.user) {
+        return state.user.user.isAdmin;
+      } else {
+        return false;
+      }
+    },
     fc(state) { return state.fc.data.fc },
     fcMembers(state) { return state.fc.data.fcMembers },
     staffMembers(state) { return state.fc.data.staff },
@@ -52,6 +60,7 @@ export default createStore({
     },
     LOGOUT(state) {
       state.user = "";
+      localStorage.removeItem("user");
     },
   },
   actions: {
@@ -140,7 +149,22 @@ export default createStore({
     },
     logout({ commit }) {
       commit("LOGOUT");
-      localStorage.removeItem("user");
+    },
+    checkUser({ commit }, id) {
+      return new Promise((resolve, reject) => {
+        commit("REQUEST", "pending");
+        api.get("user/" + id)
+        .then(response => {
+          commit("REQUEST", "success");
+          resolve(response);
+        })
+        .catch(error => {
+          commit("REQUEST", "error");
+          commit("ERROR", error.response.data.error);
+          commit("LOGOUT");
+          reject(error.response.data.error);
+        })
+      })
     },
     apply({ commit }, form) {
       return new Promise((resolve, reject) => {

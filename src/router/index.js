@@ -134,9 +134,46 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  //Set Page Infos
-  // store.commit("REQUEST", "pending");
-  next();
+  //redirect if not logged in or admin
+  const publicPages = ["/", "/login", "/signup", "/members", "/apply", "/teams"];
+  const adminPages = ["/admin"];
+  const authRequired = !publicPages.includes(to.path);
+  const adminRequired = adminPages.includes(to.path);
+
+  if (authRequired) {
+    //Check if user is logged in
+    const loggedIn = localStorage.getItem('user');
+
+    if (!loggedIn) {
+      store.dispatch("error", "Vous devez être connecté pour accéder à cette page.");
+      return next('/login');
+    }
+    else {
+      // Check if user is still registered
+      const userId = store.getters.userId;
+      store.dispatch("checkUser", userId)
+      .then(() => {
+        if (adminRequired) {
+          //Check if user is admin if page is restricted
+          const isAdmin = store.getters.isAdmin;
+
+          if (!isAdmin) {
+            const error = "Vous n'avez pas la permission d'accéder à cette page."
+            throw error;
+          }
+        } else {
+          next();
+        }
+      })
+      .catch((e) => {
+        store.dispatch("error", e);
+        return next('/');
+      })
+    }
+  }
+  else {
+    next()
+  }
 })
 router.afterEach((to) => {
   router.isReady()

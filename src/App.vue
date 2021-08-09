@@ -1,7 +1,7 @@
 <template>
   <AppLoading :loading="status == 'pending'" />
   <AppErrors />
-  <AppNav :loggedIn="loggedIn" />
+  <AppNav :loggedIn="loggedIn" :isAdmin="isAdmin" />
   <AppHeading :title="title" :icon="icon">{{ title }}</AppHeading>
   <router-view class="content" />
   <AppFooter />
@@ -24,7 +24,7 @@ export default {
     AppFooter
   },
   computed: {
-    ...mapGetters(["status", "loggedIn", "title", "icon"]),
+    ...mapGetters(["status", "loggedIn", "isAdmin", "title", "icon"]),
     ...mapState(["errors"])
   }
 };
