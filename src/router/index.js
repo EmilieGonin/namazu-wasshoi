@@ -160,6 +160,8 @@ router.beforeEach((to, from, next) => {
           if (!isAdmin) {
             const error = "Vous n'avez pas la permission d'accéder à cette page."
             throw error;
+          } else {
+            next();
           }
         } else {
           next();
