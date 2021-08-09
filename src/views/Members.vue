@@ -9,7 +9,7 @@
         class="members__name"
         :class="{
           'members__name--empty': !currentMember,
-          'members__name--staff': staffMember(currentMember),
+          'members__name--staff': staffMembers && staffMember(currentMember),
           'members__name--gold': currentMember && grade(currentMember, 'gold'),
           'members__name--lunar':
             currentMember && grade(currentMember, 'lunar'),
