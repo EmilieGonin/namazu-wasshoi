@@ -5,7 +5,6 @@
       class="heading__bann"
       src="@/assets/bann.png"
       alt="Bannière du site"
-      v-if="display"
       :style="setSize"
     />
     <!--Page Title-->
@@ -28,8 +27,7 @@ export default {
   data() {
     return {
       windowHeight: "",
-      fullscreen: false,
-      display: true
+      fullscreen: false
     };
   },
   props: {
@@ -57,7 +55,6 @@ export default {
       const noBannerPages = ["FestivalGyokoso", "AdminPanel"];
 
       if (!noBannerPages.includes(name)) {
-        this.display = true;
         this.fullscreen = false;
         if (fullscreenPages.includes(name)) {
           this.windowHeight = window.innerHeight - 43;
@@ -68,7 +65,7 @@ export default {
           this.windowHeight = window.innerHeight / 4;
         }
       } else {
-        this.display = false;
+        this.windowHeight = 0;
       }
     }
   }
