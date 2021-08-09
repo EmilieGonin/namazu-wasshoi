@@ -37,6 +37,7 @@
       <!--else-->
       <router-link class="nav__menu-icon" to="/login" v-if="!loggedIn">
         <font-awesome-icon icon="sign-in-alt" fixed-width />
+        <span class="nav__menu-icon__text"> Se connecter</span>
       </router-link>
       <router-link class="nav__menu-icon" to="/signup" v-if="!loggedIn">
         <font-awesome-icon icon="user-plus" fixed-width />
@@ -152,6 +153,7 @@ export default {
   z-index: 998;
   position: fixed;
   width: 100%;
+  min-height: 43px;
   background: $namazu;
   color: $grey;
   padding: 3px 5px;
@@ -164,11 +166,14 @@ export default {
   &__menu-icon {
     cursor: pointer;
     padding: 5px;
-    border-radius: 20%;
+    border-radius: 5px;
     background: $black-veil;
     color: fade-out($grey, 0.2);
     &:hover {
       background: fade-in($black-veil, 0.1);
+    }
+    &__text {
+      @include mobile-hide;
     }
   }
   &__popup {
