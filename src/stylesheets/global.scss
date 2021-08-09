@@ -71,6 +71,17 @@ strong {
     opacity: 0;
   }
 }
+.slide-down-without-opacity {
+  &-enter-active,
+  &-leave-active {
+    transition: all 500ms;
+    transform: translateY(0);
+  }
+  &-enter-from,
+  &-leave-to {
+    transform: translateY(100%);
+  }
+}
 .slide {
   &-enter-active,
   &-leave-active {

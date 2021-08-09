@@ -1,5 +1,5 @@
 <template lang="html">
-  <transition name="slide-down-long">
+  <transition name="slide-down-without-opacity">
     <div
       class="message"
       :class="{
@@ -29,8 +29,6 @@ export default {
 <style lang="scss" scoped>
 .message {
   width: 100%;
-  max-width: 580px;
-  margin: auto;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -38,10 +36,12 @@ export default {
   z-index: 999;
   padding: 5px;
   text-align: center;
-  font-size: $font-small;
-  color: $namazu;
-  background: white;
-  border-top: 3px solid $namazu;
-  border-radius: 10px 10px 0 0;
+  color: white;
+  &--success {
+    background-color: $valid;
+  }
+  &--error {
+    background-color: $invalid;
+  }
 }
 </style>
