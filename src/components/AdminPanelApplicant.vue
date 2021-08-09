@@ -1,46 +1,48 @@
 <template lang="html">
   <div class="applicant">
-    <!--Character Name-->
-    <div class="applicant__title">
-      {{ applicant.character }}
+    <div class="applicant__head">
+      <div class="applicant__profile">
+        <!--Character Name-->
+        <div class="applicant__title" @click="redirect(applicant.characterId)">
+          {{ applicant.character }}
+        </div>
+        <!--Name-->
+        <div v-if="applicant.name">
+          <font-awesome-icon :icon="'user'" fixed-width />
+          {{ applicant.name }}
+        </div>
+        <!--Discord-->
+        <div>
+          <font-awesome-icon :icon="['fab', 'discord']" fixed-width />
+          {{ applicant.discord }}
+        </div>
+        <!--Birthday-->
+        <div>
+          <font-awesome-icon :icon="'gift'" fixed-width />
+          {{ applicant.birthday }}
+        </div>
+        <!--Mic-->
+        <font-awesome-layers>
+          <font-awesome-icon :icon="'microphone'" fixed-width />
+          <font-awesome-icon
+            :icon="'check-circle'"
+            transform="shrink-6 left-10 down-4"
+            class="valid"
+            v-if="applicant.mic"
+          />
+          <font-awesome-icon
+            :icon="'times-circle'"
+            transform="shrink-6 left-10 down-4"
+            class="invalid"
+            v-else
+          />
+        </font-awesome-layers>
+      </div>
+      <AppButton @click="toggle = !toggle">
+        <span v-if="!toggle">Afficher la candidature</span>
+        <span v-else>Fermer la candidature</span>
+      </AppButton>
     </div>
-    <div class="applicant__profile">
-      <!--Name-->
-      <div v-if="applicant.name">
-        <font-awesome-icon :icon="'user'" fixed-width />
-        {{ applicant.name }}
-      </div>
-      <!--Discord-->
-      <div>
-        <font-awesome-icon :icon="['fab', 'discord']" fixed-width />
-        {{ applicant.discord }}
-      </div>
-      <!--Birthday-->
-      <div>
-        <font-awesome-icon :icon="'gift'" fixed-width />
-        {{ applicant.birthday }}
-      </div>
-      <!--Mic-->
-      <font-awesome-layers>
-        <font-awesome-icon :icon="'microphone'" fixed-width />
-        <font-awesome-icon
-          :icon="'check-circle'"
-          transform="shrink-6 left-10 down-4"
-          class="valid"
-          v-if="applicant.mic"
-        />
-        <font-awesome-icon
-          :icon="'times-circle'"
-          transform="shrink-6 left-10 down-4"
-          class="invalid"
-          v-else
-        />
-      </font-awesome-layers>
-    </div>
-    <AppButton @click="toggle = !toggle">
-      <span v-if="!toggle">Afficher la candidature</span>
-      <span v-else>Fermer la candidature</span>
-    </AppButton>
     <transition name="slide-up">
       <div class="applicant__body" v-show="toggle">
         <!--Availability-->
@@ -153,6 +155,12 @@ export default {
   },
   props: {
     applicant: Object
+  },
+  methods: {
+    redirect(id) {
+      const lodestone = "https://fr.finalfantasyxiv.com/lodestone/character/";
+      window.open(lodestone + id);
+    }
   }
 };
 </script>
@@ -162,15 +170,26 @@ export default {
   @include flex($direction: column);
   position: relative;
   width: 100%;
-  max-width: 600px;
+  max-width: 1200px;
   padding: 5px;
+  margin: auto;
+  &__head {
+    @include flex($gap: 10, $align: stretch);
+    flex-wrap: wrap;
+    width: 100%;
+  }
   &__title {
     @include page-title;
+    transform: translateY(2px);
+    cursor: pointer;
   }
   &__profile {
     @include flex($gap: 10, $justify: flex-start);
     flex-wrap: wrap;
-    transform: translateY(-5px);
+    border: 2px solid $namazu;
+    width: 100%;
+    max-width: 800px;
+    padding: 3px 10px;
   }
   &__body {
     @include flex($gap: 10);
