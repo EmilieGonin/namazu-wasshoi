@@ -68,8 +68,8 @@ export default {
 .avatar {
   display: block;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   border: 3px solid $grey;
   box-shadow: 0 0 2px $main-black;
