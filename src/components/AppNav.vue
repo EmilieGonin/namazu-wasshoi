@@ -185,7 +185,7 @@ export default {
     @include flex($direction: column);
     z-index: 998;
     position: fixed;
-    top: 46px;
+    top: 43px;
     left: 0;
     background: $namazu;
   }
