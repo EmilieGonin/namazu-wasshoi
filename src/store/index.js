@@ -29,9 +29,21 @@ export default createStore({
         return false;
       }
     },
-    fc(state) { return state.fc.data.fc },
-    fcMembers(state) { return state.fc.data.fcMembers },
-    staffMembers(state) { return state.fc.data.staff },
+    fc(state) {
+      if (state.fc) {
+        return state.fc.data.fc;
+      }
+    },
+    fcMembers(state) {
+      if (state.fc) {
+        return state.fc.data.fcMembers;
+      }
+    },
+    staffMembers(state) {
+      if (state.fc) {
+        return state.fc.data.staff;
+      }
+    },
     loggedIn(state) { return !!state.user }
   },
   mutations: {
