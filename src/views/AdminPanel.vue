@@ -42,7 +42,7 @@ export default {
 <style lang="scss" scoped>
 .admin {
   &__button {
-    position: fixed;
+    position: fixed !important;
     bottom: 0;
     left: 0;
   }
