@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       //temp
-      gold: ["Nexara Dei-ijla", "Fallen Nightblade"],
+      gold: ["Nexara Dei-ijla", "Rabyte Tsukisagi"],
       lunar: "Nana Rosenbach",
       fail: "Enael Chubby'fox"
     };
