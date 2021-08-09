@@ -124,6 +124,28 @@ export default createStore({
         });
       })
     },
+    getCharacter({ commit, state }) {
+      return new Promise((resolve, reject) => {
+        const character = checkCache("character");
+
+        if (!character) {
+          api.get("fc/character/" + state.user.user.characterId)
+          .then((response) => {
+            cache("character", response.data.character);
+            commit("REQUEST", "success");
+            resolve(response.data.character);
+          })
+          .catch((e) => {
+            commit("REQUEST", "error");
+            commit("MESSAGE", e.response.data.error);
+            reject();
+          });
+        } else {
+          commit("REQUEST", "success");
+          resolve(character.data);
+        }
+      })
+    },
     error({ commit }, error) {
       commit("REQUEST", "error");
       commit("MESSAGE", error);

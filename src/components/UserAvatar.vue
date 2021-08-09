@@ -5,16 +5,17 @@
   <img
     class="avatar"
     :class="{
-      'avatar--gold': member && grade(member, 'gold'),
-      'avatar--lunar': member && grade(member, 'lunar'),
-      'avatar--fail': member && grade(member, 'fail'),
+      'avatar--gold': member && grade(member.Name, 'gold'),
+      'avatar--lunar': member && grade(member.Name, 'lunar'),
+      'avatar--fail': member && grade(member.Name, 'fail'),
       'avatar--alt': altStyle,
       'avatar--nofade': nofade
     }"
-    src="@/assets/avatar_sample.jpg"
+    :src="memberAvatar ? memberAvatar : avatar"
     altStyle=""
     :style="style"
-    :title="member"
+    :title="memberName ? memberName : 'Accéder au profil'"
+    v-if="avatar || memberAvatar"
   />
 </template>
 
@@ -23,11 +24,19 @@ export default {
   name: "UserAvatar",
   data() {
     return {
+      avatar: "",
       //temp
       gold: ["Nexara Dei-ijla", "Rabyte Tsukisagi"],
       lunar: "Nana Rosenbach",
       fail: "Enael Chubby'fox"
     };
+  },
+  mounted() {
+    if (!this.avatar && !this.memberAvatar) {
+      this.$store.dispatch("getCharacter").then(character => {
+        this.avatar = character.Character.Avatar;
+      });
+    }
   },
   props: {
     size: [String, Number],
@@ -40,7 +49,8 @@ export default {
       type: Boolean,
       default: false
     },
-    member: String
+    memberName: String,
+    memberAvatar: String
   },
   computed: {
     style() {
