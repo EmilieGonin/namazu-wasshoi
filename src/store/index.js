@@ -3,7 +3,7 @@ import { api, authHeader, cache, checkCache } from './axios'
 
 const user = JSON.parse(localStorage.getItem("user"));
 // localStorage.clear();
-console.log(user);
+// console.log(user);
 
 export default createStore({
   state() {
@@ -12,7 +12,7 @@ export default createStore({
       errors: "",
       title: "",
       icon: "",
-      user: user,
+      user: user ? user : "",
       fc: ""
     }
   },
@@ -27,7 +27,7 @@ export default createStore({
     loggedIn(state) { return !!state.user }
   },
   mutations: {
-    UPDATE_STATUS(state, status) {
+    REQUEST(state, status) {
       state.status = status;
     },
     ERROR(state, errors) {
@@ -50,6 +50,9 @@ export default createStore({
       state.status = "success";
       state.errors = "";
     },
+    LOGOUT(state) {
+      state.user = "";
+    },
   },
   actions: {
     setPage({ commit }, [ title, icon ]) {
@@ -57,25 +60,25 @@ export default createStore({
     },
     setFreeCompany({ commit }) {
       return new Promise((resolve, reject) => {
-        commit("UPDATE_STATUS", "pending");
+        commit("REQUEST", "pending");
         const fc = checkCache("fc");
 
         if (!fc) {
           api.get("fc")
           .then((response) => {
             commit("SET_FREE_COMPANY", cache("fc", response.data));
-            commit("UPDATE_STATUS", "success");
+            commit("REQUEST", "success");
             resolve();
           })
           .catch((e) => {
             console.error(e);
-            commit("UPDATE_STATUS", "error");
+            commit("REQUEST", "error");
             commit("ERROR", "Une erreur s'est produite pendant le chargement de la compagnie libre.");
             reject();
           });
         } else {
           commit("SET_FREE_COMPANY", fc);
-          commit("UPDATE_STATUS", "success");
+          commit("REQUEST", "success");
           resolve();
         }
       })
@@ -83,7 +86,7 @@ export default createStore({
     searchCharacter({ commit }, [ character, cl, silent ]) {
       return new Promise((resolve, reject) => {
         if (!silent) {
-          commit("UPDATE_STATUS", "pending");
+          commit("REQUEST", "pending");
         }
 
         api.post("fc/character", {
@@ -91,45 +94,64 @@ export default createStore({
           cl: cl
         })
         .then((response) => {
-          commit("UPDATE_STATUS", "success");
+          commit("REQUEST", "success");
           resolve(response.data.character);
         })
         .catch((e) => {
-          commit("UPDATE_STATUS", "error");
+          commit("REQUEST", "error");
           commit("ERROR", e.response.data.error);
           reject();
         });
       })
     },
     error({ commit }, error) {
-      commit("UPDATE_STATUS", "error");
+      commit("REQUEST", "error");
       commit("ERROR", error);
     },
     signup({ commit }, user) {
       return new Promise((resolve, reject) => {
-        commit("UPDATE_STATUS", "pending");
+        commit("REQUEST", "pending");
         api.post("user/signup", user)
         .then((response) => {
           commit("AUTH_SUCCESS", response.data);
           resolve(response);
         })
         .catch((error) => {
-          commit("UPDATE_STATUS", "error");
+          commit("REQUEST", "error");
           commit("ERROR", error.response.data.error);
           reject(error);
         })
       })
     },
+    login({ commit }, user) {
+      return new Promise((resolve, reject) => {
+        commit("REQUEST");
+        api.post("user/login", user)
+        .then((response) => {
+          commit("AUTH_SUCCESS", response.data);
+          resolve(response);
+        })
+        .catch((error) => {
+          commit("REQUEST", "error");
+          commit("ERROR", error.response.data.error);
+          reject(error);
+        })
+      })
+    },
+    logout({ commit }) {
+      commit("LOGOUT");
+      localStorage.removeItem("user");
+    },
     apply({ commit }, form) {
       return new Promise((resolve, reject) => {
-        commit("UPDATE_STATUS", "pending");
+        commit("REQUEST", "pending");
         api.post("applicants/new", form)
         .then(() => {
-          commit("UPDATE_STATUS", "success");
+          commit("REQUEST", "success");
           resolve();
         })
         .catch((error) => {
-          commit("UPDATE_STATUS", "error");
+          commit("REQUEST", "error");
           commit("ERROR", error.response.data.error);
           reject(error);
         })
@@ -137,14 +159,14 @@ export default createStore({
     },
     getApplicants({ commit }) {
       return new Promise((resolve, reject) => {
-        commit("UPDATE_STATUS", "pending");
+        commit("REQUEST", "pending");
         api.get("applicants/")
         .then((response) => {
-          commit("UPDATE_STATUS", "success");
+          commit("REQUEST", "success");
           resolve(response.data.applicants);
         })
         .catch((error) => {
-          commit("UPDATE_STATUS", "error");
+          commit("REQUEST", "error");
           commit("ERROR", error.response.data.error);
           reject(error);
         })
@@ -152,14 +174,14 @@ export default createStore({
     },
     getParameter({ commit }, parameter) {
       return new Promise((resolve, reject) => {
-        commit("UPDATE_STATUS", "pending");
+        commit("REQUEST", "pending");
         api.get("parameters/" + parameter)
         .then((response) => {
-          commit("UPDATE_STATUS", "success");
+          commit("REQUEST", "success");
           resolve(response.data.parameter.data);
         })
         .catch((error) => {
-          commit("UPDATE_STATUS", "error");
+          commit("REQUEST", "error");
           commit("ERROR", error.response.data.error);
           reject(error);
         })

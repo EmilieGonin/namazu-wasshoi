@@ -26,7 +26,12 @@
       <router-link class="nav__menu-icon" to="/account" v-if="loggedIn">
         <font-awesome-icon icon="cog" fixed-width />
       </router-link>
-      <router-link class="nav__menu-icon" to="/" v-if="loggedIn">
+      <router-link
+        class="nav__menu-icon"
+        to="/"
+        v-if="loggedIn"
+        @click.prevent="logout"
+      >
         <font-awesome-icon icon="sign-out-alt" fixed-width />
       </router-link>
       <!--else-->
@@ -127,6 +132,11 @@ export default {
       if (this.toggle) {
         this.toggle = false;
       }
+    },
+    logout() {
+      this.$store.dispatch("logout").then(() => {
+        this.$router.push("/login");
+      });
     }
   }
 };

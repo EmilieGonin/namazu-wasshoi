@@ -135,14 +135,14 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   //Set Page Infos
-  // store.commit("UPDATE_STATUS", "pending");
+  // store.commit("REQUEST", "pending");
   next();
 })
 router.afterEach((to) => {
   router.isReady()
   .then(() => {
     store.dispatch("setPage", [to.meta.heading, to.meta.icon]);
-    // store.commit("UPDATE_STATUS", "success");
+    // store.commit("REQUEST", "success");
   })
   .catch((e) => console.error(e));
 })
