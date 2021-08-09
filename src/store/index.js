@@ -9,7 +9,7 @@ export default createStore({
   state() {
     return {
       status: "",
-      errors: "",
+      message: "",
       title: "",
       icon: "",
       user: user ? user : "",
@@ -50,10 +50,10 @@ export default createStore({
     REQUEST(state, status) {
       state.status = status;
     },
-    ERROR(state, errors) {
-      state.errors = errors;
+    MESSAGE(state, message) {
+      state.message = message;
       setTimeout(() => {
-        state.errors = "";
+        state.message = "";
       }, 5000);
     },
     SET_PAGE(state, [ title, icon ]) {
@@ -94,7 +94,7 @@ export default createStore({
           .catch((e) => {
             console.error(e);
             commit("REQUEST", "error");
-            commit("ERROR", "Une erreur s'est produite pendant le chargement de la compagnie libre.");
+            commit("MESSAGE", "Une erreur s'est produite pendant le chargement de la compagnie libre.");
             reject();
           });
         } else {
@@ -120,14 +120,14 @@ export default createStore({
         })
         .catch((e) => {
           commit("REQUEST", "error");
-          commit("ERROR", e.response.data.error);
+          commit("MESSAGE", e.response.data.error);
           reject();
         });
       })
     },
     error({ commit }, error) {
       commit("REQUEST", "error");
-      commit("ERROR", error);
+      commit("MESSAGE", error);
     },
     signup({ commit }, user) {
       return new Promise((resolve, reject) => {
@@ -139,7 +139,7 @@ export default createStore({
         })
         .catch((error) => {
           commit("REQUEST", "error");
-          commit("ERROR", error.response.data.error);
+          commit("MESSAGE", error.response.data.error);
           reject(error);
         })
       })
@@ -154,7 +154,7 @@ export default createStore({
         })
         .catch((error) => {
           commit("REQUEST", "error");
-          commit("ERROR", error.response.data.error);
+          commit("MESSAGE", error.response.data.error);
           reject(error);
         })
       })
@@ -172,7 +172,7 @@ export default createStore({
         })
         .catch(error => {
           commit("REQUEST", "error");
-          commit("ERROR", error.response.data.error);
+          commit("MESSAGE", error.response.data.error);
           commit("LOGOUT");
           reject(error.response.data.error);
         })
@@ -188,7 +188,7 @@ export default createStore({
         })
         .catch((error) => {
           commit("REQUEST", "error");
-          commit("ERROR", error.response.data.error);
+          commit("MESSAGE", error.response.data.error);
           reject(error);
         })
       })
@@ -203,7 +203,7 @@ export default createStore({
         })
         .catch((error) => {
           commit("REQUEST", "error");
-          commit("ERROR", error.response.data.error);
+          commit("MESSAGE", error.response.data.error);
           reject(error);
         })
       })
@@ -218,7 +218,7 @@ export default createStore({
         })
         .catch((error) => {
           commit("REQUEST", "error");
-          commit("ERROR", error.response.data.error);
+          commit("MESSAGE", error.response.data.error);
           reject(error);
         })
       })

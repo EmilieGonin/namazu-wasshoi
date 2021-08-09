@@ -1,25 +1,33 @@
 <template lang="html">
   <transition name="slide-down-long">
-    <div class="errors" v-if="errors">
-      <font-awesome-icon :icon="'times-circle'" fixed-width />
-      {{ errors }}
+    <div
+      class="message"
+      :class="{
+        'message--success': status == 'success',
+        'message--error': status == 'error'
+      }"
+      v-if="message"
+    >
+      <font-awesome-icon
+        :icon="'check-circle'"
+        fixed-width
+        v-if="status == 'success'"
+      />
+      <font-awesome-icon :icon="'times-circle'" fixed-width v-else />
+      {{ message }}
     </div>
   </transition>
 </template>
 
 <script>
-import { mapState } from "vuex";
-
 export default {
-  name: "AppErrors",
-  computed: {
-    ...mapState(["errors"])
-  }
+  name: "AppMessages",
+  props: ["message", "status"]
 };
 </script>
 
 <style lang="scss" scoped>
-.errors {
+.message {
   width: 100%;
   max-width: 580px;
   margin: auto;

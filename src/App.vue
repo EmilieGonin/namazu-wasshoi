@@ -1,6 +1,6 @@
 <template>
   <AppLoading :loading="status == 'pending'" />
-  <AppErrors />
+  <AppMessages :status="status" :message="message" />
   <AppNav :loggedIn="loggedIn" :isAdmin="isAdmin" />
   <AppHeading :title="title" :icon="icon">{{ title }}</AppHeading>
   <router-view class="content" />
@@ -10,7 +10,7 @@
 <script>
 import { mapGetters, mapState } from "vuex";
 import AppLoading from "@/components/AppLoading.vue";
-import AppErrors from "@/components/AppErrors.vue";
+import AppMessages from "@/components/AppMessages.vue";
 import AppHeading from "@/components/AppHeading.vue";
 import AppNav from "@/components/AppNav.vue";
 import AppFooter from "@/components/AppFooter.vue";
@@ -18,14 +18,14 @@ import AppFooter from "@/components/AppFooter.vue";
 export default {
   components: {
     AppLoading,
-    AppErrors,
+    AppMessages,
     AppHeading,
     AppNav,
     AppFooter
   },
   computed: {
     ...mapGetters(["status", "loggedIn", "isAdmin", "title", "icon"]),
-    ...mapState(["errors"])
+    ...mapState(["message"])
   }
 };
 </script>
