@@ -73,6 +73,7 @@ export default createStore({
     LOGOUT(state) {
       state.user = "";
       localStorage.removeItem("user");
+      localStorage.removeItem("character");
     },
   },
   actions: {
