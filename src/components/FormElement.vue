@@ -75,13 +75,17 @@
     <!--Select Inputs-->
     <select
       class="form__checkbox-container"
+      :class="{ 'form__select-disabled': !modelValue }"
       :name="name"
       :id="name"
       @change="$emit('update:modelValue', $event.target.value)"
       v-if="type == 'select'"
     >
-      <option disabled value="" v-if="labelSelect">{{ labelSelect }}</option>
+      <option disabled selected value="" v-if="labelSelect">{{
+        labelSelect
+      }}</option>
       <option
+        class="form__option"
         v-for="input in inputs"
         :key="input.name"
         :value="input.value ? input.value : input.name"
@@ -355,6 +359,12 @@ export default {
       opacity: 1;
       border-radius: 20%;
     }
+  }
+  &__select-disabled {
+    color: $light-black;
+  }
+  &__option {
+    color: black;
   }
 
   //Form elements
