@@ -23,12 +23,7 @@
         Liste des membres
       </div>
       <div class="panel__members">
-        <UserAvatar :size="'80'" :borderRadius="'25%'"></UserAvatar>
-        <UserAvatar :size="'80'" :borderRadius="'25%'"></UserAvatar>
-        <UserAvatar :size="'80'" :borderRadius="'25%'"></UserAvatar>
-        <UserAvatar :size="'80'" :borderRadius="'25%'"></UserAvatar>
-        <UserAvatar :size="'80'" :borderRadius="'25%'"></UserAvatar>
-        <UserAvatar :size="'80'" :borderRadius="'25%'"></UserAvatar>
+        -
       </div>
       <div class="panel__screenshots">
         <img
@@ -49,12 +44,12 @@
 </template>
 
 <script>
-import UserAvatar from "@/components/UserAvatar.vue";
+// import UserAvatar from "@/components/UserAvatar.vue";
 
 export default {
   name: "TeamsPanel",
   components: {
-    UserAvatar
+    // UserAvatar
   },
   props: {
     team: String
