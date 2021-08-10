@@ -1,9 +1,9 @@
 <template lang="html">
-  <!--Checkbox Field-->
+  <!--Checkbox, Radio & Select Field-->
   <div
     class="form__field"
     :class="{ 'form__field--large': large }"
-    v-if="type == 'checkbox' || type == 'radio'"
+    v-if="type == 'checkbox' || type == 'radio' || type == 'select'"
   >
     <!--Field Label-->
     <label class="form__label form__label--only" :for="name" v-if="label">
@@ -72,6 +72,23 @@
         </label>
       </span>
     </div>
+    <!--Select Inputs-->
+    <select
+      class="form__checkbox-container"
+      :name="name"
+      :id="name"
+      @change="$emit('update:modelValue', $event.target.value)"
+      v-if="type == 'select'"
+    >
+      <option disabled value="" v-if="labelSelect">{{ labelSelect }}</option>
+      <option
+        v-for="input in inputs"
+        :key="input.name"
+        :value="input.value ? input.value : input.name"
+      >
+        {{ input.name }}
+      </option>
+    </select>
   </div>
   <!--Other Fields-->
   <div class="form__field" :class="{ 'form__field--large': large }" v-else>
@@ -160,6 +177,7 @@ export default {
       type: Boolean,
       default: false
     },
+    labelSelect: String,
     large: {
       type: Boolean,
       default: false
@@ -341,7 +359,8 @@ export default {
 
   //Form elements
   input,
-  textarea {
+  textarea,
+  select {
     width: 100%;
     padding: 0 5px;
     padding-right: 25px;
@@ -353,7 +372,8 @@ export default {
       //
     }
   }
-  textarea {
+  textarea,
+  select {
     padding: 5px;
   }
   input {
