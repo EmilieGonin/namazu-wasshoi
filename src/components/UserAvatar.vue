@@ -1,7 +1,4 @@
 <template lang="html">
-  <!--if logged in-->
-  <!--<img class="avatar" :src="avatar" alt="" />-->
-  <!--else-->
   <img
     class="avatar"
     :class="{
