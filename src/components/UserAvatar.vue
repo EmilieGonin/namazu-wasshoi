@@ -14,11 +14,17 @@
     :title="memberName ? memberName : 'Accéder au profil'"
     v-if="avatar || memberAvatar"
   />
+  <AppMiniSpinner v-else />
 </template>
 
 <script>
+import AppMiniSpinner from "@/components/AppMiniSpinner.vue";
+
 export default {
   name: "UserAvatar",
+  components: {
+    AppMiniSpinner
+  },
   data() {
     return {
       avatar: "",
