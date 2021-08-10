@@ -49,6 +49,7 @@ export default createStore({
   mutations: {
     REQUEST(state, status) {
       state.status = status;
+      state.message = "";
     },
     MESSAGE(state, message) {
       state.message = message;
@@ -155,8 +156,8 @@ export default createStore({
         commit("REQUEST", "pending");
         api.post("user/signup", user)
         .then((response) => {
-          commit("MESSAGE", "Inscription validée !");
           commit("AUTH_SUCCESS", response.data);
+          commit("MESSAGE", "Inscription validée !");
           resolve(response);
         })
         .catch((error) => {
@@ -171,8 +172,8 @@ export default createStore({
         // commit("REQUEST", "pending");
         api.post("user/login", user)
         .then((response) => {
-          commit("MESSAGE", "Connexion réussie !");
           commit("AUTH_SUCCESS", response.data);
+          commit("MESSAGE", "Connexion réussie !");
           resolve(response);
         })
         .catch((error) => {
