@@ -136,9 +136,30 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   //redirect if not logged in or admin
   const publicPages = ["/", "/login", "/signup", "/members", "/apply", "/teams"];
+  const ucPages = ["/teams", "/planning"];
   const adminPages = ["/admin"];
   const authRequired = !publicPages.includes(to.path);
   const adminRequired = adminPages.includes(to.path);
+  const uc = ucPages.includes(to.path);
+
+  if (uc) {
+    //Check if user is logged in
+    const loggedIn = localStorage.getItem('user');
+
+    if (!loggedIn) {
+      store.dispatch("error", "Cette page est toujours en construction. :(");
+      return next("/");
+
+    } else {
+      //Check if user is admin
+      const isAdmin = store.getters.isAdmin;
+
+      if (!isAdmin) {
+        store.dispatch("error", "Cette page est toujours en construction. :(");
+        return next("/");
+      }
+    }
+  }
 
   if (authRequired) {
     //Check if user is logged in
