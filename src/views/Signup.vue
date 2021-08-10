@@ -88,7 +88,8 @@ export default {
         this.$store
           .dispatch("searchCharacter", [character, cl, silent])
           .then(character => {
-            form.character_cl = character.ID;
+            form.character_cl = character.Name;
+            form.characterId = character.ID;
 
             this.$store
               .dispatch("signup", form)
