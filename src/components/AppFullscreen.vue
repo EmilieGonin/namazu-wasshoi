@@ -14,6 +14,9 @@ export default {
 
 <style lang="scss" scoped>
 .fullscreen {
+  @include responsive(320) {
+    position: absolute;
+  }
   @include absolute-center;
   position: fixed;
   top: 43px;
