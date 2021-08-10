@@ -48,8 +48,10 @@ export default createStore({
   },
   mutations: {
     REQUEST(state, status) {
+      if (state.status == "error") {
+        state.message = "";
+      }
       state.status = status;
-      state.message = "";
     },
     MESSAGE(state, message) {
       state.message = message;
