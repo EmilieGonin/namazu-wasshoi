@@ -1,5 +1,14 @@
 <template lang="html">
-  <button :type="type" class="button" :style="style" @click="go">
+  <button
+    :type="type"
+    class="button"
+    :class="{
+      'button--darkhover': altClass && altClass.includes('darkhover'),
+      'button--bighover': altClass && altClass.includes('bighover')
+    }"
+    :style="style"
+    @click="go"
+  >
     <slot>Envoyer</slot>
     <font-awesome-icon
       class="button__icon button__icon--l"
@@ -28,7 +37,8 @@ export default {
     iconR: String,
     marginTop: Number,
     margin: String,
-    link: String
+    link: String,
+    altClass: [String, Array]
   },
   computed: {
     style() {
@@ -64,6 +74,19 @@ export default {
     background: white;
     border: 2px solid $namazu;
     color: $namazu;
+  }
+  &--darkhover {
+    &:hover {
+      background: dark($namazu);
+      border: 2px solid dark($namazu);
+      color: $minor-white;
+    }
+  }
+  &--bighover {
+    transition: transform 200ms;
+    &:hover {
+      transform: scale(1.2);
+    }
   }
   &--alt {
     background: none;

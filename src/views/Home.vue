@@ -4,7 +4,11 @@
     <div class="home__stats">
       <span class="home__cl-name">Namazu Wasshoi</span> est une compagnie libre
       en activité depuis février 2020 sur le serveur Moogle.
-      <AppButton :link="'/apply'" :margin="'auto'" :marginTop="'10'"
+      <AppButton
+        :altClass="'darkhover'"
+        :link="'/apply'"
+        :margin="'auto'"
+        :marginTop="'10'"
         >Je postule !</AppButton
       >
     </div>
