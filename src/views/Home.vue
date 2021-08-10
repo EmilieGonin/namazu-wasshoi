@@ -4,6 +4,9 @@
     <div class="home__stats">
       <span class="home__cl-name">Namazu Wasshoi</span> est une compagnie libre
       en activité depuis février 2020 sur le serveur Moogle.
+      <AppButton :link="'/apply'" :margin="'auto'" :marginTop="'10'"
+        >Je postule !</AppButton
+      >
     </div>
     <!--Activities-->
     <div class="home__activities">
@@ -68,12 +71,14 @@
 <script>
 import HomeCard from "@/components/HomeCard.vue";
 import HomeFestival from "@/components/HomeFestival.vue";
+import AppButton from "@/components/AppButton.vue";
 
 export default {
   name: "Home",
   components: {
     HomeCard,
-    HomeFestival
+    HomeFestival,
+    AppButton
   }
 };
 </script>
@@ -84,11 +89,17 @@ export default {
     @include responsive(359) {
       font-size: $font-regular - 1;
     }
-    @include responsive(640) {
-      transform: translateY(-155%);
+    @include responsive(770) {
+      transform: translateY(-150%);
+    }
+    @include responsive(430) {
+      transform: translateY(-145%);
+    }
+    @include responsive(350) {
+      transform: translateY(-127%);
     }
     position: absolute;
-    transform: translateY(-160%);
+    transform: translateY(-110%);
     padding: 20px;
     width: 100%;
     text-align: center;
