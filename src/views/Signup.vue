@@ -22,6 +22,15 @@
         :wait="true"
       ></FormElement>
       <FormElement
+        v-model="form_team"
+        :inputs="teams"
+        :label="'Equipe d\'évent'"
+        :labelSelect="'Sélectionnez une équipe'"
+        :name="'form_team'"
+        :type="'select'"
+        :required="true"
+      ></FormElement>
+      <FormElement
         v-model="form_email"
         :label="'Adresse email'"
         :name="'form_email'"
@@ -52,7 +61,15 @@ export default {
       form_email: "",
       form_password: "",
       form_character_cl: "",
-      form_discord: ""
+      form_discord: "",
+      form_team: "",
+      //temp
+      teams: [
+        { name: "Mog" },
+        { name: "Chocobo" },
+        { name: "Pampa" },
+        { name: "Carbuncle" }
+      ]
     };
   },
   components: {
