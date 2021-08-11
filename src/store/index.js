@@ -222,6 +222,7 @@ export default createStore({
         api.post("applicants/new", form)
         .then(() => {
           commit("REQUEST", "success");
+          commit("MESSAGE", "Merci ! Ta candidature a bien été envoyée.");
           resolve();
         })
         .catch((error) => {
