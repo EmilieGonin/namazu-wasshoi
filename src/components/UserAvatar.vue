@@ -45,7 +45,7 @@ export default {
   mounted() {
     if (!this.avatar && !this.memberAvatar) {
       this.$store.dispatch("getCharacter").then(character => {
-        this.avatar = character.Character.Avatar;
+        this.avatar = character.Avatar;
       });
     }
   },

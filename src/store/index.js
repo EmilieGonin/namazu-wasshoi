@@ -2,7 +2,6 @@ import { createStore } from 'vuex'
 import { api, authHeader, cache, checkCache } from './axios'
 
 const user = JSON.parse(localStorage.getItem("user"));
-const character = JSON.parse(localStorage.getItem("character"));
 const fc = JSON.parse(localStorage.getItem("fc"));
 // localStorage.clear();
 console.log(user);
@@ -15,7 +14,6 @@ export default createStore({
       title: "",
       icon: "",
       user: user ? user : "",
-      character: character ? character.data : "",
       fc: fc ? fc.data : ""
     }
   },
@@ -145,9 +143,9 @@ export default createStore({
         if (!character) {
           api.get("fc/character/" + state.user.user.characterId)
           .then((response) => {
-            commit("SET_CHARACTER", cache("character", response.data.character));
+            cache("character", response.data.character.Character);
             commit("REQUEST", "success");
-            resolve(response.data.character);
+            resolve(response.data.character.Character);
           })
           .catch((e) => {
             commit("REQUEST", "error");
@@ -155,7 +153,6 @@ export default createStore({
             reject();
           });
         } else {
-          commit("SET_CHARACTER", character);
           commit("REQUEST", "success");
           resolve(character.data);
         }
