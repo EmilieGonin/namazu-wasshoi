@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="profile">
     <div class="profile__line"></div>
-    <div class="profile__container">
+    <div class="profile__container" v-if="character">
       <div class="profile__screenshot-container">
         <img class="profile__screenshot" src="@/assets/sample.png" alt="" />
         <UserAvatar
@@ -19,14 +19,35 @@
             'profile__name--fail': isFail
           }"
         >
-          Nom du personnage
+          {{ character.Name }}
         </div>
-        <div class="profile__title">
-          Titre du personnage
+        <div class="profile__title" v-if="character.Title">
+          {{ character.Title }}
+        </div>
+        <div class="profile__infos">
+          <!--Birthday-->
+          <div>
+            <font-awesome-icon
+              :icon="'gift'"
+              fixed-width
+              v-if="user.birthday"
+            />
+            {{ user.birthday }}
+          </div>
+          <!--Discord-->
+          <div>
+            <font-awesome-icon
+              :icon="['fab', 'discord']"
+              fixed-width
+              v-if="user.discord"
+            />
+            {{ user.discord }}
+          </div>
         </div>
         <div class="profile__bio">
           Bio libre du membre
         </div>
+        <AppButton :marginTop="'10'" :iconR="'images'">Galeries</AppButton>
       </div>
     </div>
   </div>
@@ -34,22 +55,34 @@
 </template>
 
 <script>
+import AppButton from "@/components/AppButton.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
 // import WasshoListe from "@/components/WasshoListe.vue";
 
 export default {
   name: "Profile",
+  components: {
+    AppButton,
+    UserAvatar
+    // WasshoListe
+  },
   data() {
     return {
+      character: "",
+      user: "",
       //temp
       isGold: false,
       isLunar: false,
       isFail: false
     };
   },
-  components: {
-    UserAvatar
-    // WasshoListe
+  mounted() {
+    this.$store.dispatch("getCharacter").then(character => {
+      this.character = character;
+    });
+    this.$store.dispatch("getUser", this.$route.params.id).then(user => {
+      this.user = user;
+    });
   }
 };
 </script>
@@ -121,6 +154,10 @@ export default {
     &::after {
       content: " »";
     }
+  }
+  &__infos {
+    @include flex($gap: 10);
+    margin-top: 10px;
   }
   &__bio {
     width: 100%;

@@ -189,12 +189,27 @@ export default createStore({
         api.get("user/" + id)
         .then(response => {
           commit("REQUEST", "success");
-          resolve(response);
+          resolve(response.data);
         })
         .catch(error => {
           commit("REQUEST", "error");
           commit("MESSAGE", error.response.data.error);
           commit("LOGOUT");
+          reject(error.response.data.error);
+        })
+      })
+    },
+    getUser({ commit }, id) {
+      return new Promise((resolve, reject) => {
+        commit("REQUEST", "pending");
+        api.get("user/" + id)
+        .then(response => {
+          commit("REQUEST", "success");
+          resolve(response.data.user);
+        })
+        .catch(error => {
+          commit("REQUEST", "error");
+          commit("MESSAGE", error.response.data.error);
           reject(error.response.data.error);
         })
       })
