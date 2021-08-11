@@ -32,18 +32,18 @@
       ></FormElement>
       <AppButton :iconR="'arrow-right'">Mettre à jour</AppButton>
     </form>
-    <div class="account__heading">
+    <!-- <div class="account__heading">
       <span class="account__title">Modifier la Wassho'Liste</span>
       <div class="account__line"></div>
     </div>
-    <WasshoListe :edit="true"></WasshoListe>
+    <WasshoListe :edit="true"></WasshoListe> -->
   </div>
 </template>
 
 <script>
 import FormElement from "@/components/FormElement.vue";
 import AppButton from "@/components/AppButton.vue";
-import WasshoListe from "@/components/WasshoListe.vue";
+// import WasshoListe from "@/components/WasshoListe.vue";
 
 export default {
   name: "Account",
@@ -56,8 +56,8 @@ export default {
   },
   components: {
     FormElement,
-    AppButton,
-    WasshoListe
+    AppButton
+    // WasshoListe
   },
   props: {
     //

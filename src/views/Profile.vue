@@ -30,12 +30,12 @@
       </div>
     </div>
   </div>
-  <WasshoListe></WasshoListe>
+  <!-- <WasshoListe></WasshoListe> -->
 </template>
 
 <script>
 import UserAvatar from "@/components/UserAvatar.vue";
-import WasshoListe from "@/components/WasshoListe.vue";
+// import WasshoListe from "@/components/WasshoListe.vue";
 
 export default {
   name: "Profile",
@@ -48,8 +48,8 @@ export default {
     };
   },
   components: {
-    UserAvatar,
-    WasshoListe
+    UserAvatar
+    // WasshoListe
   }
 };
 </script>
