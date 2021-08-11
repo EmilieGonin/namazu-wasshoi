@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="members" v-if="status && status != 'pending'">
+  <div class="members" v-if="members">
     <!--Birthdays-->
     <UsersBirthdays></UsersBirthdays>
     <!--Members-->
@@ -22,7 +22,7 @@
       <div class="members__container">
         <div
           class="members__avatar-container"
-          v-for="member in fcMembers"
+          v-for="member in members"
           :key="member.ID"
           @click="redirect(member.Name)"
         >
@@ -66,7 +66,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import UsersBirthdays from "@/components/UsersBirthdays.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
 
@@ -75,6 +74,8 @@ export default {
   data() {
     return {
       currentMember: "",
+      members: "",
+      staffMembers: "",
       //temp
       gold: ["Nexara Dei-ijla", "Rabyte Tsukisagi"],
       lunar: "Nana Rosenbach",
@@ -85,11 +86,11 @@ export default {
     UsersBirthdays,
     UserAvatar
   },
-  computed: {
-    ...mapGetters(["status", "fcMembers", "staffMembers"])
-  },
   mounted() {
-    this.$store.dispatch("setFreeCompany");
+    this.$store.dispatch("setFreeCompany").then(fc => {
+      this.members = fc.fcMembers;
+      this.staffMembers = fc.staffMembers;
+    });
   },
   methods: {
     setCurrentMember(e) {

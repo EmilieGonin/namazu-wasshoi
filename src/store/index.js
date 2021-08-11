@@ -2,7 +2,6 @@ import { createStore } from 'vuex'
 import { api, authHeader, cache, checkCache } from './axios'
 
 const user = JSON.parse(localStorage.getItem("user"));
-const fc = JSON.parse(localStorage.getItem("fc"));
 // localStorage.clear();
 console.log(user);
 
@@ -13,29 +12,13 @@ export default createStore({
       message: "",
       title: "",
       icon: "",
-      user: user ? user.user : "",
-      fc: fc ? fc.data : ""
+      user: user ? user.user : ""
     }
   },
   getters: {
     status(state) { return state.status },
     title(state) { return state.title },
-    icon(state) { return state.icon },
-    fc(state) {
-      if (state.fc) {
-        return state.fc.fc;
-      }
-    },
-    fcMembers(state) {
-      if (state.fc) {
-        return state.fc.fcMembers;
-      }
-    },
-    staffMembers(state) {
-      if (state.fc) {
-        return state.fc.staff;
-      }
-    },
+    icon(state) { return state.icon }
   },
   mutations: {
     REQUEST(state, status) {
@@ -53,12 +36,6 @@ export default createStore({
     SET_PAGE(state, [ title, icon ]) {
       state.title = title;
       state.icon = icon;
-    },
-    SET_FREE_COMPANY(state, fc) {
-      state.fc = fc.data;
-    },
-    SET_CHARACTER(state, character) {
-      state.character = character.data;
     },
     AUTH_SUCCESS(state, user) {
       localStorage.setItem("user", JSON.stringify(user));
@@ -84,9 +61,9 @@ export default createStore({
         if (!fc) {
           api.get("fc")
           .then((response) => {
-            commit("SET_FREE_COMPANY", cache("fc", response.data));
+            cache("fc", response.data);
             commit("REQUEST", "success");
-            resolve();
+            resolve(response.data);
           })
           .catch((e) => {
             console.error(e);
@@ -95,9 +72,8 @@ export default createStore({
             reject();
           });
         } else {
-          commit("SET_FREE_COMPANY", fc);
           commit("REQUEST", "success");
-          resolve();
+          resolve(fc.data);
         }
       })
     },
