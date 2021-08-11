@@ -18,8 +18,8 @@
     <!--User Menu-->
     <div class="nav__user-menu">
       <!--Avatar-->
-      <router-link :to="'/user/' + id">
-        <UserAvatar :altStyle="true" v-if="loggedIn"></UserAvatar>
+      <router-link :to="'/user/' + user.id" v-if="loggedIn">
+        <UserAvatar :altStyle="true"></UserAvatar>
       </router-link>
       <!--Links-->
       <!--if logged in-->
@@ -109,10 +109,18 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import UserAvatar from "@/components/UserAvatar.vue";
 
 export default {
   name: "AppNav",
+  components: {
+    UserAvatar
+  },
+  props: {
+    loggedIn: Boolean,
+    isAdmin: Boolean
+  },
   data() {
     return {
       toggle: false,
@@ -120,17 +128,13 @@ export default {
       id: "1"
     };
   },
-  props: {
-    loggedIn: Boolean,
-    isAdmin: Boolean
+  computed: {
+    ...mapGetters(["user"])
   },
   watch: {
     $route() {
       this.toggle = false;
     }
-  },
-  components: {
-    UserAvatar
   },
   methods: {
     close() {
