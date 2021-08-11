@@ -19,7 +19,7 @@
     <div class="nav__user-menu">
       <!--Avatar-->
       <router-link :to="'/user/' + user.id" v-if="loggedIn">
-        <UserAvatar :altStyle="true"></UserAvatar>
+        <UserAvatar :altStyle="true" v-if="loggedIn"></UserAvatar>
       </router-link>
       <!--Links-->
       <!--if logged in-->
