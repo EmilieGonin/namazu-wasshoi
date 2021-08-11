@@ -129,10 +129,9 @@ export default createStore({
         if (!character) {
           api.get("fc/character/" + state.user.characterId)
           .then((response) => {
-            console.log(response.data);
-            cache("character", response.data);
+            cache("character", response.data.character);
             commit("REQUEST", "success");
-            resolve(response.data);
+            resolve(response.data.character);
           })
           .catch((e) => {
             commit("REQUEST", "error");
