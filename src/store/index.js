@@ -20,8 +20,13 @@ export default createStore({
     status(state) { return state.status },
     title(state) { return state.title },
     icon(state) { return state.icon },
-    user(state) { return state.user },
-    userTeam(state) { return state.user.user.team },
+    user(state) {
+      if (user) {
+        return state.user.user
+      } else {
+        return "";
+      }
+    },
     userId(state) { return state.user.user.id },
     isAdmin(state) {
       if (state.user) {

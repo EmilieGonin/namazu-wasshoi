@@ -9,10 +9,10 @@
         'avatar--alt': altStyle,
         'avatar--nofade': nofade
       },
-      userTeam && !memberAvatar && altStyle
-        ? 'avatar--alt--' + userTeam.toLowerCase()
-        : userTeam && !memberAvatar
-        ? 'avatar--' + userTeam.toLowerCase()
+      user && !memberAvatar && altStyle
+        ? 'avatar--alt--' + user.team.toLowerCase()
+        : user && !memberAvatar
+        ? 'avatar--' + user.team.toLowerCase()
         : ''
     ]"
     :src="memberAvatar ? memberAvatar : avatar"
@@ -71,7 +71,7 @@ export default {
         borderRadius: this.borderRadius
       };
     },
-    ...mapGetters(["userTeam"])
+    ...mapGetters(["user"])
   },
   methods: {
     //temp
