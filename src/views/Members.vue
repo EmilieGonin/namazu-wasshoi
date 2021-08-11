@@ -32,8 +32,7 @@
             :size="'75'"
             :borderRadius="'25%'"
             alt="Avatar"
-            :memberName="member.Name"
-            :memberAvatar="member.Avatar"
+            :member="member"
             @mouseover="setCurrentMember"
             @mouseleave="reset"
           ></UserAvatar>

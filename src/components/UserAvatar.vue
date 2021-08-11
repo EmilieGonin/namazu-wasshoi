@@ -9,17 +9,17 @@
         'avatar--alt': altStyle,
         'avatar--nofade': nofade
       },
-      user && !memberAvatar && altStyle
+      user && !member && altStyle
         ? 'avatar--alt--' + user.team.toLowerCase()
-        : user && !memberAvatar
+        : user && !member
         ? 'avatar--' + user.team.toLowerCase()
         : ''
     ]"
-    :src="memberAvatar ? memberAvatar : avatar"
+    :src="member ? member.Avatar : avatar"
     altStyle=""
     :style="avatarSize"
-    :title="memberName ? memberName : 'Accéder au profil'"
-    v-if="avatar || memberAvatar"
+    :title="member ? member.Name : 'Accéder au profil'"
+    v-if="avatar || member"
   />
   <AppMiniSpinner v-else />
 </template>
@@ -60,8 +60,7 @@ export default {
       type: Boolean,
       default: false
     },
-    memberName: String,
-    memberAvatar: String
+    member: Object
   },
   computed: {
     avatarSize() {
