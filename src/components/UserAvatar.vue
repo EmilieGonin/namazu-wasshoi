@@ -66,7 +66,7 @@ export default {
     ...mapState(["user"])
   },
   mounted() {
-    if (!this.avatar && !this.memberAvatar) {
+    if (!this.avatar && !this.member) {
       this.$store.dispatch("getCharacter").then(character => {
         this.avatar = character.Avatar;
       });
