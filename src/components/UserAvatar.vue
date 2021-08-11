@@ -1,16 +1,23 @@
 <template lang="html">
   <img
     class="avatar"
-    :class="{
-      'avatar--gold': member && grade(member.Name, 'gold'),
-      'avatar--lunar': member && grade(member.Name, 'lunar'),
-      'avatar--fail': member && grade(member.Name, 'fail'),
-      'avatar--alt': altStyle,
-      'avatar--nofade': nofade
-    }"
+    :class="[
+      {
+        'avatar--gold': member && grade(member.Name, 'gold'),
+        'avatar--lunar': member && grade(member.Name, 'lunar'),
+        'avatar--fail': member && grade(member.Name, 'fail'),
+        'avatar--alt': altStyle,
+        'avatar--nofade': nofade
+      },
+      userTeam && !memberAvatar && altStyle
+        ? 'avatar--alt--' + userTeam.toLowerCase()
+        : userTeam && !memberAvatar
+        ? 'avatar--' + userTeam.toLowerCase()
+        : ''
+    ]"
     :src="memberAvatar ? memberAvatar : avatar"
     altStyle=""
-    :style="style"
+    :style="avatarSize"
     :title="memberName ? memberName : 'Accéder au profil'"
     v-if="avatar || memberAvatar"
   />
@@ -18,6 +25,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import AppMiniSpinner from "@/components/AppMiniSpinner.vue";
 
 export default {
@@ -56,13 +64,14 @@ export default {
     memberAvatar: String
   },
   computed: {
-    style() {
+    avatarSize() {
       return {
         width: this.size + "px",
         height: this.size + "px",
         borderRadius: this.borderRadius
       };
-    }
+    },
+    ...mapGetters(["userTeam"])
   },
   methods: {
     //temp
@@ -116,6 +125,15 @@ export default {
   }
   &--nofade {
     opacity: 1;
+  }
+
+  @each $team, $color in $teams {
+    &--#{$team} {
+      border: 3px solid $color;
+    }
+    &--alt--#{$team} {
+      border: 2px solid $color;
+    }
   }
 }
 </style>

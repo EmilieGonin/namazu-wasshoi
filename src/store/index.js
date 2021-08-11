@@ -21,6 +21,7 @@ export default createStore({
     title(state) { return state.title },
     icon(state) { return state.icon },
     user(state) { return state.user },
+    userTeam(state) { return state.user.user.team },
     userId(state) { return state.user.user.id },
     isAdmin(state) {
       if (state.user) {
