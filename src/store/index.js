@@ -2,6 +2,8 @@ import { createStore } from 'vuex'
 import { api, authHeader, cache, checkCache } from './axios'
 
 const user = JSON.parse(localStorage.getItem("user"));
+const character = JSON.parse(localStorage.getItem("character"));
+const fc = JSON.parse(localStorage.getItem("fc"));
 // localStorage.clear();
 console.log(user);
 
@@ -13,7 +15,8 @@ export default createStore({
       title: "",
       icon: "",
       user: user ? user : "",
-      fc: ""
+      character: character ? character.data : "",
+      fc: fc ? fc.data : ""
     }
   },
   getters: {
@@ -23,8 +26,6 @@ export default createStore({
     user(state) {
       if (user) {
         return state.user.user
-      } else {
-        return "";
       }
     },
     userId(state) { return state.user.user.id },
@@ -37,17 +38,17 @@ export default createStore({
     },
     fc(state) {
       if (state.fc) {
-        return state.fc.data.fc;
+        return state.fc.fc;
       }
     },
     fcMembers(state) {
       if (state.fc) {
-        return state.fc.data.fcMembers;
+        return state.fc.fcMembers;
       }
     },
     staffMembers(state) {
       if (state.fc) {
-        return state.fc.data.staff;
+        return state.fc.staff;
       }
     },
     loggedIn(state) { return !!state.user }
@@ -69,8 +70,11 @@ export default createStore({
       state.title = title;
       state.icon = icon;
     },
-    SET_FREE_COMPANY(state, data) {
-      state.fc = data;
+    SET_FREE_COMPANY(state, fc) {
+      state.fc = fc.data;
+    },
+    SET_CHARACTER(state, character) {
+      state.character = character.data;
     },
     AUTH_SUCCESS(state, user) {
       localStorage.setItem("user", JSON.stringify(user));
@@ -141,7 +145,7 @@ export default createStore({
         if (!character) {
           api.get("fc/character/" + state.user.user.characterId)
           .then((response) => {
-            cache("character", response.data.character);
+            commit("SET_CHARACTER", cache("character", response.data.character));
             commit("REQUEST", "success");
             resolve(response.data.character);
           })
@@ -151,6 +155,7 @@ export default createStore({
             reject();
           });
         } else {
+          commit("SET_CHARACTER", character);
           commit("REQUEST", "success");
           resolve(character.data);
         }
