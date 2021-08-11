@@ -13,7 +13,7 @@ export default createStore({
       message: "",
       title: "",
       icon: "",
-      user: user ? user : "",
+      user: user ? user.user : "",
       fc: fc ? fc.data : ""
     }
   },
@@ -21,19 +21,6 @@ export default createStore({
     status(state) { return state.status },
     title(state) { return state.title },
     icon(state) { return state.icon },
-    user(state) {
-      if (user) {
-        return state.user.user
-      }
-    },
-    userId(state) { return state.user.user.id },
-    isAdmin(state) {
-      if (state.user) {
-        return state.user.user.isAdmin;
-      } else {
-        return false;
-      }
-    },
     fc(state) {
       if (state.fc) {
         return state.fc.fc;
@@ -49,7 +36,6 @@ export default createStore({
         return state.fc.staff;
       }
     },
-    loggedIn(state) { return !!state.user }
   },
   mutations: {
     REQUEST(state, status) {
@@ -77,7 +63,7 @@ export default createStore({
     AUTH_SUCCESS(state, user) {
       localStorage.setItem("user", JSON.stringify(user));
       authHeader(user);
-      state.user = user;
+      state.user = user.user;
       state.status = "success";
     },
     LOGOUT(state) {
@@ -141,11 +127,12 @@ export default createStore({
         const character = checkCache("character");
 
         if (!character) {
-          api.get("fc/character/" + state.user.user.characterId)
+          api.get("fc/character/" + state.user.characterId)
           .then((response) => {
-            cache("character", response.data.character.Character);
+            console.log(response.data);
+            cache("character", response.data);
             commit("REQUEST", "success");
-            resolve(response.data.character.Character);
+            resolve(response.data);
           })
           .catch((e) => {
             commit("REQUEST", "error");

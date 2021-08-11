@@ -25,29 +25,13 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 import AppMiniSpinner from "@/components/AppMiniSpinner.vue";
 
 export default {
   name: "UserAvatar",
   components: {
     AppMiniSpinner
-  },
-  data() {
-    return {
-      avatar: "",
-      //temp
-      gold: ["Nexara Dei-ijla", "Rabyte Tsukisagi"],
-      lunar: "Nana Rosenbach",
-      fail: "Enael Chubby'fox"
-    };
-  },
-  mounted() {
-    if (!this.avatar && !this.memberAvatar) {
-      this.$store.dispatch("getCharacter").then(character => {
-        this.avatar = character.Avatar;
-      });
-    }
   },
   props: {
     size: [String, Number],
@@ -62,6 +46,15 @@ export default {
     },
     member: Object
   },
+  data() {
+    return {
+      avatar: "",
+      //temp
+      gold: ["Nexara Dei-ijla", "Rabyte Tsukisagi"],
+      lunar: "Nana Rosenbach",
+      fail: "Enael Chubby'fox"
+    };
+  },
   computed: {
     avatarSize() {
       return {
@@ -70,7 +63,14 @@ export default {
         borderRadius: this.borderRadius
       };
     },
-    ...mapGetters(["user"])
+    ...mapState(["user"])
+  },
+  mounted() {
+    if (!this.avatar && !this.memberAvatar) {
+      this.$store.dispatch("getCharacter").then(character => {
+        this.avatar = character.Avatar;
+      });
+    }
   },
   methods: {
     //temp

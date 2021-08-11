@@ -152,7 +152,7 @@ router.beforeEach((to, from, next) => {
 
     } else {
       //Check if user is admin
-      const isAdmin = store.getters.isAdmin;
+      const isAdmin = store.state.user.isAdmin;
 
       if (!isAdmin) {
         store.dispatch("error", "Cette page est toujours en construction. :(");
@@ -171,12 +171,12 @@ router.beforeEach((to, from, next) => {
     }
     else {
       // Check if user is still registered
-      const userId = store.getters.userId;
+      const userId = store.state.user.id;
       store.dispatch("checkUser", userId)
       .then(() => {
         if (adminRequired) {
           //Check if user is admin if page is restricted
-          const isAdmin = store.getters.isAdmin;
+          const isAdmin = store.state.user.isAdmin;
 
           if (!isAdmin) {
             const error = "Vous n'avez pas la permission d'accéder à cette page."

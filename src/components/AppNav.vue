@@ -18,28 +18,28 @@
     <!--User Menu-->
     <div class="nav__user-menu">
       <!--Avatar-->
-      <router-link :to="'/user/' + user.id" v-if="loggedIn">
-        <UserAvatar :altStyle="true" v-if="loggedIn"></UserAvatar>
+      <router-link :to="'/user/' + user.id" v-if="user">
+        <UserAvatar :altStyle="true" v-if="user"></UserAvatar>
       </router-link>
       <!--Links-->
       <!--if logged in-->
-      <router-link class="nav__menu-icon" to="/account" v-if="loggedIn">
+      <router-link class="nav__menu-icon" to="/account" v-if="user">
         <font-awesome-icon icon="cog" fixed-width />
       </router-link>
       <router-link
         class="nav__menu-icon"
         to="/"
-        v-if="loggedIn"
+        v-if="user"
         @click.prevent="logout"
       >
         <font-awesome-icon icon="sign-out-alt" fixed-width />
       </router-link>
       <!--else-->
-      <router-link class="nav__menu-icon" to="/login" v-if="!loggedIn">
+      <router-link class="nav__menu-icon" to="/login" v-if="!user">
         <font-awesome-icon icon="sign-in-alt" fixed-width />
         <span class="nav__menu-icon__text"> Se connecter</span>
       </router-link>
-      <router-link class="nav__menu-icon" to="/signup" v-if="!loggedIn">
+      <router-link class="nav__menu-icon" to="/signup" v-if="!user">
         <font-awesome-icon icon="user-plus" fixed-width />
       </router-link>
     </div>
@@ -48,11 +48,11 @@
   <transition name="fade">
     <div class="nav__submenu" v-show="toggle">
       <!--Admin Panel-->
-      <router-link class="nav__submenu-link" to="/admin" v-if="isAdmin">
+      <router-link class="nav__submenu-link" to="/admin" v-if="user.isAdmin">
         <font-awesome-icon icon="user-crown" fixed-width /> Panel administrateur
       </router-link>
       <!--Separation if admin-->
-      <div class="nav__separation" v-if="isAdmin"></div>
+      <div class="nav__separation" v-if="user.isAdmin"></div>
       <!--Public Links-->
       <router-link class="nav__submenu-link" to="/">
         <font-awesome-icon icon="home-lg-alt" fixed-width /> Accueil
@@ -64,43 +64,39 @@
         <font-awesome-icon icon="stars" fixed-width /> Equipes d'évent
       </router-link>
       <!--only if not logged in-->
-      <router-link class="nav__submenu-link" to="/apply" v-if="!loggedIn">
+      <router-link class="nav__submenu-link" to="/apply" v-if="!user">
         <font-awesome-icon icon="user-check" fixed-width /> Postuler
       </router-link>
       <!--Separation-->
       <div class="nav__separation"></div>
       <!--Activities Links if logged in-->
-      <router-link class="nav__submenu-link" to="/planning" v-if="loggedIn">
+      <router-link class="nav__submenu-link" to="/planning" v-if="user">
         <font-awesome-icon icon="calendar-week" fixed-width /> Planning
       </router-link>
-      <router-link
-        class="nav__submenu-link"
-        to="/festival-gyokoso"
-        v-if="loggedIn"
-      >
+      <router-link class="nav__submenu-link" to="/festival-gyokoso" v-if="user">
         <font-awesome-icon icon="camera" fixed-width /> Festival Gyôkoso
       </router-link>
-      <router-link class="nav__submenu-link" to="/galleries" v-if="loggedIn">
+      <router-link class="nav__submenu-link" to="/galleries" v-if="user">
         <font-awesome-icon icon="images" fixed-width /> Galeries
       </router-link>
       <!--Separation-->
-      <div class="nav__separation" v-if="loggedIn"></div>
+      <div class="nav__separation" v-if="user"></div>
       <!--Account Pages-->
       <!--if logged  in-->
-      <router-link class="nav__submenu-link" :to="'/user/' + 1" v-if="loggedIn">
+      <router-link class="nav__submenu-link" :to="'/user/' + 1" v-if="user">
         <font-awesome-icon icon="user" fixed-width /> Profil utilisateur
       </router-link>
-      <router-link class="nav__submenu-link" to="/account" v-if="loggedIn">
+      <router-link class="nav__submenu-link" to="/account" v-if="user">
         <font-awesome-icon icon="cog" fixed-width /> Paramètres du compte
       </router-link>
-      <router-link class="nav__submenu-link" :to="'/'" v-if="loggedIn">
+      <router-link class="nav__submenu-link" :to="'/'" v-if="user">
         <font-awesome-icon icon="sign-out-alt" fixed-width /> Se déconnecter
       </router-link>
       <!--else-->
-      <router-link class="nav__submenu-link" to="/login" v-if="!loggedIn">
+      <router-link class="nav__submenu-link" to="/login" v-if="!user">
         <font-awesome-icon icon="sign-in-alt" fixed-width /> Se connecter
       </router-link>
-      <router-link class="nav__submenu-link" to="/signup" v-if="!loggedIn">
+      <router-link class="nav__submenu-link" to="/signup" v-if="!user">
         <font-awesome-icon icon="user-plus" fixed-width /> S'inscrire
       </router-link>
     </div>
@@ -109,17 +105,13 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 import UserAvatar from "@/components/UserAvatar.vue";
 
 export default {
   name: "AppNav",
   components: {
     UserAvatar
-  },
-  props: {
-    loggedIn: Boolean,
-    isAdmin: Boolean
   },
   data() {
     return {
@@ -129,7 +121,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["user"])
+    ...mapState(["user"])
   },
   watch: {
     $route() {
