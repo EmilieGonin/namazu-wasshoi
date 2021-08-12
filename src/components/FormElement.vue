@@ -105,10 +105,9 @@
         :required="required"
         v-if="element == 'input'"
         @input="
-          $emit('update:modelValue', $event.target.value), setIcon($event)
-        "
-        @keyup="
-          name.includes('character') ? searchCharacter($event.target) : ''
+          $emit('update:modelValue', $event.target.value),
+            setIcon($event),
+            name.includes('character') ? searchCharacter($event.target) : ''
         "
       />
       <!--Textarea-->
