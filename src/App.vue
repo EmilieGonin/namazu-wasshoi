@@ -1,4 +1,9 @@
 <template>
+  <metainfo>
+    <template v-slot:title="{ content }">
+      {{ content ? `${content} | Namazu Wasshoi` : `Namazu Wasshoi` }}
+    </template>
+  </metainfo>
   <AppLoading :loading="status == 'pending'" />
   <AppMessages :status="status" :message="message" />
   <AppNav />
@@ -8,6 +13,7 @@
 </template>
 
 <script>
+import { useMeta } from "vue-meta";
 import { mapGetters, mapState } from "vuex";
 import AppLoading from "@/components/AppLoading.vue";
 import AppMessages from "@/components/AppMessages.vue";
@@ -22,6 +28,12 @@ export default {
     AppHeading,
     AppNav,
     AppFooter
+  },
+  setup() {
+    useMeta({
+      title: "",
+      htmlAttrs: { lang: "fr", amp: true }
+    });
   },
   computed: {
     ...mapGetters(["status", "title", "icon"]),
