@@ -14,16 +14,16 @@
         <router-link to="/signup">Inscrivez-vous !</router-link>
       </div>
       <FormElement
-        v-model="email"
+        v-model="form_email"
         :label="'Adresse email'"
-        :name="'email'"
+        :name="'form_email'"
         :type="'email'"
         :required="true"
       ></FormElement>
       <FormElement
-        v-model="password"
+        v-model="form_password"
         :label="'Mot de passe'"
-        :name="'password'"
+        :name="'form_password'"
         :type="'password'"
         :required="true"
       ></FormElement>
@@ -34,6 +34,7 @@
 
 <script>
 import { useMeta } from "vue-meta";
+import { formValidate } from "@/mixins.js";
 import AppFullscreen from "@/components/AppFullscreen.vue";
 import AppButton from "@/components/AppButton.vue";
 import FormElement from "@/components/FormElement.vue";
@@ -47,8 +48,8 @@ export default {
   },
   data() {
     return {
-      email: "",
-      password: ""
+      form_email: "",
+      form_password: ""
     };
   },
   components: {
@@ -56,23 +57,13 @@ export default {
     AppButton,
     FormElement
   },
+  mixins: [formValidate],
   methods: {
     submit() {
       try {
-        if (!this.email || !this.password) {
-          const error =
-            "Veuillez renseigner tous les champs requis du formulaire.";
-          this.$store.dispatch("error", error);
-          throw error;
-        }
-
-        const user = {
-          email: this.email,
-          password: this.password
-        };
-
+        const form = this.formValidate();
         this.$store
-          .dispatch("login", user)
+          .dispatch("login", form)
           .then(() => this.$router.push("/"))
           .catch(e => {
             console.error(e);

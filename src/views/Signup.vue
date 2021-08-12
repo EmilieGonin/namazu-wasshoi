@@ -56,6 +56,7 @@
 
 <script>
 import { useMeta } from "vue-meta";
+import { formValidate } from "@/mixins.js";
 import AppFullscreen from "@/components/AppFullscreen.vue";
 import AppButton from "@/components/AppButton.vue";
 import FormElement from "@/components/FormElement.vue";
@@ -88,27 +89,11 @@ export default {
       ]
     };
   },
+  mixins: [formValidate],
   methods: {
     submit() {
       try {
-        const form = {};
-        const datas = JSON.parse(JSON.stringify(this.$data));
-
-        for (const data of Object.entries(datas)) {
-          if (data[0].startsWith("form_") || data[0].startsWith("formo_")) {
-            const name = data[0].split("_")[1];
-            const value = data[1];
-            form[name] = value;
-
-            if (!data[0].startsWith("formo_") && !value) {
-              const error =
-                "Veuillez renseigner tous les champs requis du formulaire.";
-              this.$store.dispatch("error", error);
-              throw error;
-            }
-          }
-        }
-
+        const form = this.formValidate();
         const character = this.form_character_cl.split(" ").join("+");
         const cl = true;
         const silent = false;

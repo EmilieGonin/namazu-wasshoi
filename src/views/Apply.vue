@@ -258,6 +258,7 @@
 
 <script>
 import { useMeta } from "vue-meta";
+import { formValidate } from "@/mixins.js";
 import FormElement from "@/components/FormElement.vue";
 import AppButton from "@/components/AppButton.vue";
 
@@ -328,6 +329,7 @@ export default {
       this.recruiting = response;
     });
   },
+  mixins: [formValidate],
   methods: {
     scroll(ref) {
       const to = this.$refs[ref];
@@ -351,24 +353,7 @@ export default {
     },
     submit() {
       try {
-        const form = {};
-        const datas = JSON.parse(JSON.stringify(this.$data));
-
-        for (const data of Object.entries(datas)) {
-          if (data[0].startsWith("form_") || data[0].startsWith("formo_")) {
-            const name = data[0].split("_")[1];
-            const value = data[1];
-            form[name] = value;
-
-            if (!data[0].startsWith("formo_") && !value) {
-              const error =
-                "Veuillez renseigner tous les champs requis du formulaire.";
-              this.$store.dispatch("error", error);
-              throw error;
-            }
-          }
-        }
-
+        const form = this.formValidate();
         const character = this.form_character.split(" ").join("+");
         const cl = false;
         const silent = false;
@@ -379,16 +364,11 @@ export default {
             form.character = character.Name;
             form.characterId = character.ID;
 
-            this.$store
-              .dispatch("apply", form)
-              .then(() => {
-                //
-              })
-              .catch(() => {
-                console.error(
-                  "Une erreur est survenue pendant l'envoi du formulaire."
-                );
-              });
+            this.$store.dispatch("apply", form).catch(() => {
+              console.error(
+                "Une erreur est survenue pendant l'envoi du formulaire."
+              );
+            });
           })
           .catch(() => {
             console.error("Personnage non trouvé.");
