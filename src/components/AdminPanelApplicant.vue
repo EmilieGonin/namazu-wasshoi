@@ -6,6 +6,12 @@
         <div class="applicant__title" @click="redirect(applicant.characterId)">
           {{ applicant.character }}
         </div>
+        <!--Team-->
+        <div>
+          <strong :class="applicant.team.toLowerCase()">
+            {{ applicant.team }}
+          </strong>
+        </div>
         <!--Name-->
         <div v-if="applicant.name">
           <font-awesome-icon :icon="'user'" fixed-width />
