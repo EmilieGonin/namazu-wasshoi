@@ -5,6 +5,7 @@
     :class="{ 'form__field--large': large }"
     v-if="type == 'checkbox' || type == 'radio' || type == 'select'"
   >
+    <div class="form__required" v-if="required">*</div>
     <!--Field Label-->
     <label class="form__label form__label--only" :for="name" v-if="label">
       {{ label }}
@@ -97,48 +98,45 @@
   <!--Other Fields-->
   <div class="form__field" :class="{ 'form__field--large': large }" v-else>
     <!--Input-->
-    <div class="form__input-container">
-      <input
-        :value="modelValue"
-        :id="name"
-        :type="type"
-        :required="required"
-        v-if="element == 'input'"
-        @input="
-          $emit('update:modelValue', $event.target.value),
-            setIcon($event),
-            name.includes('character') ? searchCharacter($event.target) : ''
-        "
-      />
-      <!--Textarea-->
-      <textarea
-        :value="modelValue"
-        :id="name"
-        :required="required"
-        rows="8"
-        cols="80"
-        v-if="element == 'text'"
-        @input="
-          $emit('update:modelValue', $event.target.value), setIcon($event)
-        "
-      ></textarea>
-      <!--Label-->
-      <label class="form__label" :for="name">
-        {{ label }}
-      </label>
-      <!--Input Icon-->
-      <font-awesome-icon
-        class="form__icon"
-        :class="{
-          'form__icon--valid': status == 'valid',
-          'form__icon--invalid': status == 'invalid',
-          'fa-spin': icon == 'spinner-third'
-        }"
-        v-if="icon"
-        :icon="[iconPre, icon]"
-        fixed-width
-      />
-    </div>
+    <div class="form__required" v-if="required">*</div>
+    <!--Label-->
+    <label class="form__label" :for="name">
+      {{ label }}
+    </label>
+    <input
+      :value="modelValue"
+      :id="name"
+      :type="type"
+      :required="required"
+      v-if="element == 'input'"
+      @input="
+        $emit('update:modelValue', $event.target.value),
+          setIcon($event),
+          name.includes('character') ? searchCharacter($event.target) : ''
+      "
+    />
+    <!--Textarea-->
+    <textarea
+      :value="modelValue"
+      :id="name"
+      :required="required"
+      rows="8"
+      cols="80"
+      v-if="element == 'text'"
+      @input="$emit('update:modelValue', $event.target.value), setIcon($event)"
+    ></textarea>
+    <!--Input Icon-->
+    <font-awesome-icon
+      class="form__icon"
+      :class="{
+        'form__icon--valid': status == 'valid',
+        'form__icon--invalid': status == 'invalid',
+        'fa-spin': icon == 'spinner-third'
+      }"
+      v-if="icon"
+      :icon="[iconPre, icon]"
+      fixed-width
+    />
   </div>
 </template>
 
@@ -288,6 +286,7 @@ export default {
   }
   &__field {
     @include flex($direction: column);
+    position: relative;
     width: 80%;
     max-width: 320px;
     &--large {
@@ -301,11 +300,6 @@ export default {
     width: 80%;
     height: 1px;
     max-width: 320px;
-  }
-  &__input-container {
-    @include flex($direction: column-reverse);
-    position: relative;
-    width: 100%;
   }
   &__separator {
     height: 10px;
@@ -372,6 +366,12 @@ export default {
   &__option {
     color: black;
   }
+  &__required {
+    position: absolute;
+    top: 27px;
+    right: -10px;
+    color: $namazu;
+  }
 
   //Form elements
   input,
@@ -400,15 +400,6 @@ export default {
     margin: 0 5px 0 15px;
     min-height: auto;
     width: auto;
-  }
-  input:required + label::after,
-  textarea:required + label::after {
-    content: " *";
-    position: absolute;
-    top: 27px;
-    right: -10px;
-    // right: 0;
-    color: $namazu;
   }
 }
 </style>
