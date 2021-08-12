@@ -9,9 +9,9 @@
         'avatar--alt': altStyle,
         'avatar--nofade': nofade
       },
-      user && !member && altStyle
+      user.team && !member && altStyle
         ? 'avatar--alt--' + user.team.toLowerCase()
-        : user && !member
+        : user.team && !member
         ? 'avatar--' + user.team.toLowerCase()
         : ''
     ]"
