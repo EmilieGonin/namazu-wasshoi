@@ -268,6 +268,13 @@ export default {
     font-size: 35px;
     line-height: 30px;
   }
+  &__text {
+    text-align: justify;
+    width: 100%;
+    max-width: 620px;
+    padding: 5px;
+    margin-bottom: 0;
+  }
   &__icon {
     position: absolute;
     right: 5px;

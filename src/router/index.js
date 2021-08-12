@@ -136,7 +136,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   //redirect if not logged in or admin
   const publicPages = ["/", "/login", "/signup", "/members", "/apply", "/teams"];
-  const ucPages = ["/teams", "/planning", "/galleries"];
+  const ucPages = ["/teams", "/planning", "/galleries", "/rosters"];
   const adminPages = ["/admin"];
   const authRequired = !publicPages.includes(to.path);
   const adminRequired = adminPages.includes(to.path);

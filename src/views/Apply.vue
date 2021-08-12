@@ -9,7 +9,7 @@
       <span v-if="recruiting">
         Le recrutement est actuellement ouvert. Nous sommes à la recherche de
         nouveaux Namazu de niveau 80, actifs en soirée entre 20h et minuit de
-        préférence.
+        préférence !
       </span>
       <span v-else>
         Le recrutement est actuellement fermé. Toutefois, nous continuons
@@ -39,6 +39,14 @@
           À propos de toi
         </div>
         Nous souhaiterions en savoir plus sur toi !
+        <p class="form__text">
+          Nous voulons nous assurer que Namazu Wasshoi est bien la CL parfaite
+          pour toi ! Sache que nos sorties hebdomadaires ont généralement lieu
+          le soir entre 21h et 23h et plus rarement l'après-midi entre 16h et
+          18h. Nos plus grands évents de CL ayant généralement lieu le vendredi
+          soir, c'est très important pour nous de connaîtres tes disponibilités
+          !
+        </p>
       </div>
       <div class="form__panel">
         <!--Name-->
@@ -97,6 +105,14 @@
           Ton rapport au jeu
         </div>
         Que fais-tu pendant tes sessions de jeu ?
+        <p class="form__text">
+          Le contenu de nos sorties sont assez variées : cartes aux trésors,
+          clear et farm d'anciens ou nouveaux contenus, elles pourront autant
+          convenir aux joueurs débutants qu'aux joueurs expérimentés ! Pour
+          pouvoir nous rejoindre, il vaut mieux que tu sois au niveau 80.
+          Toutefois, certaines de nos sorties peuvent également convenir aux
+          joueurs de niveau 70 ou plus !
+        </p>
       </div>
       <div class="form__panel">
         <!--Character-->
@@ -173,6 +189,16 @@
           Ton expérience à haut niveau
         </div>
         Nous aimerions en savoir plus sur le contenu que tu as fait !
+        <p class="form__text">
+          Au total, nous possédons trois rosters pour le contenu sadique :
+          Pleine Lune, Nouvelle Lune et Croissant de Lune. Contrairement aux
+          deux autres, Pleine Lune possède des horaires en journée.
+          L'intégration d'un roster est facultative - si tu souhaites en
+          rejoindre un, tu peux consulter les compositions !
+          <router-link :to="'/rosters'"
+            ><strong>En savoir plus</strong> </router-link
+          >.
+        </p>
       </div>
       <!--Exp-->
       <FormElement
@@ -201,6 +227,17 @@
           Choisis ton équipe
         </div>
         C'est le moment de faire un choix crucial !
+        <p class="form__text">
+          Les équipes d'évent sont au centre de nos activités ! Lors de ton
+          intégration dans la CL, tu seras parrainé par l'officier assigné à ton
+          équipe. Chaque équipe possède un slogan ainsi qu'un salon privé sur
+          notre Discord. Participe et remporte la première place à nos évents
+          pour faire gagner des points à ton équipe et remporter la WasshoCup
+          trimestrielle !
+          <router-link :to="'/teams'"
+            ><strong>En savoir plus</strong> </router-link
+          >.
+        </p>
       </div>
       <FormElement
         v-model="form_team"
@@ -212,7 +249,7 @@
         :teamsLabel="true"
         @check="handleCheck"
       ></FormElement>
-      <AppButton :iconR="'arrow-right'" @click="submit">
+      <AppButton :marginTop="15" :iconR="'arrow-right'" @click="submit">
         Postuler
       </AppButton>
     </form>
