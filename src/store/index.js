@@ -161,7 +161,7 @@ export default createStore({
     },
     checkUser({ commit }, id) {
       return new Promise((resolve, reject) => {
-        commit("REQUEST", "pending");
+        // commit("REQUEST", "pending");
         api.get("user/" + id)
         .then(response => {
           commit("REQUEST", "success");
@@ -208,7 +208,7 @@ export default createStore({
     },
     getApplicants({ commit }) {
       return new Promise((resolve, reject) => {
-        commit("REQUEST", "pending");
+        // commit("REQUEST", "pending");
         api.get("applicants/")
         .then((response) => {
           commit("REQUEST", "success");
