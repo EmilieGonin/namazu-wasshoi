@@ -1,6 +1,13 @@
 <template lang="html">
   <div class="admin">
-    <div v-if="applicants">
+    <div class="admin__menu">
+      <AppButton @click="[getApplicants(), (currentView = 'applicants')]"
+        >Candidatures</AppButton
+      >
+      <AppButton @click="currentView = 'members'">Membres</AppButton>
+      <AppButton @click="currentView = 'festival'">Festival Gyôkoso</AppButton>
+    </div>
+    <div v-if="currentView == 'applicants'">
       <AdminPanelApplicant
         v-for="applicant in applicants"
         :key="applicant.id"
@@ -23,17 +30,18 @@ export default {
   },
   data() {
     return {
-      applicants: []
+      applicants: "",
+      currentView: ""
     };
-  },
-  mounted() {
-    this.$store.dispatch("getApplicants").then(applicants => {
-      this.applicants = applicants;
-    });
   },
   methods: {
     clear() {
       localStorage.clear();
+    },
+    getApplicants() {
+      this.$store.dispatch("getApplicants").then(applicants => {
+        this.applicants = applicants;
+      });
     }
   }
 };
@@ -41,6 +49,11 @@ export default {
 
 <style lang="scss" scoped>
 .admin {
+  &__menu {
+    @include flex($gap: 10);
+    flex-wrap: wrap;
+    margin: 10px;
+  }
   &__button {
     position: fixed !important;
     bottom: 0;
