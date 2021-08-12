@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="members" v-if="members">
-    <!--Members-->
-    <div class="members__members-pannel">
+    <!--Members Pannel-->
+    <div class="members__panel">
       <!--Current Selected Member Name-->
       <div
         class="members__name"
@@ -43,20 +43,20 @@
           />
         </div>
       </div>
-      <!--Legend-->
-      <div class="members__legend-container">
-        <div class="members__legend">
-          <div class="members__line members__line--gold"></div>
-          <span>Namazu dorés</span>
-        </div>
-        <div class="members__legend">
-          <div class="members__line members__line--lunar"></div>
-          <span>Namazu lunaire</span>
-        </div>
-        <div class="members__legend">
-          <div class="members__line members__line--fail"></div>
-          <span>Namazu espiègle</span>
-        </div>
+    </div>
+    <!--Legend-->
+    <div class="members__legend-container">
+      <div class="members__legend">
+        <div class="members__line members__line--gold"></div>
+        <span>Namazu dorés</span>
+      </div>
+      <div class="members__legend">
+        <div class="members__line members__line--lunar"></div>
+        <span>Namazu lunaire</span>
+      </div>
+      <div class="members__legend">
+        <div class="members__line members__line--fail"></div>
+        <span>Namazu espiègle</span>
       </div>
     </div>
   </div>
@@ -129,14 +129,13 @@ export default {
 
 <style lang="scss" scoped>
 .members {
-  @include flex($align: stretch);
+  @include flex($justify: space-between, $direction: column);
   width: 100%;
-  max-width: 800px;
-  margin: auto;
-  &__members-pannel {
-    @include flex($justify: space-between, $direction: column);
+  &__panel {
     width: 100%;
-    margin: 20px auto 0 auto;
+    max-width: 800px;
+    margin: auto;
+    margin-top: 20px;
   }
   &__name {
     @include responsive(900) {
@@ -146,6 +145,7 @@ export default {
     @include font-relief($main-black);
     margin-bottom: 10px;
     height: 69px;
+    text-align: center;
     &--empty {
       @include font-relief(dark($grey));
     }
@@ -166,7 +166,7 @@ export default {
     @include flex($gap: 5);
     position: relative;
     flex-wrap: wrap;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
   }
   &__avatar-container {
     position: relative;
