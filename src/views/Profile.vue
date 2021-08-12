@@ -104,6 +104,9 @@ export default {
   position: relative;
   width: 100%;
   &__container {
+    @include responsive(375) {
+      margin: 0;
+    }
     @include flex($gap: 10, $align: stretch);
     flex-wrap: wrap;
     width: 100%;
@@ -117,6 +120,9 @@ export default {
     background: $grey;
   }
   &__screenshot-container {
+    @include responsive(375) {
+      margin: 0;
+    }
     position: relative;
     width: 100%;
     max-width: 380px;
@@ -146,6 +152,9 @@ export default {
     padding: 20px;
   }
   &__name {
+    @include responsive(420) {
+      font-size: 35px;
+    }
     @include cursive(50);
     @include font-relief($main-black);
     &--gold {
