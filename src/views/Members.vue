@@ -1,7 +1,5 @@
 <template lang="html">
   <div class="members" v-if="members">
-    <!--Birthdays-->
-    <UsersBirthdays></UsersBirthdays>
     <!--Members-->
     <div class="members__members-pannel">
       <!--Current Selected Member Name-->
@@ -67,7 +65,6 @@
 
 <script>
 import { useMeta } from "vue-meta";
-import UsersBirthdays from "@/components/UsersBirthdays.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
 
 export default {
@@ -89,7 +86,6 @@ export default {
     };
   },
   components: {
-    UsersBirthdays,
     UserAvatar
   },
   mounted() {
@@ -135,7 +131,7 @@ export default {
 .members {
   @include flex($align: stretch);
   width: 100%;
-  max-width: 1000px;
+  max-width: 800px;
   margin: auto;
   &__members-pannel {
     @include flex($justify: space-between, $direction: column);
@@ -170,7 +166,7 @@ export default {
     @include flex($gap: 5);
     position: relative;
     flex-wrap: wrap;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
   }
   &__avatar-container {
     position: relative;
