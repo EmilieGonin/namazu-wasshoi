@@ -332,7 +332,10 @@ export default {
     scroll(ref) {
       const to = this.$refs[ref];
       const top = to.offsetTop;
-      window.scrollTo(0, top - 10);
+      window.scrollTo({
+        top: top - 10,
+        behavior: "smooth"
+      });
     },
     handleCheck(e) {
       const name = e.name;
@@ -447,9 +450,6 @@ export default {
     object-fit: cover;
   }
   &__form {
-    @include responsive(930) {
-      transform: translateY(60px);
-    }
     @include flex($justify: space-evenly);
     width: 100%;
     max-width: 1000px;

@@ -272,7 +272,7 @@ export default {
     text-align: justify;
     width: 100%;
     max-width: 620px;
-    padding: 5px;
+    padding: 5px 15px;
     margin-bottom: 0;
   }
   &__icon {
