@@ -1,6 +1,11 @@
 <template lang="html">
   <AppFullscreen>
-    <form class="form" @submit.prevent="submit" method="post">
+    <form
+      class="form"
+      @submit.prevent="submit"
+      @keyup.enter="submit"
+      method="post"
+    >
       <div class="form__heading">
         <div class="form__title">
           Bienvenue parmi nous !
