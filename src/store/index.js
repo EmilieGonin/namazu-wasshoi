@@ -221,6 +221,21 @@ export default createStore({
         })
       })
     },
+    getMembers({ commit }) {
+      return new Promise((resolve, reject) => {
+        // commit("REQUEST", "pending");
+        api.get("user/")
+        .then((response) => {
+          commit("REQUEST", "success");
+          resolve(response.data.members);
+        })
+        .catch((error) => {
+          commit("REQUEST", "error");
+          commit("MESSAGE", error.response.data.error);
+          reject(error);
+        })
+      })
+    },
     getParameter({ commit }, parameter) {
       return new Promise((resolve, reject) => {
         commit("REQUEST", "pending");
