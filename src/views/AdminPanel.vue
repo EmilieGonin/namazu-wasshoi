@@ -4,14 +4,23 @@
       <AppButton @click="[getApplicants(), (currentView = 'applicants')]"
         >Candidatures</AppButton
       >
-      <AppButton @click="currentView = 'members'">Membres</AppButton>
+      <AppButton @click="[getMembers(), (currentView = 'members')]"
+        >Membres</AppButton
+      >
       <AppButton @click="currentView = 'festival'">Festival Gyôkoso</AppButton>
     </div>
     <div v-if="currentView == 'applicants'">
-      <AdminPanelApplicant
-        v-for="applicant in applicants"
+      <AdminPanelCell
+        v-for="applicant in data"
         :key="applicant.id"
         :applicant="applicant"
+      />
+    </div>
+    <div v-if="currentView == 'members'">
+      <AdminPanelCell
+        v-for="member in data"
+        :key="member.id"
+        :member="member"
       />
     </div>
     <AppButton @click="clear" class="admin__button">Clear Cache</AppButton>
@@ -20,18 +29,18 @@
 
 <script>
 import AppButton from "@/components/AppButton.vue";
-import AdminPanelApplicant from "@/components/AdminPanelApplicant.vue";
+import AdminPanelCell from "@/components/AdminPanelCell.vue";
 
 export default {
   name: "AdminPanel",
   components: {
     AppButton,
-    AdminPanelApplicant
+    AdminPanelCell
   },
   data() {
     return {
-      applicants: "",
-      currentView: ""
+      currentView: "",
+      data: ""
     };
   },
   methods: {
@@ -40,7 +49,12 @@ export default {
     },
     getApplicants() {
       this.$store.dispatch("getApplicants").then(applicants => {
-        this.applicants = applicants;
+        this.data = applicants;
+      });
+    },
+    getMembers() {
+      this.$store.dispatch("getMembers").then(members => {
+        this.data = members;
       });
     }
   }

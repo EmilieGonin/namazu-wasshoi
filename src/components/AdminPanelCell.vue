@@ -1,34 +1,51 @@
 <template lang="html">
-  <div class="applicant">
-    <div class="applicant__head">
-      <div class="applicant__profile">
+  <div class="cell">
+    <div class="cell__head">
+      <div class="cell__profile">
         <!--Character Name-->
-        <div class="applicant__title" @click="redirect(applicant.characterId)">
-          {{ applicant.character }}
+        <div
+          class="cell__title"
+          @click="
+            applicant
+              ? redirect(applicant.characterId)
+              : member
+              ? go(member.id)
+              : ''
+          "
+        >
+          {{ applicant ? applicant.character : member ? member.character : "" }}
         </div>
         <!--Team-->
         <div>
-          <strong :class="applicant.team.toLowerCase()">
-            {{ applicant.team }}
+          <strong
+            :class="
+              applicant
+                ? applicant.team.toLowerCase()
+                : member
+                ? member.team.toLowerCase()
+                : ''
+            "
+          >
+            {{ applicant ? applicant.team : member ? member.team : "" }}
           </strong>
         </div>
         <!--Name-->
-        <div v-if="applicant.name">
+        <div v-if="applicant && applicant.name">
           <font-awesome-icon :icon="'user'" fixed-width />
           {{ applicant.name }}
         </div>
         <!--Discord-->
-        <div>
+        <div v-if="applicant || member.discord">
           <font-awesome-icon :icon="['fab', 'discord']" fixed-width />
-          {{ applicant.discord }}
+          {{ applicant ? applicant.discord : member ? member.discord : "" }}
         </div>
         <!--Birthday-->
-        <div>
+        <div v-if="applicant || member.birthday">
           <font-awesome-icon :icon="'gift'" fixed-width />
-          {{ applicant.birthday }}
+          {{ applicant ? applicant.birthday : member ? member.birthday : "" }}
         </div>
         <!--Mic-->
-        <font-awesome-layers>
+        <font-awesome-layers v-if="applicant">
           <font-awesome-icon :icon="'microphone'" fixed-width />
           <font-awesome-icon
             :icon="'check-circle'"
@@ -44,100 +61,100 @@
           />
         </font-awesome-layers>
       </div>
-      <AppButton @click="toggle = !toggle">
+      <AppButton @click="toggle = !toggle" v-if="applicant">
         <span v-if="!toggle">Afficher la candidature</span>
         <span v-else>Fermer la candidature</span>
       </AppButton>
     </div>
     <transition name="slide-up">
-      <div class="applicant__body" v-show="toggle">
+      <div class="cell__body" v-show="toggle" v-if="applicant">
         <!--Availability-->
-        <div class="applicant__tab">
-          <div class="applicant__cell applicant__cell--question">
+        <div class="cell__tab">
+          <div class="cell__cell cell__cell--question">
             Disponibilités
           </div>
-          <div class="applicant__cell applicant__cell--answer">
+          <div class="cell__cell cell__cell--answer">
             {{ applicant.availability }}
           </div>
         </div>
         <!--About-->
-        <div class="applicant__tab">
-          <div class="applicant__cell applicant__cell--question">
+        <div class="cell__tab">
+          <div class="cell__cell cell__cell--question">
             À propos
           </div>
-          <div class="applicant__cell applicant__cell--answer">
+          <div class="cell__cell cell__cell--answer">
             {{ applicant.about }}
           </div>
         </div>
         <!--Main Class-->
-        <div class="applicant__tab">
-          <div class="applicant__cell applicant__cell--question">
+        <div class="cell__tab">
+          <div class="cell__cell cell__cell--question">
             Classe principale
           </div>
-          <div class="applicant__cell applicant__cell--answer">
+          <div class="cell__cell cell__cell--answer">
             {{ applicant.mainClass }}
           </div>
         </div>
         <!--Playtime-->
-        <div class="applicant__tab">
-          <div class="applicant__cell applicant__cell--question">
+        <div class="cell__tab">
+          <div class="cell__cell cell__cell--question">
             Temps de jeu
           </div>
-          <div class="applicant__cell applicant__cell--answer">
+          <div class="cell__cell cell__cell--answer">
             {{ applicant.playtime }}
           </div>
         </div>
         <!--Game Activities-->
-        <div class="applicant__tab">
-          <div class="applicant__cell applicant__cell--question">
+        <div class="cell__tab">
+          <div class="cell__cell cell__cell--question">
             Activités préférées
           </div>
-          <div class="applicant__cell applicant__cell--answer">
+          <div class="cell__cell cell__cell--answer">
             {{ applicant.gameActivities }}
           </div>
         </div>
         <!--CL-->
-        <div class="applicant__tab">
-          <div class="applicant__cell applicant__cell--question">
+        <div class="cell__tab">
+          <div class="cell__cell cell__cell--question">
             Choix de CL
           </div>
-          <div class="applicant__cell applicant__cell--answer">
+          <div class="cell__cell cell__cell--answer">
             {{ applicant.cl }}
           </div>
         </div>
         <!--CL Required-->
-        <div class="applicant__tab">
-          <div class="applicant__cell applicant__cell--question">
+        <div class="cell__tab">
+          <div class="cell__cell cell__cell--question">
             Critères obligatoires
           </div>
-          <div class="applicant__cell applicant__cell--answer">
+          <div class="cell__cell cell__cell--answer">
             {{ applicant.clRequired }}
           </div>
         </div>
         <!--Current CL-->
-        <div class="applicant__tab">
-          <div class="applicant__cell applicant__cell--question">
+        <div class="cell__tab">
+          <div class="cell__cell cell__cell--question">
             CL actuelle
           </div>
-          <div class="applicant__cell applicant__cell--answer">
+          <div class="cell__cell cell__cell--answer">
             {{ applicant.currentCl }}
           </div>
         </div>
         <!--exp-->
-        <div class="applicant__tab">
-          <div class="applicant__cell applicant__cell--question">
+        <div class="cell__tab">
+          <div class="cell__cell cell__cell--question">
             Expérience HL
           </div>
-          <div class="applicant__cell applicant__cell--answer">
+          <div class="cell__cell cell__cell--answer">
             {{ applicant.exp }}
           </div>
         </div>
         <!--Savage-->
-        <div class="applicant__tab">
-          <div class="applicant__cell applicant__cell--question">
+        <div class="cell__tab">
+          <div class="cell__cell cell__cell--question">
             Roster sadique
           </div>
-          <div class="applicant__cell applicant__cell--answer">
+          <div class="cell__cell cell__cell--answer">
             {{ applicant.savageRequired }}
           </div>
         </div>
@@ -150,7 +167,7 @@
 import AppButton from "@/components/AppButton.vue";
 
 export default {
-  name: "AdminPanelApplicants",
+  name: "AdminPanelCell",
   components: {
     AppButton
   },
@@ -160,19 +177,23 @@ export default {
     };
   },
   props: {
-    applicant: Object
+    applicant: Object,
+    member: Object
   },
   methods: {
     redirect(id) {
       const lodestone = "https://fr.finalfantasyxiv.com/lodestone/character/";
       window.open(lodestone + id);
+    },
+    go(id) {
+      this.$router.push("/user/" + id);
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.applicant {
+.cell {
   @include flex($direction: column);
   position: relative;
   width: 100%;
