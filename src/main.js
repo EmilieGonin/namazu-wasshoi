@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { createMetaManager } from 'vue-meta'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -35,4 +36,9 @@ library.add(
   faHomeLgAlt, faStars, faUserCrown, faSpinnerThird
 )
 
-createApp(App).use(store).use(router).component("font-awesome-icon", FontAwesomeIcon).mount('#app')
+createApp(App)
+.component("font-awesome-icon", FontAwesomeIcon)
+.use(router)
+.use(store)
+.use(createMetaManager())
+.mount("#app")

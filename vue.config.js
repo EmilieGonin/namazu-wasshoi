@@ -1,6 +1,7 @@
 const GoogleFontsPlugin = require("@beyonk/google-fonts-webpack-plugin")
 
 module.exports = {
+  transpileDependencies: ['vue-meta'],
   css: {
     loaderOptions: {
       scss: {
