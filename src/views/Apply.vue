@@ -195,7 +195,7 @@
           deux autres, Pleine Lune possède des horaires en journée.
           L'intégration d'un roster est facultative - si tu souhaites en
           rejoindre un, tu peux consulter les compositions !
-          <router-link :to="'/rosters'"
+          <router-link :to="'/rosters'" target="_blank"
             ><strong>En savoir plus</strong> </router-link
           >.
         </p>
@@ -234,7 +234,7 @@
           notre Discord. Participe et remporte la première place à nos évents
           pour faire gagner des points à ton équipe et remporter la WasshoCup
           trimestrielle !
-          <router-link :to="'/teams'"
+          <router-link :to="'/teams'" target="_blank"
             ><strong>En savoir plus</strong> </router-link
           >.
         </p>
