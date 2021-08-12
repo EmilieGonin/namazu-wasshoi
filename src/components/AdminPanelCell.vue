@@ -5,44 +5,30 @@
         <!--Character Name-->
         <div
           class="cell__title"
-          @click="
-            applicant
-              ? redirect(applicant.characterId)
-              : member
-              ? go(member.id)
-              : ''
-          "
+          @click="applicant ? redirect(data.characterId) : go(data.id)"
         >
-          {{ applicant ? applicant.character : member ? member.character : "" }}
+          {{ data.character }}
         </div>
         <!--Team-->
-        <div>
-          <strong
-            :class="
-              applicant
-                ? applicant.team.toLowerCase()
-                : member
-                ? member.team.toLowerCase()
-                : ''
-            "
-          >
-            {{ applicant ? applicant.team : member ? member.team : "" }}
+        <div v-if="data.team">
+          <strong :class="data.team ? data.team.toLowerCase() : ''">
+            {{ data.team }}
           </strong>
         </div>
         <!--Name-->
-        <div v-if="applicant && applicant.name">
+        <div v-if="data.name">
           <font-awesome-icon :icon="'user'" fixed-width />
-          {{ applicant.name }}
+          {{ data.name }}
         </div>
         <!--Discord-->
-        <div v-if="applicant || member.discord">
+        <div v-if="data.discord">
           <font-awesome-icon :icon="['fab', 'discord']" fixed-width />
-          {{ applicant ? applicant.discord : member ? member.discord : "" }}
+          {{ data.discord }}
         </div>
         <!--Birthday-->
-        <div v-if="applicant || member.birthday">
+        <div v-if="data.birthday">
           <font-awesome-icon :icon="'gift'" fixed-width />
-          {{ applicant ? applicant.birthday : member ? member.birthday : "" }}
+          {{ data.birthday }}
         </div>
         <!--Mic-->
         <font-awesome-layers v-if="applicant">
@@ -66,10 +52,7 @@
         <span v-else>Fermer la candidature</span>
       </AppButton>
       <!--Archive Applicant/Delete User-->
-      <AppButton
-        :small="true"
-        @click="archive(applicant ? applicant.id : member ? member.id : '')"
-      >
+      <AppButton :small="true" @click="archive(data.id)">
         <font-awesome-icon :icon="'trash-alt'" fixed-width />
       </AppButton>
     </div>
@@ -184,8 +167,8 @@ export default {
     };
   },
   props: {
-    applicant: Object,
-    member: Object
+    data: Object,
+    applicant: Boolean
   },
   methods: {
     redirect(id) {

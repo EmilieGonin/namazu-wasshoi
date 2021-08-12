@@ -11,17 +11,14 @@
     </div>
     <div v-if="currentView == 'applicants'">
       <AdminPanelCell
-        v-for="applicant in data"
-        :key="applicant.id"
-        :applicant="applicant"
+        v-for="data in datas"
+        :key="data.id"
+        :data="data"
+        :applicant="true"
       />
     </div>
     <div v-if="currentView == 'members'">
-      <AdminPanelCell
-        v-for="member in data"
-        :key="member.id"
-        :member="member"
-      />
+      <AdminPanelCell v-for="data in datas" :key="data.id" :data="data" />
     </div>
     <AppButton @click="clear" class="admin__button">Clear Cache</AppButton>
   </div>
@@ -46,7 +43,7 @@ export default {
   data() {
     return {
       currentView: "",
-      data: ""
+      datas: ""
     };
   },
   methods: {
@@ -55,12 +52,12 @@ export default {
     },
     getApplicants() {
       this.$store.dispatch("getApplicants").then(applicants => {
-        this.data = applicants;
+        this.datas = applicants;
       });
     },
     getMembers() {
       this.$store.dispatch("getMembers").then(members => {
-        this.data = members;
+        this.datas = members;
       });
     }
   }
