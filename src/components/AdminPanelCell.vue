@@ -37,7 +37,7 @@
             :icon="'check-circle'"
             transform="shrink-6 left-10 down-4"
             class="valid"
-            v-if="applicant.mic"
+            v-if="data.mic"
           />
           <font-awesome-icon
             :icon="'times-circle'"
@@ -64,7 +64,7 @@
             Disponibilités
           </div>
           <div class="cell__cell cell__cell--answer">
-            {{ applicant.availability }}
+            {{ data.availability }}
           </div>
         </div>
         <!--About-->
@@ -73,7 +73,7 @@
             À propos
           </div>
           <div class="cell__cell cell__cell--answer">
-            {{ applicant.about }}
+            {{ data.about }}
           </div>
         </div>
         <!--Main Class-->
@@ -82,7 +82,7 @@
             Classe principale
           </div>
           <div class="cell__cell cell__cell--answer">
-            {{ applicant.mainClass }}
+            {{ data.mainClass }}
           </div>
         </div>
         <!--Playtime-->
@@ -91,7 +91,7 @@
             Temps de jeu
           </div>
           <div class="cell__cell cell__cell--answer">
-            {{ applicant.playtime }}
+            {{ data.playtime }}
           </div>
         </div>
         <!--Game Activities-->
@@ -100,7 +100,7 @@
             Activités préférées
           </div>
           <div class="cell__cell cell__cell--answer">
-            {{ applicant.gameActivities }}
+            {{ data.gameActivities }}
           </div>
         </div>
         <!--CL-->
@@ -109,7 +109,7 @@
             Choix de CL
           </div>
           <div class="cell__cell cell__cell--answer">
-            {{ applicant.cl }}
+            {{ data.cl }}
           </div>
         </div>
         <!--CL Required-->
@@ -118,7 +118,7 @@
             Critères obligatoires
           </div>
           <div class="cell__cell cell__cell--answer">
-            {{ applicant.clRequired }}
+            {{ data.clRequired }}
           </div>
         </div>
         <!--Current CL-->
@@ -127,7 +127,7 @@
             CL actuelle
           </div>
           <div class="cell__cell cell__cell--answer">
-            {{ applicant.currentCl }}
+            {{ data.currentCl }}
           </div>
         </div>
         <!--exp-->
@@ -136,7 +136,7 @@
             Expérience HL
           </div>
           <div class="cell__cell cell__cell--answer">
-            {{ applicant.exp }}
+            {{ data.exp }}
           </div>
         </div>
         <!--Savage-->
@@ -145,7 +145,7 @@
             Roster sadique
           </div>
           <div class="cell__cell cell__cell--answer">
-            {{ applicant.savageRequired }}
+            {{ data.savageRequired }}
           </div>
         </div>
       </div>
