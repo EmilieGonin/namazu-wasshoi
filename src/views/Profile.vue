@@ -83,11 +83,14 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("getCharacter").then(character => {
-      this.character = character;
-    });
     this.$store.dispatch("getUser", this.$route.params.id).then(user => {
       this.user = user;
+
+      this.$store
+        .dispatch("getCharacter", [user.characterId, false])
+        .then(character => {
+          this.character = character;
+        });
     });
   }
 };

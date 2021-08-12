@@ -67,9 +67,11 @@ export default {
   },
   mounted() {
     if (!this.avatar && !this.member) {
-      this.$store.dispatch("getCharacter").then(character => {
-        this.avatar = character.Avatar;
-      });
+      this.$store
+        .dispatch("getCharacter", [this.user.characterId, true])
+        .then(character => {
+          this.avatar = character.Avatar;
+        });
     }
   },
   methods: {

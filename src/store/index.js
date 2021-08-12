@@ -98,12 +98,15 @@ export default createStore({
         });
       })
     },
-    getCharacter({ commit, state }) {
+    getCharacter({ commit }, [ characterId, silent ]) {
       return new Promise((resolve, reject) => {
+        if (!silent) {
+          commit("REQUEST", "pending");
+        }
         const character = checkCache("character");
 
         if (!character) {
-          api.get("fc/character/" + state.user.characterId)
+          api.get("fc/character/" + characterId)
           .then((response) => {
             cache("character", response.data.character);
             commit("REQUEST", "success");
