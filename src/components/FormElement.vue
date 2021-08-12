@@ -188,7 +188,7 @@ export default {
         setTimeout(() => {
           this.iconPre = "fad";
           this.icon = "spinner-third";
-        }, 500);
+        }, 1000);
       } else {
         this.iconPre = "fas";
         this.icon = "times-circle";
@@ -219,7 +219,7 @@ export default {
             this.icon = "times-circle";
             this.status = "invalid";
           });
-      }, 1500);
+      }, 3000);
     },
     regex(name) {
       if (name.includes("email")) {
