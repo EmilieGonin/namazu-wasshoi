@@ -65,6 +65,13 @@
         <span v-if="!toggle">Afficher la candidature</span>
         <span v-else>Fermer la candidature</span>
       </AppButton>
+      <!--Archive Applicant/Delete User-->
+      <AppButton
+        :small="true"
+        @click="archive(applicant ? applicant.id : member ? member.id : '')"
+      >
+        <font-awesome-icon :icon="'trash-alt'" fixed-width />
+      </AppButton>
     </div>
     <transition name="slide-up">
       <div class="cell__body" v-show="toggle" v-if="applicant">
@@ -187,6 +194,9 @@ export default {
     },
     go(id) {
       this.$router.push("/user/" + id);
+    },
+    archive(id) {
+      console.log(id);
     }
   }
 };

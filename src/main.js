@@ -10,7 +10,7 @@ import {
   //Users & Account
   faUser, faUsers, faUserCheck, faUserPlus, faSignOutAlt, faSignInAlt, faCog,
   //Applications
-  faMicrophone, faMicrophoneSlash,
+  faMicrophone, faMicrophoneSlash, faTrashAlt,
   //Activities
   faCalendarWeek, faDungeon, faCamera, faImages, faGift,
   //Misc
@@ -25,7 +25,7 @@ library.add(
   //Users & Account
   faUser, faUsers, faUserCheck, faUserPlus, faSignOutAlt, faSignInAlt, faCog,
   //Applications
-  faMicrophone, faMicrophoneSlash,
+  faMicrophone, faMicrophoneSlash, faTrashAlt,
   //Activities
   faCalendarWeek, faDungeon, faCamera, faImages, faGift,
   //Misc
