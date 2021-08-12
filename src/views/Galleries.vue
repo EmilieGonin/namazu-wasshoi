@@ -16,10 +16,16 @@
 </template>
 
 <script>
+import { useMeta } from "vue-meta";
 import AppButton from "@/components/AppButton.vue";
 
 export default {
   name: "Galleries",
+  setup() {
+    useMeta({
+      title: "Galeries"
+    });
+  },
   data() {
     return {
       //temp

@@ -215,11 +215,17 @@
 </template>
 
 <script>
+import { useMeta } from "vue-meta";
 import FormElement from "@/components/FormElement.vue";
 import AppButton from "@/components/AppButton.vue";
 
 export default {
   name: "Apply",
+  setup() {
+    useMeta({
+      title: "Postuler"
+    });
+  },
   data() {
     return {
       recruiting: "",

@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { useMeta } from "vue-meta";
 import AppButton from "@/components/AppButton.vue";
 import AdminPanelCell from "@/components/AdminPanelCell.vue";
 
@@ -36,6 +37,11 @@ export default {
   components: {
     AppButton,
     AdminPanelCell
+  },
+  setup() {
+    useMeta({
+      title: "Panel administrateur"
+    });
   },
   data() {
     return {

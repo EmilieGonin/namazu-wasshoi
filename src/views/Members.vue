@@ -66,11 +66,17 @@
 </template>
 
 <script>
+import { useMeta } from "vue-meta";
 import UsersBirthdays from "@/components/UsersBirthdays.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
 
 export default {
   name: "Members",
+  setup() {
+    useMeta({
+      title: "Membres"
+    });
+  },
   data() {
     return {
       currentMember: "",

@@ -50,12 +50,23 @@
 </template>
 
 <script>
+import { useMeta } from "vue-meta";
 import AppFullscreen from "@/components/AppFullscreen.vue";
 import AppButton from "@/components/AppButton.vue";
 import FormElement from "@/components/FormElement.vue";
 
 export default {
   name: "Signup",
+  components: {
+    AppFullscreen,
+    AppButton,
+    FormElement
+  },
+  setup() {
+    useMeta({
+      title: "Créer un compte"
+    });
+  },
   data() {
     return {
       form_email: "",
@@ -71,11 +82,6 @@ export default {
         { name: "Carbuncle" }
       ]
     };
-  },
-  components: {
-    AppFullscreen,
-    AppButton,
-    FormElement
   },
   methods: {
     submit() {

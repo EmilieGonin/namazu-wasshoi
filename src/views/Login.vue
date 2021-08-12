@@ -28,12 +28,18 @@
 </template>
 
 <script>
+import { useMeta } from "vue-meta";
 import AppFullscreen from "@/components/AppFullscreen.vue";
 import AppButton from "@/components/AppButton.vue";
 import FormElement from "@/components/FormElement.vue";
 
 export default {
   name: "Login",
+  setup() {
+    useMeta({
+      title: "Se connecter"
+    });
+  },
   data() {
     return {
       email: "",

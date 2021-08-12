@@ -3,8 +3,14 @@
 </template>
 
 <script>
+import { useMeta } from "vue-meta";
 export default {
-  name: "Planning"
+  name: "Planning",
+  setup() {
+    useMeta({
+      title: "Planning"
+    });
+  }
 };
 </script>
 

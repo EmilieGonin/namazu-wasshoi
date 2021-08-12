@@ -46,12 +46,18 @@
 </template>
 
 <script>
+import { useMeta } from "vue-meta";
 import FestivalInfos from "@/components/FestivalInfos.vue";
 import FestivalSubmissions from "@/components/FestivalSubmissions.vue";
 import AppButton from "@/components/AppButton.vue";
 
 export default {
   name: "FestivalGyokoso",
+  setup() {
+    useMeta({
+      title: "Festival Gyôkoso"
+    });
+  },
   data() {
     return {
       windowHeight: "",

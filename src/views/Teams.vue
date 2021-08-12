@@ -39,12 +39,18 @@
 </template>
 
 <script>
+import { useMeta } from "vue-meta";
 import TeamsPanel from "@/components/TeamsPanel.vue";
 
 export default {
   name: "Teams",
   components: {
     TeamsPanel
+  },
+  setup() {
+    useMeta({
+      title: "Equipes d'évent"
+    });
   }
 };
 </script>

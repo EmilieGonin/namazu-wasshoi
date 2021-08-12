@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import { useMeta } from "vue-meta";
 import AppButton from "@/components/AppButton.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
 // import WasshoListe from "@/components/WasshoListe.vue";
@@ -65,6 +66,11 @@ export default {
     AppButton,
     UserAvatar
     // WasshoListe
+  },
+  setup() {
+    useMeta({
+      title: "Profil utilisateur"
+    });
   },
   data() {
     return {

@@ -41,12 +41,18 @@
 </template>
 
 <script>
+import { useMeta } from "vue-meta";
 import FormElement from "@/components/FormElement.vue";
 import AppButton from "@/components/AppButton.vue";
 // import WasshoListe from "@/components/WasshoListe.vue";
 
 export default {
   name: "Account",
+  setup() {
+    useMeta({
+      title: "Paramètres du compte"
+    });
+  },
   data() {
     return {
       email: "",
