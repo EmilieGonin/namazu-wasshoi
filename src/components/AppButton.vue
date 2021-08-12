@@ -38,13 +38,15 @@ export default {
     marginTop: Number,
     margin: String,
     link: String,
+    small: Boolean,
     altClass: [String, Array]
   },
   computed: {
     style() {
       return {
         margin: this.margin,
-        marginTop: this.marginTop + "px"
+        marginTop: this.marginTop + "px",
+        maxWidth: this.small ? "50px" : "200px"
       };
     }
   },
@@ -64,7 +66,6 @@ export default {
   position: relative;
   cursor: pointer;
   width: 100%;
-  max-width: 200px;
   padding: 12px;
   background: $namazu;
   border: 2px solid $namazu;
