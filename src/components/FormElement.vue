@@ -1,22 +1,50 @@
 <template lang="html">
-  <!--Checkbox, Radio & Select Field-->
-  <div
-    class="form__field"
-    :class="{ 'form__field--large': large }"
-    v-if="type == 'checkbox' || type == 'radio' || type == 'select'"
-  >
+  <!--Field-->
+  <div class="form__field" :class="{ 'form__field--large': large }">
+    <!--Required-->
     <div class="form__required" v-if="required">*</div>
-    <!--Field Label-->
-    <label class="form__label form__label--only" :for="name" v-if="label">
+    <!--Label-->
+    <label class="form__label" :for="name" v-if="label">
       {{ label }}
     </label>
-    <!--Checkbox Inputs-->
+    <!--Textarea-->
+    <textarea
+      :value="modelValue"
+      :id="name"
+      :required="required"
+      rows="8"
+      cols="80"
+      v-if="type == 'textarea'"
+      @input="$emit('update:modelValue', $event.target.value), setIcon($event)"
+    ></textarea>
+    <!--Select-->
+    <select
+      class="form__checkbox-container"
+      :class="{ 'form__select-disabled': !modelValue }"
+      :name="name"
+      :id="name"
+      @change="$emit('update:modelValue', $event.target.value)"
+      v-else-if="type == 'select'"
+    >
+      <option disabled selected value="" v-if="labelSelect">{{
+        labelSelect
+      }}</option>
+      <option
+        class="form__option"
+        v-for="input in inputs"
+        :key="input.name"
+        :value="input.value ? input.value : input.name"
+      >
+        {{ input.name }}
+      </option>
+    </select>
+    <!--Checkbox-->
     <div
       class="form__checkbox-container"
       :class="{
         'form__checkbox-container--box': !bigLabel
       }"
-      v-if="type == 'checkbox'"
+      v-else-if="type == 'checkbox'"
     >
       <span v-for="(input, index) in inputs" :key="input.name">
         <input
@@ -42,11 +70,11 @@
         </label>
       </span>
     </div>
-    <!--Radio Inputs-->
+    <!--Radio-->
     <div
       class="form__checkbox-container"
       :class="{ 'form__checkbox-container--box': !bigLabel }"
-      v-if="type == 'radio'"
+      v-else-if="type == 'radio'"
     >
       <span v-for="(input, index) in inputs" :key="input.name">
         <input
@@ -73,59 +101,20 @@
         </label>
       </span>
     </div>
-    <!--Select Inputs-->
-    <select
-      class="form__checkbox-container"
-      :class="{ 'form__select-disabled': !modelValue }"
-      :name="name"
-      :id="name"
-      @change="$emit('update:modelValue', $event.target.value)"
-      v-if="type == 'select'"
-    >
-      <option disabled selected value="" v-if="labelSelect">{{
-        labelSelect
-      }}</option>
-      <option
-        class="form__option"
-        v-for="input in inputs"
-        :key="input.name"
-        :value="input.value ? input.value : input.name"
-      >
-        {{ input.name }}
-      </option>
-    </select>
-  </div>
-  <!--Other Fields-->
-  <div class="form__field" :class="{ 'form__field--large': large }" v-else>
     <!--Input-->
-    <div class="form__required" v-if="required">*</div>
-    <!--Label-->
-    <label class="form__label" :for="name">
-      {{ label }}
-    </label>
     <input
       :value="modelValue"
       :id="name"
       :type="type"
       :required="required"
-      v-if="element == 'input'"
+      v-else
       @input="
         $emit('update:modelValue', $event.target.value),
           setIcon($event),
           name.includes('character') ? searchCharacter($event.target) : ''
       "
     />
-    <!--Textarea-->
-    <textarea
-      :value="modelValue"
-      :id="name"
-      :required="required"
-      rows="8"
-      cols="80"
-      v-if="element == 'text'"
-      @input="$emit('update:modelValue', $event.target.value), setIcon($event)"
-    ></textarea>
-    <!--Input Icon-->
+    <!--Valid/Invalid Icon-->
     <font-awesome-icon
       class="form__icon"
       :class="{
@@ -163,20 +152,10 @@ export default {
       default: null
     },
     inputs: Array,
-    //Element tag
-    element: {
-      type: String,
-      default: "input"
-    },
     //Element type
     type: {
       type: String,
       default: "text"
-    },
-    //Element design
-    labelOnly: {
-      type: Boolean,
-      default: false
     },
     labelSelect: String,
     large: {

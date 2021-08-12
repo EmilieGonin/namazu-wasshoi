@@ -84,16 +84,16 @@
           v-model="form_availability"
           :label="'Quelles sont tes disponibilités pour jouer ?'"
           :name="'form_availability'"
-          :element="'text'"
+          :type="'textarea'"
           :large="true"
           :required="true"
         ></FormElement>
         <!--About-->
         <FormElement
-          :element="'text'"
           v-model="form_about"
           :label="'Dis-nous en plus sur toi !'"
           :name="'form_about'"
+          :type="'textarea'"
           :required="true"
           :large="true"
         ></FormElement>
@@ -136,18 +136,18 @@
         v-model="form_playtime"
         :label="'Depuis quand joues-tu à Final Fantasy XIV ?'"
         :name="'form_playtime'"
+        :type="'textarea'"
         :required="true"
         :large="true"
-        :element="'text'"
       ></FormElement>
       <!--Game Activities-->
       <FormElement
         v-model="form_gameActivities"
         :label="'Quelles sont tes activités préférées dans le jeu ?'"
         :name="'form_gameActivities'"
+        :type="'textarea'"
         :required="true"
         :large="true"
-        :element="'text'"
       ></FormElement>
       <!--CL Wishes-->
       <FormElement
@@ -156,9 +156,9 @@
           'Quel genre de compagnie libre recherches-tu et pourquoi nous choisir ?'
         "
         :name="'form_cl'"
+        :type="'textarea'"
         :required="true"
         :large="true"
-        :element="'text'"
       ></FormElement>
       <!--Current CL-->
       <FormElement
@@ -167,9 +167,9 @@
           'Quel est le ou les critères obligatoires pour que tu nous rejoignes ?'
         "
         :name="'form_clRequired'"
+        :type="'textarea'"
         :required="true"
         :large="true"
-        :element="'text'"
       ></FormElement>
       <!--Current CL-->
       <FormElement
@@ -178,9 +178,9 @@
           'Fais-tu actuellement partie d\'une compagnie ? Si oui, pourquoi la quitter ?'
         "
         :name="'form_currentCl'"
+        :type="'textarea'"
         :required="true"
         :large="true"
-        :element="'text'"
       ></FormElement>
       <div class="form__separator"></div>
       <!--Ton expérience à haut niveau-->
@@ -205,9 +205,9 @@
         v-model="form_exp"
         :label="'Quelle est ton expérience de jeu à haut niveau ?'"
         :name="'form_exp'"
+        :type="'textarea'"
         :required="true"
         :large="true"
-        :element="'text'"
       ></FormElement>
       <!--Savage Required-->
       <FormElement
@@ -216,9 +216,9 @@
           'Souhaites-tu rejoindre l\'un de nos rosters ? Si oui, obligatoirement ?'
         "
         :name="'form_savageRequired'"
+        :type="'textarea'"
         :required="true"
         :large="true"
-        :element="'text'"
       ></FormElement>
       <div class="form__separator"></div>
       <!--Choisis ton équipe-->
