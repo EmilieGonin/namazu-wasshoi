@@ -107,6 +107,7 @@
       :id="name"
       :type="type"
       :required="required"
+      :pattern="regex(name)"
       v-else
       @input="
         $emit('update:modelValue', $event.target.value),
@@ -219,6 +220,15 @@ export default {
             this.status = "invalid";
           });
       }, 1500);
+    },
+    regex(name) {
+      if (name.includes("email")) {
+        return "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$";
+      } else if (name.includes("password")) {
+        return "(?=.*)(?=.*[a-z])(?=.*[A-Z]).{8,}";
+      } else if (name.includes("discord")) {
+        return "^[a-zA-Z0-9._%+-]+#[0-9]+$";
+      }
     }
   }
 };
