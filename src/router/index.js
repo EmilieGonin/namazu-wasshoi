@@ -148,7 +148,7 @@ router.beforeEach((to, from, next) => {
 
     if (!loggedIn) {
       store.dispatch("error", "Cette page est toujours en construction. :(");
-      return next("/");
+      return false;
 
     } else {
       //Check if user is admin
@@ -156,7 +156,7 @@ router.beforeEach((to, from, next) => {
 
       if (!isAdmin) {
         store.dispatch("error", "Cette page est toujours en construction. :(");
-        return next("/");
+        return false;
       }
     }
   }
