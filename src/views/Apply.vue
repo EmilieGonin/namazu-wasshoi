@@ -191,13 +191,10 @@
         Nous aimerions en savoir plus sur le contenu que tu as fait !
         <p class="form__text">
           Au total, nous possédons trois rosters pour le contenu sadique :
-          Pleine Lune, Nouvelle Lune et Croissant de Lune. Contrairement aux
-          deux autres, Pleine Lune possède des horaires en journée.
-          L'intégration d'un roster est facultative - si tu souhaites en
-          rejoindre un, tu peux consulter les compositions !
-          <router-link :to="'/rosters'" target="_blank"
-            ><strong>En savoir plus</strong> </router-link
-          >.
+          <strong>Pleine Lune</strong> (16h-19h - sam, dim et un jour de plus à
+          définir), <strong>Nouvelle Lune</strong> (21h-0h, jours à définir) et
+          <strong>Croissant de Lune</strong> (21h-23h30 - lun, mer, jeu).
+          L'intégration d'un roster est facultative !
         </p>
       </div>
       <!--Exp-->
