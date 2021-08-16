@@ -16,12 +16,16 @@
           :label="'Adresse email'"
           :name="'formo_email'"
           :type="'email'"
+          :disabled="emailDisabled"
+          @allow-edit="emailDisabled = false"
         ></FormElement>
         <FormElement
           v-model="formo_password"
           :label="'Mot de passe'"
           :name="'formo_password'"
           :type="'password'"
+          :disabled="passwordDisabled"
+          @allow-edit="passwordDisabled = false"
         ></FormElement>
       </div>
       <div class="account__heading">
@@ -82,7 +86,9 @@ export default {
       formo_password: "",
       formo_birthday: this.$store.state.user.birthday,
       formo_discord: this.$store.state.user.discord,
-      formo_bio: this.$store.state.user.bio
+      formo_bio: this.$store.state.user.bio,
+      emailDisabled: true,
+      passwordDisabled: true
     };
   },
   components: {
@@ -98,7 +104,6 @@ export default {
     submit() {
       try {
         const form = this.formValidate();
-        console.log(form);
 
         this.$store.dispatch("editUser", [this.$store.state.user.id, form]);
       } catch (e) {

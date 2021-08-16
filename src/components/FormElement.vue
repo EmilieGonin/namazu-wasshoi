@@ -116,6 +116,13 @@
           name.includes('character') ? searchCharacter($event.target) : ''
       "
     />
+    <font-awesome-icon
+      v-if="disabled"
+      @click="$emit('allow-edit', $event.target)"
+      class="form__icon form__icon--edit"
+      :icon="'edit'"
+      fixed-width
+    />
     <!--Valid/Invalid Icon-->
     <font-awesome-icon
       class="form__icon"
@@ -143,7 +150,7 @@ export default {
       timer: ""
     };
   },
-  emits: ["update:modelValue", "check", "keyup"],
+  emits: ["update:modelValue", "check", "keyup", "allow-edit"],
   props: {
     //Element datas
     modelValue: [String, Array],
@@ -276,6 +283,9 @@ export default {
     }
     &--invalid {
       color: veil($namazu);
+    }
+    &--edit {
+      color: $namazu;
     }
   }
   &__field {
