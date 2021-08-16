@@ -405,5 +405,11 @@ export default {
     min-height: auto;
     width: auto;
   }
+  input:disabled {
+    background-color: $grey;
+    border: 2px solid dark($grey, 5%);
+    border-top: 2px solid $namazu;
+    color: dark($grey, 25%);
+  }
 }
 </style>
