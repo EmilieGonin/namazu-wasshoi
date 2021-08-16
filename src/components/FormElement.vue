@@ -80,12 +80,12 @@
         <input
           type="radio"
           :value="input.value ? input.value : input.name"
-          :id="input.name"
+          :id="name + '-' + input.name"
           :name="name"
           :class="{ 'form__checkbox-input': input.label }"
           @change="$emit('update:modelValue', $event.target.value)"
         />
-        <label :for="input.name">
+        <label :for="name + '-' + input.name">
           <img
             class="form__checkbox-label"
             :class="{

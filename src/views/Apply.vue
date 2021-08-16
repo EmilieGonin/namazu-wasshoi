@@ -363,7 +363,6 @@ export default {
           this[name].splice(index, 1);
         }
       }
-      console.log(this[name]);
     },
     submit() {
       try {
