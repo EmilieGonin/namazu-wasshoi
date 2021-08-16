@@ -190,7 +190,10 @@ export default {
   },
   methods: {
     setIcon(e) {
-      if (!this.wait && e.target.checkValidity()) {
+      if (!e.target.value) {
+        this.icon = "";
+        this.status = "";
+      } else if (!this.wait && e.target.checkValidity()) {
         this.iconPre = "fas";
         this.icon = "check-circle";
         this.status = "valid";
