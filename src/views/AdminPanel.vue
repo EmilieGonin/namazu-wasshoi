@@ -9,7 +9,13 @@
       >
       <AppButton @click="currentView = 'festival'">Festival Gyôkoso</AppButton>
     </div>
-    <div v-if="currentView == 'applicants'">
+    <div
+      class="admin__empty"
+      v-if="currentView == 'applicants' && datas.length == 0"
+    >
+      Aucune candidature disponible
+    </div>
+    <div v-else-if="currentView == 'applicants'">
       <AdminPanelCell
         v-for="data in datas"
         :key="data.id"
@@ -51,11 +57,13 @@ export default {
       localStorage.clear();
     },
     getApplicants() {
+      this.datas = "";
       this.$store.dispatch("getApplicants").then(applicants => {
         this.datas = applicants;
       });
     },
     getMembers() {
+      this.datas = "";
       this.$store.dispatch("getMembers").then(members => {
         this.datas = members;
       });
@@ -75,6 +83,19 @@ export default {
     position: fixed !important;
     bottom: 0;
     left: 0;
+  }
+  &__empty {
+    @include responsive(400) {
+      border-radius: 0;
+    }
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: $invalid;
+    color: white;
   }
 }
 </style>
