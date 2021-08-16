@@ -105,7 +105,12 @@ export default {
       try {
         const form = this.formValidate();
 
-        this.$store.dispatch("editUser", [this.$store.state.user.id, form]);
+        this.$store
+          .dispatch("editUser", [this.$store.state.user.id, form])
+          .then(() => {
+            this.passwordDisabled = true;
+            this.emailDisabled = true;
+          });
       } catch (e) {
         console.error(e);
       }
