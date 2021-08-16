@@ -124,12 +124,23 @@
           :required="true"
           :wait="true"
         ></FormElement>
+        <!--MSQ-->
+        <FormElement
+          v-model="form_msq"
+          :inputs="yesno"
+          :label="'As-tu terminé l\'épopée ?'"
+          :name="'form_msq'"
+          :type="'radio'"
+          :required="true"
+        ></FormElement>
         <!--Main Class-->
         <FormElement
           v-model="form_mainClass"
-          :label="'Quelle est ta classe principale ?'"
+          :label="'Quelle est ta classe principale / classe secondaire ?'"
           :name="'form_mainClass'"
+          :type="'textarea'"
           :required="true"
+          :large="true"
         ></FormElement>
       </div>
       <!--Playtime-->
@@ -278,6 +289,7 @@ export default {
       form_availability: "",
       form_about: "",
       form_character: "",
+      form_msq: "",
       form_mainClass: "",
       form_playtime: "",
       form_gameActivities: "",
