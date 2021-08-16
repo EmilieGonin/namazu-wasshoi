@@ -1,8 +1,8 @@
 import axios from 'axios'
 const user = JSON.parse(localStorage.getItem("user"));
 
-export function authHeader(user) {
-  api.defaults.headers.common['Authorization'] = "Bearer " + user.token;
+export function authHeader(token) {
+  api.defaults.headers.common['Authorization'] = "Bearer " + token;
 }
 
 export function cache(name, data) {

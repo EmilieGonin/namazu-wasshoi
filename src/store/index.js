@@ -12,7 +12,7 @@ export default createStore({
       message: "",
       title: "",
       icon: "",
-      user: user ? user.user : ""
+      user: user ? user : ""
     }
   },
   getters: {
@@ -37,10 +37,9 @@ export default createStore({
       state.title = title;
       state.icon = icon;
     },
-    AUTH_SUCCESS(state, user) {
+    SET_USER(state, user) {
       localStorage.setItem("user", JSON.stringify(user));
-      authHeader(user);
-      state.user = user.user;
+      state.user = user;
       state.status = "success";
     },
     LOGOUT(state) {
@@ -132,7 +131,8 @@ export default createStore({
         commit("REQUEST", "pending");
         api.post("users/signup", user)
         .then((response) => {
-          commit("AUTH_SUCCESS", response.data);
+          commit("SET_USER", response.data.user);
+          authHeader(response.data.token);
           commit("MESSAGE", "Inscription validée !");
           resolve(response);
         })
@@ -148,7 +148,8 @@ export default createStore({
         // commit("REQUEST", "pending");
         api.post("users/login", user)
         .then((response) => {
-          commit("AUTH_SUCCESS", response.data);
+          commit("SET_USER", response.data.user);
+          authHeader(response.data.token);
           commit("MESSAGE", "Connexion réussie !");
           resolve(response);
         })
@@ -184,6 +185,22 @@ export default createStore({
         api.get("users/" + id)
         .then(response => {
           commit("REQUEST", "success");
+          resolve(response.data.user);
+        })
+        .catch(error => {
+          commit("REQUEST", "error");
+          commit("MESSAGE", error.response.data.error);
+          reject(error.response.data.error);
+        })
+      })
+    },
+    editUser({ commit }, [ id, form ]) {
+      return new Promise((resolve, reject) => {
+        commit("REQUEST", "pending");
+        api.put("users/" + id, form)
+        .then(response => {
+          commit("SET_USER", response.data.user);
+          commit("MESSAGE", "Vos données ont bien été modifiées !");
           resolve(response.data.user);
         })
         .catch(error => {
