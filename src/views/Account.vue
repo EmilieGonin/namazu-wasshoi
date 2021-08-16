@@ -1,21 +1,26 @@
 <template lang="html">
   <div class="account">
-    <form class="form" @submit.prevent="submit" method="post">
+    <form
+      class="form"
+      @submit.prevent="submit"
+      @keyup.enter="submit"
+      method="post"
+    >
       <div class="account__heading">
         <span class="account__title">Modifier les données personnelles</span>
         <div class="account__line"></div>
       </div>
       <div class="form__panel">
         <FormElement
-          v-model="email"
+          v-model="formo_email"
           :label="'Adresse email'"
-          :name="'email'"
+          :name="'formo_email'"
           :type="'email'"
         ></FormElement>
         <FormElement
-          v-model="password"
+          v-model="formo_password"
           :label="'Mot de passe'"
-          :name="'password'"
+          :name="'formo_password'"
           :type="'password'"
         ></FormElement>
       </div>
@@ -23,14 +28,31 @@
         <span class="account__title">Modifier le profil</span>
         <div class="account__line"></div>
       </div>
+      <div class="form__panel">
+        <!--Birthday-->
+        <FormElement
+          v-model="formo_birthday"
+          :label="'Date de naissance'"
+          :name="'formo_birthday'"
+          :type="'date'"
+        ></FormElement>
+        <!--Discord-->
+        <FormElement
+          v-model="formo_discord"
+          :label="'Identifiant Discord'"
+          :name="'formo_discord'"
+        ></FormElement>
+      </div>
       <FormElement
-        v-model="bio"
+        v-model="formo_bio"
         :label="'Biographie'"
-        :name="'bio'"
-        :element="'text'"
+        :name="'formo_bio'"
+        :type="'textarea'"
         :large="true"
       ></FormElement>
-      <AppButton :iconR="'arrow-right'">Mettre à jour</AppButton>
+      <AppButton :iconR="'arrow-right'" @click="submit"
+        >Mettre à jour</AppButton
+      >
     </form>
     <!-- <div class="account__heading">
       <span class="account__title">Modifier la Wassho'Liste</span>
@@ -42,6 +64,7 @@
 
 <script>
 import { useMeta } from "vue-meta";
+import { formValidate } from "@/mixins.js";
 import FormElement from "@/components/FormElement.vue";
 import AppButton from "@/components/AppButton.vue";
 // import WasshoListe from "@/components/WasshoListe.vue";
@@ -55,9 +78,11 @@ export default {
   },
   data() {
     return {
-      email: "",
-      password: "",
-      bio: ""
+      formo_email: this.$store.state.user.email,
+      formo_password: "",
+      formo_birthday: this.$store.state.user.birthday,
+      formo_discord: this.$store.state.user.discord,
+      formo_bio: this.$store.state.user.bio
     };
   },
   components: {
@@ -68,9 +93,17 @@ export default {
   props: {
     //
   },
+  mixins: [formValidate],
   methods: {
     submit() {
-      //
+      try {
+        const form = this.formValidate();
+        console.log(form);
+
+        this.$store.dispatch("editUser", [this.$store.state.user.id, form]);
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
 };
