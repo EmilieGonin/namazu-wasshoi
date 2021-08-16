@@ -107,6 +107,7 @@
       :id="name"
       :type="type"
       :required="required"
+      :disabled="disabled"
       :pattern="regex(name)"
       v-else
       @input="
@@ -172,6 +173,10 @@ export default {
       default: false
     },
     wait: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
       type: Boolean,
       default: false
     }
