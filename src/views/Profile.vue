@@ -45,7 +45,8 @@
           </div>
         </div>
         <div class="profile__bio">
-          Bio libre du membre
+          <span v-if="user.bio">{{ user.bio }}</span>
+          <span v-else>Ce membre ne possède pas de biographie.</span>
         </div>
         <AppButton :marginTop="'10'" :iconR="'images'">Galeries</AppButton>
       </div>
