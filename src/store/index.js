@@ -130,7 +130,7 @@ export default createStore({
     signup({ commit }, user) {
       return new Promise((resolve, reject) => {
         commit("REQUEST", "pending");
-        api.post("user/signup", user)
+        api.post("users/signup", user)
         .then((response) => {
           commit("AUTH_SUCCESS", response.data);
           commit("MESSAGE", "Inscription validée !");
@@ -146,7 +146,7 @@ export default createStore({
     login({ commit }, user) {
       return new Promise((resolve, reject) => {
         // commit("REQUEST", "pending");
-        api.post("user/login", user)
+        api.post("users/login", user)
         .then((response) => {
           commit("AUTH_SUCCESS", response.data);
           commit("MESSAGE", "Connexion réussie !");
@@ -165,7 +165,7 @@ export default createStore({
     checkUser({ commit }, id) {
       return new Promise((resolve, reject) => {
         // commit("REQUEST", "pending");
-        api.get("user/" + id)
+        api.get("users/" + id)
         .then(response => {
           commit("REQUEST", "success");
           resolve(response.data);
@@ -181,7 +181,7 @@ export default createStore({
     getUser({ commit }, id) {
       return new Promise((resolve, reject) => {
         commit("REQUEST", "pending");
-        api.get("user/" + id)
+        api.get("users/" + id)
         .then(response => {
           commit("REQUEST", "success");
           resolve(response.data.user);
@@ -227,7 +227,7 @@ export default createStore({
     getMembers({ commit }) {
       return new Promise((resolve, reject) => {
         // commit("REQUEST", "pending");
-        api.get("user/")
+        api.get("users/")
         .then((response) => {
           commit("REQUEST", "success");
           resolve(response.data.members);
