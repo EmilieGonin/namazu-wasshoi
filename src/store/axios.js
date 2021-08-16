@@ -1,5 +1,5 @@
 import axios from 'axios'
-const user = JSON.parse(localStorage.getItem("user"));
+const token = JSON.parse(localStorage.getItem("token"));
 
 export function authHeader(token) {
   api.defaults.headers.common['Authorization'] = "Bearer " + token;
@@ -37,4 +37,4 @@ export const api = axios.create({
   baseURL: process.env.VUE_APP_API_URL
 })
 
-if (user) { authHeader(user) }
+if (token) { authHeader(token) }
