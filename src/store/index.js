@@ -239,9 +239,11 @@ export default createStore({
         })
       })
     },
-    getParameter({ commit }, parameter) {
+    getParameter({ commit }, [ parameter, silent ]) {
       return new Promise((resolve, reject) => {
-        commit("REQUEST", "pending");
+        if (silent) {
+          commit("REQUEST", "pending");
+        }
         api.get("parameters/" + parameter)
         .then((response) => {
           commit("REQUEST", "success");

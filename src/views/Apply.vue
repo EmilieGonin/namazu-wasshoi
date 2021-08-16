@@ -6,16 +6,17 @@
       <div class="apply__heading">
         Nous rejoindre
       </div>
-      <span v-if="recruiting">
+      <span v-if="recruiting && recruiting != 'unknown'">
         Le recrutement est actuellement ouvert. Nous sommes à la recherche de
         nouveaux Namazu de niveau 80, actifs en soirée entre 20h et minuit de
         préférence !
       </span>
-      <span v-else>
+      <span v-else-if="!recruiting">
         Le recrutement est actuellement fermé. Toutefois, nous continuons
         d'étudier les nouvelles candidatures et tu seras ajouté sur la liste
         d'attente !
       </span>
+      <AppMiniSpinner v-else />
       <AppButton
         :iconR="'arrow-right'"
         :marginTop="10"
@@ -258,6 +259,7 @@ import { useMeta } from "vue-meta";
 import { formValidate } from "@/mixins.js";
 import FormElement from "@/components/FormElement.vue";
 import AppButton from "@/components/AppButton.vue";
+import AppMiniSpinner from "@/components/AppMiniSpinner.vue";
 
 export default {
   name: "Apply",
@@ -268,7 +270,7 @@ export default {
   },
   data() {
     return {
-      recruiting: "",
+      recruiting: "unknown",
       formo_name: "",
       form_birthday: "",
       form_discord: "",
@@ -319,12 +321,15 @@ export default {
   },
   components: {
     FormElement,
-    AppButton
+    AppButton,
+    AppMiniSpinner
   },
   mounted() {
-    this.$store.dispatch("getParameter", "recruiting").then(response => {
-      this.recruiting = response;
-    });
+    this.$store
+      .dispatch("getParameter", ["recruiting", "silent"])
+      .then(response => {
+        this.recruiting = response;
+      });
   },
   mixins: [formValidate],
   methods: {
