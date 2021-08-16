@@ -224,6 +224,22 @@ export default createStore({
         })
       })
     },
+    deleteApplicant({ commit }, id) {
+      return new Promise((resolve, reject) => {
+        // commit("REQUEST", "pending");
+        api.delete("applicants/" + id)
+        .then(() => {
+          commit("REQUEST", "success");
+          commit("MESSAGE", "La candidature a bien été supprimée.");
+          resolve();
+        })
+        .catch((error) => {
+          commit("REQUEST", "error");
+          commit("MESSAGE", error.response.data.error);
+          reject(error);
+        })
+      })
+    },
     getMembers({ commit }) {
       return new Promise((resolve, reject) => {
         // commit("REQUEST", "pending");
@@ -231,6 +247,22 @@ export default createStore({
         .then((response) => {
           commit("REQUEST", "success");
           resolve(response.data.members);
+        })
+        .catch((error) => {
+          commit("REQUEST", "error");
+          commit("MESSAGE", error.response.data.error);
+          reject(error);
+        })
+      })
+    },
+    deleteUser({ commit }, id) {
+      return new Promise((resolve, reject) => {
+        // commit("REQUEST", "pending");
+        api.delete("users/" + id)
+        .then((response) => {
+          commit("REQUEST", "success");
+          commit("MESSAGE", response.data.message);
+          resolve();
         })
         .catch((error) => {
           commit("REQUEST", "error");

@@ -17,14 +17,20 @@
     </div>
     <div v-else-if="currentView == 'applicants'">
       <AdminPanelCell
-        v-for="data in datas"
+        v-for="(data, index) in datas"
         :key="data.id"
         :data="data"
         :applicant="true"
+        @delete="deleteItem(index)"
       />
     </div>
     <div v-if="currentView == 'members'">
-      <AdminPanelCell v-for="data in datas" :key="data.id" :data="data" />
+      <AdminPanelCell
+        v-for="(data, index) in datas"
+        :key="data.id"
+        :data="data"
+        @delete="deleteItem(index)"
+      />
     </div>
     <AppButton @click="clear" class="admin__button">Clear Cache</AppButton>
   </div>
@@ -67,6 +73,9 @@ export default {
       this.$store.dispatch("getMembers").then(members => {
         this.datas = members;
       });
+    },
+    deleteItem(index) {
+      this.datas.splice(index, 1);
     }
   }
 };

@@ -52,7 +52,10 @@
         <span v-else>Fermer la candidature</span>
       </AppButton>
       <!--Archive Applicant/Delete User-->
-      <AppButton :small="true" @click="archive(data.id)">
+      <AppButton
+        :small="true"
+        @click="applicant ? deleteApplicant(data.id) : deleteUser(data.id)"
+      >
         <font-awesome-icon :icon="'trash-alt'" fixed-width />
       </AppButton>
     </div>
@@ -166,6 +169,7 @@ export default {
       toggle: false
     };
   },
+  emits: ["delete"],
   props: {
     data: Object,
     applicant: Boolean
@@ -178,8 +182,19 @@ export default {
     go(id) {
       this.$router.push("/user/" + id);
     },
-    archive(id) {
-      console.log(id);
+    deleteApplicant(id) {
+      if (confirm("Voulez-vous vraiment supprimer cette candidature ?")) {
+        this.$store.dispatch("deleteApplicant", id).then(() => {
+          this.$emit("delete");
+        });
+      }
+    },
+    deleteUser(id) {
+      if (confirm("Voulez-vous vraiment supprimer ce membre ?")) {
+        this.$store.dispatch("deleteUser", id).then(() => {
+          this.$emit("delete");
+        });
+      }
     }
   }
 };
