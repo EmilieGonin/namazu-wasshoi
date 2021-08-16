@@ -14,9 +14,9 @@ const formValidate = {
               "Veuillez renseigner tous les champs requis du formulaire.";
             this.$store.dispatch("error", error);
             throw error;
-          } else if (value) {
+          } else {
             form[name] = value;
-            
+
             if (
               data[0].includes("email") &&
               !data[1].match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
