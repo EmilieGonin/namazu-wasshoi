@@ -45,6 +45,7 @@ export default createStore({
     LOGOUT(state) {
       state.user = "";
       localStorage.removeItem("user");
+      localStorage.removeItem("token");
       localStorage.removeItem("character");
     },
   },
