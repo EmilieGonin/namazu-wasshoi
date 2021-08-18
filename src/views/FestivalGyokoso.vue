@@ -47,34 +47,28 @@
         {{ festivals.current.id }}ème édition du Festival Gyôkoso
       </div>
       <div class="festival__infos">
-        <AppButton>Participer</AppButton>
+        <AppButton
+          @click="
+            festivals.voting
+              ? (currentView = 'Submissions')
+              : (currentView = 'Submit')
+          "
+          v-if="currentView == 'Infos'"
+        >
+          {{ festivals.voting ? "Voter" : "Participer" }}
+        </AppButton>
+        <AppButton
+          @click="currentView = 'Infos'"
+          v-if="currentView == 'Submit' || currentView == 'Submissions'"
+        >
+          Informations
+        </AppButton>
         <div class="festival__deadline">
           <AppDate :date="festivals.current.end_date">Date limite :</AppDate>
         </div>
       </div>
-      <div class="festival__menu">
-        <AppButton
-          v-for="view in views"
-          :key="view"
-          :class="[
-            'button--alt',
-            {
-              'button--alt--inactive': currentView != view.component
-            },
-            {
-              'button--alt--disabled':
-                view.button == 'Participations' && !festivals.voting
-            }
-          ]"
-          @click="
-            if (festivals.voting) {
-              currentView = view.component;
-            }
-          "
-        >
-          {{ view.button }}
-        </AppButton>
-      </div>
+
+      <!--Current View Component-->
       <transition name="slide-down" mode="out-in">
         <component :is="currentViewComponent"></component>
       </transition>
@@ -86,6 +80,7 @@
 import { useMeta } from "vue-meta";
 import FestivalInfos from "@/components/FestivalInfos.vue";
 import FestivalSubmissions from "@/components/FestivalSubmissions.vue";
+import FestivalSubmit from "@/components/FestivalSubmit.vue";
 import AppButton from "@/components/AppButton.vue";
 import AppDate from "@/components/AppDate.vue";
 
@@ -112,6 +107,7 @@ export default {
   components: {
     FestivalInfos,
     FestivalSubmissions,
+    FestivalSubmit,
     AppButton,
     AppDate
   },
@@ -222,10 +218,6 @@ export default {
     background: white;
     overflow: hidden scroll;
   }
-  &__menu {
-    @include flex($gap: 10);
-    margin-bottom: 20px;
-  }
   &__title {
     @include flex;
     @include cursive(50);
@@ -244,6 +236,7 @@ export default {
   }
   &__infos {
     @include flex($direction: column, $gap: 10);
+    margin-bottom: 20px;
   }
   &__deadline {
     font-size: $font-small;
