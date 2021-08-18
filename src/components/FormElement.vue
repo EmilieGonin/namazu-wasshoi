@@ -408,6 +408,9 @@ export default {
     min-height: auto;
     width: auto;
   }
+  input[type="file"] {
+    padding-top: 5px;
+  }
   input:disabled {
     background-color: $grey;
     border: 2px solid dark($grey, 5%);
