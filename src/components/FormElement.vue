@@ -101,6 +101,34 @@
         </label>
       </span>
     </div>
+    <!--File-->
+    <div v-else-if="type == 'file'">
+      <input
+        :value="modelValue"
+        :id="name"
+        :type="type"
+        :required="required"
+        ref="file"
+        accept="image/png, image/jpeg"
+        v-if="uploadReady"
+        @change="
+          $emit('update:modelValue', $event.target.value),
+            setIcon($event),
+            $emit('upload', handleFile())
+        "
+      />
+      <div class="form__file-container" v-if="preview">
+        <img class="form__file" :src="preview" />
+        <!--Delete File Button-->
+        <font-awesome-icon
+          class="form__file-icon"
+          v-if="preview"
+          :icon="'times-circle'"
+          fixed-width
+          @click="removeFile()"
+        />
+      </div>
+    </div>
     <!--Input-->
     <input
       :value="modelValue"
@@ -131,7 +159,7 @@
         'form__icon--invalid': status == 'invalid',
         'fa-spin': icon == 'spinner-third'
       }"
-      v-if="icon"
+      v-if="icon && type != 'file'"
       :icon="[iconPre, icon]"
       fixed-width
     />
@@ -147,10 +175,13 @@ export default {
       iconPre: "fas",
       status: "",
       checked: [],
-      timer: ""
+      timer: "",
+      uploadReady: true,
+      handledFile: "",
+      preview: ""
     };
   },
-  emits: ["update:modelValue", "check", "keyup", "allow-edit"],
+  emits: ["update:modelValue", "check", "keyup", "allow-edit", "upload"],
   props: {
     //Element datas
     modelValue: [String, Array],
@@ -244,6 +275,20 @@ export default {
       } else if (name.includes("discord")) {
         return "^[a-zA-Z0-9._%+-]+#[0-9]+$";
       }
+    },
+    handleFile() {
+      this.handledFile = this.$refs.file.files[0];
+      this.preview = URL.createObjectURL(this.handledFile);
+      return this.handledFile;
+    },
+    removeFile() {
+      this.handledFile = "";
+      this.preview = "";
+      this.uploadReady = false;
+      this.$nextTick(() => {
+        this.uploadReady = true;
+      });
+      this.$emit("upload", null);
     }
   }
 };
@@ -378,6 +423,27 @@ export default {
     top: 27px;
     right: -10px;
     color: $namazu;
+  }
+  &__file-container {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin-top: 20px;
+    border: 3px solid white;
+    box-shadow: 0 0 2px $main-black;
+  }
+  &__file {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+  }
+  &__file-icon {
+    font-size: 20px;
+    position: absolute;
+    top: 3px;
+    right: 0;
+    color: $invalid;
+    cursor: pointer;
   }
 
   //Form elements
