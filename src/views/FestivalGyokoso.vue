@@ -67,7 +67,7 @@
             }
           ]"
           @click="
-            if (festivals.voting) {
+            if (!festivals.voting) {
               currentView = view;
             }
           "
@@ -102,8 +102,7 @@ export default {
       currentWinner: 1,
       timer: "",
       windowHeight: "",
-      views: ["Informations", "Participations"],
-      currentView: "Informations"
+      views: ["Informations", "Participations"]
     };
   },
   components: {
@@ -138,6 +137,13 @@ export default {
         return "FestivalSubmissions";
       } else {
         return "";
+      }
+    },
+    currentView() {
+      if (this.festivals.voting) {
+        return "Participations";
+      } else {
+        return "Informations";
       }
     }
   },
@@ -178,7 +184,6 @@ export default {
   &__banner-container {
     @include flex($direction: column);
     position: relative;
-    margin: 10px;
     height: 100%;
     width: 100%;
     border: 3px solid white;
