@@ -102,7 +102,7 @@
       </span>
     </div>
     <!--File-->
-    <div v-else-if="type == 'file'">
+    <div class="form__container" v-else-if="type == 'file'">
       <input
         :value="modelValue"
         :id="name"
@@ -298,6 +298,9 @@ export default {
 .form {
   @include flex($direction: column, $gap: 25);
   width: 100%;
+  &__container {
+    width: 100%;
+  }
   &__panel {
     @include flex($gap: 25);
     flex-wrap: wrap;
