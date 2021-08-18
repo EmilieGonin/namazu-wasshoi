@@ -50,6 +50,22 @@ export default createStore({
     },
   },
   actions: {
+    getFestivals({ commit }, option) {
+      return new Promise((resolve, reject) => {
+        commit("REQUEST", "pending");
+
+        api.get("festivals/" + option)
+        .then((response) => {
+          commit("REQUEST", "success");
+          resolve(response.data);
+        })
+        .catch((e) => {
+          commit("REQUEST", "error");
+          commit("MESSAGE", e.response.data.error);
+          reject();
+        });
+      })
+    },
     setPage({ commit }, [ title, icon ]) {
       commit("SET_PAGE", [ title, icon ]);
     },

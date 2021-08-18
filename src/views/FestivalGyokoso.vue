@@ -1,20 +1,44 @@
 <template lang="html">
-  <div class="festival" :style="setSize">
-    <div class="festival__banner-container">
+  <div class="festival" :style="setSize" v-if="festivals">
+    <div class="festival__banner-panel">
       <div class="festival__title">
         Festival Gyôkoso
       </div>
-      <img class="festival__banner" src="@/assets/sample.png" alt="" />
-      <div class="festival__legend">
-        « Theme » par Gagnant • Participation gagnante de la précédente édition
-      </div>
+      <template v-for="winner in festivals.winners" :key="winner.id">
+        <div
+          class="festival__banner-container"
+          v-if="currentWinner == winner.id"
+        >
+          <transition name="fade">
+            <div class="festival__banner-helper">
+              <img
+                class="festival__banner"
+                :src="winner.url"
+                :alt="
+                  festivals.previous.theme + ' par ' + winner.User.character
+                "
+                :title="
+                  festivals.previous.theme + ' par ' + winner.User.character
+                "
+              />
+              <div class="festival__legend">
+                « {{ festivals.previous.theme }} » par
+                {{ winner.User.character }} • Participation gagnante de la
+                précédente édition
+              </div>
+            </div>
+          </transition>
+        </div>
+      </template>
     </div>
     <div class="festival__theme">
       <div class="festival__heading">
-        xème édition du Festival Gyôkoso
+        {{ festivals.current.theme }}
+      </div>
+      <div class="festival__subheading">
+        {{ festivals.current.id }}ème édition du Festival Gyôkoso
       </div>
       <div class="festival__infos">
-        Les inscriptions sont ouvertes !
         <AppButton>Participer</AppButton>
         <span class="festival__deadline">Date limite : 25/06 - 20:00</span>
       </div>
@@ -27,10 +51,13 @@
             {
               'button--alt--inactive': currentView != view
             },
-            { 'button--alt--disabled': view == 'Participations' && !voting }
+            {
+              'button--alt--disabled':
+                view == 'Participations' && !festivals.voting
+            }
           ]"
           @click="
-            if (voting) {
+            if (festivals.voting) {
               currentView = view;
             }
           "
@@ -60,11 +87,11 @@ export default {
   },
   data() {
     return {
+      festivals: "",
+      currentWinner: 1,
       windowHeight: "",
       views: ["Informations", "Participations"],
-      currentView: "Informations",
-      //temp
-      voting: false
+      currentView: "Informations"
     };
   },
   components: {
@@ -75,6 +102,10 @@ export default {
   mounted() {
     this.checkSize();
     window.addEventListener("resize", this.checkSize);
+    this.$store.dispatch("getFestivals", "now").then(festivals => {
+      this.festivals = festivals;
+      this.carousel();
+    });
   },
   computed: {
     setSize() {
@@ -99,6 +130,15 @@ export default {
       } else {
         this.windowHeight = "unset";
       }
+    },
+    carousel() {
+      setTimeout(() => {
+        this.currentWinner++;
+        setTimeout(() => {
+          this.currentWinner--;
+          this.carousel();
+        }, 5000);
+      }, 5000);
     }
   }
 };
@@ -110,26 +150,40 @@ export default {
     flex-direction: column;
   }
   @include flex;
-  &__banner-container {
-    @include flex($direction: column);
+  &__banner-panel {
+    @include flex($justify: space-between, $direction: column);
     position: relative;
     width: 100%;
     height: 100%;
+    background: white;
+  }
+  &__banner-container {
+    @include flex($direction: column);
+    position: relative;
+    margin: 10px;
+    height: 100%;
+    width: 100%;
+    border: 3px solid white;
+    box-shadow: 0 0 2px $main-black;
+  }
+  &__banner-helper {
+    @include absolute-center;
   }
   &__banner {
+    @include absolute-center;
     display: block;
     width: 100%;
     height: 100%;
     min-height: 400px;
     object-fit: cover;
-    border-top: 3px solid white;
-    box-shadow: 0 0 2px $main-black;
   }
   &__legend {
     @include responsive(700) {
       font-size: $font-small - 2;
     }
     @include flex;
+    position: absolute;
+    bottom: 0;
     width: 100%;
     padding: 10px 27px;
     background: $namazu;
@@ -163,11 +217,15 @@ export default {
     @include cursive(50);
     @include font-relief($namazu);
     width: 100%;
-    background: white;
     padding: 5px;
   }
   &__heading {
-    @include title(30);
+    @include cursive(35);
+    @include font-relief($namazu);
+    text-align: center;
+  }
+  &__subheading {
+    @include title(25);
     text-align: center;
   }
   &__infos {
