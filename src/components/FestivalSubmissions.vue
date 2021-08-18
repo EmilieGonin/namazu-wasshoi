@@ -1,35 +1,35 @@
 <template lang="html">
-  <div class="submissions">
-    <div class="submissions__container submissions__container--selected">
-      <img class="submissions__img" src="@/assets/sample.png" alt="" />
-    </div>
-    <div class="submissions__container">
-      <img class="submissions__img" src="@/assets/sample.png" alt="" />
-    </div>
-    <div class="submissions__container">
-      <img class="submissions__img" src="@/assets/sample.png" alt="" />
-    </div>
-    <div class="submissions__container">
-      <img class="submissions__img" src="@/assets/sample.png" alt="" />
-    </div>
-    <div class="submissions__container">
-      <img class="submissions__img" src="@/assets/sample.png" alt="" />
-    </div>
-    <div class="submissions__container">
-      <img class="submissions__img" src="@/assets/sample.png" alt="" />
+  <div class="submissions" v-if="submissions">
+    <div
+      class="submissions__container"
+      :class="{ 'submissions__container--selected': selected == submission.id }"
+      v-for="submission in submissions"
+      :key="submission.id"
+      @click="selected ? (selected = '') : (selected = submission.id)"
+    >
+      <img
+        class="submissions__img"
+        :src="submission.url"
+        :alt="submission.description"
+        :title="submission.description"
+      />
     </div>
   </div>
 </template>
 
 <script>
-// import AppButton from "@/components/AppButton.vue";
-
 export default {
   name: "FestivalSubmissions",
   data() {
     return {
+      submissions: "",
       selected: ""
     };
+  },
+  mounted() {
+    this.$store.dispatch("getFestivals", "now").then(festivals => {
+      this.submissions = festivals.current.Screenshots;
+    });
   }
 };
 </script>
@@ -43,7 +43,6 @@ export default {
     border: 3px solid white;
     &--selected {
       border: 3px solid veil($valid);
-      border-radius: 5px;
     }
   }
   &__img {
