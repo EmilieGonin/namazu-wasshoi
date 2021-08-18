@@ -52,7 +52,7 @@ export default createStore({
   actions: {
     getFestivals({ commit }, option) {
       return new Promise((resolve, reject) => {
-        commit("REQUEST", "pending");
+        // commit("REQUEST", "pending");
 
         api.get("festivals/" + option)
         .then((response) => {
