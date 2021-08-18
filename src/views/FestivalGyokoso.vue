@@ -59,20 +59,20 @@
           :class="[
             'button--alt',
             {
-              'button--alt--inactive': currentView != view
+              'button--alt--inactive': currentView != view.component
             },
             {
               'button--alt--disabled':
-                view == 'Participations' && !festivals.voting
+                view.button == 'Participations' && !festivals.voting
             }
           ]"
           @click="
-            if (!festivals.voting) {
-              currentView = view;
+            if (festivals.voting) {
+              currentView = view.component;
             }
           "
         >
-          {{ view }}
+          {{ view.button }}
         </AppButton>
       </div>
       <transition name="slide-down" mode="out-in">
@@ -102,7 +102,11 @@ export default {
       currentWinner: 1,
       timer: "",
       windowHeight: "",
-      views: ["Informations", "Participations"]
+      views: [
+        { button: "Informations", component: "Infos" },
+        { button: "Participations", component: "Submissions" }
+      ],
+      currentView: "Infos"
     };
   },
   components: {
@@ -131,20 +135,7 @@ export default {
       };
     },
     currentViewComponent() {
-      if (this.currentView == "Informations") {
-        return "FestivalInfos";
-      } else if (this.currentView == "Participations") {
-        return "FestivalSubmissions";
-      } else {
-        return "";
-      }
-    },
-    currentView() {
-      if (this.festivals.voting) {
-        return "Participations";
-      } else {
-        return "Informations";
-      }
+      return "Festival" + this.currentView;
     }
   },
   methods: {
