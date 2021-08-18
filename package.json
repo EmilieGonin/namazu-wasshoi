@@ -19,6 +19,7 @@
     "@xivapi/js": "^0.3.2",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "date-fns": "^2.23.0",
     "vue": "^3.0.0",
     "vue-meta": "^3.0.0-alpha.9",
     "vue-router": "^4.0.0-0",
