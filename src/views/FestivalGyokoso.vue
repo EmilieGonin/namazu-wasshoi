@@ -1,8 +1,11 @@
 <template lang="html">
   <div class="festival" :style="setSize" v-if="festivals">
     <div class="festival__banner-panel">
-      <div class="festival__title">
-        Festival Gyôkoso
+      <div class="festival__title-container">
+        <div class="festival__title">
+          Festival Gyôkoso
+        </div>
+        <div class="festival__subtitle">Concours de screenshot mensuel</div>
       </div>
       <template v-for="winner in festivals.winners" :key="winner.id">
         <div
@@ -157,21 +160,25 @@ export default {
 
 <style lang="scss" scoped>
 .festival {
-  @include responsive(940) {
+  @include responsive(1024) {
     flex-direction: column;
   }
   @include flex;
   &__banner-panel {
-    @include flex($justify: space-between, $direction: column);
+    @include flex($direction: column);
     position: relative;
     width: 100%;
     height: 100%;
     background: white;
   }
   &__banner-container {
+    @include responsive(425) {
+      min-height: 300px;
+    }
     @include flex($direction: column);
     position: relative;
     height: 100%;
+    min-height: 600px;
     width: 100%;
     border: 3px solid white;
     box-shadow: 0 0 2px $main-black;
@@ -184,7 +191,6 @@ export default {
     display: block;
     width: 100%;
     height: 100%;
-    min-height: 400px;
     object-fit: cover;
   }
   &__legend {
@@ -206,31 +212,44 @@ export default {
     height: 200px;
   }
   &__theme {
-    @include responsive(940) {
+    @include responsive(1024) {
       width: 100%;
       overflow: visible;
       height: auto;
+      padding: 5px 20px;
     }
     width: 50%;
     height: 100%;
-    padding: 50px;
-    padding-bottom: 20px;
+    padding: 20px 50px;
     background: white;
     overflow: hidden scroll;
   }
+  &__title-container {
+    padding: 5px;
+    text-align: center;
+  }
   &__title {
-    @include flex;
+    @include responsive(320) {
+      font-size: 40px;
+    }
     @include cursive(50);
     @include font-relief($namazu);
-    width: 100%;
-    padding: 5px;
+  }
+  &__subtitle {
+    transform: translateY(-5px);
   }
   &__heading {
+    @include responsive(320) {
+      font-size: 30px;
+    }
     @include cursive(40);
     @include font-relief($namazu);
     text-align: center;
   }
   &__subheading {
+    @include responsive(320) {
+      font-size: 20px;
+    }
     @include title(22);
     text-align: center;
   }
