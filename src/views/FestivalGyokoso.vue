@@ -15,15 +15,23 @@
                 class="festival__banner"
                 :src="winner.url"
                 :alt="
-                  festivals.previous.theme + ' par ' + winner.User.character
+                  winner.User
+                    ? festivals.previous.theme + ' par ' + winner.User.character
+                    : festivals.previous.theme
                 "
                 :title="
-                  festivals.previous.theme + ' par ' + winner.User.character
+                  winner.User
+                    ? festivals.previous.theme + ' par ' + winner.User.character
+                    : festivals.previous.theme
                 "
               />
-              <div class="festival__legend">
+              <div class="festival__legend" v-if="winner.User">
                 « {{ festivals.previous.theme }} » par
                 {{ winner.User.character }} • Participation gagnante de la
+                précédente édition
+              </div>
+              <div class="festival__legend" v-else>
+                « {{ festivals.previous.theme }} », participation gagnante de la
                 précédente édition
               </div>
             </div>
@@ -40,7 +48,9 @@
       </div>
       <div class="festival__infos">
         <AppButton>Participer</AppButton>
-        <span class="festival__deadline">Date limite : 25/06 - 20:00</span>
+        <div class="festival__deadline">
+          <AppDate :date="festivals.current.end_date">Date limite :</AppDate>
+        </div>
       </div>
       <div class="festival__menu">
         <AppButton
@@ -77,6 +87,7 @@ import { useMeta } from "vue-meta";
 import FestivalInfos from "@/components/FestivalInfos.vue";
 import FestivalSubmissions from "@/components/FestivalSubmissions.vue";
 import AppButton from "@/components/AppButton.vue";
+import AppDate from "@/components/AppDate.vue";
 
 export default {
   name: "FestivalGyokoso",
@@ -89,6 +100,7 @@ export default {
     return {
       festivals: "",
       currentWinner: 1,
+      timer: "",
       windowHeight: "",
       views: ["Informations", "Participations"],
       currentView: "Informations"
@@ -97,7 +109,8 @@ export default {
   components: {
     FestivalInfos,
     FestivalSubmissions,
-    AppButton
+    AppButton,
+    AppDate
   },
   mounted() {
     this.checkSize();
@@ -106,6 +119,11 @@ export default {
       this.festivals = festivals;
       this.carousel();
     });
+  },
+  beforeUnmounted() {
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
   },
   computed: {
     setSize() {
@@ -132,7 +150,7 @@ export default {
       }
     },
     carousel() {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.currentWinner++;
         setTimeout(() => {
           this.currentWinner--;
@@ -220,12 +238,12 @@ export default {
     padding: 5px;
   }
   &__heading {
-    @include cursive(35);
+    @include cursive(40);
     @include font-relief($namazu);
     text-align: center;
   }
   &__subheading {
-    @include title(25);
+    @include title(22);
     text-align: center;
   }
   &__infos {
