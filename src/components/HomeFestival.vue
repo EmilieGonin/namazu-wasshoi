@@ -1,11 +1,8 @@
 <template lang="html">
   <div class="festival" v-if="festivals">
     <div class="festival__line"></div>
-    <template v-for="winner in festivals.winners" :key="winner.id">
-      <div
-        class="festival__banner-container"
-        v-show="currentWinner == winner.id"
-      >
+    <template v-for="(winner, index) in festivals.winners" :key="winner.id">
+      <div class="festival__banner-container" v-show="currentWinner == index">
         <transition name="fade">
           <div>
             <img
@@ -71,7 +68,7 @@ export default {
   data() {
     return {
       festivals: "",
-      currentWinner: 1,
+      currentWinner: 0,
       timer: ""
     };
   },

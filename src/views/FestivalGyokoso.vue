@@ -7,11 +7,8 @@
         </div>
         <div class="festival__subtitle">Concours de screenshot mensuel</div>
       </div>
-      <template v-for="winner in festivals.winners" :key="winner.id">
-        <div
-          class="festival__banner-container"
-          v-if="currentWinner == winner.id"
-        >
+      <template v-for="(winner, index) in festivals.winners" :key="winner.id">
+        <div class="festival__banner-container" v-if="currentWinner == index">
           <transition name="fade">
             <div class="festival__banner-helper">
               <img
@@ -97,7 +94,7 @@ export default {
   data() {
     return {
       festivals: "",
-      currentWinner: 1,
+      currentWinner: 0,
       timer: "",
       windowHeight: "",
       views: [
