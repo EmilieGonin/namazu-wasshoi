@@ -39,7 +39,7 @@
       <div class="festival__infos festival__infos--heading">
         <span v-if="festivals.voting">Les votes sont ouverts !</span>
         <span v-else
-          >Participez à la {{ festivals.current.id }}ème édition !</span
+          >Participez à la {{ festivals.current.edition }}ème édition !</span
         >
       </div>
       <div class="festival__theme">

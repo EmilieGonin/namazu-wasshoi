@@ -47,7 +47,7 @@
         {{ festivals.current.theme }}
       </div>
       <div class="festival__subheading">
-        {{ festivals.current.id }}ème édition du Festival Gyôkoso
+        {{ festivals.current.edition }}ème édition du Festival Gyôkoso
       </div>
       <div class="festival__infos">
         <AppButton
