@@ -15,7 +15,7 @@ const formValidate = {
               "Veuillez renseigner tous les champs requis du formulaire.";
             this.$store.dispatch("error", error);
             throw error;
-          } else if (value) {
+          } else if (value && name != "file") {
             form[name] = value;
 
             if (
