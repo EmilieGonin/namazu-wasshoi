@@ -323,7 +323,24 @@ export default createStore({
           reject(error);
         })
       })
-    }
+    },
+    submitScreenshot({ commit, state }, formData) {
+      return new Promise((resolve, reject) => {
+        formData.append("userId", JSON.stringify(state.user.id));
+        commit("REQUEST", "pending");
+        api.post("screenshots/", formData)
+        .then(() => {
+          commit("REQUEST", "success");
+          commit("MESSAGE", "Merci ! Ta participation a bien été reçue.");
+          resolve();
+        })
+        .catch((error) => {
+          commit("REQUEST", "error");
+          commit("MESSAGE", error.response.data.error);
+          reject(error);
+        })
+      })
+    },
   },
   modules: {
   }

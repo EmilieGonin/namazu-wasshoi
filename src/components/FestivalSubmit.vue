@@ -38,6 +38,9 @@ export default {
     FormElement,
     AppButton
   },
+  props: {
+    festival: [String, Number]
+  },
   data() {
     return {
       file: "",
@@ -49,12 +52,15 @@ export default {
   methods: {
     submit() {
       try {
-        console.log(this.form_file);
         const form = this.formValidate();
-        console.log(form.file);
-        // this.$store.dispatch("submitScreenshot", form).catch(e => {
-        //   console.error(e);
-        // });
+        const formData = new FormData();
+
+        formData.append("file", this.form_file);
+        formData.append("description", form.description);
+        formData.append("festival", this.festival);
+        this.$store.dispatch("submitScreenshot", formData).catch(e => {
+          console.error(e);
+        });
       } catch (e) {
         console.error(e);
       }
