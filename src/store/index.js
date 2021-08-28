@@ -349,6 +349,26 @@ export default createStore({
         })
       })
     },
+    submitVote({ commit, state }, screenshotId) {
+      return new Promise((resolve, reject) => {
+        const req = {
+          userId: state.user.id,
+          screenshotId: screenshotId
+        }
+        // commit("REQUEST", "pending");
+        api.post("festivals/vote", req)
+        .then((response) => {
+          commit("REQUEST", "success");
+          commit("MESSAGE", response.data.message);
+          resolve();
+        })
+        .catch((error) => {
+          commit("REQUEST", "error");
+          commit("MESSAGE", error.response.data.error);
+          reject(error);
+        })
+      })
+    },
   },
   modules: {
   }
