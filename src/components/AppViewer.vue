@@ -64,7 +64,6 @@ export default {
     border-radius: 0 0 0 15px;
   }
   &__description {
-    max-width: 100%;
     background: white;
     padding: 5px 20px;
     border-radius: 0 0 10px 10px;
