@@ -6,6 +6,7 @@
   </metainfo>
   <AppLoading :loading="status == 'pending'" />
   <AppMessages :status="status" :message="message" />
+  <AppViewer />
   <AppNav />
   <AppHeading :title="title" :icon="icon">{{ title }}</AppHeading>
   <router-view class="content" />
@@ -20,6 +21,7 @@ import AppMessages from "@/components/AppMessages.vue";
 import AppHeading from "@/components/AppHeading.vue";
 import AppNav from "@/components/AppNav.vue";
 import AppFooter from "@/components/AppFooter.vue";
+import AppViewer from "@/components/AppViewer.vue";
 
 export default {
   components: {
@@ -27,7 +29,8 @@ export default {
     AppMessages,
     AppHeading,
     AppNav,
-    AppFooter
+    AppFooter,
+    AppViewer
   },
   setup() {
     useMeta({

@@ -12,7 +12,8 @@ export default createStore({
       message: "",
       title: "",
       icon: "",
-      user: user ? user : ""
+      user: user ? user : "",
+      viewer: ""
     }
   },
   getters: {
@@ -42,6 +43,10 @@ export default createStore({
       state.user = user;
       state.status = "success";
     },
+    SET_IMAGE_VIEWER(state, image) {
+      state.viewer = image;
+      state.status = "success";
+    },
     LOGOUT(state) {
       state.user = "";
       localStorage.removeItem("user");
@@ -68,6 +73,9 @@ export default createStore({
     },
     setPage({ commit }, [ title, icon ]) {
       commit("SET_PAGE", [ title, icon ]);
+    },
+    setImageViewer({ commit }, image) {
+      commit("SET_IMAGE_VIEWER", image);
     },
     setFreeCompany({ commit }) {
       return new Promise((resolve, reject) => {
