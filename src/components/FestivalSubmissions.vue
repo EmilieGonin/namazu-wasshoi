@@ -17,6 +17,14 @@
             : (selected = submission.id)
         "
       />
+      <transition name="fade">
+        <font-awesome-icon
+          class="submissions__selected"
+          :icon="'check-circle'"
+          fixed-width
+          v-if="selected == submission.id"
+        />
+      </transition>
       <div
         class="submissions__icon"
         @click="setImageViewer(submission.url, submission.description)"
@@ -57,9 +65,10 @@ export default {
   margin-bottom: 15px;
   &__container {
     position: relative;
-    border: 3px solid white;
+    border: 2px solid white;
+    transition: all 500ms;
     &--selected {
-      border: 3px solid veil($valid);
+      border: 2px solid veil($valid);
     }
   }
   &__img {
@@ -71,6 +80,15 @@ export default {
     border: 5px solid white;
     border-bottom: 40px solid white;
     box-shadow: 0 0 2px $main-black;
+  }
+  &__selected {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    font-size: 30px;
+    color: $valid;
   }
   &__icon {
     position: absolute;
