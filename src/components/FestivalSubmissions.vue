@@ -1,43 +1,53 @@
 <template lang="html">
   <div class="submissions" v-if="submissions">
-    <div
-      class="submissions__container"
-      :class="{ 'submissions__container--selected': selected == submission.id }"
-      v-for="submission in submissions"
-      :key="submission.id"
-    >
-      <img
-        class="submissions__img"
-        :src="submission.url"
-        :alt="submission.description"
-        :title="submission.description"
-        @click="
-          selected == submission.id
-            ? (selected = '')
-            : (selected = submission.id)
-        "
-      />
-      <transition name="fade">
-        <font-awesome-icon
-          class="submissions__selected"
-          :icon="'check-circle'"
-          fixed-width
-          v-if="selected == submission.id"
-        />
-      </transition>
+    <div class="submissions__container">
       <div
-        class="submissions__icon"
-        @click="setImageViewer(submission.url, submission.description)"
+        class="submissions__img-container"
+        :class="{
+          'submissions__img-container--selected': selected == submission.id
+        }"
+        v-for="submission in submissions"
+        :key="submission.id"
       >
-        <font-awesome-icon :icon="'expand-alt'" fixed-width />
+        <img
+          class="submissions__img"
+          :src="submission.url"
+          :alt="submission.description"
+          :title="submission.description"
+          @click="
+            form_selected == submission.id
+              ? (selected = '')
+              : (selected = submission.id)
+          "
+        />
+        <transition name="fade">
+          <font-awesome-icon
+            class="submissions__selected"
+            :icon="'check-circle'"
+            fixed-width
+            v-if="selected == submission.id"
+          />
+        </transition>
+        <div
+          class="submissions__icon"
+          @click="setImageViewer(submission.url, submission.description)"
+        >
+          <font-awesome-icon :icon="'expand-alt'" fixed-width />
+        </div>
       </div>
     </div>
+    <AppButton @click="submit">Valider le vote</AppButton>
   </div>
 </template>
 
 <script>
+import AppButton from "@/components/AppButton.vue";
+
 export default {
   name: "FestivalSubmissions",
+  components: {
+    AppButton
+  },
   data() {
     return {
       submissions: "",
@@ -53,6 +63,26 @@ export default {
     setImageViewer(url, title) {
       const image = { url: url, title: title };
       this.$store.dispatch("setImageViewer", image);
+    },
+    submit() {
+      try {
+        if (!this.selected) {
+          const error = "Veuillez choisir une participation.";
+          this.$store.dispatch("error", error);
+          throw error;
+        }
+
+        this.$store
+          .dispatch("submitVote", this.selected)
+          .then(() => {
+            this.selected = "";
+          })
+          .catch(e => {
+            console.error(e);
+          });
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
 };
@@ -60,10 +90,13 @@ export default {
 
 <style lang="scss" scoped>
 .submissions {
-  @include flex($gap: 5);
-  flex-wrap: wrap;
-  margin-bottom: 15px;
+  @include flex($direction: column, $gap: 10);
   &__container {
+    @include flex($gap: 5);
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+  }
+  &__img-container {
     position: relative;
     border: 2px solid white;
     transition: all 500ms;
