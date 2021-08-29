@@ -1,21 +1,18 @@
 <template lang="html">
   <div class="admin">
     <div class="admin__menu">
-      <AppButton @click="[getApplicants(), (currentView = 'applicants')]"
-        >Candidatures</AppButton
-      >
-      <AppButton @click="[getMembers(), (currentView = 'members')]"
-        >Membres</AppButton
-      >
-      <AppButton @click="currentView = 'festival'">Festival Gyôkoso</AppButton>
+      <AppButton @click="getDatas('Applicants')">Candidatures</AppButton>
+      <AppButton @click="getDatas('Members')">Membres</AppButton>
+      <AppButton @click="getDatas('Festivals')">Festival Gyôkoso</AppButton>
+      <AppButton @click="getDatas('Parameters')">Paramètres</AppButton>
     </div>
     <div
       class="admin__empty"
-      v-if="currentView == 'applicants' && datas.length == 0"
+      v-if="currentView == 'Applicants' && datas.length == 0"
     >
       Aucune candidature disponible
     </div>
-    <div v-else-if="currentView == 'applicants'">
+    <div v-else-if="currentView == 'Applicants'">
       <AdminPanelCell
         v-for="(data, index) in datas"
         :key="data.id"
@@ -24,7 +21,7 @@
         @delete="deleteItem(index)"
       />
     </div>
-    <div v-if="currentView == 'members'">
+    <div v-if="currentView == 'Members'">
       <AdminPanelCell
         v-for="(data, index) in datas"
         :key="data.id"
@@ -62,16 +59,11 @@ export default {
     clear() {
       localStorage.clear();
     },
-    getApplicants() {
+    getDatas(datas) {
       this.datas = "";
-      this.$store.dispatch("getApplicants").then(applicants => {
-        this.datas = applicants;
-      });
-    },
-    getMembers() {
-      this.datas = "";
-      this.$store.dispatch("getMembers").then(members => {
-        this.datas = members;
+      this.$store.dispatch("get" + datas).then(storeDatas => {
+        this.datas = storeDatas;
+        this.currentView = datas;
       });
     },
     deleteItem(index) {
