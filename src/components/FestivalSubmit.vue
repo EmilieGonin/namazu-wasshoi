@@ -57,7 +57,7 @@ export default {
 
         formData.append("file", this.form_file);
         formData.append("description", form.description);
-        formData.append("festival", this.festival);
+        formData.append("FestivalId", this.festival);
         this.$store.dispatch("submitScreenshot", formData).catch(e => {
           console.error(e);
         });

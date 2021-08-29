@@ -48,6 +48,9 @@ export default {
   components: {
     AppButton
   },
+  props: {
+    festival: [String, Number]
+  },
   data() {
     return {
       submissions: "",
@@ -72,8 +75,10 @@ export default {
           throw error;
         }
 
+        const form = { ScreenshotId: this.selected, FestivalId: this.festival };
+
         this.$store
-          .dispatch("submitVote", this.selected)
+          .dispatch("submitVote", form)
           .then(() => {
             this.selected = "";
           })

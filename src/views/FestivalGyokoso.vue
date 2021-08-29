@@ -72,7 +72,7 @@
       <transition name="slide-down" mode="out-in">
         <component
           :is="currentViewComponent"
-          :festival="festivals.current.edition"
+          :festival="festivals.current.id"
         ></component>
       </transition>
     </div>
