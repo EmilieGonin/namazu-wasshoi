@@ -334,12 +334,12 @@ export default createStore({
     },
     submitScreenshot({ commit, state }, formData) {
       return new Promise((resolve, reject) => {
-        formData.append("userId", JSON.stringify(state.user.id));
+        formData.append("UserId", JSON.stringify(state.user.id));
         commit("REQUEST", "pending");
         api.post("screenshots/", formData)
-        .then(() => {
+        .then((response) => {
           commit("REQUEST", "success");
-          commit("MESSAGE", "Merci ! Ta participation a bien été reçue.");
+          commit("MESSAGE", response.data.message);
           resolve();
         })
         .catch((error) => {
@@ -349,11 +349,11 @@ export default createStore({
         })
       })
     },
-    submitVote({ commit, state }, screenshotId) {
+    submitVote({ commit, state }, form) {
       return new Promise((resolve, reject) => {
         const req = {
-          userId: state.user.id,
-          screenshotId: screenshotId
+          UserId: state.user.id,
+          ...form
         }
         // commit("REQUEST", "pending");
         api.post("festivals/vote", req)
