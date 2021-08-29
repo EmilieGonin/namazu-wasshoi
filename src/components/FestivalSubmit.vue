@@ -17,10 +17,9 @@
 
       <FormElement
         v-model="form_description"
-        :label="'Décrivez votre participation'"
+        :label="'Titre ou description (facultatif)'"
         :name="'form_description'"
         :type="'textarea'"
-        :required="true"
       ></FormElement>
       <AppButton @click="submit">Valider la participation</AppButton>
     </form>
@@ -45,7 +44,7 @@ export default {
     return {
       file: "",
       form_file: "",
-      form_description: ""
+      formo_description: ""
     };
   },
   mixins: [formValidate],
@@ -56,8 +55,12 @@ export default {
         const formData = new FormData();
 
         formData.append("file", this.form_file);
-        formData.append("description", form.description);
         formData.append("FestivalId", this.festival);
+
+        if (form.description) {
+          formData.append("description", form.description);
+        }
+
         this.$store.dispatch("submitScreenshot", formData).catch(e => {
           console.error(e);
         });
