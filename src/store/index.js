@@ -290,7 +290,7 @@ export default createStore({
         api.get("users/")
         .then((response) => {
           commit("REQUEST", "success");
-          resolve(response.data.members);
+          resolve(response.data.users);
         })
         .catch((error) => {
           commit("REQUEST", "error");
