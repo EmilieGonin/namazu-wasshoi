@@ -332,6 +332,20 @@ export default createStore({
         })
       })
     },
+    getParameters({ commit }) {
+      return new Promise((resolve, reject) => {
+        api.get("parameters/")
+        .then((response) => {
+          commit("REQUEST", "success");
+          resolve(response.data.parameters);
+        })
+        .catch((error) => {
+          commit("REQUEST", "error");
+          commit("MESSAGE", error.response.data.error);
+          reject(error);
+        })
+      })
+    },
     submitScreenshot({ commit, state }, formData) {
       return new Promise((resolve, reject) => {
         formData.append("UserId", JSON.stringify(state.user.id));
