@@ -59,10 +59,14 @@ export default createStore({
       return new Promise((resolve, reject) => {
         // commit("REQUEST", "pending");
 
-        api.get("festivals/" + option)
+        api.get("festivals/" + (option ? option : ''))
         .then((response) => {
           commit("REQUEST", "success");
-          resolve(response.data);
+          if (option) {
+            resolve(response.data);
+          } else {
+            resolve(response.data.festivals);
+          }
         })
         .catch((e) => {
           commit("REQUEST", "error");
