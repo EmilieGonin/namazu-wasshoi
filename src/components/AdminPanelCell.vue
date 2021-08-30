@@ -2,12 +2,14 @@
   <div class="cell">
     <div class="cell__head">
       <div class="cell__profile">
-        <!--Character Name-->
-        <div
-          class="cell__title"
-          @click="applicant ? redirect(data.characterId) : go(data.id)"
-        >
-          {{ data.character }}
+        <!--Theme / Name-->
+        <div class="cell__title" v-if="data.theme || data.name">
+          {{ data.theme ? data.theme : "" }}
+          {{ data.name ? data.name : "" }}
+        </div>
+        <!--Character-->
+        <div class="cell__title" @click="go(data)" v-if="data.Character">
+          {{ data.Character.name }}
         </div>
         <!--Team-->
         <div v-if="data.team">
@@ -15,141 +17,68 @@
             {{ data.team }}
           </strong>
         </div>
-        <!--Name-->
-        <div v-if="data.name">
-          <font-awesome-icon :icon="'user'" fixed-width />
-          {{ data.name }}
-        </div>
-        <!--Discord-->
-        <div v-if="data.discord">
-          <font-awesome-icon :icon="['fab', 'discord']" fixed-width />
-          {{ data.discord }}
-        </div>
-        <!--Birthday-->
-        <div v-if="data.birthday">
-          <font-awesome-icon :icon="'gift'" fixed-width />
-          {{ data.birthday }}
-        </div>
-        <!--Mic-->
-        <font-awesome-layers v-if="applicant">
-          <font-awesome-icon :icon="'microphone'" fixed-width />
-          <font-awesome-icon
-            :icon="'check-circle'"
-            transform="shrink-6 left-10 down-4"
-            class="valid"
-            v-if="data.mic"
-          />
-          <font-awesome-icon
-            :icon="'times-circle'"
-            transform="shrink-6 left-10 down-4"
-            class="invalid"
-            v-else
-          />
-        </font-awesome-layers>
+        <!--Profile-->
+        <template v-if="data.Profile">
+          <template v-for="(item, name) in data.Profile" :key="item">
+            <!--Mic-->
+            <font-awesome-layers v-if="name == 'mic'">
+              <font-awesome-icon :icon="'microphone'" fixed-width />
+              <font-awesome-icon
+                :icon="'check-circle'"
+                transform="shrink-6 left-10 down-4"
+                class="valid"
+                v-if="item"
+              />
+              <font-awesome-icon
+                :icon="'times-circle'"
+                transform="shrink-6 left-10 down-4"
+                class="invalid"
+                v-else
+              />
+            </font-awesome-layers>
+            <font-awesome-icon
+              :icon="'user'"
+              fixed-width
+              v-if="item && name == 'name'"
+            />
+            <font-awesome-icon
+              :icon="'gift'"
+              fixed-width
+              v-if="item && name == 'birthday'"
+            />
+            <font-awesome-icon
+              :icon="['fab', 'discord']"
+              fixed-width
+              v-if="item && name == 'discord'"
+            />
+            <template v-if="name != 'mic'">{{ item }}</template>
+          </template>
+        </template>
       </div>
-      <AppButton @click="toggle = !toggle" v-if="applicant">
+      <AppButton @click="toggle = !toggle" v-if="view == 'Applicants'">
         <span v-if="!toggle">Afficher la candidature</span>
         <span v-else>Fermer la candidature</span>
       </AppButton>
       <!--Archive Applicant/Delete User-->
       <AppButton
         :small="true"
-        @click="applicant ? deleteApplicant(data.id) : deleteUser(data.id)"
+        @click="remove(data.id)"
+        v-if="view != 'Parameters'"
       >
         <font-awesome-icon :icon="'trash-alt'" fixed-width />
       </AppButton>
     </div>
     <transition name="slide-up">
-      <div class="cell__body" v-show="toggle" v-if="applicant">
-        <!--Availability-->
-        <div class="cell__tab">
-          <div class="cell__cell cell__cell--question">
-            Disponibilités
-          </div>
-          <div class="cell__cell cell__cell--answer">
-            {{ data.availability }}
-          </div>
-        </div>
-        <!--About-->
-        <div class="cell__tab">
-          <div class="cell__cell cell__cell--question">
-            À propos
-          </div>
-          <div class="cell__cell cell__cell--answer">
-            {{ data.about }}
-          </div>
-        </div>
-        <!--Main Class-->
-        <div class="cell__tab">
-          <div class="cell__cell cell__cell--question">
-            Classe principale
-          </div>
-          <div class="cell__cell cell__cell--answer">
-            {{ data.mainClass }}
-          </div>
-        </div>
-        <!--Playtime-->
-        <div class="cell__tab">
-          <div class="cell__cell cell__cell--question">
-            Temps de jeu
-          </div>
-          <div class="cell__cell cell__cell--answer">
-            {{ data.playtime }}
-          </div>
-        </div>
-        <!--Game Activities-->
-        <div class="cell__tab">
-          <div class="cell__cell cell__cell--question">
-            Activités préférées
-          </div>
-          <div class="cell__cell cell__cell--answer">
-            {{ data.gameActivities }}
-          </div>
-        </div>
-        <!--CL-->
-        <div class="cell__tab">
-          <div class="cell__cell cell__cell--question">
-            Choix de CL
-          </div>
-          <div class="cell__cell cell__cell--answer">
-            {{ data.cl }}
-          </div>
-        </div>
-        <!--CL Required-->
-        <div class="cell__tab">
-          <div class="cell__cell cell__cell--question">
-            Critères obligatoires
-          </div>
-          <div class="cell__cell cell__cell--answer">
-            {{ data.clRequired }}
-          </div>
-        </div>
-        <!--Current CL-->
-        <div class="cell__tab">
-          <div class="cell__cell cell__cell--question">
-            CL actuelle
-          </div>
-          <div class="cell__cell cell__cell--answer">
-            {{ data.currentCl }}
-          </div>
-        </div>
-        <!--exp-->
-        <div class="cell__tab">
-          <div class="cell__cell cell__cell--question">
-            Expérience HL
-          </div>
-          <div class="cell__cell cell__cell--answer">
-            {{ data.exp }}
-          </div>
-        </div>
-        <!--Savage-->
-        <div class="cell__tab">
-          <div class="cell__cell cell__cell--question">
-            Roster sadique
-          </div>
-          <div class="cell__cell cell__cell--answer">
-            {{ data.savageRequired }}
-          </div>
+      <div class="cell__body" v-show="toggle" v-if="view == 'Applicants'">
+        <div v-for="item in data" :key="item" class="cell__tab">
+          <template v-if="item.label && item.value">
+            <div class="cell__cell cell__cell--question">
+              {{ item.label }}
+            </div>
+            <div class="cell__cell cell__cell--answer">
+              {{ item.value }}
+            </div>
+          </template>
         </div>
       </div>
     </transition>
@@ -172,28 +101,32 @@ export default {
   emits: ["delete"],
   props: {
     data: Object,
-    applicant: Boolean
+    view: String
   },
   methods: {
-    redirect(id) {
-      const lodestone = "https://fr.finalfantasyxiv.com/lodestone/character/";
-      window.open(lodestone + id);
-    },
-    go(id) {
-      this.$router.push("/user/" + id);
-    },
-    deleteApplicant(id) {
-      if (confirm("Voulez-vous vraiment supprimer cette candidature ?")) {
-        this.$store.dispatch("deleteApplicant", id).then(() => {
-          this.$emit("delete");
-        });
+    go(data) {
+      if (this.view == "Applicants") {
+        const id = data.Character.id;
+        const lodestone = "https://fr.finalfantasyxiv.com/lodestone/character/";
+        window.open(lodestone + id);
+      } else if (this.view == "Members") {
+        const id = data.id;
+        this.$router.push("/user/" + id);
       }
     },
-    deleteUser(id) {
-      if (confirm("Voulez-vous vraiment supprimer ce membre ?")) {
-        this.$store.dispatch("deleteUser", id).then(() => {
-          this.$emit("delete");
-        });
+    remove(id) {
+      if (this.view == "Applicants") {
+        if (confirm("Voulez-vous vraiment supprimer cette candidature ?")) {
+          this.$store.dispatch("deleteApplicant", id).then(() => {
+            this.$emit("delete");
+          });
+        }
+      } else if (this.view == "Members") {
+        if (confirm("Voulez-vous vraiment supprimer ce membre ?")) {
+          this.$store.dispatch("deleteUser", id).then(() => {
+            this.$emit("delete");
+          });
+        }
       }
     }
   }
@@ -215,6 +148,7 @@ export default {
   }
   &__title {
     @include page-title;
+    font-size: 27px;
     transform: translateY(2px);
     cursor: pointer;
   }

@@ -1,10 +1,21 @@
 <template lang="html">
   <div class="admin">
     <div class="admin__menu">
-      <AppButton @click="getDatas('Applicants')">Candidatures</AppButton>
-      <AppButton @click="getDatas('Members')">Membres</AppButton>
-      <AppButton @click="getDatas('Festivals')">Festival Gyôkoso</AppButton>
-      <AppButton @click="getDatas('Parameters')">Paramètres</AppButton>
+      <AppButton @click="getDatas('Applicants')" :iconR="'user-check'"
+        >Candidatures</AppButton
+      >
+      <AppButton @click="getDatas('Members')" :iconR="'users'"
+        >Membres</AppButton
+      >
+      <AppButton @click="getDatas('Festivals')" :iconR="'camera'"
+        >Festivals Gyôkoso</AppButton
+      >
+      <AppButton @click="view('NewFestival')" :iconR="'plus'"
+        >Créer un Festival</AppButton
+      >
+      <AppButton @click="getDatas('Parameters')" :iconR="'cog'"
+        >Paramètres du site</AppButton
+      >
     </div>
     <div
       class="admin__empty"
@@ -12,20 +23,13 @@
     >
       Aucune candidature disponible
     </div>
-    <div v-else-if="currentView == 'Applicants'">
+    <div v-else-if="currentView">
+      <AdminPanelFestival v-if="currentView == 'NewFestival'" />
       <AdminPanelCell
         v-for="(data, index) in datas"
         :key="data.id"
         :data="data"
-        :applicant="true"
-        @delete="deleteItem(index)"
-      />
-    </div>
-    <div v-if="currentView == 'Members'">
-      <AdminPanelCell
-        v-for="(data, index) in datas"
-        :key="data.id"
-        :data="data"
+        :view="currentView"
         @delete="deleteItem(index)"
       />
     </div>
@@ -37,12 +41,14 @@
 import { useMeta } from "vue-meta";
 import AppButton from "@/components/AppButton.vue";
 import AdminPanelCell from "@/components/AdminPanelCell.vue";
+import AdminPanelFestival from "@/components/AdminPanelFestival.vue";
 
 export default {
   name: "AdminPanel",
   components: {
     AppButton,
-    AdminPanelCell
+    AdminPanelCell,
+    AdminPanelFestival
   },
   setup() {
     useMeta({
@@ -62,9 +68,14 @@ export default {
     getDatas(datas) {
       this.datas = "";
       this.$store.dispatch("get" + datas).then(storeDatas => {
+        console.log(storeDatas);
         this.datas = storeDatas;
         this.currentView = datas;
       });
+    },
+    view(view) {
+      this.datas = "";
+      this.currentView = view;
     },
     deleteItem(index) {
       this.datas.splice(index, 1);
