@@ -17,21 +17,25 @@
         >Paramètres du site</AppButton
       >
     </div>
-    <div
-      class="admin__empty"
-      v-if="currentView == 'Applicants' && datas.length == 0"
-    >
-      Aucune candidature disponible
-    </div>
-    <div v-else-if="currentView">
-      <AdminPanelFestival v-if="currentView == 'NewFestival'" />
-      <AdminPanelCell
-        v-for="(data, index) in datas"
-        :key="data.id"
-        :data="data"
-        :view="currentView"
-        @delete="deleteItem(index)"
-      />
+    <div class="admin__panel" :class="{ 'admin__panel--open': currentView }">
+      <transition name="quick-fade" mode="out-in">
+        <div
+          class="admin__empty"
+          v-if="currentView == 'Applicants' && datas.length == 0"
+        >
+          Aucune candidature disponible
+        </div>
+        <AdminPanelFestival v-else-if="currentView == 'NewFestival'" />
+        <div v-else-if="currentView">
+          <AdminPanelCell
+            v-for="(data, index) in datas"
+            :key="data.id"
+            :data="data"
+            :view="currentView"
+            @delete="deleteItem(index)"
+          />
+        </div>
+      </transition>
     </div>
     <AppButton @click="clear" class="admin__button">Clear Cache</AppButton>
   </div>
@@ -66,6 +70,7 @@ export default {
       localStorage.clear();
     },
     getDatas(datas) {
+      this.currentView = "";
       this.datas = "";
       this.$store.dispatch("get" + datas).then(storeDatas => {
         console.log(storeDatas);
@@ -108,6 +113,22 @@ export default {
     text-align: center;
     background-color: $invalid;
     color: white;
+  }
+  &__panel {
+    @include responsive(1024) {
+      padding: 20px;
+    }
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    border-radius: 25px;
+    border: 3px dotted $minor-white;
+    padding: 50px;
+    transition: all 500ms;
+    &--open {
+      border: 3px dotted white;
+      box-shadow: 0 0 5px $grey;
+    }
   }
 }
 </style>

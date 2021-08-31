@@ -14,7 +14,7 @@ import {
   //Activities
   faCalendarWeek, faDungeon, faCamera, faImages, faGift,
   //Misc
-  faBars, faArrowRight, faPlus, faCheckCircle, faTimesCircle, faTimes, faExpandAlt
+  faBars, faChevronUp, faArrowRight, faPlus, faCheckCircle, faTimesCircle, faTimes, faExpandAlt
 } from '@fortawesome/free-solid-svg-icons'
 import { faDiscord } from '@fortawesome/free-brands-svg-icons'
 import { faHomeLgAlt, faStars, faUserCrown } from '@fortawesome/pro-solid-svg-icons'
@@ -29,7 +29,7 @@ library.add(
   //Activities
   faCalendarWeek, faDungeon, faCamera, faImages, faGift,
   //Misc
-  faBars, faArrowRight, faPlus, faCheckCircle, faTimesCircle, faTimes, faExpandAlt,
+  faBars, faChevronUp, faArrowRight, faPlus, faCheckCircle, faTimesCircle, faTimes, faExpandAlt,
   //Brands
   faDiscord,
   //Pro

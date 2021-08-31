@@ -55,9 +55,18 @@
           </template>
         </template>
       </div>
+      <!--Buttons-->
       <AppButton @click="toggle = !toggle" v-if="view == 'Applicants'">
         <span v-if="!toggle">Afficher la candidature</span>
         <span v-else>Fermer la candidature</span>
+      </AppButton>
+      <AppButton
+        :small="true"
+        @click="toggle = !toggle"
+        v-if="view == 'Festivals' && data.Screenshots.length"
+      >
+        <font-awesome-icon :icon="'images'" fixed-width v-if="!toggle" />
+        <font-awesome-icon :icon="'chevron-up'" fixed-width v-else />
       </AppButton>
       <!--Archive Applicant/Delete User-->
       <AppButton
@@ -80,6 +89,24 @@
             </div>
           </template>
         </div>
+      </div>
+    </transition>
+
+    <transition name="appear">
+      <div
+        class="cell__screenshot-container"
+        v-show="toggle"
+        v-if="view == 'Festivals'"
+      >
+        <template v-for="screenshot in data.Screenshots" :key="screenshot.id">
+          <img
+            class="cell__screenshot"
+            :src="screenshot.url"
+            :alt="screenshot.description"
+            :title="screenshot.description"
+            @click="setImageViewer(screenshot.url, screenshot.description)"
+          />
+        </template>
       </div>
     </transition>
   </div>
@@ -128,6 +155,10 @@ export default {
           });
         }
       }
+    },
+    setImageViewer(url, title) {
+      const image = { url: url, title: title };
+      this.$store.dispatch("setImageViewer", image);
     }
   }
 };
@@ -138,9 +169,12 @@ export default {
   @include flex($direction: column);
   position: relative;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1100px;
   padding: 5px;
   margin: auto;
+  margin-bottom: 5px;
+  background-color: white;
+  box-shadow: 0 0 5px $grey;
   &__head {
     @include flex($gap: 10, $align: stretch);
     flex-wrap: wrap;
@@ -156,9 +190,8 @@ export default {
     @include flex($gap: 10, $justify: flex-start);
     flex-wrap: wrap;
     border: 2px solid $namazu;
-    width: 100%;
-    max-width: 800px;
     padding: 3px 10px;
+    flex-grow: 2;
   }
   &__body {
     @include flex($gap: 10);
@@ -175,6 +208,7 @@ export default {
     width: 100%;
     padding: 5px;
     font-size: $font-small;
+    background-color: $minor-white;
     &--question {
       background-color: $namazu;
       border: 2px solid $namazu;
@@ -188,6 +222,17 @@ export default {
       border-radius: 0 0 5px 5px;
       border-top: none;
     }
+  }
+  &__screenshot-container {
+    @include flex($gap: 5);
+    flex-wrap: wrap;
+    padding: 10px;
+  }
+  &__screenshot {
+    display: block;
+    width: 300px;
+    object-fit: cover;
+    cursor: pointer;
   }
 }
 </style>
