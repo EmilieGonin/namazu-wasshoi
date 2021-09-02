@@ -57,7 +57,7 @@ export default createStore({
   actions: {
     getFestivals({ commit }, option) {
       return new Promise((resolve, reject) => {
-        // commit("REQUEST", "pending");
+        commit("REQUEST", "pending");
 
         api.get("festivals/" + (option ? option : ''))
         .then((response) => {
@@ -175,7 +175,7 @@ export default createStore({
     },
     login({ commit }, user) {
       return new Promise((resolve, reject) => {
-        // commit("REQUEST", "pending");
+        commit("REQUEST", "pending");
         api.post("users/login", user)
         .then((response) => {
           commit("SET_USER", response.data.user);
@@ -196,7 +196,7 @@ export default createStore({
     },
     checkUser({ commit }, id) {
       return new Promise((resolve, reject) => {
-        // commit("REQUEST", "pending");
+        commit("REQUEST", "pending");
         api.get("users/" + id)
         .then(response => {
           commit("REQUEST", "success");
@@ -227,7 +227,7 @@ export default createStore({
     },
     editUser({ commit }, [ id, form ]) {
       return new Promise((resolve, reject) => {
-        // commit("REQUEST", "pending");
+        commit("REQUEST", "pending");
         api.put("users/" + id, form)
         .then(response => {
           commit("SET_USER", response.data.user);
@@ -259,7 +259,7 @@ export default createStore({
     },
     getApplicants({ commit }) {
       return new Promise((resolve, reject) => {
-        // commit("REQUEST", "pending");
+        commit("REQUEST", "pending");
         api.get("applicants/")
         .then((response) => {
           commit("REQUEST", "success");
@@ -274,7 +274,7 @@ export default createStore({
     },
     deleteApplicant({ commit }, id) {
       return new Promise((resolve, reject) => {
-        // commit("REQUEST", "pending");
+        commit("REQUEST", "pending");
         api.delete("applicants/" + id)
         .then(() => {
           commit("REQUEST", "success");
@@ -290,7 +290,7 @@ export default createStore({
     },
     getMembers({ commit }) {
       return new Promise((resolve, reject) => {
-        // commit("REQUEST", "pending");
+        commit("REQUEST", "pending");
         api.get("users/")
         .then((response) => {
           commit("REQUEST", "success");
@@ -305,7 +305,7 @@ export default createStore({
     },
     deleteUser({ commit }, id) {
       return new Promise((resolve, reject) => {
-        // commit("REQUEST", "pending");
+        commit("REQUEST", "pending");
         api.delete("users/" + id)
         .then((response) => {
           commit("REQUEST", "success");
@@ -373,7 +373,7 @@ export default createStore({
           UserId: state.user.id,
           ...form
         }
-        // commit("REQUEST", "pending");
+        commit("REQUEST", "pending");
         api.post("festivals/vote", req)
         .then((response) => {
           commit("REQUEST", "success");

@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="loading" v-if="loading">
+  <div class="loading" v-if="loading && ready">
     <div class="loading__ball loading__ball--mog"></div>
     <div class="loading__ball loading__ball--chocobo"></div>
     <div class="loading__ball loading__ball--pampa"></div>
@@ -12,6 +12,20 @@ export default {
   name: "AppLoading",
   props: {
     loading: Boolean
+  },
+  data() {
+    return {
+      ready: false
+    };
+  },
+  watch: {
+    loading() {
+      if (this.loading) {
+        setTimeout(() => {
+          this.ready = true;
+        }, 300);
+      }
+    }
   }
 };
 </script>
