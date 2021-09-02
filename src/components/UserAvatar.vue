@@ -15,11 +15,11 @@
         ? 'avatar--' + user.team.toLowerCase()
         : ''
     ]"
-    :src="member ? member.Avatar : avatar"
+    :src="member ? member.Avatar : user.Character.avatar"
     altStyle=""
     :style="avatarSize"
     :title="member ? member.Name : 'Accéder au profil'"
-    v-if="avatar || member"
+    v-if="(user && user.Character) || member"
   />
   <AppMiniSpinner v-else />
 </template>
@@ -64,15 +64,6 @@ export default {
       };
     },
     ...mapState(["user"])
-  },
-  mounted() {
-    if (!this.avatar && !this.member) {
-      this.$store
-        .dispatch("getCharacter", [this.user.characterId, true])
-        .then(character => {
-          this.avatar = character.Avatar;
-        });
-    }
   },
   methods: {
     //temp

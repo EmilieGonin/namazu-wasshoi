@@ -43,6 +43,11 @@ export default createStore({
       state.user = user;
       state.status = "success";
     },
+    SET_CHARACTER(state, character) {
+      state.user.Character = character;
+      state.status = "success";
+      localStorage.setItem("user", JSON.stringify(state.user));
+    },
     SET_IMAGE_VIEWER(state, image) {
       state.viewer = image;
       state.status = "success";
@@ -51,7 +56,6 @@ export default createStore({
       state.user = "";
       localStorage.removeItem("user");
       localStorage.removeItem("token");
-      localStorage.removeItem("character");
     },
   },
   actions: {
@@ -126,29 +130,20 @@ export default createStore({
         });
       })
     },
-    getCharacter({ commit }, [ characterId, silent ]) {
+    updateCharacter({ commit, state }) {
       return new Promise((resolve, reject) => {
-        if (!silent) {
-          commit("REQUEST", "pending");
-        }
-        const character = checkCache("character");
+        commit("SET_CHARACTER", null);
 
-        if (!character) {
-          api.get("fc/character/" + characterId)
-          .then((response) => {
-            cache("character", response.data.character);
-            commit("REQUEST", "success");
-            resolve(response.data.character);
-          })
-          .catch((e) => {
-            commit("REQUEST", "error");
-            commit("MESSAGE", e.response.data.error);
-            reject();
-          });
-        } else {
-          commit("REQUEST", "success");
-          resolve(character.data);
-        }
+        api.get("users/" + state.user.id + "/character")
+        .then((response) => {
+          commit("SET_USER", response.data.user);
+          resolve();
+        })
+        .catch((e) => {
+          commit("REQUEST", "error");
+          commit("MESSAGE", e.response.data.error);
+          reject();
+        });
       })
     },
     error({ commit }, error) {

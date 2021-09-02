@@ -142,10 +142,18 @@ router.beforeEach((to, from, next) => {
   const adminRequired = adminPages.includes(to.path);
   const uc = ucPages.includes(to.path);
 
-  if (uc) {
-    //Check if user is logged in
-    const loggedIn = localStorage.getItem('user');
+  //Check user character cache
+  const loggedIn = localStorage.getItem('user');
+  if (loggedIn) {
+    const now = new Date();
+    const expire = new Date(JSON.parse(loggedIn).Character.expire);
 
+    if (now > expire) {
+      store.dispatch("updateCharacter")
+    }
+  }
+
+  if (uc) {
     if (!loggedIn) {
       store.dispatch("error", "Cette page est toujours en construction. :(");
       return false;
@@ -162,9 +170,6 @@ router.beforeEach((to, from, next) => {
   }
 
   if (authRequired) {
-    //Check if user is logged in
-    const loggedIn = localStorage.getItem('user');
-
     if (!loggedIn) {
       store.dispatch("error", "Vous devez être connecté pour accéder à cette page.");
       return next('/login');
