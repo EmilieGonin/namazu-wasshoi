@@ -19,10 +19,10 @@
             'profile__name--fail': isFail
           }"
         >
-          {{ character.Name }}
+          {{ character.name }}
         </div>
-        <div class="profile__title" v-if="character.Title">
-          {{ character.Title }}
+        <div class="profile__title" v-if="character.title">
+          {{ character.title }}
         </div>
         <div class="profile__infos">
           <!--Birthday-->
@@ -88,12 +88,7 @@ export default {
       .dispatch("getUser", this.$route.params.id)
       .then(user => {
         this.user = user;
-
-        this.$store
-          .dispatch("getCharacter", [user.characterId, false])
-          .then(character => {
-            this.character = character;
-          });
+        this.character = user.Character;
       })
       .catch(() => this.$router.push("/"));
   }
