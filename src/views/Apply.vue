@@ -127,11 +127,11 @@
         <!--MSQ-->
         <FormElement
           v-model="form_msq"
-          :inputs="yesno"
-          :label="'As-tu terminé l\'épopée ?'"
+          :label="'As-tu terminé l\'épopée ? Si non, où en es-tu ?'"
           :name="'form_msq'"
-          :type="'radio'"
+          :type="'textarea'"
           :required="true"
+          :large="true"
         ></FormElement>
         <!--Main Class-->
         <FormElement
