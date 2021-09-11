@@ -15,15 +15,21 @@ export default {
   },
   data() {
     return {
-      ready: false
+      ready: false,
+      timer: ""
     };
   },
   watch: {
     loading() {
-      if (this.loading) {
-        setTimeout(() => {
+      if (this.timer) {
+        clearTimeout(this.timer);
+      }
+
+      if (this.loading === true) {
+        this.ready = false;
+        this.timer = setTimeout(() => {
           this.ready = true;
-        }, 300);
+        }, 200);
       }
     }
   }
