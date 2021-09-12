@@ -25,27 +25,28 @@
         <p>
           Sur cette page, vous pourrez obtenir des informations sur nos quatre
           équipes d'évent : découvrez leur composition ainsi que leur slogan !
+          (page en construction)
         </p>
       </div>
       <div class="teams__line"></div>
     </div>
-    <TeamsPanel :team="'mog'">Pas de coups sous le pompon !</TeamsPanel>
+    <!-- <TeamsPanel :team="'mog'">Pas de coups sous le pompon !</TeamsPanel>
     <TeamsPanel :team="'chocobo'">On est chaud... cobo !</TeamsPanel>
     <TeamsPanel :team="'pampa'">Qui s'y frotte s'y pique !</TeamsPanel>
     <TeamsPanel :team="'carbuncle'">
       Que la poussière de diamant vous réduise en éclat !
-    </TeamsPanel>
+    </TeamsPanel> -->
   </div>
 </template>
 
 <script>
 import { useMeta } from "vue-meta";
-import TeamsPanel from "@/components/TeamsPanel.vue";
+// import TeamsPanel from "@/components/TeamsPanel.vue";
 
 export default {
   name: "Teams",
   components: {
-    TeamsPanel
+    // TeamsPanel
   },
   setup() {
     useMeta({
