@@ -40,6 +40,7 @@ export default {
     border-radius: 25px;
     border: 3px dotted $minor-white;
     background-color: white;
+    box-shadow: 0 0 5px $grey;
   }
 }
 </style>
