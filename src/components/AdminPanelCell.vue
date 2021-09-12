@@ -7,6 +7,15 @@
           {{ data.theme ? data.theme : "" }}
           {{ data.name ? data.name : "" }}
         </div>
+        <!--Festival Dates-->
+        <div class="cell__dates" v-if="data.start_date">
+          <span class="cell__legend">début</span>
+          <AppDate :date="data.start_date" />
+          <span class="cell__legend"> votes</span>
+          <AppDate :date="data.vote_date" />
+          <span class="cell__legend"> fin</span>
+          <AppDate :date="data.end_date" />
+        </div>
         <!--Character-->
         <div class="cell__title" @click="go(data)" v-if="data.Character">
           {{ data.Character.name }}
@@ -114,11 +123,13 @@
 
 <script>
 import AppButton from "@/components/AppButton.vue";
+import AppDate from "@/components/AppDate.vue";
 
 export default {
   name: "AdminPanelCell",
   components: {
-    AppButton
+    AppButton,
+    AppDate
   },
   data() {
     return {
@@ -187,6 +198,14 @@ export default {
     font-size: 27px;
     transform: translateY(2px);
     cursor: pointer;
+  }
+  &__dates {
+    font-size: $font-small;
+  }
+  &__legend {
+    font-size: $font-small - 2;
+    font-weight: bold;
+    color: $namazu;
   }
   &__profile {
     @include flex($gap: 10, $justify: flex-start);
