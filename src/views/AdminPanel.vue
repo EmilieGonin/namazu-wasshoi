@@ -33,6 +33,7 @@
             :data="data"
             :view="currentView"
             @delete="deleteItem(index)"
+            @update="getDatas(currentView)"
           />
         </div>
       </transition>

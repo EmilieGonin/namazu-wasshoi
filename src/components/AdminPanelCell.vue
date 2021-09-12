@@ -77,7 +77,15 @@
         <font-awesome-icon :icon="'images'" fixed-width v-if="!toggle" />
         <font-awesome-icon :icon="'chevron-up'" fixed-width v-else />
       </AppButton>
-      <!--Archive Applicant/Delete User-->
+      <!--Edit Button-->
+      <AppButton
+        :small="true"
+        @click="edit = !edit"
+        v-if="view != 'Applicants'"
+      >
+        <font-awesome-icon :icon="'pen'" fixed-width />
+      </AppButton>
+      <!--Delete Button-->
       <AppButton
         :small="true"
         @click="remove(data.id)"
@@ -118,22 +126,115 @@
         </template>
       </div>
     </transition>
+    <transition name="quick-fade">
+      <AppPopup @close="edit = !edit" v-if="edit">
+        <form
+          class="form"
+          @submit.prevent="submit"
+          @keyup.enter="submit"
+          method="post"
+        >
+          <!--Users-->
+          <FormElement
+            v-model="formo_team"
+            :inputs="teams"
+            :label="'Equipe d\'évent'"
+            :labelSelect="'Sélectionnez une équipe'"
+            :name="'formo_team'"
+            :type="'select'"
+            :required="true"
+          ></FormElement>
+          <!--Festivals-->
+          <FormElement
+            v-model="formo_theme"
+            :label="'Theme'"
+            :name="'formo_theme'"
+            :required="true"
+            v-if="view == 'Festivals'"
+          ></FormElement>
+          <FormElement
+            v-model="formo_start_date"
+            :label="'Date de début'"
+            :name="'formo_start_date'"
+            :type="'date'"
+            :required="true"
+            v-if="view == 'Festivals'"
+          ></FormElement>
+          <FormElement
+            v-model="formo_vote_date"
+            :label="'Date des votes'"
+            :name="'formo_vote_date'"
+            :type="'datetime-local'"
+            :required="true"
+            v-if="view == 'Festivals'"
+          ></FormElement>
+          <FormElement
+            v-model="formo_end_date"
+            :label="'Date de fin'"
+            :name="'formo_end_date'"
+            :type="'datetime-local'"
+            :required="true"
+            v-if="view == 'Festivals'"
+          ></FormElement>
+
+          <div class="form__legend" v-if="view == 'Festivals'">
+            La date de début doit correspondre à la date de fin du festival
+            précédent.
+          </div>
+          <AppButton @click="update(data.id)">
+            Valider
+          </AppButton>
+        </form>
+      </AppPopup>
+    </transition>
   </div>
 </template>
 
 <script>
 import AppButton from "@/components/AppButton.vue";
 import AppDate from "@/components/AppDate.vue";
+import AppPopup from "@/components/AppPopup.vue";
+import FormElement from "@/components/FormElement.vue";
+import { format } from "date-fns";
+import fr from "date-fns/locale/fr";
+import { formValidate } from "@/mixins.js";
 
 export default {
   name: "AdminPanelCell",
   components: {
     AppButton,
-    AppDate
+    AppDate,
+    AppPopup,
+    FormElement
   },
   data() {
     return {
-      toggle: false
+      toggle: false,
+      edit: false,
+      formo_team: this.data.team,
+      formo_theme: this.data.theme,
+      formo_start_date: this.data.start_date
+        ? format(new Date(this.data.start_date), "yyyy-MM-dd", {
+            locale: fr
+          })
+        : "",
+      formo_vote_date: this.data.vote_date
+        ? format(new Date(this.data.vote_date), "yyyy-MM-dd'T'HH':'mm", {
+            locale: fr
+          })
+        : "",
+      formo_end_date: this.data.end_date
+        ? format(new Date(this.data.end_date), "yyyy-MM-dd'T'HH':'mm", {
+            locale: fr
+          })
+        : "",
+      //temp
+      teams: [
+        { name: "Mog" },
+        { name: "Chocobo" },
+        { name: "Pampa" },
+        { name: "Carbuncle" }
+      ]
     };
   },
   emits: ["delete"],
@@ -141,6 +242,7 @@ export default {
     data: Object,
     view: String
   },
+  mixins: [formValidate],
   methods: {
     go(data) {
       if (this.view == "Applicants") {
@@ -150,6 +252,24 @@ export default {
       } else if (this.view == "Members") {
         const id = data.id;
         this.$router.push("/user/" + id);
+      }
+    },
+    update(id) {
+      const form = this.formValidate();
+      console.log(form);
+
+      if (this.view == "Members") {
+        this.$store.dispatch("editUser", [id, form]).then(() => {
+          this.$emit("update");
+        });
+      } else if (this.view == "Festivals") {
+        this.$store.dispatch("editFestival", [id, form]).then(() => {
+          this.$emit("update");
+        });
+      } else if (this.view == "Parameters") {
+        this.$store.dispatch("editParameter", [id, form]).then(() => {
+          this.$emit("update");
+        });
       }
     },
     remove(id) {
