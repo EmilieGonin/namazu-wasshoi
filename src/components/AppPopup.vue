@@ -27,6 +27,11 @@ export default {
     z-index: 10;
   }
   &__content {
+    @include responsive(425) {
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+    }
     z-index: 11;
     position: fixed;
     top: 50%;
