@@ -301,6 +301,10 @@ export default {
   &__buttons {
     @include flex($align: stretch, $gap: 5);
   }
+  &__legend {
+    font-size: $font-small - 2;
+    text-align: center;
+  }
   &__container {
     width: 100%;
   }
