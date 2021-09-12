@@ -143,6 +143,7 @@
             :name="'formo_team'"
             :type="'select'"
             :required="true"
+            v-if="view == 'Members'"
           ></FormElement>
           <!--Festivals-->
           <FormElement
