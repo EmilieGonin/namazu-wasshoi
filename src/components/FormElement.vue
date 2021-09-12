@@ -298,6 +298,9 @@ export default {
 .form {
   @include flex($direction: column, $gap: 25);
   width: 100%;
+  &__buttons {
+    @include flex($align: stretch, $gap: 5);
+  }
   &__container {
     width: 100%;
   }
