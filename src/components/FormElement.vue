@@ -34,6 +34,7 @@
         v-for="input in inputs"
         :key="input.name"
         :value="input.value ? input.value : input.name"
+        :selected="input.name == modelValue"
       >
         {{ input.name }}
       </option>
