@@ -14,15 +14,15 @@
         <router-link to="/apply">Postulez dès maintenant !</router-link>
       </div>
       <FormElement
-        v-model="form_discord"
+        v-model="form_discord_Profile"
         :label="'Pseudo Discord'"
-        :name="'form_discord'"
+        :name="'form_discord_Profile'"
         :required="true"
       ></FormElement>
       <FormElement
-        v-model="form_character_cl"
+        v-model="form_name_Character_cl"
         :label="'Nom du personnage'"
-        :name="'form_character_cl'"
+        :name="'form_name_Character_cl'"
         :required="true"
         :wait="true"
       ></FormElement>
@@ -77,8 +77,9 @@ export default {
     return {
       form_email: "",
       form_password: "",
-      form_character_cl: "",
-      form_discord: "",
+      form_name_Character_cl: "",
+      form_lodestoneId_Character: "",
+      form_discord_Profile: "",
       form_team: "",
       //temp
       teams: [
@@ -93,17 +94,14 @@ export default {
   methods: {
     submit() {
       try {
-        const form = this.formValidate();
-        const character = this.form_character_cl.split(" ").join("+");
-        const cl = true;
-        const silent = false;
-
+        const character = this.form_name_Character_cl.split(" ").join("+");
         this.$store
-          .dispatch("searchCharacter", [character, cl, silent])
+          .dispatch("searchCharacter", [character, true, false])
           .then(character => {
-            form.character_cl = character.Name;
-            form.characterId = character.ID;
+            this.form_name_Character_cl = character.Name;
+            this.form_lodestoneId_Character = character.ID;
 
+            const form = this.formValidate();
             this.$store
               .dispatch("signup", form)
               .then(() => this.$router.push("/"))

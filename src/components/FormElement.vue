@@ -141,7 +141,7 @@
       @input="
         $emit('update:modelValue', $event.target.value),
           setIcon($event),
-          name.includes('character') ? searchCharacter($event.target) : ''
+          name.includes('name_Character') ? searchCharacter($event.target) : ''
       "
     />
     <font-awesome-icon

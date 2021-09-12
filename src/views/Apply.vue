@@ -52,28 +52,28 @@
       <div class="form__panel">
         <!--Name-->
         <FormElement
-          v-model="formo_name"
+          v-model="formo_name_Profile"
           :label="'Comment t\'appelles-tu ?'"
-          :name="'formo_name'"
+          :name="'formo_name_Profile'"
         ></FormElement>
         <!--Birthday-->
         <FormElement
-          v-model="form_birthday"
+          v-model="form_birthday_Profile"
           :label="'Quelle est ta date de naissance ?'"
-          :name="'form_birthday'"
+          :name="'form_birthday_Profile'"
           :type="'date'"
           :required="true"
         ></FormElement>
         <!--Discord-->
         <FormElement
-          v-model="form_discord"
+          v-model="form_discord_Profile"
           :label="'Quel est ton identifiant Discord ?'"
-          :name="'form_discord'"
+          :name="'form_discord_Profile'"
           :required="true"
         ></FormElement>
         <!--Mic-->
         <FormElement
-          v-model="form_mic"
+          v-model="form_mic_Profile"
           :inputs="yesno"
           :label="'Possèdes-tu un micro ?'"
           :name="'form_mic'"
@@ -118,9 +118,9 @@
       <div class="form__panel">
         <!--Character-->
         <FormElement
-          v-model="form_character"
+          v-model="form_name_Character"
           :label="'Nom du personnage'"
-          :name="'form_character'"
+          :name="'form_name_Character'"
           :required="true"
           :wait="true"
         ></FormElement>
@@ -282,13 +282,14 @@ export default {
   data() {
     return {
       recruiting: "unknown",
-      formo_name: "",
-      form_birthday: "",
-      form_discord: "",
-      form_mic: "",
+      formo_name_Profile: "",
+      form_birthday_Profile: "",
+      form_discord_Profile: "",
+      form_mic_Profile: "",
       form_availability: "",
       form_about: "",
-      form_character: "",
+      form_name_Character: "",
+      form_lodestoneId_Character: "",
       form_msq: "",
       form_mainClass: "",
       form_playtime: "",
@@ -366,17 +367,14 @@ export default {
     },
     submit() {
       try {
-        const form = this.formValidate();
-        const character = this.form_character.split(" ").join("+");
-        const cl = false;
-        const silent = false;
-
+        const character = this.form_name_Character.split(" ").join("+");
         this.$store
-          .dispatch("searchCharacter", [character, cl, silent])
+          .dispatch("searchCharacter", [character, false, false])
           .then(character => {
-            form.character = character.Name;
-            form.characterId = character.ID;
+            this.form_name_Character = character.Name;
+            this.form_lodestoneId_Character = character.ID;
 
+            const form = this.formValidate();
             this.$store.dispatch("apply", form).catch(() => {
               console.error(
                 "Une erreur est survenue pendant l'envoi du formulaire."
