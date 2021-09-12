@@ -8,7 +8,8 @@ const formValidate = {
         //Get all datas starting with form_ or formo_
         if (data[0].startsWith("form_") || data[0].startsWith("formo_")) {
           const name = data[0].split("_")[1];
-          const value = data[1];
+          const category = data[0].split("_")[2];
+          let value = data[1];
 
           if (!data[0].startsWith("formo_") && !value) {
             const error =
@@ -16,7 +17,20 @@ const formValidate = {
             this.$store.dispatch("error", error);
             throw error;
           } else if (value && name != "file") {
-            form[name] = value;
+            if (value == "true" || value == "false") {
+              value = !!value;
+            }
+            
+            if (category) {
+              if (form[category]) {
+                form[category][name] = value;
+              } else {
+                form[category] = {};
+                form[category][name] = value;
+              }
+            } else {
+              form[name] = value;
+            }
 
             if (
               name == "email" &&
