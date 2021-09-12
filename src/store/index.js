@@ -240,9 +240,9 @@ export default createStore({
       return new Promise((resolve, reject) => {
         commit("REQUEST", "pending");
         api.post("applicants/new", form)
-        .then(() => {
+        .then((response) => {
           commit("REQUEST", "success");
-          commit("MESSAGE", "Merci ! Ta candidature a bien été envoyée.");
+          commit("MESSAGE", response.data.message);
           resolve();
         })
         .catch((error) => {
