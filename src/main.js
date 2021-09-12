@@ -8,7 +8,7 @@ import "@/stylesheets/global.scss"
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   //Users & Account
-  faUser, faUsers, faUserCheck, faUserPlus, faSignOutAlt, faSignInAlt, faCog, faEdit,
+  faUser, faUsers, faUserCheck, faUserPlus, faSignOutAlt, faSignInAlt, faCog, faEdit, faPen,
   //Applications
   faMicrophone, faMicrophoneSlash, faTrashAlt,
   //Activities
@@ -23,7 +23,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(
   //Users & Account
-  faUser, faUsers, faUserCheck, faUserPlus, faSignOutAlt, faSignInAlt, faCog, faEdit,
+  faUser, faUsers, faUserCheck, faUserPlus, faSignOutAlt, faSignInAlt, faCog, faEdit, faPen,
   //Applications
   faMicrophone, faMicrophoneSlash, faTrashAlt,
   //Activities
