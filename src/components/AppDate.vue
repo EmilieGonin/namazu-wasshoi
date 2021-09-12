@@ -17,12 +17,20 @@ export default {
     short: {
       type: Boolean,
       default: true
+    },
+    birthday: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
     getDate() {
       if (this.short) {
         return format(new Date(this.date), "dd'/'MM", {
+          locale: fr
+        });
+      } else if (this.birthday) {
+        return format(new Date(this.date), "dd'/'MM'/'yyyy", {
           locale: fr
         });
       } else {
