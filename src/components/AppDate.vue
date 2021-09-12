@@ -1,5 +1,5 @@
 <template>
-  <div><slot></slot> {{ full ? getDateFull : getDate }}</div>
+  <span><slot></slot> {{ dateonly ? getDate : getDateFull }}</span>
 </template>
 
 <script>
@@ -10,18 +10,37 @@ export default {
   name: "DateItem",
   props: {
     date: String,
-    full: Boolean
+    dateonly: {
+      type: Boolean,
+      default: false
+    },
+    short: {
+      type: Boolean,
+      default: true
+    }
   },
   computed: {
     getDate() {
-      return format(new Date(this.date), "dd'/'MM - HH':'mm", {
-        locale: fr
-      });
+      if (this.short) {
+        return format(new Date(this.date), "dd'/'MM", {
+          locale: fr
+        });
+      } else {
+        return format(new Date(this.date), "dd MMMM yyyy", {
+          locale: fr
+        });
+      }
     },
     getDateFull() {
-      return format(new Date(this.date), "dd MMMM yyyy - HH':'mm", {
-        locale: fr
-      });
+      if (this.short) {
+        return format(new Date(this.date), "dd'/'MM - HH':'mm", {
+          locale: fr
+        });
+      } else {
+        return format(new Date(this.date), "dd MMMM yyyy - HH':'mm", {
+          locale: fr
+        });
+      }
     },
     getTimeAgo() {
       return formatDistanceToNow(new Date(this.date), {
