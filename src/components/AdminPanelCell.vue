@@ -142,15 +142,17 @@ export default {
       }
     },
     remove(id) {
-      if (this.view == "Applicants") {
-        if (confirm("Voulez-vous vraiment supprimer cette candidature ?")) {
+      if (confirm("Confirmer la suppression ?")) {
+        if (this.view == "Applicants") {
           this.$store.dispatch("deleteApplicant", id).then(() => {
             this.$emit("delete");
           });
-        }
-      } else if (this.view == "Members") {
-        if (confirm("Voulez-vous vraiment supprimer ce membre ?")) {
+        } else if (this.view == "Members") {
           this.$store.dispatch("deleteUser", id).then(() => {
+            this.$emit("delete");
+          });
+        } else if (this.view == "Festivals") {
+          this.$store.dispatch("deleteFestival", id).then(() => {
             this.$emit("delete");
           });
         }
