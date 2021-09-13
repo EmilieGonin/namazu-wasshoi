@@ -3,9 +3,16 @@
     <div class="cell__head">
       <div class="cell__profile">
         <!--Theme / Name-->
-        <div class="cell__title" v-if="data.theme || data.name">
+        <div
+          class="cell__title cell__title--nocursor"
+          v-if="data.theme || data.name"
+        >
           {{ data.theme ? data.theme : "" }}
           {{ data.name ? data.name : "" }}
+        </div>
+        <!--Parameters value-->
+        <div class="cell__legend" v-if="view == 'Parameters'">
+          {{ data.data ? "Oui" : "Non" }}
         </div>
         <!--Festival Dates-->
         <div class="cell__dates" v-if="data.start_date">
@@ -81,7 +88,7 @@
       <AppButton
         :small="true"
         @click="edit = !edit"
-        v-if="view != 'Applicants'"
+        v-if="view != 'Applicants' && view != 'Parameters'"
       >
         <font-awesome-icon :icon="'pen'" fixed-width />
       </AppButton>
@@ -92,6 +99,15 @@
         v-if="view != 'Parameters'"
       >
         <font-awesome-icon :icon="'trash-alt'" fixed-width />
+      </AppButton>
+      <!--Parameters Boolean Buttons-->
+      <AppButton
+        :small="true"
+        @click="update(data.id)"
+        v-if="data.data === true || data.data === false"
+      >
+        <font-awesome-icon :icon="'times'" fixed-width v-if="data.data" />
+        <font-awesome-icon :icon="'check'" fixed-width v-else />
       </AppButton>
     </div>
     <transition name="slide-up">
@@ -256,19 +272,18 @@ export default {
       }
     },
     update(id) {
-      const form = this.formValidate();
-      console.log(form);
-
       if (this.view == "Users") {
+        const form = this.formValidate();
         this.$store.dispatch("editUser", [id, form]).then(() => {
           this.$emit("update");
         });
       } else if (this.view == "Festivals") {
+        const form = this.formValidate();
         this.$store.dispatch("editFestival", [id, form]).then(() => {
           this.$emit("update");
         });
       } else if (this.view == "Parameters") {
-        this.$store.dispatch("editParameter", [id, form]).then(() => {
+        this.$store.dispatch("editParameter", id).then(() => {
           this.$emit("update");
         });
       }
@@ -319,6 +334,9 @@ export default {
     font-size: 27px;
     transform: translateY(2px);
     cursor: pointer;
+    &--nocursor {
+      cursor: default;
+    }
   }
   &__dates {
     font-size: $font-small;
