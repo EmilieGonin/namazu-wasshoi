@@ -45,7 +45,7 @@ const actions = {
         .catch(e => {
           commit("request", "error", { root: true });
           commit("message", e.response.data.error, { root: true });
-          reject();
+          reject(e);
         });
       } else {
         commit("request", "success", { root: true });
@@ -71,7 +71,7 @@ const actions = {
       .catch(e => {
         commit("request", "error", { root: true });
         commit("message", e.response.data.error, { root: true });
-        reject();
+        reject(e);
       });
     })
   }
