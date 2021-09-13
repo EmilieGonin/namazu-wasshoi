@@ -27,12 +27,20 @@ const formValidate = {
           const category = data[0].split("_")[2];
           let value = data[1];
 
+          //If value is removed or empty, set it null
+          if (value == "") {
+            value = null;
+          }
+
           if (!data[0].startsWith("formo_") && !value) {
             const error =
               "Veuillez renseigner tous les champs requis du formulaire.";
             this.$store.dispatch("error", error);
             throw error;
-          } else if (value && name != "file") {
+          } else if ((value || (value === null && name != "email" && name != "password")) && name != "file") {
+            //Above we check if there's a value OR if the value is null BUT isn't email or password, or if value isn't file
+
+            //Prevent value from being string if value is true or false
             if (value == "true" || value == "false") {
               value = !!value;
             }
@@ -49,14 +57,14 @@ const formValidate = {
             }
 
             if (
-              name == "email" &&
+              value && name == "email" &&
               !value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
             ) {
               const error = "L'adresse email est invalide.";
               this.$store.dispatch("error", error);
               throw error;
             } else if (
-              name == "password" &&
+              value && name == "password" &&
               !value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/)
             ) {
               const error =
@@ -64,15 +72,13 @@ const formValidate = {
               this.$store.dispatch("error", error);
               throw error;
             } else if (
-              name == "discord" &&
+              value && name == "discord" &&
               !value.match(/^[a-zA-Z0-9._%+-]+#[0-9]+$/)
             ) {
               const error = "L'identifiant Discord est incorrect.";
               this.$store.dispatch("error", error);
               throw error;
             }
-          } else if (!value && name != "email" && name != "password") {
-            form[name] = null;
           }
         }
       }
