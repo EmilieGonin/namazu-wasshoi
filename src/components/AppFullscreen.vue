@@ -14,14 +14,10 @@ export default {
 
 <style lang="scss" scoped>
 .fullscreen {
-  @include responsive(320) {
-    position: absolute;
-  }
-  @include absolute-center;
-  position: fixed;
-  top: 43px;
   @include flex;
   backdrop-filter: blur(5px);
+  padding: 10px 0;
+  width: 100%;
   &__container {
     width: 35%;
     min-width: 320px;

@@ -39,7 +39,8 @@ export default {
   computed: {
     setSize() {
       return {
-        height: this.windowHeight + "px"
+        height: this.windowHeight + "px",
+        position: this.fullscreen ? "fixed" : "relative"
       };
     }
   },
