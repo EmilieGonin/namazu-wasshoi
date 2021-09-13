@@ -3,7 +3,7 @@
     class="avatar"
     :class="[
       {
-        'avatar--gold': member && grade(member.Name, 'gold'),
+        'avatar--gold': member && grade(member.Name, 'golden'),
         'avatar--lunar': member && grade(member.Name, 'lunar'),
         'avatar--fail': member && grade(member.Name, 'fail'),
         'avatar--alt': altStyle,
@@ -44,15 +44,14 @@ export default {
       type: Boolean,
       default: false
     },
-    member: Object
+    member: Object,
+    golden: Array,
+    lunar: String,
+    fail: String
   },
   data() {
     return {
-      avatar: "",
-      //temp
-      gold: ["Nexara Dei-ijla", "Rabyte Tsukisagi"],
-      lunar: "Nana Rosenbach",
-      fail: "Enael Chubby'fox"
+      avatar: ""
     };
   },
   computed: {
@@ -68,7 +67,7 @@ export default {
   methods: {
     //temp
     grade(member, grade) {
-      if (this[grade].includes(member)) {
+      if (this[grade] && this[grade].includes(member)) {
         return true;
       } else {
         return false;

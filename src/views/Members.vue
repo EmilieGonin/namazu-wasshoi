@@ -8,7 +8,8 @@
         :class="{
           'members__name--empty': !currentMember,
           'members__name--staff': staffMembers && staffMember(currentMember),
-          'members__name--gold': currentMember && grade(currentMember, 'gold'),
+          'members__name--gold':
+            currentMember && grade(currentMember, 'golden'),
           'members__name--lunar':
             currentMember && grade(currentMember, 'lunar'),
           'members__name--fail': currentMember && grade(currentMember, 'fail')
@@ -31,6 +32,9 @@
             :borderRadius="'25%'"
             alt="Avatar"
             :member="member"
+            :golden="golden"
+            :fail="fail"
+            :lunar="lunar"
             @mouseover="setCurrentMember"
             @mouseleave="reset"
           ></UserAvatar>
@@ -79,10 +83,9 @@ export default {
       currentMember: "",
       members: "",
       staffMembers: "",
-      //temp
-      gold: ["Nexara Dei-ijla", "Rabyte Tsukisagi"],
-      lunar: "Nana Rosenbach",
-      fail: "Enael Chubby'fox"
+      golden: "",
+      lunar: "",
+      fail: ""
     };
   },
   components: {
@@ -92,6 +95,14 @@ export default {
     this.$store.dispatch("setFreeCompany").then(fc => {
       this.members = fc.fcMembers;
       this.staffMembers = fc.staffMembers;
+    });
+    this.$store.dispatch("getUsersRoles").then(roles => {
+      //Temporary use manual names
+      this.golden = roles.golden
+        ? roles.golden
+        : '["Nexara Dei-ijla", "Jalee Puyin"]';
+      this.lunar = roles.lunar ? roles.lunar : "Elyaz Alee";
+      this.fail = roles.fail ? roles.fail : "Rabyte Tsukisagi";
     });
   },
   methods: {
@@ -110,7 +121,7 @@ export default {
     },
     //temp
     grade(member, grade) {
-      if (this[grade].includes(member)) {
+      if (this[grade] && this[grade].includes(member)) {
         return true;
       } else {
         return false;

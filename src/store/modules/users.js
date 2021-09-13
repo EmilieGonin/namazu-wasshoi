@@ -202,6 +202,23 @@ const actions = {
       });
     })
   },
+  //Get all users for each roles
+  getUsersRoles({ commit }) {
+    return new Promise((resolve, reject) => {
+      commit("request", "pending", { root: true });
+
+      api.get("users/roles")
+      .then(response => {
+        commit("request", "success", { root: true });
+        resolve(response.data.roles);
+      })
+      .catch(e => {
+        commit("request", "error", { root: true });
+        commit("message", e.response.data.error, { root: true });
+        reject(e);
+      })
+    })
+  }
 }
 
 export default {
