@@ -35,22 +35,22 @@
       <div class="form__panel">
         <!--Birthday-->
         <FormElement
-          v-model="formo_birthday"
+          v-model="formo_birthday_Profile"
           :label="'Date de naissance'"
-          :name="'formo_birthday'"
+          :name="'formo_birthday_Profile'"
           :type="'date'"
         ></FormElement>
         <!--Discord-->
         <FormElement
-          v-model="formo_discord"
+          v-model="formo_discord_Profile"
           :label="'Identifiant Discord'"
-          :name="'formo_discord'"
+          :name="'formo_discord_Profile'"
         ></FormElement>
       </div>
       <FormElement
-        v-model="formo_bio"
+        v-model="formo_bio_Profile"
         :label="'Biographie'"
-        :name="'formo_bio'"
+        :name="'formo_bio_Profile'"
         :type="'textarea'"
         :large="true"
       ></FormElement>
@@ -84,9 +84,9 @@ export default {
     return {
       formo_email: this.$store.state.users.user.email,
       formo_password: "",
-      formo_birthday: this.$store.state.users.user.birthday,
-      formo_discord: this.$store.state.users.user.discord,
-      formo_bio: this.$store.state.users.user.bio,
+      formo_birthday_Profile: this.$store.state.users.user.Profile.birthday,
+      formo_discord_Profile: this.$store.state.users.user.Profile.discord,
+      formo_bio_Profile: this.$store.state.users.user.Profile.bio,
       emailDisabled: true,
       passwordDisabled: true
     };

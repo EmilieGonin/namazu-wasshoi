@@ -30,22 +30,22 @@
             <font-awesome-icon
               :icon="'gift'"
               fixed-width
-              v-if="user.birthday"
+              v-if="user.Profile.birthday"
             />
-            {{ user.birthday }}
+            {{ user.Profile.birthday }}
           </div>
           <!--Discord-->
           <div>
             <font-awesome-icon
               :icon="['fab', 'discord']"
               fixed-width
-              v-if="user.discord"
+              v-if="user.Profile.discord"
             />
-            {{ user.discord }}
+            {{ user.Profile.discord }}
           </div>
         </div>
         <div class="profile__bio">
-          <span v-if="user.bio">{{ user.bio }}</span>
+          <span v-if="user.Profile.bio">{{ user.Profile.bio }}</span>
           <span v-else>Ce membre ne possède pas de biographie.</span>
         </div>
         <AppButton :marginTop="'10'" :iconR="'images'">Galeries</AppButton>
