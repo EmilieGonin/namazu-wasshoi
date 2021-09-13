@@ -8,7 +8,7 @@
       <AppButton @click="getDatas('Festivals')" :iconR="'camera'"
         >Festivals Gyôkoso</AppButton
       >
-      <AppButton @click="view('NewFestival')" :iconR="'plus'"
+      <AppButton @click="create = !create" :iconR="'plus'"
         >Créer un Festival</AppButton
       >
       <AppButton @click="getDatas('Parameters')" :iconR="'cog'"
@@ -37,21 +37,81 @@
       </transition>
     </div>
     <AppButton @click="clear" class="admin__button">Clear Cache</AppButton>
+    <transition name="quick-fade">
+      <AppPopup @close="create = !create" v-if="create">
+        <form
+          class="form"
+          @submit.prevent="submit"
+          @keyup.enter="submit"
+          method="post"
+        >
+          <div class="form__title">
+            Créer un Festival
+          </div>
+          <div class="form__panel">
+            <FormElement
+              v-model="form_theme"
+              :label="'Theme'"
+              :name="'form_theme'"
+              :required="true"
+            ></FormElement>
+            <FormElement
+              v-model="form_edition"
+              :label="'Edition'"
+              :name="'form_edition'"
+              :type="'number'"
+              :required="true"
+            ></FormElement>
+          </div>
+          <FormElement
+            v-model="form_start_date"
+            :label="'Date de début'"
+            :name="'form_start_date'"
+            :type="'date'"
+            :required="true"
+          ></FormElement>
+          <FormElement
+            v-model="form_vote_date"
+            :label="'Date des votes'"
+            :name="'form_vote_date'"
+            :type="'date'"
+            :required="true"
+          ></FormElement>
+          <FormElement
+            v-model="form_end_date"
+            :label="'Date de fin'"
+            :name="'form_end_date'"
+            :type="'date'"
+            :required="true"
+          ></FormElement>
+
+          <div class="form__legend">
+            La date de début doit correspondre à la date de fin du festival
+            précédent. La date des votes correspond au dernier samedi du mois et
+            la date de fin correspond au dernier dimanche du mois.
+          </div>
+          <AppButton :iconR="'plus'" @click="submit">Créer</AppButton>
+        </form>
+      </AppPopup>
+    </transition>
   </div>
 </template>
 
 <script>
 import { useMeta } from "vue-meta";
+import { formValidate } from "@/mixins.js";
 import AppButton from "@/components/AppButton.vue";
+import AppPopup from "@/components/AppPopup.vue";
 import AdminPanelCell from "@/components/AdminPanelCell.vue";
-import AdminPanelFestival from "@/components/AdminPanelFestival.vue";
+import FormElement from "@/components/FormElement.vue";
 
 export default {
   name: "AdminPanel",
   components: {
     AppButton,
+    AppPopup,
     AdminPanelCell,
-    AdminPanelFestival
+    FormElement
   },
   setup() {
     useMeta({
@@ -61,9 +121,16 @@ export default {
   data() {
     return {
       currentView: "",
-      datas: ""
+      datas: "",
+      create: false,
+      form_theme: "",
+      form_edition: "",
+      form_start_date: "",
+      form_vote_date: "",
+      form_end_date: ""
     };
   },
+  mixins: [formValidate],
   methods: {
     clear() {
       localStorage.clear();
@@ -72,17 +139,25 @@ export default {
       this.currentView = "";
       this.datas = "";
       this.$store.dispatch("get" + datas).then(storeDatas => {
-        console.log(storeDatas);
         this.datas = storeDatas;
         this.currentView = datas;
       });
     },
-    view(view) {
-      this.datas = "";
-      this.currentView = view;
-    },
     deleteItem(index) {
       this.datas.splice(index, 1);
+    },
+    submit() {
+      try {
+        const form = this.formValidate();
+        this.$store
+          .dispatch("newFestival", form)
+          .then(() => (this.create = false))
+          .catch(e => {
+            console.error(e);
+          });
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
 };
