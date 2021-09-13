@@ -11,7 +11,9 @@
           Bienvenue parmi nous !
         </div>
         L'inscription est réservée aux membres de Namazu Wasshoi.
-        <router-link to="/apply">Postulez dès maintenant !</router-link>
+        <router-link to="/apply">
+          <strong>Postulez dès maintenant !</strong>
+        </router-link>
       </div>
       <FormElement
         v-model="form_discord_Profile"

@@ -11,7 +11,9 @@
           Bon retour parmi nous !
         </div>
         Vous n'avez pas encore de compte ?
-        <router-link to="/signup">Inscrivez-vous !</router-link>
+        <router-link to="/signup">
+          <strong>Inscrivez-vous !</strong>
+        </router-link>
       </div>
       <FormElement
         v-model="form_email"
