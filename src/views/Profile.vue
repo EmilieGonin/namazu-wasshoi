@@ -8,6 +8,7 @@
           class="profile__avatar"
           :nofade="true"
           :size="'80'"
+          :member="character"
         ></UserAvatar>
       </div>
       <div class="profile__user-container">

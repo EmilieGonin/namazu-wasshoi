@@ -15,7 +15,13 @@
         ? 'avatar--' + user.team.toLowerCase()
         : ''
     ]"
-    :src="member ? member.Avatar : user.Character.avatar"
+    :src="
+      member && member.Avatar
+        ? member.Avatar
+        : member && member.avatar
+        ? member.avatar
+        : user.Character.avatar
+    "
     altStyle=""
     :style="avatarSize"
     :title="member ? member.Name : 'Accéder au profil'"
