@@ -16,11 +16,6 @@ export default createStore({
       viewer: "",
     }
   },
-  getters: {
-    status(state) { return state.status },
-    title(state) { return state.title },
-    icon(state) { return state.icon }
-  },
   mutations: {
     request(state, status) {
       if (state.status == "error") {

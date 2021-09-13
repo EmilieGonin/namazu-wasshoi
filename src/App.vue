@@ -15,7 +15,7 @@
 
 <script>
 import { useMeta } from "vue-meta";
-import { mapGetters, mapState } from "vuex";
+import { mapState } from "vuex";
 import AppLoading from "@/components/AppLoading.vue";
 import AppMessages from "@/components/AppMessages.vue";
 import AppHeading from "@/components/AppHeading.vue";
@@ -39,8 +39,7 @@ export default {
     });
   },
   computed: {
-    ...mapGetters(["status", "title", "icon"]),
-    ...mapState(["message"])
+    ...mapState(["message", "status", "title", "icon"])
   }
 };
 </script>
