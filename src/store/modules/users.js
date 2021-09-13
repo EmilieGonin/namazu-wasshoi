@@ -80,11 +80,9 @@ const actions = {
   //Check if user is still logged and/or registered
   checkUser({ commit }, id) {
     return new Promise((resolve, reject) => {
-      commit("request", "pending", { root: true });
 
       api.get("users/" + id)
       .then(() => {
-        commit("request", "success", { root: true });
         resolve();
       })
       .catch(e => {
@@ -186,13 +184,11 @@ const actions = {
   //Update User Character datas
   updateCharacter({ commit, state }) {
     return new Promise((resolve, reject) => {
-      // commit("request", "pending", { root: true });
       commit("setCharacter", null);
 
       api.get("users/" + state.user.id + "/character")
       .then(response => {
         commit("setUser", response.data.user);
-        // commit("request", "success", { root: true });
         resolve();
       })
       .catch(e => {
@@ -205,11 +201,9 @@ const actions = {
   //Get all users for each roles
   getUsersRoles({ commit }) {
     return new Promise((resolve, reject) => {
-      commit("request", "pending", { root: true });
 
       api.get("users/roles")
       .then(response => {
-        commit("request", "success", { root: true });
         resolve(response.data.roles);
       })
       .catch(e => {
