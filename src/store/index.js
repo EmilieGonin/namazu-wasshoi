@@ -40,11 +40,11 @@ export default createStore({
   },
   actions: {
     setImageViewer({ commit }, image) {
-      commit("SET_IMAGE_VIEWER", image);
+      commit("setImageViewer", image);
     },
     error({ commit }, error) {
-      commit("REQUEST", "error");
-      commit("MESSAGE", error);
+      commit("request", "error");
+      commit("message", error);
     }
   },
   modules: {
