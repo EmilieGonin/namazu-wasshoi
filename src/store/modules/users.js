@@ -129,6 +129,23 @@ const actions = {
       })
     })
   },
+  //Get User id by Character name
+  getUserByCharacterName({ commit }, name) {
+    return new Promise((resolve, reject) => {
+      commit("request", "pending", { root: true });
+
+      api.post("users/character", {"name": name})
+      .then(response => {
+        commit("request", "success", { root: true });
+        resolve(response.data.id);
+      })
+      .catch(e => {
+        commit("request", "error", { root: true });
+        commit("message", e.response.data.error, { root: true });
+        reject(e);
+      })
+    })
+  },
   //Edit User datas
   editUser({ commit }, [ id, form ]) {
     return new Promise((resolve, reject) => {

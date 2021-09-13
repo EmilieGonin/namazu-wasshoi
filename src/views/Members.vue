@@ -117,11 +117,13 @@ export default {
       }
     },
     redirect(name) {
-      //Add api call to get user ID - if user doesn't have an ID, don't redirect and call error message
       console.log(name);
-
-      //temp
-      this.$router.push("/user/1");
+      this.$store
+        .dispatch("getUserByCharacterName", name)
+        .then(id => {
+          this.$router.push("/user/" + id);
+        })
+        .catch(e => console.error(e));
     }
   }
 };
