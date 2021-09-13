@@ -56,16 +56,20 @@ const formValidate = {
               form[name] = value;
             }
 
+            const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const passwordRegexp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}/;
+            const discordRegexp = /^[a-zA-Z0-9._%+-]+#[0-9]+$/;
+
             if (
               value && name == "email" &&
-              !value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
+              !emailRegexp.test(value)
             ) {
               const error = "L'adresse email est invalide.";
               this.$store.dispatch("error", error);
               throw error;
             } else if (
               value && name == "password" &&
-              !value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/)
+              !passwordRegexp.test(value)
             ) {
               const error =
                 "Le mot de passe doit contenir au moins 8 caractères dont une minuscule, une majuscule et un chiffre.";
@@ -73,7 +77,7 @@ const formValidate = {
               throw error;
             } else if (
               value && name == "discord" &&
-              !value.match(/^[a-zA-Z0-9._%+-]+#[0-9]+$/)
+              !discordRegexp.test(value)
             ) {
               const error = "L'identifiant Discord est incorrect.";
               this.$store.dispatch("error", error);

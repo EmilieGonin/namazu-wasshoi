@@ -272,7 +272,7 @@ export default {
       if (name.includes("email")) {
         return "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$";
       } else if (name.includes("password")) {
-        return "(?=.*)(?=.*[a-z])(?=.*[A-Z]).{8,}";
+        return "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}";
       } else if (name.includes("discord")) {
         return "^[a-zA-Z0-9._%+-]+#[0-9]+$";
       }
