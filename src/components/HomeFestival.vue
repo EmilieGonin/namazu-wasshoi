@@ -53,7 +53,7 @@
         </AppButton>
       </div>
       <div class="festival__infos festival__infos--heading">
-        <AppDate :date="festivals.current.end_date">Date limite :</AppDate>
+        <AppDate :date="festivals.current.end">Date limite :</AppDate>
       </div>
     </div>
   </div>

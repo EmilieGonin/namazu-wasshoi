@@ -64,12 +64,10 @@
           Informations
         </AppButton>
         <div class="festival__deadline">
-          <AppDate :date="festivals.current.vote_date" v-if="!festivals.voting"
+          <AppDate :date="festivals.current.vote" v-if="!festivals.voting"
             >Date limite :</AppDate
           >
-          <AppDate :date="festivals.current.end_date" v-else
-            >Date limite :</AppDate
-          >
+          <AppDate :date="festivals.current.end" v-else>Date limite :</AppDate>
         </div>
       </div>
 

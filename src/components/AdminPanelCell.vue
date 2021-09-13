@@ -15,13 +15,13 @@
           {{ data.data ? "Oui" : "Non" }}
         </div>
         <!--Festival Dates-->
-        <div class="cell__dates" v-if="data.start_date">
+        <div class="cell__dates" v-if="data.start">
           <span class="cell__legend">début</span>
-          <AppDate :date="data.start_date" />
+          <AppDate :date="data.start" />
           <span class="cell__legend"> votes</span>
-          <AppDate :date="data.vote_date" />
+          <AppDate :date="data.vote" />
           <span class="cell__legend"> fin</span>
-          <AppDate :date="data.end_date" />
+          <AppDate :date="data.end" />
         </div>
         <!--Character-->
         <div class="cell__title" @click="go(data)" v-if="data.Character">
@@ -170,25 +170,25 @@
             v-if="view == 'Festivals'"
           ></FormElement>
           <FormElement
-            v-model="formo_start_date"
+            v-model="formo_start"
             :label="'Date de début'"
-            :name="'formo_start_date'"
+            :name="'formo_start'"
             :type="'date'"
             :required="true"
             v-if="view == 'Festivals'"
           ></FormElement>
           <FormElement
-            v-model="formo_vote_date"
+            v-model="formo_vote"
             :label="'Date des votes'"
-            :name="'formo_vote_date'"
+            :name="'formo_vote'"
             :type="'date'"
             :required="true"
             v-if="view == 'Festivals'"
           ></FormElement>
           <FormElement
-            v-model="formo_end_date"
+            v-model="formo_end"
             :label="'Date de fin'"
-            :name="'formo_end_date'"
+            :name="'formo_end'"
             :type="'date'"
             :required="true"
             v-if="view == 'Festivals'"
@@ -209,13 +209,13 @@
 </template>
 
 <script>
+import { formValidate } from "@/mixins.js";
+import { format } from "date-fns";
+import fr from "date-fns/locale/fr";
 import AppButton from "@/components/AppButton.vue";
 import AppDate from "@/components/AppDate.vue";
 import AppPopup from "@/components/AppPopup.vue";
 import FormElement from "@/components/FormElement.vue";
-import { format } from "date-fns";
-import fr from "date-fns/locale/fr";
-import { formValidate } from "@/mixins.js";
 
 export default {
   name: "AdminPanelCell",
@@ -231,18 +231,18 @@ export default {
       edit: false,
       formo_team: this.data.team,
       formo_theme: this.data.theme,
-      formo_start_date: this.data.start_date
-        ? format(new Date(this.data.start_date), "yyyy-MM-dd", {
+      formo_start: this.data.start
+        ? format(new Date(this.data.start), "yyyy-MM-dd", {
             locale: fr
           })
         : "",
-      formo_vote_date: this.data.vote_date
-        ? format(new Date(this.data.vote_date), "yyyy-MM-dd", {
+      formo_vote: this.data.vote
+        ? format(new Date(this.data.vote), "yyyy-MM-dd", {
             locale: fr
           })
         : "",
-      formo_end_date: this.data.end_date
-        ? format(new Date(this.data.end_date), "yyyy-MM-dd", {
+      formo_end: this.data.end
+        ? format(new Date(this.data.end), "yyyy-MM-dd", {
             locale: fr
           })
         : "",

@@ -64,23 +64,23 @@
             ></FormElement>
           </div>
           <FormElement
-            v-model="form_start_date"
+            v-model="form_start"
             :label="'Date de début'"
-            :name="'form_start_date'"
+            :name="'form_start'"
             :type="'date'"
             :required="true"
           ></FormElement>
           <FormElement
-            v-model="form_vote_date"
+            v-model="form_vote"
             :label="'Date des votes'"
-            :name="'form_vote_date'"
+            :name="'form_vote'"
             :type="'date'"
             :required="true"
           ></FormElement>
           <FormElement
-            v-model="form_end_date"
+            v-model="form_end"
             :label="'Date de fin'"
-            :name="'form_end_date'"
+            :name="'form_end'"
             :type="'date'"
             :required="true"
           ></FormElement>
@@ -100,6 +100,8 @@
 <script>
 import { useMeta } from "vue-meta";
 import { formValidate } from "@/mixins.js";
+import { format } from "date-fns";
+import fr from "date-fns/locale/fr";
 import AppButton from "@/components/AppButton.vue";
 import AppPopup from "@/components/AppPopup.vue";
 import AdminPanelCell from "@/components/AdminPanelCell.vue";
@@ -125,9 +127,15 @@ export default {
       create: false,
       form_theme: "",
       form_edition: "",
-      form_start_date: "",
-      form_vote_date: "",
-      form_end_date: ""
+      form_start: format(new Date(), "yyyy-MM-dd", {
+        locale: fr
+      }),
+      form_vote: format(new Date(), "yyyy-MM-dd", {
+        locale: fr
+      }),
+      form_end: format(new Date(), "yyyy-MM-dd", {
+        locale: fr
+      })
     };
   },
   mixins: [formValidate],
