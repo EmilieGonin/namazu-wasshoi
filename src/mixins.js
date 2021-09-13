@@ -1,5 +1,21 @@
 const formValidate = {
   methods: {
+    formValidateRequired() {
+      const datas = JSON.parse(JSON.stringify(this.$data));
+
+      for (const data of Object.entries(datas)) {
+        let value = data[1];
+
+        if (!data[0].startsWith("formo_") && !value) {
+          const error =
+            "Veuillez renseigner tous les champs requis du formulaire.";
+          this.$store.dispatch("error", error);
+          throw error;
+        }
+      }
+
+      return true;
+    },
     formValidate() {
       const form = {};
       const datas = JSON.parse(JSON.stringify(this.$data));
@@ -20,7 +36,7 @@ const formValidate = {
             if (value == "true" || value == "false") {
               value = !!value;
             }
-            
+
             if (category) {
               if (form[category]) {
                 form[category][name] = value;

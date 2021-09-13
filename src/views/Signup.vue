@@ -78,7 +78,7 @@ export default {
       form_email: "",
       form_password: "",
       form_name_Character_cl: "",
-      form_lodestoneId_Character: "",
+      formo_lodestoneId_Character: "",
       form_discord_Profile: "",
       form_team: "",
       //temp
@@ -94,14 +94,8 @@ export default {
   methods: {
     submit() {
       try {
+        this.formValidateRequired();
         const character = this.form_name_Character_cl.split(" ").join("+");
-
-        if (!character) {
-          const error =
-            "Veuillez renseigner tous les champs requis du formulaire.";
-          this.$store.dispatch("error", error);
-          throw error;
-        }
 
         this.$store
           .dispatch("searchCharacter", [character, true, false])

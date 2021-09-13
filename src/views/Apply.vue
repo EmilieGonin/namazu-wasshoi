@@ -289,7 +289,7 @@ export default {
       form_availability: "",
       form_about: "",
       form_name_Character: "",
-      form_lodestoneId_Character: "",
+      formo_lodestoneId_Character: "",
       form_msq: "",
       form_mainClass: "",
       form_playtime: "",
@@ -365,14 +365,8 @@ export default {
     },
     submit() {
       try {
+        this.formValidateRequired();
         const character = this.form_name_Character.split(" ").join("+");
-
-        if (!character) {
-          const error =
-            "Veuillez renseigner tous les champs requis du formulaire.";
-          this.$store.dispatch("error", error);
-          throw error;
-        }
 
         this.$store
           .dispatch("searchCharacter", [character, false, false])
