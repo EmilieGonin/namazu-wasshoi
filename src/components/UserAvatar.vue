@@ -63,7 +63,7 @@ export default {
         borderRadius: this.borderRadius
       };
     },
-    ...mapState(["user"])
+    ...mapState({ user: state => state.users.user })
   },
   methods: {
     //temp

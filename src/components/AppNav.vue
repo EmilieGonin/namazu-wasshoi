@@ -121,7 +121,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["user"])
+    ...mapState({ user: state => state.users.user })
   },
   watch: {
     $route() {
@@ -135,9 +135,8 @@ export default {
       }
     },
     logout() {
-      this.$store.dispatch("logout").then(() => {
-        this.$router.push("/login");
-      });
+      this.$store.commit("logout");
+      this.$router.push("/login");
     }
   }
 };

@@ -82,11 +82,11 @@ export default {
   },
   data() {
     return {
-      formo_email: this.$store.state.user.email,
+      formo_email: this.$store.state.users.user.email,
       formo_password: "",
-      formo_birthday: this.$store.state.user.birthday,
-      formo_discord: this.$store.state.user.discord,
-      formo_bio: this.$store.state.user.bio,
+      formo_birthday: this.$store.state.users.user.birthday,
+      formo_discord: this.$store.state.users.user.discord,
+      formo_bio: this.$store.state.users.user.bio,
       emailDisabled: true,
       passwordDisabled: true
     };
@@ -106,7 +106,7 @@ export default {
         const form = this.formValidate();
 
         this.$store
-          .dispatch("editUser", [this.$store.state.user.id, form])
+          .dispatch("editUser", [this.$store.state.users.user.id, form])
           .then(() => {
             this.passwordDisabled = true;
             this.emailDisabled = true;

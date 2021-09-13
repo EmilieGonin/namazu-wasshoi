@@ -144,6 +144,7 @@ router.beforeEach((to, from, next) => {
 
   //Check user character cache
   const loggedIn = localStorage.getItem('user');
+
   if (loggedIn) {
     const now = new Date();
     const expire = new Date(JSON.parse(loggedIn).Character.expire);
@@ -160,7 +161,7 @@ router.beforeEach((to, from, next) => {
 
     } else {
       //Check if user is admin
-      const isAdmin = store.state.user.isAdmin;
+      const isAdmin = store.state.users.user.isAdmin;
 
       if (!isAdmin) {
         store.dispatch("error", "Cette page est toujours en construction. :(");
@@ -176,12 +177,12 @@ router.beforeEach((to, from, next) => {
     }
     else {
       // Check if user is still registered
-      const userId = store.state.user.id;
+      const userId = store.state.users.user.id;
       store.dispatch("checkUser", userId)
       .then(() => {
         if (adminRequired) {
           //Check if user is admin if page is restricted
-          const isAdmin = store.state.user.isAdmin;
+          const isAdmin = store.state.users.user.isAdmin;
 
           if (!isAdmin) {
             const error = "Vous n'avez pas la permission d'accéder à cette page."
@@ -206,8 +207,7 @@ router.beforeEach((to, from, next) => {
 router.afterEach((to) => {
   router.isReady()
   .then(() => {
-    store.dispatch("setPage", [to.meta.heading, to.meta.icon]);
-    // store.commit("REQUEST", "success");
+    store.commit("setPage", [to.meta.heading, to.meta.icon]);
   })
   .catch((e) => console.error(e));
 })

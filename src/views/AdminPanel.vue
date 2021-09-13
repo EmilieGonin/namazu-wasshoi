@@ -4,9 +4,7 @@
       <AppButton @click="getDatas('Applicants')" :iconR="'user-check'"
         >Candidatures</AppButton
       >
-      <AppButton @click="getDatas('Members')" :iconR="'users'"
-        >Membres</AppButton
-      >
+      <AppButton @click="getDatas('Users')" :iconR="'users'">Membres</AppButton>
       <AppButton @click="getDatas('Festivals')" :iconR="'camera'"
         >Festivals Gyôkoso</AppButton
       >

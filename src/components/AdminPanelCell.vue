@@ -143,7 +143,7 @@
             :name="'formo_team'"
             :type="'select'"
             :required="true"
-            v-if="view == 'Members'"
+            v-if="view == 'Users'"
           ></FormElement>
           <!--Festivals-->
           <FormElement
@@ -250,7 +250,7 @@ export default {
         const id = data.Character.id;
         const lodestone = "https://fr.finalfantasyxiv.com/lodestone/character/";
         window.open(lodestone + id);
-      } else if (this.view == "Members") {
+      } else if (this.view == "Users") {
         const id = data.id;
         this.$router.push("/user/" + id);
       }
@@ -259,7 +259,7 @@ export default {
       const form = this.formValidate();
       console.log(form);
 
-      if (this.view == "Members") {
+      if (this.view == "Users") {
         this.$store.dispatch("editUser", [id, form]).then(() => {
           this.$emit("update");
         });
@@ -279,7 +279,7 @@ export default {
           this.$store.dispatch("deleteApplicant", id).then(() => {
             this.$emit("delete");
           });
-        } else if (this.view == "Members") {
+        } else if (this.view == "Users") {
           this.$store.dispatch("deleteUser", id).then(() => {
             this.$emit("delete");
           });
