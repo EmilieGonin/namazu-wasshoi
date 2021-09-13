@@ -26,7 +26,7 @@ export default {
 <style lang="scss" scoped>
 .footer {
   width: 100%;
-  height: 100px;
+  height: 50px;
   background: $namazu;
 }
 </style>
