@@ -263,7 +263,7 @@ export default {
   methods: {
     go(data) {
       if (this.view == "Applicants") {
-        const id = data.Character.id;
+        const id = data.Character.lodestoneId;
         const lodestone = "https://fr.finalfantasyxiv.com/lodestone/character/";
         window.open(lodestone + id);
       } else if (this.view == "Users") {
