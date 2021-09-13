@@ -338,11 +338,9 @@ export default {
     AppMiniSpinner
   },
   mounted() {
-    this.$store
-      .dispatch("getParameter", ["recruiting", "silent"])
-      .then(response => {
-        this.recruiting = response;
-      });
+    this.$store.dispatch("getParameter", "recruiting").then(response => {
+      this.recruiting = response;
+    });
   },
   mixins: [formValidate],
   methods: {
