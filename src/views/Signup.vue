@@ -95,6 +95,14 @@ export default {
     submit() {
       try {
         const character = this.form_name_Character_cl.split(" ").join("+");
+
+        if (!character) {
+          const error =
+            "Veuillez renseigner tous les champs requis du formulaire.";
+          this.$store.dispatch("error", error);
+          throw error;
+        }
+
         this.$store
           .dispatch("searchCharacter", [character, true, false])
           .then(character => {
