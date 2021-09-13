@@ -181,7 +181,7 @@
             v-model="formo_vote_date"
             :label="'Date des votes'"
             :name="'formo_vote_date'"
-            :type="'datetime-local'"
+            :type="'date'"
             :required="true"
             v-if="view == 'Festivals'"
           ></FormElement>
@@ -189,14 +189,15 @@
             v-model="formo_end_date"
             :label="'Date de fin'"
             :name="'formo_end_date'"
-            :type="'datetime-local'"
+            :type="'date'"
             :required="true"
             v-if="view == 'Festivals'"
           ></FormElement>
 
           <div class="form__legend" v-if="view == 'Festivals'">
             La date de début doit correspondre à la date de fin du festival
-            précédent.
+            précédent. La date des votes correspond au dernier samedi du mois et
+            la date de fin correspond au dernier dimanche du mois.
           </div>
           <AppButton @click="update(data.id)">
             Valider
@@ -236,12 +237,12 @@ export default {
           })
         : "",
       formo_vote_date: this.data.vote_date
-        ? format(new Date(this.data.vote_date), "yyyy-MM-dd'T'HH':'mm", {
+        ? format(new Date(this.data.vote_date), "yyyy-MM-dd", {
             locale: fr
           })
         : "",
       formo_end_date: this.data.end_date
-        ? format(new Date(this.data.end_date), "yyyy-MM-dd'T'HH':'mm", {
+        ? format(new Date(this.data.end_date), "yyyy-MM-dd", {
             locale: fr
           })
         : "",
