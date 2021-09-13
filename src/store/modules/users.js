@@ -145,13 +145,15 @@ const actions = {
     })
   },
   //Edit User datas
-  editUser({ commit }, [ id, form ]) {
+  editUser({ commit, state }, [ id, form ]) {
     return new Promise((resolve, reject) => {
       commit("request", "pending", { root: true });
 
       api.put("users/" + id, form)
       .then(response => {
-        commit("setUser", response.data.user);
+        if (state.user.id == id) {
+          commit("setUser", response.data.user);
+        }
         commit("request", "success", { root: true });
         commit("message", response.data.message, { root: true });
         resolve();
