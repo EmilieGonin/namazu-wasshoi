@@ -372,7 +372,7 @@ export default {
           .dispatch("searchCharacter", [character, false, false])
           .then(character => {
             this.form_name_Character = character.Name;
-            this.form_lodestoneId_Character = character.ID;
+            this.formo_lodestoneId_Character = character.ID;
 
             const form = this.formValidate();
             this.$store.dispatch("apply", form).catch(() => {
