@@ -83,7 +83,11 @@
       <div class="nav__separation" v-if="user"></div>
       <!--Account Pages-->
       <!--if logged  in-->
-      <router-link class="nav__submenu-link" :to="'/user/' + 1" v-if="user">
+      <router-link
+        class="nav__submenu-link"
+        :to="'/user/' + user.id"
+        v-if="user"
+      >
         <font-awesome-icon icon="user" fixed-width /> Profil utilisateur
       </router-link>
       <router-link class="nav__submenu-link" to="/account" v-if="user">
@@ -115,9 +119,7 @@ export default {
   },
   data() {
     return {
-      toggle: false,
-      //temp
-      id: "1"
+      toggle: false
     };
   },
   computed: {
