@@ -58,7 +58,7 @@ const formValidate = {
 
             const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             const passwordRegexp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}/;
-            const discordRegexp = /^[a-zA-Z0-9._%+-]+#[0-9]+$/;
+            const discordRegexp = /^.+#[0-9]+$/;
 
             if (
               value && name == "email" &&
