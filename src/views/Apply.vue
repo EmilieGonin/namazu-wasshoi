@@ -44,9 +44,8 @@
           Nous voulons nous assurer que Namazu Wasshoi est bien la CL parfaite
           pour toi ! Sache que nos sorties hebdomadaires ont généralement lieu
           le soir entre 21h et 23h et plus rarement l'après-midi entre 16h et
-          18h. Nos plus grands évents de CL ayant généralement lieu le vendredi
-          soir, c'est très important pour nous de connaîtres tes disponibilités
-          !
+          18h. Nos plus grands évents de CL ayant lieu le dimanche soir, c'est
+          très important pour nous de connaîtres tes disponibilités !
         </p>
       </div>
       <div class="form__panel">
