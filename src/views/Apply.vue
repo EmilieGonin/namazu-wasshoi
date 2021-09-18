@@ -69,6 +69,7 @@
           :label="'Quel est ton identifiant Discord ?'"
           :name="'form_discord_Profile'"
           :required="true"
+          :placeholder="'Exemple#0000'"
         ></FormElement>
         <!--Mic-->
         <FormElement

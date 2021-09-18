@@ -138,6 +138,7 @@
       :required="required"
       :disabled="disabled"
       :pattern="regex(name)"
+      :placeholder="placeholder"
       v-else
       @input="
         $emit('update:modelValue', $event.target.value),
@@ -188,6 +189,7 @@ export default {
     modelValue: [String, Array],
     name: String,
     label: String,
+    placeholder: String,
     required: {
       type: Boolean,
       default: null

@@ -20,6 +20,7 @@
         :label="'Pseudo Discord'"
         :name="'form_discord_Profile'"
         :required="true"
+        :placeholder="'Exemple#0000'"
       ></FormElement>
       <FormElement
         v-model="form_name_Character_cl"
