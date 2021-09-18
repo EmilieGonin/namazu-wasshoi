@@ -1,5 +1,3 @@
-const GoogleFontsPlugin = require("@beyonk/google-fonts-webpack-plugin")
-
 module.exports = {
   transpileDependencies: ['vue-meta'],
   css: {
@@ -8,16 +6,5 @@ module.exports = {
         prependData: `@import "~@/stylesheets/main.scss";`
       }
     }
-  },
-  configureWebpack: {
-        plugins: [
-            new GoogleFontsPlugin({
-                fonts: [
-                    { family: "Roboto", variants: [ "400", "700" ] },
-                    { family: "Pattaya" },
-                    { family: "Bebas Neue" }
-                ]
-            })
-        ]
-    }
+  }
 }
