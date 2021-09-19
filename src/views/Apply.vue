@@ -28,12 +28,7 @@
   </div>
   <!--Apply Form-->
   <div class="apply__form" ref="apply">
-    <form
-      class="form"
-      @submit.prevent="submit"
-      @keyup.enter="submit"
-      method="post"
-    >
+    <form class="form" @submit.prevent="submit" method="post">
       <!--À propos de toi-->
       <div class="form__heading">
         <div class="form__title">
