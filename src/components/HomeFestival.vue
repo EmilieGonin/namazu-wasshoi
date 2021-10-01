@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="festival" v-if="festivals">
+  <div class="festival" v-if="festivals && festivals.winners.length">
     <div class="festival__line"></div>
     <template v-for="(winner, index) in festivals.winners" :key="winner.id">
       <div class="festival__banner-container" v-show="currentWinner == index">
