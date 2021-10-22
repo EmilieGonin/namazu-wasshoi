@@ -171,7 +171,7 @@
       <FormElement
         v-model="form_clRequired"
         :label="
-          'Quel est le ou les critères obligatoires pour que tu nous rejoignes ?'
+          'Quel est le ou les critères obligatoires pour que tu acceptes de rejoindre une CL ?'
         "
         :name="'form_clRequired'"
         :type="'textarea'"
