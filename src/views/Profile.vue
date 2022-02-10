@@ -27,13 +27,9 @@
         </div>
         <div class="profile__infos">
           <!--Birthday-->
-          <div>
-            <font-awesome-icon
-              :icon="'gift'"
-              fixed-width
-              v-if="user.Profile.birthday"
-            />
-            {{ user.Profile.birthday }}
+          <div v-if="user.Profile.birthday">
+            <font-awesome-icon :icon="'gift'" fixed-width />
+            <AppDate :date="user.Profile.birthday" :birthday="true" />
           </div>
           <!--Discord-->
           <div>
@@ -66,6 +62,7 @@
 <script>
 import { useMeta } from "vue-meta";
 import AppButton from "@/components/AppButton.vue";
+import AppDate from "@/components/AppDate.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
 // import WasshoListe from "@/components/WasshoListe.vue";
 
@@ -73,6 +70,7 @@ export default {
   name: "Profile",
   components: {
     AppButton,
+    AppDate,
     UserAvatar
     // WasshoListe
   },

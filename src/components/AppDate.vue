@@ -1,5 +1,5 @@
 <template>
-  <span><slot></slot> {{ dateonly ? getDate : getDateFull }}</span>
+  <span><slot></slot> {{ dateonly || birthday ? getDate : getDateFull }}</span>
 </template>
 
 <script>
@@ -25,7 +25,7 @@ export default {
   },
   computed: {
     getDate() {
-      if (this.short) {
+      if (this.short && !this.birthday) {
         return format(new Date(this.date), "dd'/'MM", {
           locale: fr
         });
