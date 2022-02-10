@@ -161,7 +161,7 @@
         'form__icon--invalid': status == 'invalid',
         'fa-spin': icon == 'spinner-third'
       }"
-      v-if="icon && type != 'file'"
+      v-if="icon && !disabled && type != 'file'"
       :icon="[iconPre, icon]"
       fixed-width
     />
