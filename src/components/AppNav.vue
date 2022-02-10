@@ -70,9 +70,9 @@
       <!--Separation-->
       <div class="nav__separation"></div>
       <!--Activities Links if logged in-->
-      <router-link class="nav__submenu-link" to="/planning" v-if="user">
+      <!-- <router-link class="nav__submenu-link" to="/planning" v-if="user">
         <font-awesome-icon icon="calendar-week" fixed-width /> Planning
-      </router-link>
+      </router-link> -->
       <router-link class="nav__submenu-link" to="/festival-gyokoso" v-if="user">
         <font-awesome-icon icon="camera" fixed-width /> Festival Gyôkoso
       </router-link>
