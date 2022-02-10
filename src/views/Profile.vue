@@ -49,7 +49,14 @@
           <span v-if="user.Profile.bio">{{ user.Profile.bio }}</span>
           <span v-else>Ce membre ne possède pas de biographie.</span>
         </div>
-        <AppButton :marginTop="'10'" :iconR="'images'">Galeries</AppButton>
+        <div class="profile__infos">
+          <AppButton :iconR="'images'">Galeries</AppButton>
+          <AppButton
+            :iconR="'arrow-right'"
+            @click="go(user.Character.lodestoneId)"
+            >Profil Lodestone</AppButton
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -68,6 +75,12 @@ export default {
     AppButton,
     UserAvatar
     // WasshoListe
+  },
+  methods: {
+    go(id) {
+      console.log(id);
+      window.open(`https://fr.finalfantasyxiv.com/lodestone/character/${id}`);
+    }
   },
   setup() {
     useMeta({
@@ -176,6 +189,7 @@ export default {
   &__infos {
     @include flex($gap: 10);
     margin-top: 10px;
+    width: 100%;
   }
   &__bio {
     width: 100%;
