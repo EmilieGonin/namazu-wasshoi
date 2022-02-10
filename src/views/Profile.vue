@@ -78,6 +78,15 @@ export default {
     go(id) {
       console.log(id);
       window.open(`https://fr.finalfantasyxiv.com/lodestone/character/${id}`);
+    },
+    getUser() {
+      this.$store
+        .dispatch("getUser", this.$route.params.id)
+        .then(user => {
+          this.user = user;
+          this.character = user.Character;
+        })
+        .catch(() => this.$router.push("/"));
     }
   },
   setup() {
@@ -96,13 +105,14 @@ export default {
     };
   },
   mounted() {
-    this.$store
-      .dispatch("getUser", this.$route.params.id)
-      .then(user => {
-        this.user = user;
-        this.character = user.Character;
-      })
-      .catch(() => this.$router.push("/"));
+    this.getUser();
+  },
+  watch: {
+    $route(to, from) {
+      if (to.name == "Profile" && to.params.id != from.params.id) {
+        this.getUser();
+      }
+    }
   }
 };
 </script>
