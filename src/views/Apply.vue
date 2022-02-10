@@ -8,7 +8,7 @@
       </div>
       <span v-if="recruiting && recruiting != 'unknown'">
         Le recrutement est actuellement ouvert. Nous sommes à la recherche de
-        nouveaux Namazu de niveau 80, actifs en soirée entre 20h et minuit de
+        nouveaux Namazu de niveau 90, actifs en soirée entre 20h et minuit de
         préférence !
       </span>
       <span v-else-if="!recruiting">
@@ -105,9 +105,9 @@
           Le contenu de nos sorties sont assez variées : cartes aux trésors,
           clear et farm d'anciens ou nouveaux contenus, elles pourront autant
           convenir aux joueurs débutants qu'aux joueurs expérimentés ! Pour
-          pouvoir nous rejoindre, il vaut mieux que tu sois au niveau 80.
+          pouvoir nous rejoindre, il vaut mieux que tu sois au niveau 90.
           Toutefois, certaines de nos sorties peuvent également convenir aux
-          joueurs de niveau 70 ou plus !
+          joueurs de niveau 80 ou moins !
         </p>
       </div>
       <div class="form__panel">
