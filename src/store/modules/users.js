@@ -149,7 +149,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       commit("request", "pending", { root: true });
 
-      api.put("users/" + id, form)
+      api.post("users/" + id, form)
       .then(response => {
         if (state.user.id == id) {
           commit("setUser", response.data.user);

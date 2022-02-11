@@ -32,6 +32,15 @@
         <span class="account__title">Modifier le profil</span>
         <div class="account__line"></div>
       </div>
+      <!--Avatar-->
+      <FormElement
+        v-model="file"
+        :label="'Avatar'"
+        :name="'file'"
+        :type="'file'"
+        :hasFile="hasFile"
+        @upload="getFile"
+      ></FormElement>
       <div class="form__panel">
         <!--Birthday-->
         <FormElement
@@ -82,6 +91,10 @@ export default {
   },
   data() {
     return {
+      file: "",
+      deleteFile: false,
+      hasFile: this.$store.state.users.user.Profile.avatar,
+      formo_file: "",
       formo_email: this.$store.state.users.user.email,
       formo_password: "",
       formo_birthday_Profile: this.$store.state.users.user.Profile.birthday,
@@ -103,7 +116,19 @@ export default {
   methods: {
     submit() {
       try {
-        const form = this.formValidate();
+        let form = this.formValidate();
+
+        if (this.deleteFile) {
+          form.deleteFile = true;
+        }
+
+        if (this.file) {
+          const formData = new FormData();
+
+          formData.append("file", this.formo_file);
+          formData.append("user", JSON.stringify(form));
+          form = formData;
+        }
 
         this.$store
           .dispatch("editUser", [this.$store.state.users.user.id, form])
@@ -113,6 +138,14 @@ export default {
           });
       } catch (e) {
         console.error(e);
+      }
+    },
+    getFile(file) {
+      this.deleteFile = false;
+      this.formo_file = file;
+
+      if (!file) {
+        this.deleteFile = true;
       }
     }
   }

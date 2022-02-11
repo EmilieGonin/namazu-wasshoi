@@ -220,6 +220,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    hasFile: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -292,6 +296,11 @@ export default {
         this.uploadReady = true;
       });
       this.$emit("upload", null);
+    }
+  },
+  mounted() {
+    if (this.hasFile) {
+      this.preview = this.hasFile;
     }
   }
 };

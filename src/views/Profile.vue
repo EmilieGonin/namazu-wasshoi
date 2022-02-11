@@ -3,7 +3,16 @@
     <div class="profile__line"></div>
     <div class="profile__container" v-if="character">
       <div class="profile__screenshot-container">
-        <img class="profile__screenshot" src="@/assets/sample.png" alt="" />
+        <img
+          class="profile__screenshot"
+          :src="
+            user.Profile.avatar
+              ? user.Profile.avatar
+              : require('@/assets/avatar-placeholder.png')
+          "
+          :alt="'Avatar de ' + character.name"
+          :title="'Avatar de ' + character.name"
+        />
         <UserAvatar
           class="profile__avatar"
           :nofade="true"
