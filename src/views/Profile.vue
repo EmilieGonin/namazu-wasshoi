@@ -162,7 +162,7 @@ export default {
   &__screenshot {
     display: block;
     width: 100%;
-    min-height: 580px;
+    height: 580px;
     object-fit: cover;
   }
   &__avatar {
