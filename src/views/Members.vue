@@ -98,11 +98,9 @@ export default {
     });
     this.$store.dispatch("getUsersRoles").then(roles => {
       //Temporary use manual names
-      this.golden = roles.golden
-        ? roles.golden
-        : '["Nexara Dei-ijla", "Jalee Puyin"]';
-      this.lunar = roles.lunar ? roles.lunar : "Elyaz Alee";
-      this.fail = roles.fail ? roles.fail : "Rabyte Tsukisagi";
+      this.golden = roles.golden ? roles.golden : "[]";
+      this.lunar = roles.lunar ? roles.lunar : "";
+      this.fail = roles.fail ? roles.fail : "";
     });
   },
   methods: {
