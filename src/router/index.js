@@ -147,10 +147,17 @@ router.beforeEach((to, from, next) => {
 
   if (loggedIn) {
     const now = new Date();
-    const expire = new Date(JSON.parse(loggedIn).Character.expire);
+    const character = JSON.parse(loggedIn).Character;
 
-    if (now > expire) {
-      store.dispatch("updateCharacter")
+    if (character) {
+      const expire = new Date(character.expire);
+
+      if (now > expire) {
+        store.dispatch("updateCharacter")
+      }
+    } else {
+      store.commit("logout");
+      return next('/login');
     }
   }
 
@@ -195,8 +202,10 @@ router.beforeEach((to, from, next) => {
         }
       })
       .catch((e) => {
-        store.dispatch("error", e);
-        return next('/');
+        // store.dispatch("error", e);
+        console.error(e);
+        store.commit("logout");
+        return next('/login');
       })
     }
   }
